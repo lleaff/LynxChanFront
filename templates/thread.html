@@ -78,6 +78,40 @@
       name="threadId">
   </form>
 
+  <div id="divControls">
+    <form
+      action="/threadControls.js"
+      method="post"
+      enctype="multipart/form-data">
+      <input
+        name="lock"
+        type="checkbox">
+      Lock
+      <br>
+      <input
+        name="pin"
+        type="checkbox">
+      Pin
+      <input
+        type="hidden"
+        name="boardUri"
+        id="controlBoardIdentifier">
+      <input
+        type="hidden"
+        name="threadId"
+        id="controlThreadIdentifier">
+      <br>
+      <input
+        type="submit"
+        name="action"
+        value="Lock">
+      <input
+        name="action"
+        type="submit"
+        value="Pin">
+    </form>
+  </div>
+
   <br>
   <form
     method="post"
