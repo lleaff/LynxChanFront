@@ -1,0 +1,99 @@
+<html>
+<body>
+  <h4 id="boardLabel"></h4>
+  <div id="ownerControlDiv">
+
+    <form
+      action="/setVolunteer.js"
+      method="post"
+      enctype="multipart/form-data">
+
+      User login:
+      <input
+        type="text"
+        name="login"
+        id="addVolunteerFieldLogin">
+      <br>
+      <input
+        type="hidden"
+        name="add"
+        value=true>
+      <input
+        type="hidden"
+        name="boardUri"
+        id="addVolunteerBoardIdentifier">
+      <input
+        type="button"
+        onClick="addVolunteer()"
+        id="addVolunteerJsButton"
+        value="Add volunteer"
+        style="display: none;">
+      <input
+        type="submit"
+        id="addVolunteerFormButton"
+        value="Add volunteer">
+
+    </form>
+
+    <form
+      action="/transferBoardOwnership.js"
+      method="post"
+      enctype="multipart/form-data">
+
+      User login:
+      <input
+        type="text"
+        name="login"
+        id="transferBoardFieldLogin">
+      <br>
+      <input
+        type="hidden"
+        name="boardUri"
+        id="transferBoardIdentifier">
+      <input
+        type="button"
+        onClick="transferBoard()"
+        id="transferBoardJsButton"
+        value="Transfer board"
+        style="display: none;">
+      <input
+        type="submit"
+        id="transferBoardFormButton"
+        value="Transfer board">
+
+    </form>
+
+    <form
+      method="post"
+      action="/deleteBoard.js"
+      enctype="multipart/form-data">
+      <input
+        id="deletionIdentifier"
+        name="boardUri"
+        type="hidden">
+      <input
+        type="submit"
+        value="Delete board"
+        id="deleteBoardFormButton">
+      <input
+        type="button"
+        style="display: none;"
+        id="deleteBoardJsButton"
+        onClick="deleteBoard()"
+        value="Delete board">
+    </form>
+
+    <div id="volunteersDiv"></div>
+  </div>
+
+  <a id="closedReportsLink">Closed reports</a>
+  <br>
+  <a id="bansLink">Bans</a>
+  <div id="reportDiv"></div>
+</body>
+
+<script src="http://static.localhost:8080/settings.js"></script>
+<script src="http://static.localhost:8080/api.js"></script>
+<script src="http://static.localhost:8080/boardManagement.js"></script>
+
+</html>

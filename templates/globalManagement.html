@@ -1,0 +1,47 @@
+<html>
+<body>
+
+  <a href="/account.js">Account</a>
+  <br>
+  <h5 id="userLabel"></h5>
+  <form
+    id="addStaffForm"
+    method="post"
+    enctype="multipart/form-data"
+    action="/setGlobalRole.js">
+    <span>User login: </span>
+    <input
+      type="text"
+      id="fieldLogin"
+      name="login">
+    <br>
+    Role:
+    <select
+      id="newStaffCombo"
+      name="role"></select>
+    <br>
+    <input
+      type="button"
+      onClick="addUser()"
+      id="addJsButton"
+      value="Add user"
+      style="display: none;">
+    <input
+      type="submit"
+      id="addFormButton"
+      value="Add user">
+  </form>
+  <br>
+  <br>
+  <div id="divStaff"></div>
+  <a
+    id="bansLink"
+    href="/bans.js">Bans</a>
+  <a href="/closedReports.js">Closed reports</a>
+  <div id="reportDiv"></div>
+
+</body>
+<script src="http://static.localhost:8080/settings.js"></script>
+<script src="http://static.localhost:8080/api.js"></script>
+<script src="http://static.localhost:8080/globalManagement.js"></script>
+</html>
