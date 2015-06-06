@@ -1,129 +1,119 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-
+  <meta charset="UTF-8">
+  <link rel=stylesheet href="http://static.localhost:8080/css/main.css">
+  <link rel=stylesheet href="http://static.localhost:8080/css/board.css">
 </head>
 <body>
   <h1 id="labelName"></h1>
   <h3 id="labelDescription"></h3>
-  <a href="/account.js">Account</a>
-  <br>
+  <nav id="menu">
+    <a href="/account.js">Account</a>
+  </nav>
   <a id="linkManagement">Manage Board</a>
-  <br>
 
-  <form
-    action="../newThread.js"
-    enctype="multipart/form-data"
-    method="post">
-    Name:
-    <input
+  <div id="content">
+    <form
+      action="../newThread.js"
+      enctype="multipart/form-data"
+      method="post">
+      Name:
+      <input
       type="text"
       id="fieldName"
       name="name" />
-    <br>
-    Subject:
-    <input
+      Subject:
+      <input
       type="text"
       id="fieldSubject"
       name="subject" />
-    <br>
-    Email:
-    <input
+      Email:
+      <input
       name="email"
       type="text"
       id="fieldEmail">
-    <br>
-    Password:
-    <input
+      Password:
+      <input
       name="password"
       type="password"
       id="fieldPassword">
-    <br>
-    <span style="vertical-align: top;">Message:</span>
-    <br>
-    <textarea
-      rows="8"
-      cols="50"
-      name="message"
-      id="fieldMessage"></textarea>
-    <br>
-    Images:
-    <input
+      <span style="vertical-align: top;">Message:</span>
+      <textarea
+        rows="8"
+        cols="50"
+        name="message"
+        id="fieldMessage"></textarea>
+      Images:
+      <input
       type="file"
       id="files"
       name="files"
       multiple>
-    <br>
-    <input
+      <input
       type="button"
       id="jsButton"
       onClick="postThread()"
       value="Create thread"
       style="display: none;">
-    <input
+      <input
       type="submit"
       id="formButton"
       value="Create thread">
-    <input
+      <input
       id="boardIdentifier"
       type="hidden"
       name="boardUri">
-  </form>
+    </form>
 
-  <br>
-  <form
-    method="post"
-    action="../contentActions.js"
-    enctype="multipart/form-data">
-    <div id="divPostings"></div>
-    Reason:
-    <input
+    <form
+      method="post"
+      action="../contentActions.js"
+      enctype="multipart/form-data">
+      <div id="divPostings"></div>
+      Reason:
+      <input
       type="text"
       id="reportFieldPassword"
       name="reason">
-    <br>
-    Password:
-    <input
+      Password:
+      <input
       type="password"
       id="deletionFieldPassword"
       name="password">
-    <br>
-    <input
+      <input
       type="checkbox"
       name="global">
-    Global report
-    <br>
-    <input
+      Global report
+      <input
       type="submit"
       id="deleteFormButton"
       value="Delete"
       name="action">
 
-    <input
+      <input
       type="button"
       style="display: none;"
       id="deleteJsButton"
       onClick="deletePosts()"
       value="Delete">
-    <input
+      <input
       type="submit"
       id="reportFormButton"
       value="Report"
       name="action">
 
-    <input
+      <input
       type="button"
       style="display: none;"
       id="reportJsButton"
       onClick="reportPosts()"
       value="Report">
 
-  </form>
+    </form>
+  </div>
 
-  <br>
   <div id="divPages"></div>
-  <br>
 
 </body>
 
