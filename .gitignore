@@ -11,9 +11,13 @@
 
 # Build files
 build/
+/templates
+/static
 sourcemaps/
 node_modules/
 base/
+
+.sass-cache/
 
 ###OS X
 

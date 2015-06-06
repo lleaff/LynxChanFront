@@ -1,0 +1,41 @@
+$bgMain: #e5e5e5;
+$fgMain: #252525;
+
+$bgAlt: #dadada;
+$fgAlt: $fgMain;
+
+$accentA: #2277a0;
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* ------------------------------------------------------------ */
+body {
+	background-color: $bgMain;
+	color: $fgMain;
+
+	margin: 0;
+	padding: 0;
+
+	font-family: sans;
+}
+
+a {
+	color: mix($fgMain, $accentA);
+}
+
+header {
+	background-color: $bgAlt;
+  color: $fgAlt;
+
+	font-size: 1.5em;
+	padding: 0.3em;
+}
+
+#content {
+  padding: 0.3em;
+}
