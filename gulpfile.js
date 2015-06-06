@@ -51,7 +51,16 @@ var production = argv.production || argv.p;
 
 gulp.task('default', ['build']);
 
-gulp.task('build', ['js', 'html', 'css'], function() {
+gulp.task('build', ['js', 'html', 'css', 'otherFiles'], function() {
+});
+
+gulp.task('otherFiles', function() {
+  var excludeTypes = [
+    'js', 'html', 'css', 'scss', 'md'
+  ].map(function(ft) { return '!'+basePaths.source+'**/*.'+ft; });
+
+  gulp.src([basePaths.source+'**/*.*'].concat(excludeTypes))
+    .pipe(gulp.dest(basePaths.build));
 });
 
 gulp.task('js', function() {
