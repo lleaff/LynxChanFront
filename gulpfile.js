@@ -3,6 +3,7 @@ var gulp = require('gulp');
 //var es = require('event-stream');
 //var gutil = require('gulp-util');
 //var merge = require('merge-stream');
+var gulpif = require('gulp-if');
 /* ===Content operations */
 /* General */
 var sourcemaps = require('gulp-sourcemaps'); /* sourcemaps */
@@ -40,6 +41,11 @@ var outPaths = {
 	html: basePaths.build+'templates/',
 };
 
+/* Command line arguments */
+var argv = require('yargs').argv;
+
+var production = argv.production || argv.p;
+
 /* =Tasks
  * ------------------------------------------------------------ */
 
@@ -60,10 +66,10 @@ gulp.task('html', function() {
 
 gulp.task('css', function() {
   gulp.src(paths.scss+'/**/*.scss')
-    .pipe(sourcemaps.init())
+    .pipe(gulpif(!production, sourcemaps.init()))
       .pipe(sass().on('error', sass.logError))
       .pipe(minifyCss())
-    .pipe(sourcemaps.write(paths.sourcemaps))
+    .pipe(gulpif(!production, sourcemaps.write(paths.sourcemaps)))
     .pipe(gulp.dest(outPaths.css));
 });
 
