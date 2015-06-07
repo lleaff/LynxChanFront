@@ -4,15 +4,20 @@ var production = argv.production || argv.p;
 
 /* =Dependencies
 ------------------------------------------------------------ */
-/* Gulp operations
-============= */
-var gulp = require('gulp');
-//var es = require('event-stream');
-//var gutil = require('gulp-util');
+/*============= Misc ============= */
+var fs = require('fs');
+if (!production) {
+  var browserSyncModule = require('browser-sync');
+  var browserSync = browserSyncModule.create();
+}
 //var merge = require('merge-stream');
+//var es = require('event-stream');
+var child_process = require('child_process');
+/*============= Gulp operations ============= */
+var gulp = require('gulp');
+//var gutil = require('gulp-util');
 var gulpif = require('gulp-if');
-/* Content operations
-============= */
+/*============= Content operations ============= */
 /* General */
 var sourcemaps = require('gulp-sourcemaps'); /* sourcemaps */
 var concat = require('gulp-concat'); /* sourcemaps */
@@ -24,14 +29,22 @@ var uglify = require('gulp-uglify'); /* sourcemaps */
 var sass = require('gulp-sass'); /* sourcemaps */
 /* css */
 var minifyCss = require('gulp-minify-css'); /* sourcemaps */
-/* Misc
-============= */
-var browserSync = !production ? require('browser-sync').create() : null;
 
 var debug = require('gulp-debug'); /* DEBUG */
 
 /* =Variables
 ------------------------------------------------------------ */
+var settings;
+try {
+ settings = JSON.parse(fs.readFileSync('gulpsettings.json', 'utf8'));
+} catch(e) {
+  if (e instanceof Error && e.code === "ENOENT") { /* File not found */
+    console.log(
+      "No 'gulpsettings.json' file found, using default settings.");
+    settings = {};
+  } else { throw e; }
+}
+
 var package = require('./package.json');
 
 var basePaths = {
@@ -97,11 +110,31 @@ gulp.task('css', function() {
 gulp.task('browser-sync', ['build'], function() {
   if (production) { return; }
 
+  if (settings.startCommand) {
+    child_process.spawnSync();
+    child_process.execSync(settings.startCommand);
+  }
+
   browserSync.init({
-    proxy: "localhost:8080"
+    proxy: {
+      target: "localhost:8080",
+      port: 3000
+    }
   });
+
   gulp.watch([files.scss, files.css], ['css']);
-  gulp.watch(files.html).on('change', browserSync.reload);
+  gulp.watch(files.html, ['html', 'restartServer'])
+    .on('change', function() {
+      browserSync.reload();
+    });
+});
+
+gulp.task('restartServer', ['html'], function() {
+  if (settings.reloadCommand) {
+    child_process.spawnSync();
+    child_process.execSync(settings.reloadCommand);
+    console.log("Reload: \""+settings.reloadCommand+"\"");
+  }
 });
 
 /* Helper functions
