@@ -1,4 +1,0 @@
-{
-  "startCommand": "restartLynxChan",
-  "reloadCommand":  "restartHardLynxChan"
-}

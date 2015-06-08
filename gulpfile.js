@@ -75,7 +75,6 @@ var outPaths = {
 
 /* =Tasks
 ------------------------------------------------------------ */
-
 gulp.task('default', ['build']);
 
 gulp.task('build', ['js', 'html', 'css', 'otherFiles'], function() {
