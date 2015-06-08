@@ -1,0 +1,39 @@
+html
+  body
+    a(href='/account.js') Account
+    |   
+    br
+    |   
+    h5#userLabel
+    |   
+    form#addStaffForm(method='post', enctype='multipart/form-data', action='/setGlobalRole.js')
+      span User login: 
+      |     
+      input#fieldLogin(type='text', name='login')
+      |     
+      br
+      |     Role:
+      |     
+      select#newStaffCombo(name='role')
+      |     
+      br
+      |     
+      input#addJsButton(type='button', onclick='addUser()', value='Add user', style='display: none;')
+      |     
+      input#addFormButton(type='submit', value='Add user')
+    |   
+    br
+    |   
+    br
+    |   
+    #divStaff
+    |   
+    a#bansLink(href='/bans.js') Bans
+    |   
+    a(href='/closedReports.js') Closed reports
+    |   
+    #reportDiv
+  script(src='http://static.localhost:8080/settings.js')
+  script(src='http://static.localhost:8080/api.js')
+  script(src='http://static.localhost:8080/reports.js')
+  script(src='http://static.localhost:8080/globalManagement.js')

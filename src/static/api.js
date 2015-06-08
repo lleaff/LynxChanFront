@@ -87,6 +87,7 @@ function apiRequest(page, parameters, delegate) {
   }
 
   var body = {
+    captchaId : parsedCookies.captchaId,
     parameters : parameters,
     auth : {
       login : parsedCookies.login,

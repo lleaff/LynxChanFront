@@ -1,0 +1,39 @@
+html
+  body
+    | Logged in as
+    span#labelLogin
+    |   
+    form(action='/logout.js')
+      input#logoutJsButton(type='button', onclick='logout()', style='display: none', value='Logout')
+      |     
+      input#logoutFormButton(type='submit', value='Logout')
+    |   
+    a#globalManagementLink(href='/globalManagement.js') Global management
+    |   
+    br
+    |   
+    form(action='/createBoard.js', enctype='multipart/form-data', method='post')
+      | Board URI:
+      input#newBoardFieldUri(type='text', name='boardUri')
+      |     
+      br
+      |     Board name:
+      |     
+      input#newBoardFieldName(type='text', name='boardName')
+      |     
+      br
+      |     Board description:
+      |     
+      input#newBoardFieldDescription(type='text', name='boardDescription')
+      |     
+      br
+      |     
+      input#newBoardJsButton(type='button', onclick='createBoard()', style='display: none', value='Create board')
+      |     
+      input#newBoardFormButton(type='submit', value='Create board')
+    |   Owned boards:
+    |   
+    #boardsDiv
+  script(src='http://static.localhost:8080/settings.js')
+  script(src='http://static.localhost:8080/api.js')
+  script(src='http://static.localhost:8080/account.js')

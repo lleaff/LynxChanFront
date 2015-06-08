@@ -1,6 +1,6 @@
 if (!DISABLE_JS) {
-  document.getElementById('logoutJsButton').style.display = 'block';
-  document.getElementById('newBoardJsButton').style.display = 'block';
+  document.getElementById('logoutJsButton').style.display = 'inline';
+  document.getElementById('newBoardJsButton').style.display = 'inline';
 
   document.getElementById('logoutFormButton').style.display = 'none';
   document.getElementById('newBoardFormButton').style.display = 'none';

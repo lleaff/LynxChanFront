@@ -1,7 +1,60 @@
+var boardUri;
+var threadId;
+
 if (!DISABLE_JS) {
 
-  document.getElementById('jsButton').style.display = 'block';
+  boardUri = document.getElementById('boardIdentifier').value;
+  threadId = document.getElementById('controlThreadIdentifier').value;
+
+  document.getElementById('jsButton').style.display = 'inline';
+  document.getElementById('lockJsButton').style.display = 'inline';
+  document.getElementById('pinJsButton').style.display = 'inline';
+
+  document.getElementById('pinFormButton').style.display = 'none';
+  document.getElementById('lockFormButton').style.display = 'none';
   document.getElementById('formButton').style.display = 'none';
+
+}
+
+function setPin() {
+
+  apiRequest('setThreadPin', {
+    boardUri : boardUri,
+    threadId : threadId,
+    pin : document.getElementById('checkboxPin').checked
+  }, function setLock(status, data) {
+
+    if (status === 'ok') {
+
+      alert('Pin set.');
+
+      location.reload(true);
+
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
+
+}
+
+function setLock() {
+
+  apiRequest('setThreadLock', {
+    boardUri : boardUri,
+    threadId : threadId,
+    lock : document.getElementById('checkboxLock').checked
+  }, function setLock(status, data) {
+
+    if (status === 'ok') {
+
+      alert('Lock set.');
+
+      location.reload(true);
+
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
 
 }
 
@@ -11,7 +64,9 @@ function sendReplyData(files) {
   var typedEmail = document.getElementById('fieldEmail').value.trim();
   var typedMessage = document.getElementById('fieldMessage').value.trim();
   var typedSubject = document.getElementById('fieldSubject').value.trim();
-  var boardUri = document.getElementById('boardIdentifier').value;
+  var typedCaptcha = document.getElementById('fieldCaptcha').value.trim();
+  var typedPassword = document.getElementById('fieldPassword').value.trim();
+
   var threadId = document.getElementById('threadIdentifier').value;
 
   if (!typedMessage.length) {
@@ -29,11 +84,22 @@ function sendReplyData(files) {
   } else if (typedSubject.length > 32) {
     alert('Subject is too long, keep it under 128 characters.');
     return;
+  } else if (typedPassword.length > 8) {
+    alert('Password is too long, keep it under 8 characters.');
+    return;
+  } else if (typedCaptcha.length !== 6) {
+    alert('Captchas are exactly 6 characters long.');
+    return;
+  } else if (/\W/.test(typedCaptcha)) {
+    alert('Invalid captcha.');
+    return;
   }
 
   apiRequest('replyThread', {
     name : typedName,
     subject : typedSubject,
+    captcha : typedCaptcha,
+    password : typedPassword,
     message : typedMessage,
     email : typedEmail,
     files : files,

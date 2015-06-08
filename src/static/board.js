@@ -1,6 +1,6 @@
 if (!DISABLE_JS) {
 
-  document.getElementById('jsButton').style.display = 'block';
+  document.getElementById('jsButton').style.display = 'inline';
   document.getElementById('formButton').style.display = 'none';
 
 }
@@ -12,6 +12,8 @@ function sendThreadData(files) {
   var typedMessage = document.getElementById('fieldMessage').value.trim();
   var typedSubject = document.getElementById('fieldSubject').value.trim();
   var boardUri = document.getElementById('boardIdentifier').value;
+  var typedCaptcha = document.getElementById('fieldCaptcha').value.trim();
+  var typedPassword = document.getElementById('fieldPassword').value.trim();
 
   if (!typedMessage.length) {
     alert('A message is mandatory.');
@@ -28,10 +30,21 @@ function sendThreadData(files) {
   } else if (typedSubject.length > 32) {
     alert('Subject is too long, keep it under 128 characters.');
     return;
+  } else if (typedPassword.length > 8) {
+    alert('Password is too long, keep it under 8 characters.');
+    return;
+  } else if (typedCaptcha.length !== 6) {
+    alert('Captchas are exactly 6 characters long.');
+    return;
+  } else if (/\W/.test(typedCaptcha)) {
+    alert('Invalid captcha.');
+    return;
   }
 
   apiRequest('newThread', {
     name : typedName,
+    captcha : typedCaptcha,
+    password : typedPassword,
     subject : typedSubject,
     message : typedMessage,
     email : typedEmail,

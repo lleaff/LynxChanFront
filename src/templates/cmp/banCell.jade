@@ -1,0 +1,18 @@
+html
+  body
+    | Reason:
+    span.reasonLabel
+    br
+    | Expiration:
+    span.expirationLabel
+    br
+    | Applied by:
+    span.appliedByLabel
+    br
+    | Boards:
+    span.boardLabel
+    br
+    input.liftFormButton(type='submit', value='Lift')
+    input.liftJsButton(type='button', value='Lift', style='display: none;')
+    br
+    input.idIdentifier(type='hidden', name='banId')

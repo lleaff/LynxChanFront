@@ -1,9 +1,9 @@
 var boardIdentifier;
 
 if (!DISABLE_JS) {
-  document.getElementById('addVolunteerJsButton').style.display = 'block';
-  document.getElementById('transferBoardJsButton').style.display = 'block';
-  document.getElementById('deleteBoardJsButton').style.display = 'block';
+  document.getElementById('addVolunteerJsButton').style.display = 'inline';
+  document.getElementById('transferBoardJsButton').style.display = 'inline';
+  document.getElementById('deleteBoardJsButton').style.display = 'inline';
 
   document.getElementById('deleteBoardFormButton').style.display = 'none';
   document.getElementById('addVolunteerFormButton').style.display = 'none';
@@ -14,39 +14,23 @@ if (!DISABLE_JS) {
   var volunteerDiv = document.getElementById('volunteersDiv');
 
   for (var i = 0; i < volunteerDiv.childNodes.length; i++) {
-    var cell = volunteerDiv.childNodes[i];
-
-    processCell(cell);
+    processVolunteerCell(volunteerDiv.childNodes[i]);
 
   }
+
+  setupReportButtons();
 
 }
 
-function processCell(cell) {
-  var button;
-  var user;
-
-  for (var j = 0; j < cell.childNodes.length; j++) {
-    var node = cell.childNodes[j];
-
-    switch (node.id) {
-    case 'removeJsButton':
-      button = node;
-      node.style.display = 'block';
-      break;
-    case 'removeFormButton':
-      node.style.display = 'none';
-      break;
-    case 'userIdentifier':
-      user = node.value;
-      break;
-    }
-
-  }
+function processVolunteerCell(cell) {
+  var button = cell.getElementsByClassName('removeJsButton')[0];
+  button.style.display = 'inline';
+  cell.getElementsByClassName('removeFormButton')[0].style.display = 'none';
 
   button.onclick = function() {
-    setVolunteer(user, false);
+    setVolunteer(cell.getElementsByClassName('userIdentifier')[0].value, false);
   };
+
 }
 
 function addVolunteer() {
@@ -64,8 +48,7 @@ function setVolunteer(user, add) {
 
     if (status === 'ok') {
 
-      window.location.pathname = '/boardManagement.js?boardUri='
-          + boardIdentifier;
+      location.reload(true);
 
     } else {
       alert(status + ': ' + JSON.stringify(data));
