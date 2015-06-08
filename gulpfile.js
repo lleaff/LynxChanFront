@@ -134,14 +134,8 @@ gulp.task('browser-sync', ['build'], function() {
   });
 
   gulp.watch([files.scss, files.css], ['css']);
-  gulp.watch(files.jade, ['html', 'restartServer'])
-    .on('change', function() {
-      browserSync.reload();
-    });
-  gulp.watch(files.html, ['html', 'restartServer'])
-    .on('change', function() {
-      browserSync.reload();
-    });
+  gulp.watch(files.jade, ['html', 'browserReload']);
+  gulp.watch(files.html, ['html', 'browserReload']);
 });
 
 gulp.task('restartServer', ['html'], function() {
@@ -150,6 +144,10 @@ gulp.task('restartServer', ['html'], function() {
     child_process.execSync(settings.reloadCommand);
     console.log("Reload: \""+settings.reloadCommand+"\"");
   }
+});
+
+gulp.task('browserReload', ['restartServer'], function() {
+  browserSync.reload();
 });
 
 /* Helper functions
