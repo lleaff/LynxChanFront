@@ -59,7 +59,7 @@ var paths = {
 	scss: basePaths.source+'static/scss/',
 	css: basePaths.source+'static/css/',
 	html: basePaths.source+'templates/',
-	jade: basePaths.source+'templates/',
+	jade: basePaths.source+'templates/{pages,cmp}',
 	sourcemaps: '../sourcemaps/',
 };
 var files = {};

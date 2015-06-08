@@ -7,56 +7,25 @@ html
     form(action='/login.js', enctype='multipart/form-data', method='post')
       | Login:
       input#loginFieldLogin(type='text', name='login')
-      |     
-      br
       |     Password:
-      |     
       input#loginFieldPassword(type='password', name='password')
-      |     
-      br
-      |     
       input#loginFormButton(type='submit', value='Login')
-      |     
       input#loginJsButton(type='button', onclick='loginUser()', value='Login', style='display: none;')
-    |   
-    br
-    |   
-    br
     |   Register:
-    |   
     form(action='/registerAccount.js', enctype='multipart/form-data', method='post')
       | Login*:
       input#registerFieldLogin(type='text', name='login')
-      |     
-      br
       |     Password*:
-      |     
       input#registerFieldPassword(type='password', name='password')
-      |     
-      br
       |     Email:
-      |     
       input#registerFieldEmail(type='text', name='email')
-      |     
-      br
-      |     
       input#registerFormButton(type='submit', value='Register')
-      |     
       input#registerJsButton(type='button', onclick='registerAccount()', value='Register', style='display: none;')
-    |   
-    br
-    |   
-    br
     |   Recover account:
-    |   
     form(action='/requestAccountRecovery.js', enctype='multipart/form-data', method='post')
       | Login:
       input#recoverFieldLogin(type='text', name='login')
-      |     
-      br
-      |     
       input#recoverFormButton(type='submit', value='Request recovery')
-      |     
       input#recoverJsButton(type='button', onclick='recoverAccount()', value='Request recovery', style='display: none;')
   script(src='http://static.localhost:8080/settings.js')
   script(src='http://static.localhost:8080/api.js')

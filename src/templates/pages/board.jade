@@ -4,99 +4,41 @@ html
     meta(charset='UTF-8')
   body
     h1#labelName
-    |   
     h3#labelDescription
-    |   
     a(href='/account.js') Account
-    |   
-    br
-    |   
     a#linkManagement Manage Board
-    |   
-    br
-    |   
     form(action='../newThread.js', enctype='multipart/form-data', method='post')
       | Name:
       input#fieldName(type='text', name='name')
-      |     
-      br
       |     Subject:
-      |     
       input#fieldSubject(type='text', name='subject')
-      |     
-      br
       |     Email:
-      |     
       input#fieldEmail(name='email', type='text')
-      |     
-      br
       |     Password:
-      |     
       input#fieldPassword(name='password', type='password')
-      |     
-      br
-      |     
       span(style='vertical-align: top;') Message:
-      |     
-      br
-      |     
       textarea#fieldMessage(rows='8', cols='50', name='message')
-      |     
-      br
       |     Images:
-      |     
       input#files(type='file', name='files', multiple='')
-      |     
-      br
-      |     
       img(src='/captcha.js')
-      |     
-      br
       |     Captcha:
-      |     
       input#fieldCaptcha(name='captcha', type='text')
-      |     
-      br
-      |     
       input#jsButton(type='button', onclick='postThread()', value='Create thread', style='display: none;')
-      |     
       input#formButton(type='submit', value='Create thread')
-      |     
       input#boardIdentifier(type='hidden', name='boardUri')
-    |   
-    br
-    |   
     form(method='post', action='../contentActions.js', enctype='multipart/form-data')
       #divPostings
       |     Reason:
-      |     
       input#reportFieldReason(type='text', name='reason')
-      |     
-      br
       |     Password:
-      |     
       input#deletionFieldPassword(type='password', name='password')
-      |     
-      br
-      |     
       input#checkboxGlobal(type='checkbox', name='global')
       |     Global
-      |     
-      br
-      |     
       input#deleteFormButton(type='submit', value='Delete', name='action')
-      |     
       input#deleteJsButton(type='button', style='display: none;', onclick='deletePosts()', value='Delete')
-      |     
       input#reportFormButton(type='submit', value='Report', name='action')
-      |     
       input#reportJsButton(type='button', style='display: none;', onclick='reportPosts()', value='Report')
-    |   
-    br
-    |   
     #divPages
-    |   
-    br
   script(src='http://static.localhost:8080/settings.js')
   script(src='http://static.localhost:8080/api.js')
   script(src='http://static.localhost:8080/board.js')

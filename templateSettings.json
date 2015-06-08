@@ -17,7 +17,7 @@
   "bManagement": "pages/boardManagement.html",
   "volunteerCell": "cmp/volunteerCell.html",
   "reportCell": "cmp/reportCell.html",
-  "closedReportsPage": "pages/closedReports.html",
+  "closedReportsPage": "cmp/closedReports.html",
   "closedReportCell": "cmp/closedReportCell.html",
   "bansPage": "pages/bans.html",
   "banCell": "cmp/banCell.html"

@@ -1,55 +1,29 @@
 html
   body
     h4#boardLabel
-    |   
-    |   
     a(href='/account.js') Account
-    |   
-    |   
     #ownerControlDiv
       form(action='/setVolunteer.js', method='post', enctype='multipart/form-data')
         | User login:
         input#addVolunteerFieldLogin(type='text', name='login')
-        |       
-        br
-        |       
         input(type='hidden', name='add', value='true')
-        |       
         input#addVolunteerBoardIdentifier(type='hidden', name='boardUri')
-        |       
         input#addVolunteerJsButton(type='button', onclick='addVolunteer()', value='Add volunteer', style='display: none;')
-        |       
         input#addVolunteerFormButton(type='submit', value='Add volunteer')
-      |     
       form(action='/transferBoardOwnership.js', method='post', enctype='multipart/form-data')
         | User login:
         input#transferBoardFieldLogin(type='text', name='login')
-        |       
-        br
-        |       
         input#transferBoardIdentifier(type='hidden', name='boardUri')
-        |       
         input#transferBoardJsButton(type='button', onclick='transferBoard()', value='Transfer board', style='display: none;')
-        |       
         input#transferBoardFormButton(type='submit', value='Transfer board')
-      |     
       form(method='post', action='/deleteBoard.js', enctype='multipart/form-data')
         input#deletionIdentifier(name='boardUri', type='hidden')
-        |       
         input#deleteBoardFormButton(type='submit', value='Delete board')
-        |       
         input#deleteBoardJsButton(type='button', style='display: none;', onclick='deleteBoard()', value='Delete board')
-      |     
       #volunteersDiv
-    |   
     a#closedReportsLink Closed reports
-    |   
-    br
-    |   
     a#bansLink Bans
-    br
     |   Open reports:
-    |   
     #reportDiv
   script(src='http://static.localhost:8080/settings.js')
   script(src='http://static.localhost:8080/api.js')
