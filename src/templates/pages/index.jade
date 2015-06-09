@@ -1,5 +1,8 @@
-html
-  body
-    | This is the motherfucking front-page.
-    a(href='/account.js') Account
-    #divBoards
+extends ../jade/base
+
+a(href='/account.js') Account
+block headerTitle
+  h1= siteTitle
+block content
+  p Welcome.
+  #divBoards

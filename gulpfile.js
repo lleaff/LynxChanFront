@@ -62,19 +62,23 @@ var jadeSettings  = JSON.parse(
   tryReadFileSync('./src/templates/jadeSettings.json', {log: true}) || {});
 var package       = require('./package.json');
 /*========================== */
+var siteTitle = settings.siteTitle || "Undefined site title";
 
 var url = {
   protocol: settings.sll ? 'https' : 'http',
-  domain: settings.address === "127.0.0.1" ?
-    "localhost" : settings.address,
+  domain: settings.address === '127.0.0.1' ?
+    'localhost' : settings.address,
 
 
 };
 url.base = url.protocol+'://'+url.domain+':'+settings.port;
 url.baseStatic = url.protocol+'://'+'static.'+url.domain+':'+settings.port;
 
-jadeSettings = concatObjects(jadeSettings,
-  { baseUrl: url.base, baseStaticUrl: url.baseStatic });
+jadeSettings = concatObjects(jadeSettings, {
+  siteTitle: siteTitle,
+  baseUrl: url.base,
+  baseStaticUrl: url.baseStatic
+});
 
 var basePaths = {
 	source: 'src/',
@@ -162,7 +166,7 @@ gulp.task('browser-sync', ['build'], function() {
   });
 
   gulp.watch([files.scss, files.css], ['css']);
-  gulp.watch(files.jade, ['html', 'browserReload']);
+  gulp.watch(files.jade, ['html', 'jade', 'browserReload']);
   gulp.watch(files.html, ['html', 'browserReload']);
 });
 
