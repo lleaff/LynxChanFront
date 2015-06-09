@@ -1,6 +1,7 @@
 /* Command line arguments */
 var argv = require('yargs').argv;
 var production = argv.production || argv.p;
+var blank = argv.test || argv.blank;
 
 /* =Modules
 ------------------------------------------------------------ */
@@ -73,6 +74,7 @@ var outPaths = {
 ------------------------------------------------------------ */
 gulp.task('default', ['build']);
 
+/*============ Build ============== */
 gulp.task('build', ['js', 'html', 'css', 'otherFiles'], function() {
 });
 
@@ -145,6 +147,16 @@ gulp.task('browserReload', ['restartServer'], function() {
   browserSync.reload();
 });
 
+gulp.task('clear', function() {
+  Object.keys(outPaths).forEach(function(outPath) {
+      deleteFolderRecursive(
+        /* Strip the trailing '/' */
+        (outPaths[outPath]).slice(0, outPaths[outPath].length - 1),
+        {log: true});
+  });
+});
+
+
 /* Helper functions
 ------------------------------------------------------------ */
 function commentString(string, fileType) {
@@ -156,19 +168,6 @@ function commentString(string, fileType) {
 	return tags[fileType][0]+' '+string+' '+tags[fileType][1];
 }
 
-function tryReadFileSync(fileName, encoding) {
-  if (encoding === undefined) { encoding = 'utf-8'; }
-  try {
-    return fs.readFileSync('gulpsettings.json', 'utf8');
-  } catch(e) {
-    if (e instanceof Error && e.code === "ENOENT") { /* File not found */
-      console.log(
-        "No '"+fileName+"' file found, using default settings.");
-        return {};
-    } else { throw e; }
-  }
-}
-
 function concatObjects(obj1, obj2) {
   var obj = {};
   [obj1, obj2].forEach(function(object) {
@@ -177,4 +176,46 @@ function concatObjects(obj1, obj2) {
     });
   });
   return obj;
+}
+
+/*============= File operations ============= */
+function tryReadFileSync(fileName, options) {
+  options = options || {};
+  if (options.encoding === undefined) { options.encoding = 'utf-8'; }
+  try {
+    return fs.readFileSync(fileName, 'utf8');
+  } catch(e) {
+    if (e instanceof Error && e.code === "ENOENT") { /* File not found */
+      if (options.log) {
+        console.log(
+          "[tryReadFileSync] No '"+fileName+"' file found.");
+      }
+      return undefined;
+    } else { throw e; }
+  }
+}
+
+function deleteFolderRecursive (path, options) {
+  options = options || {};
+  var files = [];
+  if( fs.existsSync(path) ) {
+    files = fs.readdirSync(path);
+    files.forEach(function(file,index){
+      var curPath = path + "/" + file;
+      if(fs.lstatSync(curPath).isDirectory()) { // recurse
+        deleteFolderRecursive(curPath, options);
+      } else { // delete file
+        if (!blank) {
+          fs.unlinkSync(curPath);
+        }
+        if (options.log) {
+          console.log("[rm -r "+path+"] Removed "+"\""+
+                      curPath+"\"");
+        }
+      }
+    });
+    if (!blank) {
+      fs.rmdirSync(path);
+    }
+  }
 }
