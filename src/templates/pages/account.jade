@@ -1,12 +1,22 @@
-html
-  body
+extends ./../jade/base.jade
+
++styles()
++scripts()
+
+block title
+  title Account
+block append styles
+
+block content
     | Logged in as
     span#labelLogin
     form(action='/logout.js')
-      input#logoutJsButton(type='button', onclick='logout()', style='display: none', value='Logout')
+      input#logoutJsButton(type='button', onclick='logout()',
+        style='display: none', value='Logout')
       input#logoutFormButton(type='submit', value='Logout')
     a#globalManagementLink(href='/globalManagement.js') Global management
-    form(action='/createBoard.js', enctype='multipart/form-data', method='post')
+    form(action='/createBoard.js', enctype='multipart/form-data',
+        method='post')
       | Board URI:
       input#newBoardFieldUri(type='text', name='boardUri')
       |     Board name:
@@ -17,6 +27,8 @@ html
       input#newBoardFormButton(type='submit', value='Create board')
     |   Owned boards:
     #boardsDiv
+
+block append scripts
   script(src='http://static.localhost:8080/settings.js')
   script(src='http://static.localhost:8080/api.js')
   script(src='http://static.localhost:8080/account.js')
