@@ -1,0 +1,31 @@
+//-=Settings
+//------------------------------------------------------------
+- var baseStylesUrls  = [ baseStaticUrl+"/css/main.css" ];
+- var baseScriptsUrls = [ ];
+//-=Mixins
+//------------------------------------------------------------
+
+
+//-=Layout
+//------------------------------------------------------------
+doctype html
+html
+  head
+    block head
+      meta(charset="utf-8")
+      title 
+        block title
+      block styles
+        for styleUrl in baseStylesUrls
+          link(rel="stylesheet", href=styleUrl)
+  body
+    block body
+      header
+        block header
+      div#content
+        block content
+      footer
+        block footer
+      block scripts
+        for scriptUrl in baseScriptsUrls
+          script(src=scriptUrl)
