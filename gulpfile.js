@@ -37,14 +37,44 @@ var debug               = require('gulp-debug'); /* DEBUG */
 
 /* =Variables
 ------------------------------------------------------------ */
-var baseUrl       = 'http://localhost:8080',
-    baseStaticUrl = 'http://static.localhost:8080';
+/*============= Setting files ============= */
+/* Placeholder function */
+function getGeneralSettings() {
+  /* Possible paths */
+  var posPaths = [
+    '../be/settings/general.json',
+    '../LynxChan/src/be/settings/general.json'
+  ];
+  var fileContent;
+  for (var i = 0; fileContent === undefined && i < posPaths.length; ++i) {
+    fileContent = tryReadFileSync(posPaths[i]);
+  }
+  if (!fileContent) {
+    console.log("[getGeneralSettings] No \"general.json\" found.");
+  }
+  return fileContent;
+}
 
-var settings      = JSON.parse(tryReadFileSync('gulpsettings.json'));
-var jadeSettings  = JSON.parse(tryReadFileSync('./src/templates/jadeSettings.json'));
-jadeSettings = concatObjects({ baseUrl: baseUrl, baseStaticUrl: baseStaticUrl });
-
+var settings      = JSON.parse(getGeneralSettings());
+var gulpSettings  = JSON.parse(
+  tryReadFileSync('gulpsettings.json', {log: true}) || {});
+var jadeSettings  = JSON.parse(
+  tryReadFileSync('./src/templates/jadeSettings.json', {log: true}) || {});
 var package       = require('./package.json');
+/*========================== */
+
+var url = {
+  protocol: settings.sll ? 'https' : 'http',
+  domain: settings.address === "127.0.0.1" ?
+    "localhost" : settings.address,
+
+
+};
+url.base = url.protocol+'://'+url.domain+':'+settings.port;
+url.baseStatic = url.protocol+'://'+'static.'+url.domain+':'+settings.port;
+
+jadeSettings = concatObjects(jadeSettings,
+  { baseUrl: url.base, baseStaticUrl: url.baseStatic });
 
 var basePaths = {
 	source: 'src/',
@@ -115,12 +145,13 @@ gulp.task('css', function() {
     .pipe(!production ? browserSync.stream() : gutil.noop());
 });
 
+/*============ Utility ============== */
 gulp.task('browser-sync', ['build'], function() {
   if (production) { return; }
 
-  if (settings.startCommand) {
+  if (gulpSettings.startCommand) {
     child_process.spawnSync();
-    child_process.execSync(settings.startCommand);
+    child_process.execSync(gulpSettings.startCommand);
   }
 
   browserSync.init({
@@ -136,10 +167,10 @@ gulp.task('browser-sync', ['build'], function() {
 });
 
 gulp.task('restartServer', ['html'], function() {
-  if (settings.reloadCommand) {
+  if (gulpSettings.reloadCommand) {
     child_process.spawnSync();
-    child_process.execSync(settings.reloadCommand);
-    console.log("Reload: \""+settings.reloadCommand+"\"");
+    child_process.execSync(gulpSettings.reloadCommand);
+    console.log("Reload: \""+gulpSettings.reloadCommand+"\"");
   }
 });
 
