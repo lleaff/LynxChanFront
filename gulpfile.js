@@ -57,9 +57,11 @@ function getGeneralSettings() {
 
 var settings      = JSON.parse(getGeneralSettings());
 var gulpSettings  = JSON.parse(
-  tryReadFileSync('gulpsettings.json', {log: true}) || {});
+  tryReadFileSync('gulpsettings.json', {log: true}) ||
+    "{}");
 var jadeSettings  = JSON.parse(
-  tryReadFileSync('./src/templates/jadeSettings.json', {log: true}) || {});
+  tryReadFileSync('./src/templates/jadeSettings.json', {log: true}) ||
+    "{}");
 var package       = require('./package.json');
 /*========================== */
 var siteTitle = settings.siteTitle || "Undefined site title";
