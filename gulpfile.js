@@ -88,11 +88,12 @@ var basePaths = {
 };
 
 var paths = {
-	js:     basePaths.source+'static/',
-	scss:   basePaths.source+'static/scss/',
-	css:    basePaths.source+'static/css/',
-	html:   basePaths.source+'templates/',
-	jade:   basePaths.source+'templates/{pages,cmp}',
+	js:         basePaths.source+'static/',
+	scss:       basePaths.source+'static/scss/',
+	css:        basePaths.source+'static/css/',
+	html:       basePaths.source+'templates/',
+	jade:       basePaths.source+'templates/{pages,cmp}',
+	jadeExtras: basePaths.source+'templates/jade', /* For watching */
 	sourcemaps: '../sourcemaps/',
 };
 var files = {}; /* { js: src/static/**.*js, ... } */
@@ -101,9 +102,9 @@ Object.keys(paths).forEach(function(ft) {
 });
 
 var outPaths = {
-  js:     basePaths.build+'static/',
-  css:    basePaths.build+'static/css/',
-	html:   basePaths.build+'templates/',
+  js:         basePaths.build+'static/',
+  css:        basePaths.build+'static/css/',
+	html:       basePaths.build+'templates/',
 };
 
 /* =Tasks
@@ -168,7 +169,8 @@ gulp.task('browser-sync', ['build'], function() {
   });
 
   gulp.watch([files.scss, files.css], ['css']);
-  gulp.watch(files.jade, ['html', 'jade', 'browserReload']);
+  gulp.watch([files.jade, files.jadeExtras],
+             ['html', 'jade', 'browserReload']);
   gulp.watch(files.html, ['html', 'browserReload']);
 });
 
