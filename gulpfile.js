@@ -90,10 +90,11 @@ var basePaths = {
 var paths = {
 	js:         basePaths.source+'static/',
 	scss:       basePaths.source+'static/scss/',
+	scssExtras: basePaths.source+'static/scss/sub/',
 	css:        basePaths.source+'static/css/',
 	html:       basePaths.source+'templates/',
-	jade:       basePaths.source+'templates/{pages,cmp}',
-	jadeExtras: basePaths.source+'templates/jade', /* For watching */
+	jade:       basePaths.source+'templates/{pages/,cmp/}',
+	jadeExtras: basePaths.source+'templates/jade/', /* For watching */
 	sourcemaps: '../sourcemaps/',
 };
 var files = {}; /* { js: src/static/**.*js, ... } */
@@ -168,7 +169,7 @@ gulp.task('browser-sync', ['build'], function() {
     }
   });
 
-  gulp.watch([files.scss, files.css], ['css']);
+  gulp.watch([files.scss, files.scssExtras, files.css], ['css']);
   gulp.watch([files.jade, files.jadeExtras],
              ['html', 'jade', 'browserReload']);
   gulp.watch(files.html, ['html', 'browserReload']);
