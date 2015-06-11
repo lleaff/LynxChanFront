@@ -23,10 +23,21 @@ html
     block body
       header
         block header
-      div#content
-        block content
-      footer
-        block footer
-      block scripts
-        for scriptUrl in baseScriptsUrls
-          script(src=scriptUrl)
+          header
+            block headerTitle
+              h1 #{siteTitle}
+              //-Menu
+            nav#userMenu
+              ul
+                +userMenuEntry
+                  a(href='/account.js') Account
+                block userMenu
+        //-Content
+        div#middle
+          block middle
+        //-Footer
+        footer
+          block footer
+        block scripts
+          for scriptUrl in baseScriptsUrls
+            script(src=scriptUrl)
