@@ -2,9 +2,14 @@ if (!DISABLE_JS) {
 
   document.getElementById('deleteJsButton').style.display = 'inline';
   document.getElementById('reportJsButton').style.display = 'inline';
-  document.getElementById('banJsButton').style.display = 'inline';
 
-  document.getElementById('inputBan').style.display = 'none';
+  if (!board) {
+
+    document.getElementById('banJsButton').style.display = 'inline';
+
+    document.getElementById('inputBan').style.display = 'none';
+  }
+  
   document.getElementById('reportFormButton').style.display = 'none';
   document.getElementById('deleteFormButton').style.display = 'none';
 

@@ -21,5 +21,6 @@
   "closedReportCell":   "cmp/closedReportCell.html",
   "bansPage":           "pages/bans.html",
   "banCell":            "cmp/banCell.html",
-  "uploadCell":         "cmp/uploadCell.html"
+  "uploadCell":         "cmp/uploadCell.html",
+  "errorPage":          "pages/error.html"
 }

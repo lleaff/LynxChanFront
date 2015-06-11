@@ -1,3 +1,5 @@
+var board = true;
+
 if (!DISABLE_JS) {
 
   document.getElementById('jsButton').style.display = 'inline';

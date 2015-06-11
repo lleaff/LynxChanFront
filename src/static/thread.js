@@ -1,5 +1,6 @@
 var boardUri;
 var threadId;
+var board = false;
 
 if (!DISABLE_JS) {
 
@@ -7,47 +8,25 @@ if (!DISABLE_JS) {
   threadId = document.getElementById('controlThreadIdentifier').value;
 
   document.getElementById('jsButton').style.display = 'inline';
-  document.getElementById('lockJsButton').style.display = 'inline';
-  document.getElementById('pinJsButton').style.display = 'inline';
+  document.getElementById('settingsJsButon').style.display = 'inline';
 
-  document.getElementById('pinFormButton').style.display = 'none';
-  document.getElementById('lockFormButton').style.display = 'none';
+  document.getElementById('settingsFormButon').style.display = 'none';
   document.getElementById('formButton').style.display = 'none';
 
 }
 
-function setPin() {
+function saveThreadSettings() {
 
-  apiRequest('setThreadPin', {
+  apiRequest('changeThreadSettings', {
     boardUri : boardUri,
     threadId : threadId,
-    pin : document.getElementById('checkboxPin').checked
-  }, function setLock(status, data) {
-
-    if (status === 'ok') {
-
-      alert('Pin set.');
-
-      location.reload(true);
-
-    } else {
-      alert(status + ': ' + JSON.stringify(data));
-    }
-  });
-
-}
-
-function setLock() {
-
-  apiRequest('setThreadLock', {
-    boardUri : boardUri,
-    threadId : threadId,
+    pin : document.getElementById('checkboxPin').checked,
     lock : document.getElementById('checkboxLock').checked
   }, function setLock(status, data) {
 
     if (status === 'ok') {
 
-      alert('Lock set.');
+      alert('Settings saved.');
 
       location.reload(true);
 
