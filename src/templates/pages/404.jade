@@ -1,5 +1,7 @@
-doctype html
-html
-  head
-    title 404 - Not found
-  body
+extends ../jade/base.jade
+
+block append styles
+  +style('404.css')
+
+block headerTitle
+  +title('404', 'Not found')

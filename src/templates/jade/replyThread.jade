@@ -1,0 +1,9 @@
+include postForm
+
++postForm({
+  action:'Reply',
+  actionFile:'replyThread.js',
+  actionFunction:'postReply()'
+  })#newReplyForm.postForm
+  input#boardIdentifier(type='hidden', name='boardUri')
+  input#threadIdentifier(type='hidden', name='threadId')

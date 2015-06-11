@@ -1,0 +1,27 @@
+mixin postForm(options)
+  - var action          = options.action
+  - var actionFile      = '../../'+options.actionFile
+  //- Function
+  - var actionFunction  = options.actionFunction
+  form(id=attributes.id, class=attributes.class,
+    fieldset
+      method='post', action=action, enctype='multipart/form-data')
+        label(for="fieldName") Name:
+          input#fieldName(type='text', name='name')
+        label(for="fieldSubject") Subject:
+          input#fieldSubject(type='text', name='subject')
+        label(for="fieldEmail") Email:
+          input#fieldEmail(name='email', type='text')
+        label(for="fieldPassword") Password:
+          input#fieldPassword(name='password', type='password')
+        label(for="fieldMessage") Message:
+          textarea#fieldMessage(rows='8', cols='50', name='message')
+        label(for="files") Images:
+          input#files(type='file', name='files', multiple='')
+        label(for="fieldCaptcha") Captcha:
+          img(src='/captcha.js')
+          input#fieldCaptcha(name='captcha', type='text')
+        input#jsButton(type='button', onclick=actionFunction, value=action,
+          style='display: none;')
+        input#formButton(type='submit', value=action)
+        block
