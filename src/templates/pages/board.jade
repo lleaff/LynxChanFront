@@ -1,45 +1,31 @@
-doctype html
-html
-  head
-    meta(charset='UTF-8')
-  body
-    h1#labelName
-    h3#labelDescription
-    a(href='/account.js') Account
-    a#linkManagement Manage Board
-    form(action='../newThread.js', enctype='multipart/form-data', method='post')
-      | Name:
-      input#fieldName(type='text', name='name')
-      |     Subject:
-      input#fieldSubject(type='text', name='subject')
-      |     Email:
-      input#fieldEmail(name='email', type='text')
-      |     Password:
-      input#fieldPassword(name='password', type='password')
-      span(style='vertical-align: top;') Message:
-      textarea#fieldMessage(rows='8', cols='50', name='message')
-      |     Images:
-      input#files(type='file', name='files', multiple='')
-      img(src='/captcha.js')
-      |     Captcha:
-      input#fieldCaptcha(name='captcha', type='text')
-      input#jsButton(type='button', onclick='postThread()', value='Create thread', style='display: none;')
-      input#formButton(type='submit', value='Create thread')
-      input#boardIdentifier(type='hidden', name='boardUri')
-    form(method='post', action='../contentActions.js', enctype='multipart/form-data')
-      #divPostings
-      |     Reason:
-      input#reportFieldReason(type='text', name='reason')
-      |     Password:
-      input#deletionFieldPassword(type='password', name='password')
-      input#checkboxGlobal(type='checkbox', name='global')
-      |     Global
-      input#deleteFormButton(type='submit', value='Delete', name='action')
-      input#deleteJsButton(type='button', style='display: none;', onclick='deletePosts()', value='Delete')
-      input#reportFormButton(type='submit', value='Report', name='action')
-      input#reportJsButton(type='button', style='display: none;', onclick='reportPosts()', value='Report')
-    #divPages
-  script(src='http://static.localhost:8080/settings.js')
-  script(src='http://static.localhost:8080/api.js')
-  script(src='http://static.localhost:8080/board.js')
-  script(src='http://static.localhost:8080/posting.js')
+extends ../jade/base.jade
+
+block append styles
+  +style('board.css')
+block append scripts
+  +script('board.js')
+  +script('posting.js')
+
+block headerTitle
+  +title('#labelName', '#labelDescription')
+
+block append userMenu
+  a#linkManagement Manage Board
+
+block content
+  include ../jade/createThread
+  #divPostings
+  label(for='reportFieldReason') Reason
+    input#reportFieldReason(type='text', name='reason')
+  label(for='deletionFieldPasword') Password
+    input#deletionFieldPassword(type='password', name='password')
+  label(for='checkboxGlobal') Global
+    input#checkboxGlobal(type='checkbox', name='global')
+  input#deleteFormButton(type='submit', value='Delete', name='action')
+  input#deleteJsButton(type='button', style='display: none;',
+    onclick='deletePosts()', value='Delete')
+  input#reportFormButton(type='submit', value='Report', name='action')
+  input#reportJsButton(type='button', style='display: none;',
+    onclick='reportPosts()', value='Report')
+  #divPages
+

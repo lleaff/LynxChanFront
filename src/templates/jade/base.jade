@@ -2,33 +2,68 @@
 //- Require data passed by gulp 'jade'
 //------------------------------------------------------------
 - var baseStylesUrls  = [ baseStaticUrl+"/css/main.css" ];
-- var baseScriptsUrls = [ ];
+- var baseScriptsUrls = [ baseStaticUrl+'/settings.js', baseStaticUrl+'/api.js'];
 //-=Mixins
 //------------------------------------------------------------
+//- Usage: +style('main.css')
+mixin style(relativePath)
+  link(rel='stylesheet', href=baseStaticUrl+'/'+relativePath)
+
+//- Usage: +script('api.js')
+mixin script(relativePath)
+  script(src=baseStaticUrl+'/'+relativePath)
+
+//- Format title automatically
+//- Allows passing direct title(s) text or their id by CSS notation
+mixin title(mainTitle, subTitle)
+  if mainTitle && mainTitle.charAt(0) === '#'
+    h1(id=mainTitle.slice(1))
+  else
+    h1= mainTitle
+  if block
+    block
+  if subTitle && subTitle.charAt(0) === "#"
+    p(id=subTitle.slice(1))
+  else
+    p= subTitle
+
+mixin userMenuEntry()
+  li
+    block
 
 
 //-=Layout
 //------------------------------------------------------------
 doctype html
 html
-  head
-    block head
-      meta(charset="utf-8")
-      title 
-        block title
-      block styles
-        for styleUrl in baseStylesUrls
-          link(rel="stylesheet", href=styleUrl)
-  body
-    block body
-      header
-        h1
-          block headerTitle
+  block html
+    head
+      block head
+        meta(charset="utf-8")
+        title 
+          block title
+        block styles
+          for styleUrl in baseStylesUrls
+            link(rel="stylesheet", href=styleUrl)
+    body
+      block body
+        //-Header
         block header
-      div#content
-        block content
-      footer
-        block footer
-      block scripts
-        for scriptUrl in baseScriptsUrls
-          script(src=scriptUrl)
+          header
+            block headerTitle
+              h1 #{siteTitle}
+              //-Menu
+            nav#userMenu
+              ul
+                +userMenuEntry
+                  a(href='/account.js') Account
+                block userMenu
+        //-Content
+        div#content
+          block content
+        //-Footer
+        footer
+          block footer
+        block scripts
+          for scriptUrl in baseScriptsUrls
+            script(src=scriptUrl)
