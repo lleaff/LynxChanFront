@@ -57,9 +57,11 @@ function getGeneralSettings() {
 
 var settings      = JSON.parse(getGeneralSettings());
 var gulpSettings  = JSON.parse(
-  tryReadFileSync('gulpsettings.json', {log: true}) || {});
+  tryReadFileSync('gulpsettings.json', {log: true}) ||
+    "{}");
 var jadeSettings  = JSON.parse(
-  tryReadFileSync('./src/templates/jadeSettings.json', {log: true}) || {});
+  tryReadFileSync('./src/templates/jadeSettings.json', {log: true}) ||
+    "{}");
 var package       = require('./package.json');
 /*========================== */
 var siteTitle = settings.siteTitle || "Undefined site title";
@@ -86,11 +88,13 @@ var basePaths = {
 };
 
 var paths = {
-	js:     basePaths.source+'static/',
-	scss:   basePaths.source+'static/scss/',
-	css:    basePaths.source+'static/css/',
-	html:   basePaths.source+'templates/',
-	jade:   basePaths.source+'templates/{pages,cmp}',
+	js:         basePaths.source+'static/',
+	scss:       basePaths.source+'static/scss/',
+	scssExtras: basePaths.source+'static/scss/sub/',
+	css:        basePaths.source+'static/css/',
+	html:       basePaths.source+'templates/',
+	jade:       basePaths.source+'templates/{pages/,cmp/}',
+	jadeExtras: basePaths.source+'templates/jade/', /* For watching */
 	sourcemaps: '../sourcemaps/',
 };
 var files = {}; /* { js: src/static/**.*js, ... } */
@@ -99,9 +103,9 @@ Object.keys(paths).forEach(function(ft) {
 });
 
 var outPaths = {
-  js:     basePaths.build+'static/',
-  css:    basePaths.build+'static/css/',
-	html:   basePaths.build+'templates/',
+  js:         basePaths.build+'static/',
+  css:        basePaths.build+'static/css/',
+	html:       basePaths.build+'templates/',
 };
 
 /* =Tasks
@@ -165,8 +169,9 @@ gulp.task('browser-sync', ['build'], function() {
     }
   });
 
-  gulp.watch([files.scss, files.css], ['css']);
-  gulp.watch(files.jade, ['html', 'jade', 'browserReload']);
+  gulp.watch([files.scss, files.scssExtras, files.css], ['css']);
+  gulp.watch([files.jade, files.jadeExtras],
+             ['html', 'jade', 'browserReload']);
   gulp.watch(files.html, ['html', 'browserReload']);
 });
 

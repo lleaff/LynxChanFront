@@ -1,19 +1,9 @@
-$bgMain: #e5e5e5;
-$fgMain: #252525;
-
-$bgAlt: #dadada;
-$fgAlt: $fgMain;
-
-$accentA: #2277a0;
-
-html {
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-}
+@import './sub/normalize.css';
+@import './sub/box-sizing.css';
+@import './sub/theme.scss';
 
 /* ------------------------------------------------------------ */
+
 body {
 	background-color: $bgMain;
 	color: $fgMain;
@@ -28,9 +18,19 @@ a {
 	color: mix($fgMain, $accentA);
 }
 
+input,
+button,
+textarea {
+  background-color: $bgAlt;
+  border: solid 1px $borderColorAlt;
+  color: $fgAlt;
+}
+
 header {
 	background-color: $bgAlt;
   color: $fgAlt;
+
+  border-bottom: solid 1px $borderColorAlt;
 
 	font-size: 1.5em;
 	padding: 0.3em;
