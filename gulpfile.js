@@ -31,6 +31,7 @@ var uglify              = require('gulp-uglify'); /* sourcemaps */
 /* scss */
 var sass                = require('gulp-sass'); /* sourcemaps */
 /* css */
+var stripCssComments    = require('gulp-strip-css-comments');
 var minifyCss           = require('gulp-minify-css'); /* sourcemaps */
 /* jade */
 var jade                = require('gulp-jade');
@@ -161,6 +162,7 @@ gulp.task('css', function() {
     .pipe(gulpif(!g.production, sourcemaps.init()))
       .pipe(sass({ style: (g.ugly ? 'compressed' : 'nested')})
             .on('error', sass.logError))
+      .pipe(gulpif(g.production, stripCssComments()))
       .pipe(gulpif(g.ugly, minifyCss()))
     .pipe(gulpif(!g.production, sourcemaps.write(paths.sourcemaps)))
     .pipe(gulp.dest(outPaths.css))
