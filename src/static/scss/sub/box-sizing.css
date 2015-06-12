@@ -1,9 +1,0 @@
-/* Set box-sizing to border-box on all elements while still
- *  allowing components to override it.
------------------------------------------------------------- */
-html {
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-}
