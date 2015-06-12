@@ -1,7 +1,5 @@
 extends ../jade/base.jade
 
-block append styles
-  +style('board.css')
 block append scripts
   +script('board.js')
   +script('posting.js')
@@ -27,5 +25,6 @@ block content
   input#reportFormButton(type='submit', value='Report', name='action')
   input#reportJsButton(type='button', style='display: none;',
     onclick='reportPosts()', value='Report')
+
   #divPages
 

@@ -1,10 +1,10 @@
 mixin postForm(options)
-  - var action          = options.action
-  - var actionFile      = '../../'+options.actionFile
+  - var actionFile      = '../'+options.actionFile
+  - var actionName      = options.actionName
   - var actionFunction  = options.actionFunction
   //- .postForm
   form(id=attributes.id, class=attributes.class+' postForm',
-    method='post', action=action, enctype='multipart/form-data')
+    method='post', action=actionFile, enctype='multipart/form-data')
     fieldset.author
       label(for="fieldName") Name:
         input#fieldName(type='text', name='name')
@@ -23,7 +23,7 @@ mixin postForm(options)
       label(for="fieldCaptcha") Captcha:
         img(src='/captcha.js')
         input#fieldCaptcha(name='captcha', type='text')
-      input#jsButton(type='button', onclick=actionFunction, value=action,
-        style='display: none;')
-      input#formButton(type='submit', value=action)
+      input#jsButton(type='button', onclick=actionFunction,
+        value=actionName, style='display: none;')
+      input#formButton(type='submit', value=actionName)
     block
