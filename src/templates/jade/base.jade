@@ -1,11 +1,4 @@
-//-=Settings
-//- Require data passed by gulp 'jade'
-//------------------------------------------------------------
-- var baseStylesUrls  = [ baseStaticUrl+"/css/main.css" ];
-- var baseScriptsUrls = [ ];
-//-=Mixins
-//------------------------------------------------------------
-
+include baseMixins
 
 //-=Layout
 //------------------------------------------------------------
@@ -23,10 +16,24 @@ html
     block body
       header
         block header
-      div#content
-        block content
-      footer
-        block footer
-      block scripts
-        for scriptUrl in baseScriptsUrls
-          script(src=scriptUrl)
+          header
+            block headerTitle
+              h1 #{siteTitle}
+            //-Menu
+            nav#userMenu
+              ul
+                +userMenuEntry
+                  a(href='/account.js') Account
+                block userMenu
+        div#middle
+          block middle
+            //-Content
+            main#content
+              block content
+
+        //-Footer
+        footer
+          block footer
+        block scripts
+          for scriptUrl in baseScriptsUrls
+            script(src=scriptUrl)

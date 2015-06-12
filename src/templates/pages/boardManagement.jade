@@ -1,31 +1,50 @@
-html
-  body
-    h4#boardLabel
-    a(href='/account.js') Account
-    #ownerControlDiv
-      form(action='/setVolunteer.js', method='post', enctype='multipart/form-data')
-        | User login:
-        input#addVolunteerFieldLogin(type='text', name='login')
+extends ../jade/base
+
+block headerTitle
+  +title('#boardLabel')
+
+block content
+  section#ownerControlDiv
+    form(action='/setVolunteer.js', method='post',
+        enctype='multipart/form-data')
+      fieldset
+        label(for='addVolunteerFieldLogin') User login:
+          input#addVolunteerFieldLogin(type='text', name='login')
         input(type='hidden', name='add', value='true')
         input#addVolunteerBoardIdentifier(type='hidden', name='boardUri')
-        input#addVolunteerJsButton(type='button', onclick='addVolunteer()', value='Add volunteer', style='display: none;')
+        input#addVolunteerJsButton(type='button', onclick='addVolunteer()',
+          value='Add volunteer', style='display: none;')
         input#addVolunteerFormButton(type='submit', value='Add volunteer')
-      form(action='/transferBoardOwnership.js', method='post', enctype='multipart/form-data')
-        | User login:
-        input#transferBoardFieldLogin(type='text', name='login')
+
+    form(action='/transferBoardOwnership.js', method='post',
+      enctype='multipart/form-data')
+      fieldset
+        label(for='transferBoardFieldLogin') User login:
+          input#transferBoardFieldLogin(type='text', name='login')
         input#transferBoardIdentifier(type='hidden', name='boardUri')
-        input#transferBoardJsButton(type='button', onclick='transferBoard()', value='Transfer board', style='display: none;')
-        input#transferBoardFormButton(type='submit', value='Transfer board')
-      form(method='post', action='/deleteBoard.js', enctype='multipart/form-data')
+        input#transferBoardJsButton(type='button',
+          onclick='transferBoard()', value='Transfer board',
+          style='display: none;')
+        input#transferBoardFormButton(type='submit',
+          value='Transfer board')
+
+    form(method='post', action='/deleteBoard.js',
+      enctype='multipart/form-data')
+      fieldset
         input#deletionIdentifier(name='boardUri', type='hidden')
         input#deleteBoardFormButton(type='submit', value='Delete board')
-        input#deleteBoardJsButton(type='button', style='display: none;', onclick='deleteBoard()', value='Delete board')
-      #volunteersDiv
-    a#closedReportsLink Closed reports
-    a#bansLink Bans
-    |   Open reports:
-    #reportDiv
-  script(src='http://static.localhost:8080/settings.js')
-  script(src='http://static.localhost:8080/api.js')
-  script(src='http://static.localhost:8080/reports.js')
-  script(src='http://static.localhost:8080/boardManagement.js')
+        input#deleteBoardJsButton(type='button', onclick='deleteBoard()',
+          value='Delete board', style='display: none;')
+
+  section#volunteersDiv
+
+  section#reports
+    ul
+      li: a#closedReportsLink Closed reports
+      li: a#bansLink Bans
+      li: h4 Open reports:
+        #reportDiv
+
+block append scripts
+  +script('reports.js')
+  +script('boardManagement.js')

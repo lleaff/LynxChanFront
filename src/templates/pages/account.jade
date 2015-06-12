@@ -1,7 +1,14 @@
-html
-  body
-    | Logged in as
-    span#labelLogin
+extends ../jade/base
+
+block append styles
+  +style('account.css')
+block append scripts
+  +script('account.js')
+
+block content
+  section#account
+    h4 Logged in as #[span#labelLogin]
+
     form(action='/logout.js')
       input#logoutJsButton(type='button', onclick='logout()', style='display: none', value='Logout')
       input#logoutFormButton(type='submit', value='Logout')

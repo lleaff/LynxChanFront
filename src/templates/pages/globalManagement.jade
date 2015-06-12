@@ -1,19 +1,22 @@
-html
-  body
-    a(href='/account.js') Account
-    h5#userLabel
-    form#addStaffForm(method='post', enctype='multipart/form-data', action='/setGlobalRole.js')
-      span User login: 
+extends ../jade/base
+
+block headerTitle
+  +title('#userLabel')
+
+  form#addStaffForm(method='post', enctype='multipart/form-data',
+    action='/setGlobalRole.js')
+    label(for='fieldLogin') User login: 
       input#fieldLogin(type='text', name='login')
-      |     Role:
+    label(for='newStaffCombo') Role:
       select#newStaffCombo(name='role')
-      input#addJsButton(type='button', onclick='addUser()', value='Add user', style='display: none;')
-      input#addFormButton(type='submit', value='Add user')
-    #divStaff
-    a#bansLink(href='/bans.js') Bans
-    a(href='/closedReports.js') Closed reports
-    #reportDiv
-  script(src='http://static.localhost:8080/settings.js')
-  script(src='http://static.localhost:8080/api.js')
-  script(src='http://static.localhost:8080/reports.js')
-  script(src='http://static.localhost:8080/globalManagement.js')
+    input#addJsButton(type='button', onclick='addUser()',
+      value='Add user', style='display: none;')
+    input#addFormButton(type='submit', value='Add user')
+  div#divStaff
+  a#bansLink(href='/bans.js') Bans
+  a(href='/closedReports.js') Closed reports
+  div#reportDiv
+
+block append scripts
+  +script('reports.js')
+  +script('globalManagement.js')

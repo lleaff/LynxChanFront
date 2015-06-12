@@ -1,32 +1,45 @@
-doctype html
-html
-  head
-    meta(charset='UTF-8')
-  body
-    | Login:
+extends ../jade/base
+
+block content
+  section
+    h1 Login
     form(action='/login.js', enctype='multipart/form-data', method='post')
-      | Login:
-      input#loginFieldLogin(type='text', name='login')
-      |     Password:
-      input#loginFieldPassword(type='password', name='password')
-      input#loginFormButton(type='submit', value='Login')
-      input#loginJsButton(type='button', onclick='loginUser()', value='Login', style='display: none;')
-    |   Register:
-    form(action='/registerAccount.js', enctype='multipart/form-data', method='post')
-      | Login*:
-      input#registerFieldLogin(type='text', name='login')
-      |     Password*:
-      input#registerFieldPassword(type='password', name='password')
-      |     Email:
-      input#registerFieldEmail(type='text', name='email')
-      input#registerFormButton(type='submit', value='Register')
-      input#registerJsButton(type='button', onclick='registerAccount()', value='Register', style='display: none;')
-    |   Recover account:
-    form(action='/requestAccountRecovery.js', enctype='multipart/form-data', method='post')
-      | Login:
-      input#recoverFieldLogin(type='text', name='login')
-      input#recoverFormButton(type='submit', value='Request recovery')
-      input#recoverJsButton(type='button', onclick='recoverAccount()', value='Request recovery', style='display: none;')
-  script(src='http://static.localhost:8080/settings.js')
-  script(src='http://static.localhost:8080/api.js')
-  script(src='http://static.localhost:8080/login.js')
+      fieldset
+        label(for='loginFieldLogin') Username
+          input#loginFieldLogin(type='text', name='login')
+        label(for='loginFieldPassword') Password
+          input#loginFieldPassword(type='password', name='password')
+        input#loginFormButton(type='submit', value='Login')
+        input#loginJsButton(type='button', onclick='loginUser()',
+          value='Login', style='display: none;')
+
+  section
+    h1 Register
+    form(action='/registerAccount.js', enctype='multipart/form-data',
+      method='post')
+      fieldset
+        label(for='registerFieldLogin')
+          span(title='Required') Login*
+          input#registerFieldLogin(type='text', name='login')
+        label(for='registerFieldPassword')
+          span(title='Required') Password*
+          input#registerFieldPassword(type='password', name='password')
+        label(for='registerFieldEmail') Email
+          input#registerFieldEmail(type='text', name='email')
+        input#registerFormButton(type='submit', value='Register')
+        input#registerJsButton(type='button', onclick='registerAccount()',
+          value='Register', style='display: none;')
+
+  section
+    h1 Recover account
+    form(action='/requestAccountRecovery.js',
+      enctype='multipart/form-data', method='post')
+      fieldset
+        label(for='recoverFieldLogin') Login
+          input#recoverFieldLogin(type='text', name='login')
+        input#recoverFormButton(type='submit', value='Request recovery')
+        input#recoverJsButton(type='button', onclick='recoverAccount()',
+          value='Request recovery', style='display: none;')
+
+block append scripts
+  +script('login.js')
