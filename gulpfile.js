@@ -1,13 +1,14 @@
 /* Command line arguments */
 var argv = require('yargs').argv;
-var production = argv.production || argv.p;
-var blank = argv.test || argv.blank;
+var g = {}; /* Global variables */
+g.production = argv.production || argv.p;
+g.blank = argv.test || argv.blank;
 
 /* =Modules
 ------------------------------------------------------------ */
 /*============= Misc ============= */
 var fs                  = require('fs');
-if (!production) {
+if (!g.production) {
   var browserSyncModule = require('browser-sync');
   var browserSync       = browserSyncModule.create();
 }
@@ -84,7 +85,7 @@ jadeSettings = concatObjects(jadeSettings, {
 
 var basePaths = {
 	source: 'src/',
-	build: './',
+	build: argv.output+'/' || './'+argv.o+'/' || './',
 };
 
 var paths = {
@@ -114,6 +115,7 @@ gulp.task('default', ['build']);
 
 /*============ Build ============== */
 gulp.task('build', ['js', 'html', 'css', 'otherFiles'], function() {
+  if (outPaths.build !== './') { console.log('Built project to: '+outPaths.build);}
 });
 
 gulp.task('otherFiles', function() {
@@ -137,7 +139,7 @@ gulp.task('moveHtml', function() {
 
 gulp.task('jade', ['moveHtml'], function() {
     return gulp.src(files.jade)
-      .pipe(jade({ pretty: !production, data: jadeSettings }))
+      .pipe(jade({ pretty: !g.production, data: jadeSettings }))
       .pipe(gulp.dest(outPaths.html));
 });
 
@@ -145,17 +147,17 @@ gulp.task('html', ['moveHtml', 'jade']);
 
 gulp.task('css', function() {
   return gulp.src([files.scss, files.css])
-    .pipe(gulpif(!production, sourcemaps.init()))
+    .pipe(gulpif(!g.production, sourcemaps.init()))
       .pipe(sass().on('error', sass.logError))
       .pipe(minifyCss())
-    .pipe(gulpif(!production, sourcemaps.write(paths.sourcemaps)))
+    .pipe(gulpif(!g.production, sourcemaps.write(paths.sourcemaps)))
     .pipe(gulp.dest(outPaths.css))
-    .pipe(!production ? browserSync.stream() : gutil.noop());
+    .pipe(!g.production ? browserSync.stream() : gutil.noop());
 });
 
 /*============ Utility ============== */
 gulp.task('browser-sync', ['build'], function() {
-  if (production) { return; }
+  if (g.production) { return; }
 
   if (gulpSettings.startCommand) {
     child_process.spawnSync();
@@ -195,7 +197,6 @@ gulp.task('clear', function() {
         {log: true});
   });
 });
-
 
 /* Helper functions
 ------------------------------------------------------------ */
@@ -245,7 +246,7 @@ function deleteFolderRecursive (path, options) {
       if(fs.lstatSync(curPath).isDirectory()) { // recurse
         deleteFolderRecursive(curPath, options);
       } else { // delete file
-        if (!blank) {
+        if (!g.blank) {
           fs.unlinkSync(curPath);
         }
         if (options.log) {
@@ -254,7 +255,7 @@ function deleteFolderRecursive (path, options) {
         }
       }
     });
-    if (!blank) {
+    if (!g.blank) {
       fs.rmdirSync(path);
     }
   }
