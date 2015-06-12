@@ -4,17 +4,18 @@ include baseMixins
 //------------------------------------------------------------
 doctype html
 html
-  head
-    block head
-      meta(charset="utf-8")
-      title 
-        block title
-      block styles
-        for styleUrl in baseStylesUrls
-          link(rel="stylesheet", href=styleUrl)
-  body
-    block body
-      header
+  block html
+    head
+      block head
+        meta(charset="utf-8")
+        title 
+          block title
+        block styles
+          for styleUrl in baseStylesUrls
+            link(rel="stylesheet", href=styleUrl)
+    body
+      block body
+        //-Header
         block header
           header
             block headerTitle

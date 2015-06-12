@@ -1,13 +1,6 @@
 # Build instructions
-Dependencies: 
-
- * gulp   
-```
-npm install -g gulp
-```
-  
-Navigate to the front-end's root and call:
+Navigate to the front-end's root directory and call:
 ```
 npm install
-gulp --production
+node ./node_modules/gulp/bin/gulp.js --production
 ```

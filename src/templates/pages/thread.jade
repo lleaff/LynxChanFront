@@ -1,12 +1,18 @@
-doctype html
-html
-  head
-    meta(charset='UTF-8')
-  body
-    h1#labelName
-    h3#labelDescription
-    a(href='/account.js') Account
+extends ../jade/base
+
+block append styles
+  +style('thread.css')
+block append scripts
+  +script('thread.js')
+  +script('posting.js')
+
+block headerTitle
+  +title('#labelName', '#labelDescription')
+
+block append userMenu
+  +userMenuEntry
     a#linkManagement Manage Board
+  +userMenuEntry
     a#linkMod Moderate thread
 
 block content
