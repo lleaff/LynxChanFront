@@ -1,6 +1,7 @@
 /* Command line arguments */
 var argv = require('yargs').argv;
 var g = {}; /* Global variables */
+g.ugly = argv.ugly || argv.u;
 g.production = argv.production || argv.p;
 g.blank = argv.test || argv.blank;
 
@@ -132,6 +133,9 @@ gulp.task('otherFiles', function() {
 
 gulp.task('js', function() {
   return gulp.src(files.js)
+    .pipe(gulpif(!g.production, sourcemaps.init()))
+      .pipe(gulpif(g.ugly, uglify()))
+    .pipe(gulpif(!g.production, sourcemaps.write(paths.sourcemaps)))
     .pipe(gulp.dest(outPaths.js));
 });
 
@@ -142,7 +146,7 @@ gulp.task('moveHtml', function() {
 
 gulp.task('jade', ['moveHtml'], function() {
     return gulp.src(files.jade)
-      .pipe(jade({ pretty: !g.production, data: jadeSettings }))
+      .pipe(jade({ pretty: !g.ugly, data: jadeSettings }))
       .pipe(gulp.dest(outPaths.html));
 });
 
