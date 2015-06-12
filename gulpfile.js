@@ -85,7 +85,8 @@ jadeSettings = concatObjects(jadeSettings, {
 
 var basePaths = {
 	source: 'src/',
-	build: argv.output+'/' || './'+argv.o+'/' || './',
+	build: argv.output ? './'+argv.output+'/' : (
+    argv.o ? './'+argv.o+'/' : './'),
 };
 
 var paths = {
@@ -115,7 +116,9 @@ gulp.task('default', ['build']);
 
 /*============ Build ============== */
 gulp.task('build', ['js', 'html', 'css', 'otherFiles'], function() {
-  if (outPaths.build !== './') { console.log('Built project to: '+outPaths.build);}
+  if (basePaths.build !== './') {
+    console.log('Built project to: '+basePaths.build);
+  }
 });
 
 gulp.task('otherFiles', function() {
