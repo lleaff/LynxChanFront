@@ -1,1 +1,78 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title> </title><link rel="stylesheet" href="http://static.localhost:8080/css/main.css"></head><body><header><h1 id="labelName"></h1><p id="labelDescription"></p><nav id="userMenu"><ul><li><a href="/account.js">Account</a></li><a id="linkManagement">Manage Board</a></ul></nav></header><div id="middle"><main id="content"><form id="newThreadForm" method="post" action="../../newThread.js" enctype="multipart/form-data" class="postForm postForm"><fieldset class="author"><label for="fieldName">Name:<input id="fieldName" type="text" name="name"></label><label for="fieldEmail">Email:<input id="fieldEmail" name="email" type="text"></label><label for="fieldPassword">Password:<input id="fieldPassword" name="password" type="password"></label></fieldset><fieldset class="message"><label for="fieldSubject">Subject:<input id="fieldSubject" type="text" name="subject"></label><label for="fieldMessage">Message:<textarea id="fieldMessage" rows="8" cols="50" name="message"></textarea></label><label for="files">Images:<input id="files" type="file" name="files" multiple=""></label></fieldset><fieldset class="submit"><label for="fieldCaptcha">Captcha:<img src="/captcha.js"><input id="fieldCaptcha" name="captcha" type="text"></label><input id="jsButton" type="button" onclick="postThread()" value="Create thread" style="display: none;"><input id="formButton" type="submit" value="Create thread"></fieldset><input id="boardIdentifier" type="hidden" name="boardUri"></form><div id="divPostings"></div><label for="reportFieldReason">Reason<input id="reportFieldReason" type="text" name="reason"></label><label for="deletionFieldPasword">Password<input id="deletionFieldPassword" type="password" name="password"></label><label for="checkboxGlobal">Global<input id="checkboxGlobal" type="checkbox" name="global"></label><input id="deleteFormButton" type="submit" value="Delete" name="action"><input id="deleteJsButton" type="button" style="display: none;" onclick="deletePosts()" value="Delete"><input id="reportFormButton" type="submit" value="Report" name="action"><input id="reportJsButton" type="button" style="display: none;" onclick="reportPosts()" value="Report"><div id="divPages"></div></main></div><footer></footer><script src="http://static.localhost:8080/settings.js"></script><script src="http://static.localhost:8080/api.js"></script><script src="http://static.localhost:8080/board.js"></script><script src="http://static.localhost:8080/posting.js"></script></body></html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> 
+    </title>
+    <link rel="stylesheet" href="http://static.localhost:8080/css/main.css">
+  </head>
+  <body>
+    <header>
+      <h1 id="labelName"></h1>
+      <p id="labelDescription"></p>
+      <nav id="userMenu">
+        <ul>
+          <li><a href="/account.js">Account</a>
+          </li><a id="linkManagement">Manage Board</a>
+        </ul>
+      </nav>
+    </header>
+    <div id="middle">
+      <main id="content">
+                <form id="newThreadForm" method="post" action="../../newThread.js" enctype="multipart/form-data" class="postForm postForm">
+                  <fieldset class="author">
+                    <label for="fieldName">Name:
+                      <input id="fieldName" type="text" name="name">
+                    </label>
+                    <label for="fieldEmail">Email:
+                      <input id="fieldEmail" name="email" type="text">
+                    </label>
+                    <label for="fieldPassword">Password:
+                      <input id="fieldPassword" name="password" type="password">
+                    </label>
+                  </fieldset>
+                  <fieldset class="message">
+                    <label for="fieldSubject">Subject:
+                      <input id="fieldSubject" type="text" name="subject">
+                    </label>
+                    <label for="fieldMessage">Message:
+                      <textarea id="fieldMessage" rows="8" cols="50" name="message"></textarea>
+                    </label>
+                    <label for="files">Images:
+                      <input id="files" type="file" name="files" multiple="">
+                    </label>
+                  </fieldset>
+                  <fieldset class="submit">
+                    <label for="fieldCaptcha">Captcha:<img src="/captcha.js">
+                      <input id="fieldCaptcha" name="captcha" type="text">
+                    </label>
+                    <input id="jsButton" type="button" onclick="postThread()" value="Create thread" style="display: none;">
+                    <input id="formButton" type="submit" value="Create thread">
+                  </fieldset>
+                  <input id="boardIdentifier" type="hidden" name="boardUri">
+                </form>
+        <div id="divPostings"></div>
+        <label for="reportFieldReason">Reason
+          <input id="reportFieldReason" type="text" name="reason">
+        </label>
+        <label for="deletionFieldPasword">Password
+          <input id="deletionFieldPassword" type="password" name="password">
+        </label>
+        <label for="checkboxGlobal">Global
+          <input id="checkboxGlobal" type="checkbox" name="global">
+        </label>
+        <input id="deleteFormButton" type="submit" value="Delete" name="action">
+        <input id="deleteJsButton" type="button" style="display: none;" onclick="deletePosts()" value="Delete">
+        <input id="reportFormButton" type="submit" value="Report" name="action">
+        <input id="reportJsButton" type="button" style="display: none;" onclick="reportPosts()" value="Report">
+        <div id="divPages"></div>
+      </main>
+    </div>
+    <footer>
+    </footer>
+    <script src="http://static.localhost:8080/settings.js"></script>
+    <script src="http://static.localhost:8080/api.js"></script>
+    <script src="http://static.localhost:8080/board.js"></script>
+    <script src="http://static.localhost:8080/posting.js"></script>
+  </body>
+</html>

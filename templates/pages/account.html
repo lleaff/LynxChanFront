@@ -1,1 +1,58 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title> </title><link rel="stylesheet" href="http://static.localhost:8080/css/main.css"><link rel="stylesheet" href="http://static.localhost:8080/css/ext.css"/></head><body><header><h1>Undefined site title</h1><nav id="userMenu"><ul><li><a href="/account.js">Account</a></li></ul></nav></header><div id="middle"><main id="content"><section id="account"><h4>Logged in as <span id="labelLogin"></span></h4><form action="/logout.js"><input id="logoutJsButton" type="button" onclick="logout()" style="display: none" value="Logout"><input id="logoutFormButton" type="submit" value="Logout"></form><a id="globalManagementLink" href="/globalManagement.js">Global management</a></section><section id="createBoard"><form action="/createBoard.js" enctype="multipart/form-data" method="post"><fieldset><label for="newBoardFieldUri">Board URI<input id="newBoardFieldUri" type="text" name="boardUri"></label><label for="newBoardFieldName">Board name<input id="newBoardFieldName" type="text" name="boardName"></label><label for="newBoardFieldDescription">Board description:<input id="newBoardFieldDescription" type="text" name="boardDescription"></label><input id="newBoardJsButton" type="button" onclick="createBoard()" style="display: none" value="Create board"><input id="newBoardFormButton" type="submit" value="Create board"></fieldset></form></section><section id="ownedBoards"><h1>Owned boards</h1><div id="boardsDiv"></div></section></main></div><footer></footer><script src="http://static.localhost:8080/settings.js"></script><script src="http://static.localhost:8080/api.js"></script><script src="http://static.localhost:8080/account.js"></script></body></html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> 
+    </title>
+    <link rel="stylesheet" href="http://static.localhost:8080/css/main.css">
+    <link rel="stylesheet" href="http://static.localhost:8080/css/ext.css"/>
+  </head>
+  <body>
+    <header>
+      <h1>LynxChan</h1>
+      <nav id="userMenu">
+        <ul>
+          <li><a href="/account.js">Account</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <div id="middle">
+      <main id="content">
+        <section id="account">
+          <h4>Logged in as <span id="labelLogin"></span></h4>
+          <form action="/logout.js">
+            <input id="logoutJsButton" type="button" onclick="logout()" style="display: none" value="Logout">
+            <input id="logoutFormButton" type="submit" value="Logout">
+          </form><a id="globalManagementLink" href="/globalManagement.js">Global management</a>
+        </section>
+        <section id="createBoard">
+          <form action="/createBoard.js" enctype="multipart/form-data" method="post">
+            <fieldset>
+              <label for="newBoardFieldUri">Board URI
+                <input id="newBoardFieldUri" type="text" name="boardUri">
+              </label>
+              <label for="newBoardFieldName">Board name
+                <input id="newBoardFieldName" type="text" name="boardName">
+              </label>
+              <label for="newBoardFieldDescription">Board description:
+                <input id="newBoardFieldDescription" type="text" name="boardDescription">
+              </label>
+              <input id="newBoardJsButton" type="button" onclick="createBoard()" style="display: none" value="Create board">
+              <input id="newBoardFormButton" type="submit" value="Create board">
+            </fieldset>
+          </form>
+        </section>
+        <section id="ownedBoards">
+          <h1>Owned boards</h1>
+          <div id="boardsDiv"></div>
+        </section>
+      </main>
+    </div>
+    <footer>
+    </footer>
+    <script src="http://static.localhost:8080/settings.js"></script>
+    <script src="http://static.localhost:8080/api.js"></script>
+    <script src="http://static.localhost:8080/account.js"></script>
+  </body>
+</html>

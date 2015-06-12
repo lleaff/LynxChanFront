@@ -1,1 +1,112 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title> </title><link rel="stylesheet" href="http://static.localhost:8080/css/main.css"></head><body><header><h1 id="labelName"></h1><p id="labelDescription"></p><nav id="userMenu"><ul><li><a href="/account.js">Account</a></li><li><a id="linkManagement">Manage Board</a></li><li><a id="linkMod">Moderate thread</a></li></ul></nav></header><div id="middle"><main id="content"><form id="newReplyForm" method="post" action="../../replyThread.js" enctype="multipart/form-data" class="postForm postForm"><fieldset class="author"><label for="fieldName">Name:<input id="fieldName" type="text" name="name"></label><label for="fieldEmail">Email:<input id="fieldEmail" name="email" type="text"></label><label for="fieldPassword">Password:<input id="fieldPassword" name="password" type="password"></label></fieldset><fieldset class="message"><label for="fieldSubject">Subject:<input id="fieldSubject" type="text" name="subject"></label><label for="fieldMessage">Message:<textarea id="fieldMessage" rows="8" cols="50" name="message"></textarea></label><label for="files">Images:<input id="files" type="file" name="files" multiple=""></label></fieldset><fieldset class="submit"><label for="fieldCaptcha">Captcha:<img src="/captcha.js"><input id="fieldCaptcha" name="captcha" type="text"></label><input id="jsButton" type="button" onclick="postReply()" value="Reply" style="display: none;"><input id="formButton" type="submit" value="Reply"></fieldset><input id="boardIdentifier" type="hidden" name="boardUri"><input id="threadIdentifier" type="hidden" name="threadId"></form><div id="divControls"><form action="/threadControls.js" method="post" enctype="multipart/form-data"><fieldset><label for="checkboxLock">Lock<input id="checkboxLock" name="lock" type="checkbox"></label><label for="checkboxPin">Pin<input id="checkboxPin" name="pin" type="checkbox"></label><input id="controlBoardIdentifier" type="hidden" name="boardUri"><input id="controlThreadIdentifier" type="hidden" name="threadId"><input id="lockFormButton" type="submit" name="action" value="Lock"><input id="lockJsButton" type="button" onclick="setLock()" style="display: none;" value="Lock"><input id="pinFormButton" name="action" type="submit" value="Pin"><input id="pinJsButton" type="button" onclick="setPin()" style="display: none;" value="Pin"></fieldset></form></div><form method="post" action="../../contentActions.js" enctype="multipart/form-data"><fieldset><div id="divPostings"><label for="reportFieldReason">Reason<input id="reportFieldReason" type="text" name="reason"></label></div><div id="divExpiration"><label for="fieldExpiration">Expiration<input id="fieldExpiration" type="text" name="expiration"></label></div><label for="deletionFieldPassword">Password<input id="deletionFieldPassword" type="password" name="password"></label><label for="checkboxGlobal">Global<input id="checkboxGlobal" type="checkbox" name="global"></label><input id="deleteFormButton" type="submit" value="Delete" name="action"><input id="deleteJsButton" type="button" style="display: none;" onclick="deletePosts()" value="Delete"><input id="inputBan" type="submit" value="Ban" name="action"><input id="banJsButton" type="button" style="display: none;" onclick="banPosts()" value="Ban"><input id="reportFormButton" type="submit" value="Report" name="action"><input id="reportJsButton" type="button" style="display: none;" onclick="reportPosts()" value="Report"></fieldset></form></main></div><footer></footer><script src="http://static.localhost:8080/settings.js"></script><script src="http://static.localhost:8080/api.js"></script><script src="http://static.localhost:8080/thread.js"></script><script src="http://static.localhost:8080/posting.js"></script></body></html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> 
+    </title>
+    <link rel="stylesheet" href="http://static.localhost:8080/css/main.css">
+  </head>
+  <body>
+    <header>
+      <h1 id="labelName"></h1>
+      <p id="labelDescription"></p>
+      <nav id="userMenu">
+        <ul>
+          <li><a href="/account.js">Account</a>
+          </li>
+          <li><a id="linkManagement">Manage Board</a>
+          </li>
+          <li><a id="linkMod">Moderate thread</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <div id="middle">
+      <main id="content">
+                <form id="newReplyForm" method="post" action="../../replyThread.js" enctype="multipart/form-data" class="postForm postForm">
+                  <fieldset class="author">
+                    <label for="fieldName">Name:
+                      <input id="fieldName" type="text" name="name">
+                    </label>
+                    <label for="fieldEmail">Email:
+                      <input id="fieldEmail" name="email" type="text">
+                    </label>
+                    <label for="fieldPassword">Password:
+                      <input id="fieldPassword" name="password" type="password">
+                    </label>
+                  </fieldset>
+                  <fieldset class="message">
+                    <label for="fieldSubject">Subject:
+                      <input id="fieldSubject" type="text" name="subject">
+                    </label>
+                    <label for="fieldMessage">Message:
+                      <textarea id="fieldMessage" rows="8" cols="50" name="message"></textarea>
+                    </label>
+                    <label for="files">Images:
+                      <input id="files" type="file" name="files" multiple="">
+                    </label>
+                  </fieldset>
+                  <fieldset class="submit">
+                    <label for="fieldCaptcha">Captcha:<img src="/captcha.js">
+                      <input id="fieldCaptcha" name="captcha" type="text">
+                    </label>
+                    <input id="jsButton" type="button" onclick="postReply()" value="Reply" style="display: none;">
+                    <input id="formButton" type="submit" value="Reply">
+                  </fieldset>
+                  <input id="boardIdentifier" type="hidden" name="boardUri">
+                  <input id="threadIdentifier" type="hidden" name="threadId">
+                </form>
+        <div id="divControls">
+          <form action="/threadControls.js" method="post" enctype="multipart/form-data">
+            <fieldset>
+              <label for="checkboxLock">Lock
+                <input id="checkboxLock" name="lock" type="checkbox">
+              </label>
+              <label for="checkboxPin">Pin
+                <input id="checkboxPin" name="pin" type="checkbox">
+              </label>
+              <input id="controlBoardIdentifier" type="hidden" name="boardUri">
+              <input id="controlThreadIdentifier" type="hidden" name="threadId">
+              <input id="lockFormButton" type="submit" name="action" value="Lock">
+              <input id="lockJsButton" type="button" onclick="setLock()" style="display: none;" value="Lock">
+              <input id="pinFormButton" name="action" type="submit" value="Pin">
+              <input id="pinJsButton" type="button" onclick="setPin()" style="display: none;" value="Pin">
+            </fieldset>
+          </form>
+        </div>
+        <form method="post" action="../../contentActions.js" enctype="multipart/form-data">
+          <fieldset>
+            <div id="divPostings">
+              <label for="reportFieldReason">Reason
+                <input id="reportFieldReason" type="text" name="reason">
+              </label>
+            </div>
+            <div id="divExpiration">
+              <label for="fieldExpiration">Expiration
+                <input id="fieldExpiration" type="text" name="expiration">
+              </label>
+            </div>
+            <label for="deletionFieldPassword">Password
+              <input id="deletionFieldPassword" type="password" name="password">
+            </label>
+            <label for="checkboxGlobal">Global
+              <input id="checkboxGlobal" type="checkbox" name="global">
+            </label>
+            <input id="deleteFormButton" type="submit" value="Delete" name="action">
+            <input id="deleteJsButton" type="button" style="display: none;" onclick="deletePosts()" value="Delete">
+            <input id="inputBan" type="submit" value="Ban" name="action">
+            <input id="banJsButton" type="button" style="display: none;" onclick="banPosts()" value="Ban">
+            <input id="reportFormButton" type="submit" value="Report" name="action">
+            <input id="reportJsButton" type="button" style="display: none;" onclick="reportPosts()" value="Report">
+          </fieldset>
+        </form>
+      </main>
+    </div>
+    <footer>
+    </footer>
+    <script src="http://static.localhost:8080/settings.js"></script>
+    <script src="http://static.localhost:8080/api.js"></script>
+    <script src="http://static.localhost:8080/thread.js"></script>
+    <script src="http://static.localhost:8080/posting.js"></script>
+  </body>
+</html>
