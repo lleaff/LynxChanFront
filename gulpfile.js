@@ -100,9 +100,13 @@ var paths = {
 	jadeExtras: basePaths.source+'templates/jade/', /* For watching */
 	sourcemaps: '../sourcemaps/',
 };
-var files = {}; /* { js: src/static/**.*js, ... } */
+var filesRecur = {}; /* { js: src/static/** /*.js, ... } */
 Object.keys(paths).forEach(function(ft) {
-  files[ft] = paths[ft]+'**/*.'+ft;
+  filesRecur[ft] = paths[ft]+'**/*.'+ft;
+});
+var files = {}; /* { js: src/static/*.js, ... } */
+Object.keys(paths).forEach(function(ft) {
+  files[ft] = paths[ft]+'*.'+ft;
 });
 
 var outPaths = {
@@ -132,7 +136,7 @@ gulp.task('otherFiles', function() {
 });
 
 gulp.task('js', function() {
-  return gulp.src(files.js)
+  return gulp.src(filesRecur.js)
     .pipe(gulpif(!g.production, sourcemaps.init()))
       .pipe(gulpif(g.ugly, uglify()))
     .pipe(gulpif(!g.production, sourcemaps.write(paths.sourcemaps)))
@@ -140,12 +144,12 @@ gulp.task('js', function() {
 });
 
 gulp.task('moveHtml', function() {
-    gulp.src(files.html)
+    gulp.src(filesRecur.html)
     .pipe(gulp.dest(outPaths.html));
 });
 
 gulp.task('jade', ['moveHtml'], function() {
-    return gulp.src(files.jade)
+    return gulp.src(filesRecur.jade)
       .pipe(jade({ pretty: !g.ugly, data: jadeSettings }))
       .pipe(gulp.dest(outPaths.html));
 });
@@ -153,10 +157,11 @@ gulp.task('jade', ['moveHtml'], function() {
 gulp.task('html', ['moveHtml', 'jade']);
 
 gulp.task('css', function() {
-  return gulp.src([files.scss, files.css])
+  return gulp.src([files.scss, files.css, '!'+paths.scssExtras+'*'])
     .pipe(gulpif(!g.production, sourcemaps.init()))
-      .pipe(sass().on('error', sass.logError))
-      .pipe(minifyCss())
+      .pipe(sass({ style: (g.ugly ? 'compressed' : 'nested')})
+            .on('error', sass.logError))
+      .pipe(gulpif(g.ugly, minifyCss()))
     .pipe(gulpif(!g.production, sourcemaps.write(paths.sourcemaps)))
     .pipe(gulp.dest(outPaths.css))
     .pipe(!g.production ? browserSync.stream() : gutil.noop());
@@ -178,8 +183,9 @@ gulp.task('browser-sync', ['build'], function() {
     }
   });
 
-  gulp.watch([files.scss, files.scssExtras, files.css], ['css']);
-  gulp.watch([files.jade, files.jadeExtras],
+  gulp.watch([filesRecur.scss, filesRecur.scssExtras, filesRecur.css],
+             ['css']);
+  gulp.watch([filesRecur.jade, filesRecur.jadeExtras],
              ['html', 'jade', 'browserReload']);
   gulp.watch(files.html, ['html', 'browserReload']);
 });
