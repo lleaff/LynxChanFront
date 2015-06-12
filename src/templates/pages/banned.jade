@@ -1,0 +1,11 @@
+extends ../jade/bare.jade
+
+block headerTitle
+  +title('Banned!')
+
+block content
+  p.
+    You are banned from #[span#boardLabel] until
+    #[span#expirationLabel].
+  p.
+    Reason: #[span#reasonLabel]

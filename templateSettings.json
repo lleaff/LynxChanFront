@@ -22,5 +22,6 @@
   "bansPage":           "pages/bans.html",
   "banCell":            "cmp/banCell.html",
   "uploadCell":         "cmp/uploadCell.html",
-  "errorPage":          "pages/error.html"
+  "errorPage":          "pages/error.html",
+  "banPage":            "pages/banned.html"
 }
