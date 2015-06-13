@@ -170,6 +170,7 @@ gulp.task('css', function() {
 });
 
 /*============ Utility ============== */
+gulp.task('sync', ['browser-sync']);
 gulp.task('browser-sync', ['build'], function() {
   if (g.production) { return; }
 
