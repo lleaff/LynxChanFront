@@ -8,6 +8,7 @@ block headerTitle
 
 block content
   section#ownerControlDiv
+    h2 Add volunteer
     form(action='/setVolunteer.js', method='post',
         enctype='multipart/form-data')
       fieldset
@@ -19,6 +20,7 @@ block content
           value='Add volunteer', style='display: none;')
         input#addVolunteerFormButton(type='submit', value='Add volunteer')
 
+    h2 Ownership transfer
     form(action='/transferBoardOwnership.js', method='post',
       enctype='multipart/form-data')
       fieldset
@@ -31,6 +33,7 @@ block content
         input#transferBoardFormButton(type='submit',
           value='Transfer board')
 
+    h2 Delete board
     form(method='post', action='/deleteBoard.js',
       enctype='multipart/form-data')
       fieldset
@@ -39,7 +42,10 @@ block content
         input#deleteBoardJsButton(type='button', onclick='deleteBoard()',
           value='Delete board', style='display: none;')
 
-  section#volunteersDiv
+    h2 Volunteers
+    section#volunteersDiv
+
+  a#bannerManagementLink Banners
 
   section#reports
     ul
@@ -47,6 +53,7 @@ block content
       li: a#bansLink Bans
       li: h4 Open reports:
         #reportDiv
+
 
 block append scripts
   +script('reports.js')

@@ -4,6 +4,9 @@ block append scripts
   +script('board.js')
   +script('posting.js')
 
+block prepend header
+  img#bannerImage
+
 block headerTitle
   +title('#labelName', '#labelDescription')
 

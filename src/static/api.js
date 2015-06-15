@@ -29,8 +29,8 @@ function handleConnectionResponse(xhr, delegate) {
     alert('You are not allowed to perform this operation.');
   } else if (response.status === 'banned') {
     alert('You are banned from ' + response.data.board + ' until '
-          + new Date(response.data.expiration).toString() + '.\nReason: '
-          + response.data.reason);
+        + new Date(response.data.expiration).toString() + '.\nReason: '
+        + response.data.reason);
   } else {
     delegate(response.status, response.data);
   }

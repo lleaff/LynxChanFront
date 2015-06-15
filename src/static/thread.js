@@ -90,9 +90,6 @@ function sendReplyData(files) {
 
       alert('Reply posted.');
 
-      window.location.pathname = '/' + boardUri + '/res/' + threadId + '.html#'
-          + data;
-
       location.reload(true);
 
     } else {
@@ -129,3 +126,4 @@ function postReply() {
 
   iterateSelectedFiles(0, [], document.getElementById('files'));
 }
+

@@ -1,0 +1,20 @@
+extends ../jade/base.jade
+
+block headerTitle
+  +title('Banner management')
+
+block content
+  section
+    h3 New banner
+    form(action='/createBanner.js', method='post',
+      enctype='multipart/form-data')
+      fieldset
+        input#boardIdentifier(type='hidden', name='boardUri')
+        input#files(type='files', name='files')
+        input#addFormButton(type='submit', value='Add banner')
+        input#addJsButton(type='button', value='addBanner',
+          onClick='addBanner()', style='display: none')
+
+  section
+    h3 Existing banners
+    div#bannersDiv
