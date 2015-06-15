@@ -77,6 +77,7 @@ function sendReplyData(files) {
   apiRequest('replyThread', {
     name : typedName,
     subject : typedSubject,
+    spoiler : document.getElementById('checkboxSpoiler').checked,
     captcha : typedCaptcha,
     password : typedPassword,
     message : typedMessage,
@@ -126,4 +127,3 @@ function postReply() {
 
   iterateSelectedFiles(0, [], document.getElementById('files'));
 }
-

@@ -47,6 +47,7 @@ function sendThreadData(files) {
     name : typedName,
     captcha : typedCaptcha,
     password : typedPassword,
+    spoiler : document.getElementById('checkboxSpoiler').checked,
     subject : typedSubject,
     message : typedMessage,
     email : typedEmail,

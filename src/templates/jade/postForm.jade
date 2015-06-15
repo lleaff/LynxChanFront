@@ -19,6 +19,8 @@ mixin postForm(options)
         textarea#fieldMessage(rows='8', cols='50', name='message')
       label(for="files") Images:
         input#files(type='file', name='files', multiple='')
+      label(for='checkboxSpoiler') Spoiler
+        input#checkboxSpoiler(type='checkbox', name='spoiler')
     fieldset.submit
       label(for="fieldCaptcha") Captcha:
         img(src='/captcha.js')
