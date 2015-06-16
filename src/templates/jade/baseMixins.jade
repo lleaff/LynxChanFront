@@ -28,3 +28,43 @@ mixin title(mainTitle, subTitle)
 mixin userMenuEntry()
   li
     block
+
+//-=Helper functions
+//-------------------------------------------------------------
+//- Get an object of the form
+//-   { string tag, string id, string[] classes }
+//- from a string containing a tag in jade syntax
+//-   (eg.: 'section#contactInfo.center.secondary' or '#footer' )
+-
+  function parseTag(str) {
+    function isSelector(ch) { return ch === '.' || ch === '#'}
+    var tag = '', id = '', classes = []; 
+    var inTagName = true, inId = false, inClass = false, classI = -1;
+    function setIn(str) { 
+      switch(str) {
+        case 'id': inTagName = false; inId = true; inClass = false;
+          break;
+        case 'class': inTagName = false; inId = false;
+          inClass = true; classes[++classI] = '';
+          break;
+      }
+    }
+    for (var i = 0, ch; i < str.length; ++i) {
+      ch = str[i];
+      if (i === 0 && isSelector(ch)) {
+      }
+      if (!isSelector(ch)) {
+        if (inTagName) { tag += ch; }
+        else if (inId) { id += ch; }
+        else if (inClass) { classes[classI] += ch; }
+      } else {
+      if (i === 0) { tag = 'div'; inTagName = false; }
+      if (ch === '.') {
+        setIn('class'); }
+      else if (ch === '#') {
+        setIn('id');
+      }
+      }
+    }
+    return { tag: tag, id: id, classes: classes };
+  }
