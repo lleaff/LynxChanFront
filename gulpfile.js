@@ -49,6 +49,7 @@ var debug               = require('gulp-debug'); /* DEBUG */
 function getGeneralSettings() {
   /* Possible paths */
   var posPaths = [
+    gulpSettings && gulpSettings.generalSettingsPath,
     '../be/settings/general.json',
     '../LynxChan/src/be/settings/general.json'
   ];
@@ -62,10 +63,10 @@ function getGeneralSettings() {
   return fileContent;
 }
 
-var settings      = JSON.parse(getGeneralSettings());
 var gulpSettings  = JSON.parse(
   tryReadFileSync('gulpsettings.json', {log: true}) ||
     "{}");
+var settings      = JSON.parse(getGeneralSettings() || "{}");
 var jadeSettings  = JSON.parse(
   tryReadFileSync('./src/templates/jadeSettings.json', {log: true}) ||
     "{}");
@@ -75,13 +76,12 @@ var siteTitle = settings.siteTitle || "Undefined site title";
 
 var url = {
   protocol: settings.sll ? 'https' : 'http',
-  domain: settings.address === '127.0.0.1' ?
+  domain: !settings.address || settings.address === '127.0.0.1' ?
     'localhost' : settings.address,
-
-
+  port: settings.port ? settings.port : '8080',
 };
-url.base = url.protocol+'://'+url.domain+':'+settings.port;
-url.baseStatic = url.protocol+'://'+'static.'+url.domain+':'+settings.port;
+url.base = url.protocol+'://'+url.domain+':'+url.port;
+url.baseStatic = url.protocol+'://'+'static.'+url.domain+':'+url.port;
 
 jadeSettings = concatObjects(jadeSettings, {
   siteTitle: siteTitle,
@@ -218,6 +218,7 @@ gulp.task('browserReload', ['restartServer'], function() {
   browserSync.reload();
 });
 
+gulp.task('clean' ['clear']);
 gulp.task('clear', function() {
   Object.keys(outPaths).forEach(function(outPath) {
       deleteFolderRecursive(
@@ -254,7 +255,7 @@ function tryReadFileSync(fileName, options) {
   options = options || {};
   if (options.encoding === undefined) { options.encoding = 'utf-8'; }
   try {
-    return fs.readFileSync(fileName, 'utf8');
+    return fileName && fs.readFileSync(fileName, 'utf8');
   } catch(e) {
     if (e instanceof Error && e.code === "ENOENT") { /* File not found */
       if (options.log) {
