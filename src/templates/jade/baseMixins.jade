@@ -29,6 +29,17 @@ mixin userMenuEntry()
   li
     block
 
+mixin pageMenu(idAndClasses)
+  li
+    if (idAndClasses)
+      - var tag = parseTag(idAndClasses)
+      a(id=tag.id, class=tag.classes.join(' '))&attributes(attributes)
+        block
+    else
+      a&attributes(attributes)
+        block
+
+
 //-=Helper functions
 //-------------------------------------------------------------
 //- Get an object of the form
