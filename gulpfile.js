@@ -5,8 +5,9 @@ g.ugly = argv.ugly || argv.u;
 g.production = argv.production || argv.p;
 g.blank = argv.test || argv.blank;
 
-/* =Modules
------------------------------------------------------------- */
+/*------------------------------------------------------------
+ * =Modules
+ *------------------------------------------------------------ */
 /*============= Misc ============= */
 var fs                  = require('fs');
 if (!g.production) {
@@ -35,11 +36,14 @@ var stripCssComments    = require('gulp-strip-css-comments');
 var minifyCss           = require('gulp-minify-css'); /* sourcemaps */
 /* jade */
 var jade                = require('gulp-jade');
+/* Images */
+var imagemin            = require('gulp-imagemin');
 
 var debug               = require('gulp-debug'); /* DEBUG */
 
-/* =Variables
------------------------------------------------------------- */
+/*------------------------------------------------------------- 
+ * =Variables
+ *------------------------------------------------------------*/
 /*============= Setting files ============= */
 /* Placeholder function */
 function getGeneralSettings() {
@@ -99,6 +103,7 @@ var paths = {
 	html:       basePaths.source+'templates/',
 	jade:       basePaths.source+'templates/{pages/,cmp/}',
 	jadeExtras: basePaths.source+'templates/jade/', /* For watching */
+  png:        basePaths.source+'templates/cmp/images/',
 	sourcemaps: '../sourcemaps/',
 };
 var filesRecur = {}; /* { js: src/static/** /*.js, ... } */
@@ -114,10 +119,12 @@ var outPaths = {
   js:         basePaths.build+'static/',
   css:        basePaths.build+'static/css/',
 	html:       basePaths.build+'templates/',
+  png:        basePaths.build+'templates/cmp/images/',
 };
 
-/* =Tasks
------------------------------------------------------------- */
+/*------------------------------------------------------------- 
+ *  =Tasks
+ *-------------------------------------------------------------*/
 gulp.task('default', ['build']);
 
 /*============ Build ============== */
@@ -169,6 +176,12 @@ gulp.task('css', function() {
     .pipe(!g.production ? browserSync.stream() : gutil.noop());
 });
 
+gulp.task('images', function() {
+  return gulp.src(files.png)
+    .pipe(gulpif(g.production), imagemin())
+    .pipe(gulp.dest(outPaths.png))
+});
+
 /*============ Utility ============== */
 gulp.task('sync', ['browser-sync']);
 gulp.task('browser-sync', ['build'], function() {
@@ -214,8 +227,9 @@ gulp.task('clear', function() {
   });
 });
 
-/* Helper functions
------------------------------------------------------------- */
+/*------------------------------------------------------------- 
+ * =Helper functions
+ *------------------------------------------------------------*/
 function commentString(string, fileType) {
 	var tags = {
 		html:	['<!--', '-->'],
