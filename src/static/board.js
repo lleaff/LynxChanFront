@@ -23,7 +23,7 @@ function sendThreadData(files) {
   } else if (typedName.length > 32) {
     alert('Name is too long, keep it under 32 characters.');
     return;
-  } else if (typedMessage.length > 32) {
+  } else if (typedMessage.length > 2048) {
     alert('Message is too long, keep it under 2048 characters.');
     return;
   } else if (typedEmail.length > 64) {

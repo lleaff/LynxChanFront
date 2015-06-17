@@ -1,5 +1,6 @@
 gulpsettings.json
 src/static/settings.js
+.settings
 
 # Build files
 build/

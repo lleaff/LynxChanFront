@@ -14,7 +14,8 @@ block append userMenu
   a#linkManagement Manage Board
 
 block pageMenu
-  +pageMenu('a#linkCatalogHeader') Catalog
+  +pageMenuEntry
+    a(href='catalog.html') Catalog
 
 block content
   include ../jade/createThread
