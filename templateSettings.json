@@ -26,7 +26,7 @@
   "bannerCell":           "cmp/bannerCell.html",
   "defaultBanner":        "cmp/images/banner.png",
   "thumb":                "cmp/images/thumb.png",
-  "spoiler":              "cmp/images/spoiler.png'",
+  "spoiler":              "cmp/images/spoiler.png",
   "catalogPage":          "pages/catalog.html",
   "catalogCell":          "cmp/catalogCell.html"
 }
