@@ -13,6 +13,9 @@ block headerTitle
 block append userMenu
   a#linkManagement Manage Board
 
+block pageMenu
+  +pageMenu('a#linkCatalogHeader') Catalog
+
 block content
   include ../jade/createThread
   #divPostings

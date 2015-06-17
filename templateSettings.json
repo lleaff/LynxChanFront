@@ -21,11 +21,12 @@
   "bansPage":             "pages/bans.html",
   "banCell":              "cmp/banCell.html",
   "uploadCell":           "cmp/uploadCell.html",
-  "errorPage":            "pages/error.html",
   "banPage":              "pages/banned.html",
   "bannerManagementPage": "pages/bannerManagement.html",
   "bannerCell":           "cmp/bannerCell.html",
   "defaultBanner":        "cmp/images/banner.png",
   "thumb":                "cmp/images/thumb.png",
-  "spoiler":              "cmp/images/spoiler.png'"
+  "spoiler":              "cmp/images/spoiler.png'",
+  "catalogPage":          "pages/catalog.html",
+  "catalogCell":          "cmp/catalogCell.html"
 }

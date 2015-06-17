@@ -179,7 +179,7 @@ gulp.task('css', function() {
 gulp.task('images', function() {
   return gulp.src(files.png)
     .pipe(gulpif(g.production), imagemin())
-    .pipe(gulp.dest(outPaths.png))
+    .pipe(gulp.dest(outPaths.png));
 });
 
 /*============ Utility ============== */
@@ -218,7 +218,7 @@ gulp.task('browserReload', ['restartServer'], function() {
   browserSync.reload();
 });
 
-gulp.task('clean' ['clear']);
+gulp.task('clean', ['clear']);
 gulp.task('clear', function() {
   Object.keys(outPaths).forEach(function(outPath) {
       deleteFolderRecursive(
