@@ -11,7 +11,7 @@ body {
 	margin: 0;
 	padding: 0;
 
-	font-family: sans;
+	font-family: sans-serif;
 }
 
 a {
@@ -43,6 +43,18 @@ header {
 /*------------------------------------------------------------* 
  * =Page specific
  *------------------------------------------------------------*/
+/* =Board and Thread
+ *------------------------------*/
+#banner {
+  height: 50px;
+  max-width: 50px;
+  overflow: hidden;
+}
+#bannerImage {
+  min-height: 100%;
+  min-width: 100%;
+}
+
 /* =Catalog
  *------------------------------*/
 @import 'sub/catalog';
