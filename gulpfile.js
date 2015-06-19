@@ -63,6 +63,7 @@ function getGeneralSettings() {
   return fileContent;
 }
 
+/* keys: generalSettingsPath, startCommand, reloadCommand */
 var gulpSettings  = JSON.parse(
   tryReadFileSync('gulpsettings.json', {log: true}) ||
     "{}");
@@ -215,7 +216,8 @@ gulp.task('restartServer', ['html'], function() {
 });
 
 gulp.task('browserReload', ['restartServer'], function() {
-  browserSync.reload();
+  return gulp.src()
+    .pipe(browserSync.reload());
 });
 
 gulp.task('clean', ['clear']);
