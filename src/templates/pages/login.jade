@@ -6,9 +6,9 @@ block content
     form(action='/login.js', enctype='multipart/form-data', method='post')
       fieldset
         label(for='loginFieldLogin') Username
-          input#loginFieldLogin(type='text', name='login')
+          input#loginFieldLogin(type='text', name='login', placeholder='Username', required)
         label(for='loginFieldPassword') Password
-          input#loginFieldPassword(type='password', name='password')
+          input#loginFieldPassword(type='password', name='password', required)
         input#loginFormButton(type='submit', value='Login')
         input#loginJsButton(type='button', onclick='loginUser()',
           value='Login', style='display: none;')
@@ -20,12 +20,13 @@ block content
       fieldset
         label(for='registerFieldLogin')
           span(title='Required') Login*
-          input#registerFieldLogin(type='text', name='login')
+          input#registerFieldLogin(type='text', name='login',
+          placeholder='Username', required)
         label(for='registerFieldPassword')
           span(title='Required') Password*
-          input#registerFieldPassword(type='password', name='password')
+          input#registerFieldPassword(type='password', name='password', required)
         label(for='registerFieldEmail') Email
-          input#registerFieldEmail(type='text', name='email')
+          input#registerFieldEmail(type='email', name='email', placeholder='Email')
         input#registerFormButton(type='submit', value='Register')
         input#registerJsButton(type='button', onclick='registerAccount()',
           value='Register', style='display: none;')
@@ -36,7 +37,8 @@ block content
       enctype='multipart/form-data', method='post')
       fieldset
         label(for='recoverFieldLogin') Login
-          input#recoverFieldLogin(type='text', name='login')
+          input#recoverFieldLogin(type='text', name='login',
+          placeholder='Username', required)
         input#recoverFormButton(type='submit', value='Request recovery')
         input#recoverJsButton(type='button', onclick='recoverAccount()',
           value='Request recovery', style='display: none;')

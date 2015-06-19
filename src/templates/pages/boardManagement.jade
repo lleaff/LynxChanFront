@@ -13,7 +13,7 @@ block content
         enctype='multipart/form-data')
       fieldset
         label(for='addVolunteerFieldLogin') User login:
-          input#addVolunteerFieldLogin(type='text', name='login')
+          input#addVolunteerFieldLogin(type='text', name='login', required)
         input(type='hidden', name='add', value='true')
         input#addVolunteerBoardIdentifier(type='hidden', name='boardUri')
         input#addVolunteerJsButton(type='button', onclick='addVolunteer()',
@@ -25,13 +25,11 @@ block content
       enctype='multipart/form-data')
       fieldset
         label(for='transferBoardFieldLogin') User login:
-          input#transferBoardFieldLogin(type='text', name='login')
+          input#transferBoardFieldLogin(type='text', name='login', required)
         input#transferBoardIdentifier(type='hidden', name='boardUri')
         input#transferBoardJsButton(type='button',
-          onclick='transferBoard()', value='Transfer board',
-          style='display: none;')
-        input#transferBoardFormButton(type='submit',
-          value='Transfer board')
+          onclick='transferBoard()', value='Transfer board', style='display: none;')
+        input#transferBoardFormButton(type='submit', value='Transfer board')
 
     h2 Delete board
     form(method='post', action='/deleteBoard.js',
@@ -45,7 +43,8 @@ block content
     h2 Volunteers
     section#volunteersDiv
 
-  a#bannerManagementLink Banners
+    ul
+      li: a#bannerManagementLink Banners
 
   section#reports
     ul

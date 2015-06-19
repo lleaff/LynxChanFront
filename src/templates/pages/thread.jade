@@ -46,10 +46,11 @@ block content
     fieldset
       div#divPostings
         label(for='reportFieldReason') Reason
-          input#reportFieldReason(type='text', name='reason')
+          input#reportFieldReason(type='text', name='reason', placeholder='Reason')
       div#divBanInput
         label(for='fieldExpiration') Expiration
-          input#fieldExpiration(type='text', name='expiration')
+          input#fieldExpiration(type='date', name='expiration',
+          placeholder='Expiration', required)
         label(for='fieldBanMessage') Ban message
           input#fieldBanMessage(type='text', name='banMessage')
       label(for='deletionFieldPassword') Password

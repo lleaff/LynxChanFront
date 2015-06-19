@@ -1,13 +1,9 @@
-html
-  body
-    | Reason:
-    span.reasonLabel
-    | Expiration:
-    span.expirationLabel
-    | Applied by:
-    span.appliedByLabel
-    | Boards:
-    span.boardLabel
-    input.liftFormButton(type='submit', value='Lift')
-    input.liftJsButton(type='button', value='Lift', style='display: none;')
-    input.idIdentifier(type='hidden', name='banId')
+p. 
+  Reason: #[span.reasonLabel]
+  Expiration: #[span.expirationLabel]
+  Applied by: #[span.appliedByLabel]
+  Boards: #[span.boardLabel]
+fieldset
+  input.liftFormButton(type='submit', value='Lift')
+  input.liftJsButton(type='button', value='Lift', style='display: none;')
+  input.idIdentifier(type='hidden', name='banId')
