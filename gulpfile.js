@@ -171,7 +171,7 @@ gulp.task('css', function() {
             .on('error', sass.logError))
       .pipe(gulpif(g.production, stripCssComments()))
       .pipe(gulpif(g.ugly, minifyCss()))
-    .pipe(gulpif(!g.production, sourcemaps.write(paths.sourcemaps)))
+    .pipe(gulpif(!g.production, sourcemaps.write('../'+paths.sourcemaps)))
     .pipe(gulp.dest(outPaths.css))
     .pipe(!g.production ? browserSync.stream() : gutil.noop());
 });
