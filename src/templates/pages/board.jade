@@ -12,7 +12,8 @@ block headerTitle
   +title('#labelName', '#labelDescription')
 
 block append userMenu
-  a#linkManagement Manage Board
+  +userMenuEntry
+    a#linkManagement Manage Board
 
 block pageMenu
   +pageMenuEntry

@@ -46,13 +46,13 @@ header {
 /* =Board and Thread
  *------------------------------*/
 #banner {
-  height: 50px;
-  max-width: 50px;
+  max-height: 12em ;
+  max-width: 50%;
   overflow: hidden;
 }
 #bannerImage {
-  min-height: 100%;
-  min-width: 100%;
+  max-height: inherit;
+  max-width: inherit;
 }
 
 /* =Catalog

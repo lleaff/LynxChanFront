@@ -10,7 +10,7 @@ block content
       enctype='multipart/form-data')
       fieldset
         input#boardIdentifier(type='hidden', name='boardUri')
-        input#files(type='files', name='files')
+        input#files(type='file', name='files')
         input#addFormButton(type='submit', value='Add banner')
         input#addJsButton(type='button', value='addBanner',
           onClick='addBanner()', style='display: none')
