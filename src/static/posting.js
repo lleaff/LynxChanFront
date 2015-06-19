@@ -19,6 +19,8 @@ function banPosts() {
   var typedReason = document.getElementById('reportFieldReason').value.trim();
   var typedExpiration = document.getElementById('fieldExpiration').value.trim();
 
+  var typedMessage = document.getElementById('fieldBanMesage').value.trim();
+
   var expiration = Date.parse(typedExpiration || '');
 
   if (isNaN(expiration)) {
@@ -32,6 +34,7 @@ function banPosts() {
   apiRequest('banUsers', {
     reason : typedReason,
     expiration : typedExpiration,
+    banMessage : typedMessage,
     global : document.getElementById('checkboxGlobal').checked,
     postings : toBan
   }, function requestComplete(status, data) {
