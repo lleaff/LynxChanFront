@@ -6,14 +6,16 @@ block content
     form(action='/login.js', enctype='multipart/form-data', method='post')
       fieldset
         label(for='loginFieldLogin') Username
-          input#loginFieldLogin(type='text', name='login', placeholder='Username', required)
+          input#loginFieldLogin(type='text', name='login',
+          placeholder='Username', required)
         label(for='loginFieldPassword') Password
-          input#loginFieldPassword(type='password', name='password', required)
+          input#loginFieldPassword(type='password', name='password',
+          required)
         input#loginFormButton(type='submit', value='Login')
         input#loginJsButton(type='button', onclick='loginUser()',
           value='Login', style='display: none;')
 
-  section
+  section#divCreation
     h1 Register
     form(action='/registerAccount.js', enctype='multipart/form-data',
       method='post')
@@ -24,9 +26,11 @@ block content
           placeholder='Username', required)
         label(for='registerFieldPassword')
           span(title='Required') Password*
-          input#registerFieldPassword(type='password', name='password', required)
+          input#registerFieldPassword(type='password', name='password',
+          required)
         label(for='registerFieldEmail') Email
-          input#registerFieldEmail(type='email', name='email', placeholder='Email')
+          input#registerFieldEmail(type='email', name='email',
+          placeholder='Email')
         input#registerFormButton(type='submit', value='Register')
         input#registerJsButton(type='button', onclick='registerAccount()',
           value='Register', style='display: none;')

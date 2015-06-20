@@ -22,7 +22,8 @@ block content
       enctype='multipart/form-data')
         fieldset
           label(for='emailField') E-mail
-            input#emailField(type='email', name='email', placeholder='Email', required)
+            input#emailField(type='email', name='email',
+            placeholder='Email', required)
           input#saveFormButton(type='submit', value='Save')
           input#saveJsButton(type='button', value='Save',
             onClick='save()', style='display: none;')
@@ -33,12 +34,14 @@ block content
       fieldset
         input#fieldPassword(type='password', name='password', required)
         label(for='fieldNewPassword') New password
-          input#fieldNewPassword(type='password', name='newPassword', required)
+          input#fieldNewPassword(type='password', name='newPassword',
+          required)
         label(for='fieldConfirmation') Confirm new password
-          input#fieldConfirmation(type='password', name='confirmation', required)
+          input#fieldConfirmation(type='password', name='confirmation',
+          required)
         input#passwordFormButton(type='submit', value='Change password')
 
-  section#createBoard
+  section#boardCreationDiv
     h1 Create board
     form(action='/createBoard.js', enctype='multipart/form-data',
       method='post')
