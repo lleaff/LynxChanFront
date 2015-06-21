@@ -216,8 +216,7 @@ gulp.task('restartServer', ['html'], function() {
 });
 
 gulp.task('browserReload', ['restartServer'], function() {
-  return gulp.src()
-    .pipe(browserSync.reload());
+  return browserSync.reload();
 });
 
 gulp.task('clean', ['clear']);
