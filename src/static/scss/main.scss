@@ -1,53 +1,63 @@
+/* This stylesheet is included in all pages
+ *------------------------------------------------------------*/
 @import 'sub/normalize';
 @import 'sub/box-sizing';
+
+@import 'sub/functions';
 @import 'sub/theme';
 
-/*------------------------------------------------------------*/
+/*============================================================*
+ * =Colors
+ *============================================================*/
+// Colors here must reference colors in the theme's palette with
+//  palette('key'), without assuming anything about their value
 
+$borderColorMain: mix(palette('bgMain'), palette('fgMain'), 80%);
+$borderColorAlt: mix(palette('bgAlt'), palette('fgAlt'), 80%);
+
+$buttonBgColor: palette('bgAlt');
+
+/*------------------------------------------------------------*
+ * =General
+ *------------------------------------------------------------*/
 body {
-	background-color: $bgMain;
-	color: $fgMain;
+  background-color: palette('bgMain');
+  color: palette('fgMain');
 
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 
-	font-family: sans-serif;
+  font-family: sans-serif;
 }
 
 a {
-	color: mix($fgMain, $accentA);
+  color: mix(palette('fgMain'), palette('accentA'));
 }
 
-input,
-button,
-textarea {
-  background-color: $bgAlt;
-  border: solid 1px $borderColorAlt;
-  color: $fgAlt;
-}
-
+/*------------------------------------------------------------*
+ * =Input
+ *------------------------------------------------------------*/
 header {
-	background-color: $bgAlt;
-  color: $fgAlt;
+  background-color: palette('bgAlt');
+  color: palette('fgAlt');
 
   border-bottom: solid 1px $borderColorAlt;
 
-	font-size: 1.5em;
-	padding: 0.3em;
-}
-
-#middle {
   padding: 0.3em;
 }
 
-/*------------------------------------------------------------* 
- * =Page specific
- *------------------------------------------------------------*/
-/* =Board and Thread
+header h1 {
+  font-size: 1.5em;
+}
+header h2 {
+  font-size: 1em;
+}
+
+/* =Board, Thread and Catalog
  *------------------------------*/
 #banner {
   max-height: 12em ;
-  max-width: 50%;
+  /*max-width: 50%;*/
   overflow: hidden;
 }
 #bannerImage {
@@ -55,6 +65,51 @@ header {
   max-width: inherit;
 }
 
+#middle {
+  padding: 0.3em;
+}
+
+/*------------------------------------------------------------*
+ * =Input
+ *------------------------------------------------------------*/
+input, button, textarea {
+  background-color: palette('bgAlt');
+  border: solid 1px $borderColorAlt;
+  color: palette('fgAlt');
+}
+
+.secondary {
+  border-color: take-lightness(palette('warning'), $borderColorAlt, 100%);
+  background-color: weighted('take-lightness', 10%,
+    palette('warning'), $borderColorAlt, 100%);
+
+}
+
+.careful {
+  border-color: take-lightness(palette('warning'), $borderColorAlt, 100%);
+  background-color: weighted('take-lightness', 10%,
+    palette('warning'), $borderColorAlt, 100%);
+}
+
+/* =Button
+ *------------------------------*/
+.button {
+  background-color: $buttonBgColor;
+}
+
+.submit {
+}
+
+/* =Checkbox
+ *------------------------------*/
+input[type="checkbox"] {
+}
+
+/*------------------------------------------------------------*
+ * =Page specific
+ *------------------------------------------------------------*/
+/* =Board and Thread
+ *------------------------------*/
 .opCell {
 }
 .postCell {

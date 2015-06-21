@@ -1,5 +1,6 @@
 // Mix $color by $weight with the color obtained by calling $function with
 //  $color followed by the given arguments.
+//------------------------------------------------------------
 @function weighted($function, $weight, $color, $args...) {
   // We need to compile a new argument list for call() since the '...'
   //  syntax has no effect when it's not the only argument being passed.
@@ -11,6 +12,7 @@
 }
 
 // Change $color to use the given value form $sourceColor
+//------------------------------------------------------------
 @function take-red($color, $sourceColor, $weight: 100%) {
   @return mix(change-color($color, $red: red($sourceColor)),
     $color, $weight);

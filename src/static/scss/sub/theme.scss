@@ -1,11 +1,15 @@
 /* =Color theme
 ------------------------------------------------------------ */
-$bgMain: #e5e5e5;
-$fgMain: #252525;
-$borderColorMain: mix($bgMain, $fgMain, 80);
+$palette-colors: (
+  'bgMain':       #e5e5e5,
+  'fgMain':       #252525,
+  'bgAlt':        #dadada,
+  'fgAlt':        #252525,
 
-$bgAlt: #dadada;
-$fgAlt: $fgMain;
-$borderColorAlt: mix($bgAlt, $fgAlt, 80);
+  'accentA':      #2277a0,
 
-$accentA: #2277a0;
+  'warning': #f9b3bc
+);
+@function palette($key) {
+  @return map-get($palette-colors, $key);
+}
