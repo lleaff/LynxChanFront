@@ -1,0 +1,41 @@
+// Mix $color by $weight with the color obtained by calling $function with
+//  $color followed by the given arguments.
+@function weighted($function, $weight, $color, $args...) {
+  // We need to compile a new argument list for call() since the '...'
+  //  syntax has no effect when it's not the only argument being passed.
+  $compiledArgumentList: ($function, $color);
+  @each $arg in $args {
+    $compiledArgumentList: append($compiledArgumentList, $arg);
+  }
+  @return mix(call($compiledArgumentList...), $color, $weight);
+}
+
+// Change $color to use the given value form $sourceColor
+@function take-red($color, $sourceColor, $weight: 100%) {
+  @return mix(change-color($color, $red: red($sourceColor)),
+    $color, $weight);
+}
+@function take-green($color, $sourceColor, $weight: 100%) {
+  @return mix(change-color($color, $green: green($sourceColor)),
+    $color, $weight);
+}
+@function take-blue($color, $sourceColor, $weight: 100%) {
+  @return mix(change-color($color, $blue: blue($sourceColor)),
+    $color, $weight);
+}
+@function take-hue($color, $sourceColor, $weight: 100%) {
+  @return mix(change-color($color, $hue: hue($sourceColor)),
+    $color, $weight);
+}
+@function take-saturation($color, $sourceColor, $weight: 100%) {
+  @return mix(change-color($color, $saturation: saturation($sourceColor)),
+    $color, $weight);
+}
+@function take-lightness($color, $sourceColor, $weight: 100%) {
+  @return mix(change-color($color, $lightness: lightness($sourceColor)),
+    $color, $weight);
+}
+@function take-alpha($color, $sourceColor, $weight: 100%) {
+  @return mix(change-color($color, $alpha: alpha($sourceColor)),
+    $color, $weight);
+}
