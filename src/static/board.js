@@ -9,20 +9,28 @@ if (!DISABLE_JS) {
 
 function sendThreadData(files) {
 
-  var typedName = document.getElementById('fieldName').value.trim();
+  var forcedAnon = !document.getElementById('fieldName');
+
+  if (!forcedAnon) {
+    var typedName = document.getElementById('fieldName').value.trim();
+  }
+
   var typedEmail = document.getElementById('fieldEmail').value.trim();
   var typedMessage = document.getElementById('fieldMessage').value.trim();
   var typedSubject = document.getElementById('fieldSubject').value.trim();
   var boardUri = document.getElementById('boardIdentifier').value;
-  var typedCaptcha = document.getElementById('fieldCaptcha').value.trim();
   var typedPassword = document.getElementById('fieldPassword').value.trim();
 
-  var hiddenCaptcha = document.getElementById('captchaDiv').style.display === 'none';
+  var hiddenCaptcha = !document.getElementById('captchaDiv');
+
+  if (!hiddenCaptcha) {
+    var typedCaptcha = document.getElementById('fieldCaptcha').value.trim();
+  }
 
   if (!typedMessage.length) {
     alert('A message is mandatory.');
     return;
-  } else if (typedName.length > 32) {
+  } else if (!forcedAnon && typedName.length > 32) {
     alert('Name is too long, keep it under 32 characters.');
     return;
   } else if (typedMessage.length > 2048) {
@@ -46,8 +54,8 @@ function sendThreadData(files) {
   }
 
   apiRequest('newThread', {
-    name : typedName,
-    captcha : typedCaptcha,
+    name : forcedAnon ? null : typedName,
+    captcha : hiddenCaptcha ? null : typedCaptcha,
     password : typedPassword,
     spoiler : document.getElementById('checkboxSpoiler').checked,
     subject : typedSubject,

@@ -16,9 +16,11 @@ block content
           input#addVolunteerFieldLogin(type='text', name='login', required)
         input(type='hidden', name='add', value='true')
         input#addVolunteerBoardIdentifier(type='hidden', name='boardUri')
-        input#addVolunteerJsButton(type='button', onclick='addVolunteer()',
-          value='Add volunteer', style='display: none;')
-        input#addVolunteerFormButton(type='submit', value='Add volunteer')
+        input.submit#addVolunteerJsButton(type='button',
+          onclick='addVolunteer()', value='Add volunteer',
+          style='display: none;')
+        input.submit#addVolunteerFormButton(type='submit',
+          value='Add volunteer')
 
     h2 Ownership transfer
     form(action='/transferBoardOwnership.js', method='post',
@@ -27,19 +29,22 @@ block content
         label(for='transferBoardFieldLogin') User login:
           input#transferBoardFieldLogin(type='text', name='login', required)
         input#transferBoardIdentifier(type='hidden', name='boardUri')
-        input#transferBoardJsButton(type='button',
+        input.submit#transferBoardJsButton(type='button',
           onclick='transferBoard()', value='Transfer board',
           style='display: none;')
-        input#transferBoardFormButton(type='submit', value='Transfer board')
+        input.submit#transferBoardFormButton(type='submit',
+          value='Transfer board')
 
     h2 Delete board
     form(method='post', action='/deleteBoard.js',
       enctype='multipart/form-data')
       fieldset
         input#deletionIdentifier(name='boardUri', type='hidden')
-        input#deleteBoardFormButton(type='submit', value='Delete board')
-        input#deleteBoardJsButton(type='button', onclick='deleteBoard()',
-          value='Delete board', style='display: none;')
+        input.submit#deleteBoardFormButton(type='submit',
+          value='Delete board')
+        input.submit#deleteBoardJsButton(type='button',
+          onclick='deleteBoard()', value='Delete board',
+          style='display: none;')
 
     h2 Volunteers
     section#volunteersDiv
@@ -58,9 +63,13 @@ block content
         label(for='disableCaptcha') Disable captcha
           input#disableCaptchaCheckbox(type='checkbox',
           name='disableCaptcha')
-        input#saveSettingsJsButton(type='button', value='Save',
-          style='display: none')
-        input#saveSettingsFormButton(type='submit', value='Save')
+        label(for='forceAnonymity')
+          span(title='No name field when posting') Force anonymity
+          input#forceAnonymityCheckbox(type='checkbox',
+            name='forceAnonymity')
+        input.submit#saveSettingsJsButton(type='button', value='Save',
+          style='display: none', onclick='saveSettings()')
+        input.submit#saveSettingsFormButton(type='submit', value='Save')
 
     ul
       li: a#bannerManagementLink Banners

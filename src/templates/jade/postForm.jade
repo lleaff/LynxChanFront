@@ -6,8 +6,9 @@ mixin postForm(options)
   form(id=attributes.id, class=attributes.class+' postForm',
     method='post', action=actionFile, enctype='multipart/form-data')
     fieldset.author
-      label(for="fieldName") Name:
-        input#fieldName(type='text', name='name', placeholder='Name')
+      div#divName
+        label(for="fieldName") Name:
+          input#fieldName(type='text', name='name', placeholder='Name')
       label(for="fieldEmail") Email:
         input#fieldEmail(name='email', type='text', placeholder='Email')
       label(for="fieldPassword") Password:
@@ -33,7 +34,7 @@ mixin postForm(options)
           //-  optional and this element will still be there. Put 'required'
           //-  back when disabled elements are truly removed from sent page
           input#fieldCaptcha(type='text', name='captcha')
-      input#jsButton(type='button', onclick=actionFunction,
+      input.submit#jsButton(type='button', onclick=actionFunction,
         value=actionName, style='display: none;')
-      input#formButton(type='submit', value=actionName)
+      input.submit#formButton(type='submit', value=actionName)
     block

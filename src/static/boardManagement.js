@@ -1,24 +1,72 @@
 var boardIdentifier;
 
 if (!DISABLE_JS) {
-  document.getElementById('addVolunteerJsButton').style.display = 'inline';
-  document.getElementById('transferBoardJsButton').style.display = 'inline';
-  document.getElementById('deleteBoardJsButton').style.display = 'inline';
 
-  document.getElementById('deleteBoardFormButton').style.display = 'none';
-  document.getElementById('addVolunteerFormButton').style.display = 'none';
-  document.getElementById('transferBoardFormButton').style.display = 'none';
+  if (document.getElementById('ownerControlDiv')) {
 
-  boardIdentifier = document.getElementById('addVolunteerBoardIdentifier').value;
+    document.getElementById('addVolunteerJsButton').style.display = 'inline';
+    document.getElementById('transferBoardJsButton').style.display = 'inline';
+    document.getElementById('deleteBoardJsButton').style.display = 'inline';
+    document.getElementById('saveSettingsJsButton').style.display = 'inline';
 
-  var volunteerDiv = document.getElementById('volunteersDiv');
+    document.getElementById('saveSettingsFormButton').style.display = 'none';
+    document.getElementById('deleteBoardFormButton').style.display = 'none';
+    document.getElementById('addVolunteerFormButton').style.display = 'none';
+    document.getElementById('transferBoardFormButton').style.display = 'none';
 
-  for (var i = 0; i < volunteerDiv.childNodes.length; i++) {
-    processVolunteerCell(volunteerDiv.childNodes[i]);
+    boardIdentifier = document.getElementById('addVolunteerBoardIdentifier').value;
 
+    var volunteerDiv = document.getElementById('volunteersDiv');
+
+    for (var i = 0; i < volunteerDiv.childNodes.length; i++) {
+      processVolunteerCell(volunteerDiv.childNodes[i]);
+
+    }
   }
 
   setupReportButtons();
+
+}
+
+function saveSettings() {
+  var typedName = document.getElementById('boardNameField').value.trim();
+  var typedDescription = document.getElementById('boardDescriptionField').value
+      .trim();
+
+  if (!typedName.length || !typedName.length) {
+    alert('Both name and description are mandatory.');
+    return;
+  }
+
+  var settings = [];
+
+  if (document.getElementById('disableIdsCheckbox').checked) {
+    settings.push('disableIds');
+  }
+
+  if (document.getElementById('disableCaptchaCheckbox').checked) {
+    settings.push('disableCaptcha');
+  }
+
+  if (document.getElementById('forceAnonymityCheckbox').checked) {
+    settings.push('forceAnonymity');
+  }
+
+  apiRequest('setBoardSettings', {
+    boardName : typedName,
+    boardDescription : typedDescription,
+    boardUri : boardIdentifier,
+    settings : settings
+  }, function requestComplete(status, data) {
+
+    if (status === 'ok') {
+
+      location.reload(true);
+
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
 
 }
 

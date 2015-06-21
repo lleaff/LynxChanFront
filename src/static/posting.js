@@ -3,7 +3,7 @@ if (!DISABLE_JS) {
   document.getElementById('deleteJsButton').style.display = 'inline';
   document.getElementById('reportJsButton').style.display = 'inline';
 
-  if (!board) {
+  if (!board && document.getElementById('inputBan')) {
 
     document.getElementById('banJsButton').style.display = 'inline';
 

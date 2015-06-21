@@ -11,8 +11,8 @@ block content
         label(for='loginFieldPassword') Password
           input#loginFieldPassword(type='password', name='password',
           required)
-        input#loginFormButton(type='submit', value='Login')
-        input#loginJsButton(type='button', onclick='loginUser()',
+        input.submit#loginFormButton(type='submit', value='Login')
+        input.submit#loginJsButton(type='button', onclick='loginUser()',
           value='Login', style='display: none;')
 
   section#divCreation
@@ -31,9 +31,10 @@ block content
         label(for='registerFieldEmail') Email
           input#registerFieldEmail(type='email', name='email',
           placeholder='Email')
-        input#registerFormButton(type='submit', value='Register')
-        input#registerJsButton(type='button', onclick='registerAccount()',
-          value='Register', style='display: none;')
+        input.submit#registerFormButton(type='submit', value='Register')
+        input.submit#registerJsButton(type='button',
+          onclick='registerAccount()', value='Register',
+          style='display: none;')
 
   section
     h1 Recover account
@@ -43,9 +44,11 @@ block content
         label(for='recoverFieldLogin') Login
           input#recoverFieldLogin(type='text', name='login',
           placeholder='Username', required)
-        input#recoverFormButton(type='submit', value='Request recovery')
-        input#recoverJsButton(type='button', onclick='recoverAccount()',
-          value='Request recovery', style='display: none;')
+        input.submit#recoverFormButton(type='submit',
+          value='Request recovery')
+        input.submit#recoverJsButton(type='button',
+          onclick='recoverAccount()', value='Request recovery',
+          style='display: none;')
 
 block append scripts
   +script('login.js')
