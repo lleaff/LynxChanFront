@@ -174,7 +174,7 @@ gulp.task('css', function() {
       .pipe(gulpif(g.ugly, minifyCss()))
     .pipe(gulpif(!g.production, sourcemaps.write('../'+paths.sourcemaps)))
     .pipe(gulp.dest(outPaths.css))
-    .pipe(!g.production ? browserSync.stream() : gutil.noop());
+    .pipe(gulpif(!g.production, browserSync.stream()));
 });
 
 gulp.task('images', function() {
@@ -201,24 +201,27 @@ gulp.task('browser-sync', ['build'], function() {
   });
 
   gulp.watch([filesRecur.scss, filesRecur.scssExtras, filesRecur.css],
-             ['css']);
+             ['css'])
+             .on('change', serverRefresh);
   gulp.watch([filesRecur.jade, filesRecur.jadeExtras],
              ['html', 'jade', 'browserReload']);
   gulp.watch(files.html, ['html', 'browserReload']);
 });
 
-gulp.task('restartServer', ['html'], function() {
+function serverRefresh() {
   if (gulpSettings.reloadCommand) {
     child_process.spawnSync();
     child_process.execSync(gulpSettings.reloadCommand);
     console.log("Reload: \""+gulpSettings.reloadCommand+"\"");
+    browserSync.reload();
   }
+}
+
+gulp.task('browserReload', ['html'], function() {
+  serverRefresh();
 });
 
-gulp.task('browserReload', ['restartServer'], function() {
-  return browserSync.reload();
-});
-
+/*============  ============== */
 gulp.task('clean', ['clear']);
 gulp.task('clear', function() {
   Object.keys(outPaths).forEach(function(outPath) {
