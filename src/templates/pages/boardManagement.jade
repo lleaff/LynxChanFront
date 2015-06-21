@@ -28,7 +28,8 @@ block content
           input#transferBoardFieldLogin(type='text', name='login', required)
         input#transferBoardIdentifier(type='hidden', name='boardUri')
         input#transferBoardJsButton(type='button',
-          onclick='transferBoard()', value='Transfer board', style='display: none;')
+          onclick='transferBoard()', value='Transfer board',
+          style='display: none;')
         input#transferBoardFormButton(type='submit', value='Transfer board')
 
     h2 Delete board
@@ -42,6 +43,24 @@ block content
 
     h2 Volunteers
     section#volunteersDiv
+
+    h2 Settings
+    form(action='/setBoardSettings.js', method='post',
+      enctype='multipart/form-data')
+      fieldset
+        input#boardSettingsIdentifier(type='hidden', name='boardUri')
+        label(for='boardName') Board name
+          input#boardNameField(type='text', name='boardName')
+        label(for='boardDescription') Board description
+          input#boardDescriptionField(type='text', name='boardDescription')
+        label(for='disableIds') Disable thread-wise IDs
+          input#disableIdsCheckbox(type='checkbox', name='disableIds')
+        label(for='disableCaptcha') Disable captcha
+          input#disableCaptchaCheckbox(type='checkbox',
+          name='disableCaptcha')
+        input#saveSettingsJsButton(type='button', value='Save',
+          style='display: none')
+        input#saveSettingsFormButton(type='submit', value='Save')
 
     ul
       li: a#bannerManagementLink Banners

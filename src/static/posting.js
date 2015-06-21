@@ -9,7 +9,7 @@ if (!DISABLE_JS) {
 
     document.getElementById('inputBan').style.display = 'none';
   }
-  
+
   document.getElementById('reportFormButton').style.display = 'none';
   document.getElementById('deleteFormButton').style.display = 'none';
 
@@ -18,8 +18,7 @@ if (!DISABLE_JS) {
 function banPosts() {
   var typedReason = document.getElementById('reportFieldReason').value.trim();
   var typedExpiration = document.getElementById('fieldExpiration').value.trim();
-
-  var typedMessage = document.getElementById('fieldBanMesage').value.trim();
+  var typedMessage = document.getElementById('fieldbanMessage').value.trim();
 
   var expiration = Date.parse(typedExpiration || '');
 
