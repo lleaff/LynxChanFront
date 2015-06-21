@@ -28,12 +28,14 @@ block content
     input#deletionFieldPassword(type='password', name='password')
   label(for='checkboxGlobal') Global
     input#checkboxGlobal(type='checkbox', name='global')
-  input#deleteFormButton(type='submit', value='Delete', name='action')
-  input#deleteJsButton(type='button', style='display: none;',
-    onclick='deletePosts()', value='Delete')
-  input#reportFormButton(type='submit', value='Report', name='action')
-  input#reportJsButton(type='button', style='display: none;',
-    onclick='reportPosts()', value='Report')
+  input.button.submit#deleteFormButton(type='submit', value='Delete',
+    name='action')
+  input.button.submit#deleteJsButton(type='button',
+    onclick='deletePosts()', value='Delete', style='display: none;')
+  input.button.submit#reportFormButton(type='submit', value='Report',
+    name='action')
+  input.button.submit#reportJsButton(type='button',
+    onclick='reportPosts()', value='Report', style='display: none;')
 
   #divPages
 

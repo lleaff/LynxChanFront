@@ -6,12 +6,13 @@ block headerTitle
   form#addStaffForm(method='post', enctype='multipart/form-data',
     action='/setGlobalRole.js')
     label(for='fieldLogin') User login: 
-      input#fieldLogin(type='text', name='login', placeholder='Username', required)
+      input#fieldLogin(type='text', name='login',
+        placeholder='Username', required)
     label(for='newStaffCombo') Role:
       select#newStaffCombo(name='role', required)
-    input#addJsButton(type='button', onclick='addUser()',
+    input.button.submit#addJsButton(type='button', onclick='addUser()',
       value='Add user', style='display: none;')
-    input#addFormButton(type='submit', value='Add user')
+    input.button.submit#addFormButton(type='submit', value='Add user')
   div#divStaff
   ul
     li: a#bansLink(href='/bans.js') Bans

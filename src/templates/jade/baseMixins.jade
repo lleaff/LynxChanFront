@@ -21,9 +21,9 @@ mixin title(mainTitle, subTitle)
       block
   if subTitle
     if subTitle.charAt(0) === "#"
-      p(id=subTitle.slice(1))
+      h2(id=subTitle.slice(1))
     else
-      p= subTitle
+      h2= subTitle
 
 mixin userMenuEntry()
   li

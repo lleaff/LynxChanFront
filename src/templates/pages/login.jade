@@ -11,9 +11,9 @@ block content
         label(for='loginFieldPassword') Password
           input#loginFieldPassword(type='password', name='password',
           required)
-        input.submit#loginFormButton(type='submit', value='Login')
-        input.submit#loginJsButton(type='button', onclick='loginUser()',
-          value='Login', style='display: none;')
+        input.button.submit#loginFormButton(type='submit', value='Login')
+        input.button.submit#loginJsButton(type='button',
+          onclick='loginUser()', value='Login', style='display: none;')
 
   section#divCreation
     h1 Register
@@ -31,8 +31,9 @@ block content
         label(for='registerFieldEmail') Email
           input#registerFieldEmail(type='email', name='email',
           placeholder='Email')
-        input.submit#registerFormButton(type='submit', value='Register')
-        input.submit#registerJsButton(type='button',
+        input.button.submit#registerFormButton(type='submit',
+          value='Register')
+        input.button.submit#registerJsButton(type='button',
           onclick='registerAccount()', value='Register',
           style='display: none;')
 
@@ -44,9 +45,9 @@ block content
         label(for='recoverFieldLogin') Login
           input#recoverFieldLogin(type='text', name='login',
           placeholder='Username', required)
-        input.submit#recoverFormButton(type='submit',
+        input.button.submit#recoverFormButton(type='submit',
           value='Request recovery')
-        input.submit#recoverJsButton(type='button',
+        input.button.submit#recoverJsButton(type='button',
           onclick='recoverAccount()', value='Request recovery',
           style='display: none;')
 

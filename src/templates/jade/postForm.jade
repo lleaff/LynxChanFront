@@ -5,7 +5,7 @@ mixin postForm(options)
   //- .postForm
   form(id=attributes.id, class=attributes.class+' postForm',
     method='post', action=actionFile, enctype='multipart/form-data')
-    fieldset.author
+    fieldset.authorInfo
       div#divName
         label(for="fieldName") Name:
           input#fieldName(type='text', name='name', placeholder='Name')
@@ -14,7 +14,7 @@ mixin postForm(options)
       label(for="fieldPassword") Password:
         input#fieldPassword(name='password', type='password',
         placeholder='Password')
-    fieldset.message
+    fieldset.messageArea
       label(for="fieldSubject") Subject:
         input#fieldSubject(type='text', name='subject',
         placeholder='Subject')
@@ -26,7 +26,7 @@ mixin postForm(options)
         name='files')
       label(for='checkboxSpoiler') Spoiler
         input#checkboxSpoiler(type='checkbox', name='spoiler')
-    fieldset.submit
+    fieldset.sendPost
       div#captchaDiv
         label(for="fieldCaptcha") Captcha:
           img(src='/captcha.js')
@@ -34,7 +34,7 @@ mixin postForm(options)
           //-  optional and this element will still be there. Put 'required'
           //-  back when disabled elements are truly removed from sent page
           input#fieldCaptcha(type='text', name='captcha')
-      input.submit#jsButton(type='button', onclick=actionFunction,
-        value=actionName, style='display: none;')
-      input.submit#formButton(type='submit', value=actionName)
+      input.button.submit#jsButton(type='button',
+        onclick=actionFunction, value=actionName, style='display: none;')
+      input.button.submit#formButton(type='submit', value=actionName)
     block

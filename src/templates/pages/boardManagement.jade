@@ -16,10 +16,10 @@ block content
           input#addVolunteerFieldLogin(type='text', name='login', required)
         input(type='hidden', name='add', value='true')
         input#addVolunteerBoardIdentifier(type='hidden', name='boardUri')
-        input.submit#addVolunteerJsButton(type='button',
+        input.button.submit#addVolunteerJsButton(type='button',
           onclick='addVolunteer()', value='Add volunteer',
           style='display: none;')
-        input.submit#addVolunteerFormButton(type='submit',
+        input.button.submit#addVolunteerFormButton(type='submit',
           value='Add volunteer')
 
     h2 Ownership transfer
@@ -29,10 +29,10 @@ block content
         label(for='transferBoardFieldLogin') User login:
           input#transferBoardFieldLogin(type='text', name='login', required)
         input#transferBoardIdentifier(type='hidden', name='boardUri')
-        input.submit#transferBoardJsButton(type='button',
+        input.button.submit#transferBoardJsButton(type='button',
           onclick='transferBoard()', value='Transfer board',
           style='display: none;')
-        input.submit#transferBoardFormButton(type='submit',
+        input.button.submit#transferBoardFormButton(type='submit',
           value='Transfer board')
 
     h2 Delete board
@@ -40,9 +40,9 @@ block content
       enctype='multipart/form-data')
       fieldset
         input#deletionIdentifier(name='boardUri', type='hidden')
-        input.submit#deleteBoardFormButton(type='submit',
+        input.button.submit#deleteBoardFormButton(type='submit',
           value='Delete board')
-        input.submit#deleteBoardJsButton(type='button',
+        input.button.submit#deleteBoardJsButton(type='button',
           onclick='deleteBoard()', value='Delete board',
           style='display: none;')
 
@@ -67,9 +67,10 @@ block content
           span(title='No name field when posting') Force anonymity
           input#forceAnonymityCheckbox(type='checkbox',
             name='forceAnonymity')
-        input.submit#saveSettingsJsButton(type='button', value='Save',
-          style='display: none', onclick='saveSettings()')
-        input.submit#saveSettingsFormButton(type='submit', value='Save')
+          input.button.submit#saveSettingsJsButton(type='button',
+            value='Save', onclick='saveSettings()', style='display: none')
+          input.button.submit#saveSettingsFormButton(type='submit',
+            value='Save')
 
     ul
       li: a#bannerManagementLink Banners

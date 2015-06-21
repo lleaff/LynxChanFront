@@ -10,9 +10,10 @@ block content
     h4 Logged in as #[span#labelLogin]
 
     form(action='/logout.js')
-      input.submit.careful#logoutJsButton(type='button', value='Logout',
-        onclick='logout()', style='display: none')
-      input.submit.careful#logoutFormButton(type='submit', value='Logout')
+      input.button.submit.careful#logoutJsButton(type='button',
+        value='Logout', onclick='logout()', style='display: none')
+      input.button.submit.careful#logoutFormButton(type='submit',
+          value='Logout')
 
     a#globalManagementLink(href='/globalManagement.js') Global management
 
@@ -24,8 +25,8 @@ block content
           label(for='emailField') E-mail
             input#emailField(type='email', name='email',
             placeholder='Email', required)
-          input.submit#saveFormButton(type='submit', value='Save')
-          input.submit#saveJsButton(type='button', value='Save',
+          input.button.submit#saveFormButton(type='submit', value='Save')
+          input.button.submit#saveJsButton(type='button', value='Save',
             onclick='save()', style='display: none;')
 
     h2 Password change
@@ -39,7 +40,7 @@ block content
         label(for='fieldConfirmation') Confirm new password
           input#fieldConfirmation(type='password', name='confirmation',
           required)
-        input.submit#passwordFormButton(type='submit',
+        input.button.submit#passwordFormButton(type='submit',
           value='Change password')
 
   section#boardCreationDiv
@@ -56,10 +57,11 @@ block content
         label(for='newBoardFieldDescription') Board description:
           input#newBoardFieldDescription(type='text',
             name='boardDescription', placeholder='Description', required)
-        input.submit#newBoardJsButton(type='button',
+        input.button.submit#newBoardJsButton(type='button',
           onclick='createBoard()', style='display: none',
           value='Create board')
-        input.submit#newBoardFormButton(type='submit', value='Create board')
+        input.button.submit#newBoardFormButton(type='submit',
+          value='Create board')
 
   section#ownedBoards
     h1 Owned boards

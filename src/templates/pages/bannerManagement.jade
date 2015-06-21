@@ -11,9 +11,11 @@ block content
       fieldset
         input#boardIdentifier(type='hidden', name='boardUri')
         input#files(type='file', name='files')
-        input.submit#addFormButton(type='submit', value='Add banner')
-        input.submit#addJsButton(type='button', value='addBanner',
-          onClick='addBanner()', style='display: none')
+        input.button.submit#addFormButton(type='submit',
+          value='Add banner')
+        input.button.submit#addJsButton(type='button',
+          value='Add banner', onclick='addBanner()',
+          style='display: none')
 
   section
     h3 Existing banners
