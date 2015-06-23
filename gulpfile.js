@@ -10,10 +10,8 @@ g.blank = argv.test || argv.blank;
  *------------------------------------------------------------ */
 /*============= Misc ============= */
 var fs                  = require('fs');
-if (!g.production) {
-  var browserSyncModule = require('browser-sync');
-  var browserSync       = browserSyncModule.create();
-}
+var browserSyncModule = require('browser-sync');
+var browserSync       = browserSyncModule.create();
 //var merge               = require('merge-stream');
 //var es                  = require('event-stream');
 var child_process       = require('child_process');
@@ -172,9 +170,9 @@ gulp.task('css', function() {
             .on('error', sass.logError))
       .pipe(gulpif(g.production, stripCssComments()))
       .pipe(gulpif(g.ugly, minifyCss()))
-    .pipe(gulpif(!g.production, sourcemaps.write('../'+paths.sourcemaps)))
+    .pipe(gulpif(!g.production, sourcemaps.write(paths.sourcemaps)))
     .pipe(gulp.dest(outPaths.css))
-    .pipe(gulpif(!g.production, browserSync.stream()));
+    .pipe(browserSync.stream());
 });
 
 gulp.task('images', function() {
