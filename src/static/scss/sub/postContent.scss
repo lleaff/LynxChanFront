@@ -1,0 +1,12 @@
+.greenText {
+  color: palette('green');
+}
+
+.spoiler {
+  background: palette('black');
+  color: palette('black');
+}
+.spoiler:hover {
+  background: inherit;
+  color: inherit;
+}

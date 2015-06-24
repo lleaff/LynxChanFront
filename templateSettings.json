@@ -28,5 +28,7 @@
   "thumb":                "cmp/images/thumb.png",
   "spoiler":              "cmp/images/spoiler.png",
   "catalogPage":          "pages/catalog.html",
-  "catalogCell":          "cmp/catalogCell.html"
+  "catalogCell":          "cmp/catalogCell.html",
+  "logsPage":             "pages/logs.html",
+  "logCell":              "cmp/logCell.html"
 }

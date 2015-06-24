@@ -1,0 +1,26 @@
+extends ../jade/base.jade
+
+block append headerTitle
+  +title('Logs')
+
+block content
+  section#logSearch
+    form(action='logs.js', method='get')
+      fieldset
+        label(for='checkboxExcludeGlobals') Exclude global entries
+          input#checkboxExcludeGlobals(type='checkbox',
+            name='excludeGlobals')
+        label(for='fieldBoard') Board
+          input#fieldBoard(type='text', name='boardUri', placeholder='URI')
+        label(for='fieldUser') User
+          input#fieldUser(type='text', name='user')
+        label(for='fieldAfter') Only after
+          input#fieldAfter(type='text', name='after')
+        label(for='fieldBefore') Only before
+          input#fieldBefore(type='text', name='before')
+        label(for='comboboxType') Type
+          select#comboboxType(name='type')
+        input(type='submit', value='Search')
+
+  section#divLogs
+  section#divPages

@@ -138,6 +138,10 @@ input[type="checkbox"] {
 .postCell {
 }
 
+/* =Post content
+ *------------------------------*/
+@import 'sub/postContent';
+
 /* =Catalog
  *------------------------------*/
 @import 'sub/catalog';
