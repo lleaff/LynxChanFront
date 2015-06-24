@@ -13,17 +13,17 @@ mixin script(relativePath)
 mixin title(mainTitle, subTitle)
   if mainTitle
     if mainTitle.charAt(0) === '#'
-      h1(id=mainTitle.slice(1))
+      span.mainTitle(id=mainTitle.slice(1))
     else
-      h1= mainTitle
+      span.mainTitle= mainTitle
   if block
     h1
       block
   if subTitle
     if subTitle.charAt(0) === "#"
-      h2(id=subTitle.slice(1))
+      span.subTitle(id=subTitle.slice(1))
     else
-      h2= subTitle
+      span.subTitle= subTitle
 
 mixin userMenuEntry()
   li

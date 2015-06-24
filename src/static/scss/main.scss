@@ -35,34 +35,57 @@ a {
 }
 
 /*------------------------------------------------------------*
- * =Input
+ * =Header
  *------------------------------------------------------------*/
-header {
+$headerPadding: 0.3em;
+$bannerWidth: 21em;
+$bannerHeight: $bannerWidth / 3;
+
+#pageHeader {
   background-color: palette('bgAlt');
   color: palette('fgAlt');
 
   border-bottom: solid 1px $borderColorAlt;
 
-  padding: 0.3em;
+  padding: $headerPadding;
+  
+  height: $bannerHeight;
 }
 
-header h1 {
+#headerTitle {
+  margin: 0;
   font-size: 1.5em;
+  display: block;
+  background:#a99;//DEBUG
+  height: 3em;
 }
-header h2 {
-  font-size: 1em;
+#headerTitle .mainTitle {
+  font-size:0.5em;
+  display: block;
+  background:#9f9;//DEBUG
+}
+#headerTitle .subTitle {
+  display: block;
+  font-size:0.5em;
+  font-size:0.75em;
+  background:#ff0;//DEBUG
 }
 
-/* =Board, Thread and Catalog
- *------------------------------*/
 #banner {
-  max-height: 12em ;
-  /*max-width: 50%;*/
+  float: left;
+  margin-left: -$headerPadding;
+  margin-top: -$headerPadding;
+  margin-right: $headerPadding;
+
+  width: $bannerWidth;
+  height: $bannerHeight;
   overflow: hidden;
 }
 #bannerImage {
-  max-height: inherit;
-  max-width: inherit;
+  width: inherit;
+  height: inherit;
+  //height: inherit;
+  object-fit: cover;
 }
 
 #middle {

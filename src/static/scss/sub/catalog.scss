@@ -1,5 +1,11 @@
 .catalogCell {
   float: left;
-  width: 256px;
-  height: 512px;
+  min-width: 128px;
+  width: 22%;
+  //height: 512px;
 } 
+
+.catalogHeader {
+  height: calc(128px + 1em);
+
+}

@@ -24,10 +24,11 @@ html
     body
       block body
         //-Header
-        header
+        header#pageHeader
           block header
-            block headerTitle
-              h1 #{siteTitle}
+            h1#headerTitle
+              block headerTitle
+                #{siteTitle}
             //-Menu
             nav#userMenu
               ul

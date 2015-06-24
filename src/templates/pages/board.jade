@@ -23,7 +23,8 @@ block content
   include ../jade/createThread
   #divPostings
   label(for='reportFieldReason') Reason
-    input#reportFieldReason(type='text', name='reason', placeholder='Reason')
+    input#reportFieldReason(type='text', name='reason',
+      placeholder='Reason')
   label(for='deletionFieldPasword') Password
     input#deletionFieldPassword(type='password', name='password')
   label(for='checkboxGlobal') Global
@@ -38,4 +39,3 @@ block content
     onclick='reportPosts()', value='Report', style='display: none;')
 
   #divPages
-
