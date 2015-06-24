@@ -184,8 +184,6 @@ gulp.task('images', function() {
 /*============ Utility ============== */
 gulp.task('sync', ['browser-sync']);
 gulp.task('browser-sync', ['build'], function() {
-  if (g.production) { return; }
-
   if (gulpSettings.startCommand) {
     child_process.spawnSync();
     child_process.execSync(gulpSettings.startCommand);
