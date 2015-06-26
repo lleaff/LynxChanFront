@@ -1,9 +1,7 @@
 extends ../jade/base
 
 block headerTitle
-  +title('', 'Catalog')
-    a(href='.')
-      span#labelBoard
+  +title('#labelBoard', 'Catalog', '.')
 
 block content
   section#divThreads

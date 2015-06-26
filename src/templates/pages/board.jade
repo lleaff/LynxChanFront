@@ -9,9 +9,7 @@ block prepend header
     img#bannerImage
 
 block headerTitle
-  +title('', '#labelDescription')
-    a(href='.')
-      span#labelName
+  +title('#labelName', '#labelDescription', '.')
 
 block append userMenu
   +userMenuEntry

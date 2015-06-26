@@ -10,20 +10,25 @@ mixin script(relativePath)
 
 //- Format title automatically
 //- Allows passing direct title(s) text or their id by CSS notation
-mixin title(mainTitle, subTitle)
+mixin title(mainTitle, subTitle, mainLink, subLink)
   if mainTitle
+    if mainLink
+      | <a href="#{mainLink}">
     if mainTitle.charAt(0) === '#'
       span.mainTitle(id=mainTitle.slice(1))
     else
       span.mainTitle= mainTitle
-  if block
-    h1
-      block
+    if mainLink
+      | </a>
   if subTitle
+    if subLink
+      | <a href="#{subLink}">
     if subTitle.charAt(0) === "#"
       span.subTitle(id=subTitle.slice(1))
     else
       span.subTitle= subTitle
+    if subLink
+      | </a>
 
 mixin userMenuEntry()
   li
