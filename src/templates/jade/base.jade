@@ -3,6 +3,7 @@
 //------------------------------------------------------------
 - var baseStylesUrls  = [ baseStaticUrl+"/css/main.css" ];
 - var baseScriptsUrls = [ baseStaticUrl+'/settings.js', baseStaticUrl+'/api.js'];
+- var siteLogoUrl = baseStaticUrl+'/images/logo.png';
 
 //- Mixins
 //------------------------------------------------------------
@@ -26,6 +27,9 @@ html
         //-Header
         header#pageHeader
           block header
+            div#headerLogo
+              block headerLogo
+                img#bannerImage(src=siteLogoUrl)
             h1#headerTitle
               block headerTitle
                 #{siteTitle}

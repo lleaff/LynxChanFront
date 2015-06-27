@@ -6,16 +6,7 @@
 @import 'sub/functions';
 @import 'sub/theme';
 
-/*============================================================*
- * =Colors
- *============================================================*/
-// Colors here must reference colors in the theme's palette with
-//  palette('key'), without assuming anything about their value
-
-$borderColorMain: mix(palette('bgMain'), palette('fgMain'), 80%);
-$borderColorAlt: mix(palette('bgAlt'), palette('fgAlt'), 80%);
-
-$buttonBgColor: palette('bgAlt');
+@import 'sub/colors';
 
 /*------------------------------------------------------------*
  * =General
@@ -38,47 +29,41 @@ a {
  * =Header
  *------------------------------------------------------------*/
 $headerPadding: 0.3em;
-$bannerWidth: 21em;
-$bannerHeight: $bannerWidth / 3;
+$logoWidth: 21em;
+$logoHeight: $logoWidth / 3;
 
 #pageHeader {
-  background-color: palette('bgAlt');
-  color: palette('fgAlt');
-
-  border-bottom: solid 1px $borderColorAlt;
-
+  border-bottom: solid 1px;
   padding: $headerPadding;
-  
-  height: $bannerHeight;
+  height: $logoHeight;
+
+  @include headerColors;
 }
 
 #headerTitle {
+  font-size: 1em;
+  float: left;
   margin: 0;
-  font-size: 1.5em;
   display: block;
-  background:#a99;//DEBUG
   height: 3em;
 }
 #headerTitle .mainTitle {
-  font-size:0.5em;
+  font-size:2em;
   display: block;
-  background:#9f9;//DEBUG
 }
 #headerTitle .subTitle {
   display: block;
-  font-size:0.5em;
-  font-size:0.75em;
-  background:#ff0;//DEBUG
+  font-size:1em;
 }
 
-#banner {
+#headerLogo {
   float: left;
   margin-left: -$headerPadding;
   margin-top: -$headerPadding;
   margin-right: $headerPadding;
 
-  width: $bannerWidth;
-  height: $bannerHeight;
+  width: $logoWidth;
+  height: $logoHeight;
   overflow: hidden;
 }
 #bannerImage {

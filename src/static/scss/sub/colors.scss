@@ -1,0 +1,13 @@
+// Colors here must reference colors in the theme's palette with
+//  palette('key'), without assuming anything about their value
+
+$borderColorMain: mix(palette('bgMain'), palette('fgMain'), 80%);
+$borderColorAlt: mix(palette('bgAlt'), palette('fgAlt'), 80%);
+
+$buttonBgColor: palette('bgAlt');
+
+@mixin headerColors {
+  background-color: palette('bgAlt');
+  color: palette('fgAlt');
+  border-color: $borderColorAlt;
+}
