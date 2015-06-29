@@ -91,7 +91,7 @@ function apiRequest(page, parameters, delegate) {
   }
 
   var body = {
-    captchaId : parsedCookies.captchaId,
+    captchaId : parsedCookies.captchaid,
     parameters : parameters,
     auth : {
       login : parsedCookies.login,
@@ -105,4 +105,39 @@ function apiRequest(page, parameters, delegate) {
 
   xhr.send(JSON.stringify(body));
 
+}
+
+function localRequest(address, callback) {
+
+  var xhr = new XMLHttpRequest();
+
+  if ('withCredentials' in xhr) {
+    xhr.open('GET', address, true);
+  } else if (typeof XDomainRequest != 'undefined') {
+
+    xhr = new XDomainRequest();
+    xhr.open('GET', address);
+  } else {
+    alert('This site can\'t run js on your shitty browser because it does not support CORS requests. Disable js and try again.');
+    return;
+  }
+
+  xhr.onreadystatechange = function connectionStateChanged() {
+
+    if (xhr.readyState == 4) {
+
+      if (callback.hasOwnProperty('stop')) {
+        callback.stop();
+      }
+
+      if (xhr.status != 200) {
+        callback('Connection failed');
+      } else {
+        callback(null, xhr.responseText);
+      }
+
+    }
+  };
+
+  xhr.send();
 }

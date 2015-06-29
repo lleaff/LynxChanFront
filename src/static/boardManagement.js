@@ -32,6 +32,8 @@ function saveSettings() {
   var typedName = document.getElementById('boardNameField').value.trim();
   var typedDescription = document.getElementById('boardDescriptionField').value
       .trim();
+  var typedAnonymousName = document.getElementById('anonymousNameField').value
+      .trim();
 
   if (!typedName.length || !typedName.length) {
     alert('Both name and description are mandatory.');
@@ -54,6 +56,7 @@ function saveSettings() {
 
   apiRequest('setBoardSettings', {
     boardName : typedName,
+    anonymousName : typedAnonymousName,
     boardDescription : typedDescription,
     boardUri : boardIdentifier,
     settings : settings

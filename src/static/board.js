@@ -1,11 +1,43 @@
 var board = true;
+var boardUri = document.getElementById('boardIdentifier').value;
 
 if (!DISABLE_JS) {
 
-  document.getElementById('jsButton').style.display = 'inline';
+  var postButton = document.getElementById('jsButton');
+  postButton.style.display = 'inline';
+
+  if (document.getElementById('captchaDiv')) {
+    document.getElementById('reloadCaptchaButton').style.display = 'inline';
+  }
+
   document.getElementById('formButton').style.display = 'none';
 
 }
+
+function reloadCaptcha() {
+  document.cookie = 'captchaid=; path=/captcha.js;';
+
+  document.getElementById('captchaImage').src = '/captcha.js#'
+      + new Date().toString();
+
+}
+
+var postCallback = function requestComplete(status, data) {
+
+  if (status === 'ok') {
+
+    alert('Thread created.');
+
+    window.location.pathname = '/' + boardUri + '/res/' + data + '.html';
+
+  } else {
+    alert(status + ': ' + JSON.stringify(data));
+  }
+};
+
+postCallback.stop = function() {
+  postButton.style.display = 'inline';
+};
 
 function sendThreadData(files) {
 
@@ -18,7 +50,6 @@ function sendThreadData(files) {
   var typedEmail = document.getElementById('fieldEmail').value.trim();
   var typedMessage = document.getElementById('fieldMessage').value.trim();
   var typedSubject = document.getElementById('fieldSubject').value.trim();
-  var boardUri = document.getElementById('boardIdentifier').value;
   var typedPassword = document.getElementById('fieldPassword').value.trim();
 
   var hiddenCaptcha = !document.getElementById('captchaDiv');
@@ -53,6 +84,8 @@ function sendThreadData(files) {
     return;
   }
 
+  postButton.style.display = 'none';
+
   apiRequest('newThread', {
     name : forcedAnon ? null : typedName,
     captcha : hiddenCaptcha ? null : typedCaptcha,
@@ -63,18 +96,7 @@ function sendThreadData(files) {
     email : typedEmail,
     files : files,
     boardUri : boardUri
-  }, function requestComplete(status, data) {
-
-    if (status === 'ok') {
-
-      alert('Thread created.');
-
-      window.location.pathname = '/' + boardUri + '/res/' + data + '.html';
-
-    } else {
-      alert(status + ': ' + JSON.stringify(data));
-    }
-  });
+  }, postCallback);
 
 }
 

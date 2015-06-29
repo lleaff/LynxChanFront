@@ -44,12 +44,18 @@ block content
 
   form(method='post', action='../../contentActions.js',
     enctype='multipart/form-data')
-    fieldset
-      div#divPostings
-        label(for='reportFieldReason') Reason
-          input#reportFieldReason(type='text', name='reason',
-            placeholder='Reason')
-      div#divBanInput
+    div#divPostings
+    fieldset.divRefresh(style='diplay: none;')
+      label(for='refreshCheckbox') Auto #[span#labelRefresh]
+        input#refreshCheckbox( type='checkbox', checked,
+          onchange='changeRefresh()')
+      input#refreshButton(type='button', onclick='refreshPosts(true)',
+        value='Refresh')
+    fieldset.contentAction
+      label(for='reportFieldReason') Reason
+        input#reportFieldReason(type='text', name='reason',
+          placeholder='Reason')
+      fieldset#divBanInput
         label(for='fieldExpiration') Expiration
           input#fieldExpiration(type='date', name='expiration',
           placeholder='Expiration', required)

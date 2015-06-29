@@ -1,3 +1,7 @@
+var loadedPreviews = [];
+var loadingPreviews = [];
+var quoteReference = {};
+
 if (!DISABLE_JS) {
 
   document.getElementById('deleteJsButton').style.display = 'inline';
@@ -12,6 +16,87 @@ if (!DISABLE_JS) {
 
   document.getElementById('reportFormButton').style.display = 'none';
   document.getElementById('deleteFormButton').style.display = 'none';
+
+  var quotes = document.getElementsByClassName('quoteLink');
+
+  for (var i = 0; i < quotes.length; i++) {
+    var quote = quotes[i];
+
+    processQuote(quote);
+  }
+
+}
+
+function processQuote(quote) {
+
+  var rect = quote.getBoundingClientRect();
+
+  var previewOrigin = {
+    x : rect.right + 10 + window.scrollX,
+    y : rect.top + window.scrollY
+  };
+
+  var tooltip = document.createElement('div');
+  tooltip.style.display = 'none';
+  quote.parentNode.appendChild(tooltip);
+  tooltip.innerHTML = 'Loading';
+  tooltip.style['background-color'] = '#cccccc';
+
+  tooltip.style.position = 'absolute';
+  tooltip.style.left = previewOrigin.x + 'px';
+  tooltip.style.top = previewOrigin.y + 'px';
+
+  var quoteUrl = quote.href;
+
+  var referenceList = quoteReference[quoteUrl] || [];
+
+  referenceList.push(tooltip);
+
+  quoteReference[quoteUrl] = referenceList;
+
+  quote.onmouseenter = function() {
+    tooltip.style.display = 'inline';
+
+    if (loadedPreviews.indexOf(quoteUrl) < 0
+        && loadingPreviews.indexOf(quoteUrl) < 0) {
+      loadQuote(tooltip, quoteUrl);
+    }
+
+  };
+
+  quote.onmouseout = function() {
+    tooltip.style.display = 'none';
+  };
+
+}
+
+function loadQuote(tooltip, quoteUrl) {
+
+  var matches = quoteUrl.match(/\/(\w+)\/res\/\d+\.html\#(\d+)/);
+
+  var board = matches[1];
+  var post = matches[2];
+
+  var previewUrl = '/' + board + '/preview/' + post + '.html';
+
+  localRequest(previewUrl, function receivedData(error, data) {
+    if (error) {
+      loadingPreviews.splice(loadingPreviews.indexOf(quoteUrl), 1);
+    } else {
+
+      var referenceList = quoteReference[quoteUrl];
+
+      for (var i = 0; i < referenceList.length; i++) {
+        referenceList[i].innerHTML = data;
+
+      }
+
+      loadedPreviews.push(quoteUrl);
+      loadingPreviews.splice(loadingPreviews.indexOf(quoteUrl), 1);
+    }
+  });
+
+  loadingPreviews.push(quoteUrl);
 
 }
 
