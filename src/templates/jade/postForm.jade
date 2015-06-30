@@ -21,9 +21,10 @@ mixin postForm(options)
       label(for="fieldMessage") Message:
         textarea#fieldMessage(rows='8', cols='50', name='message',
         placeholder='...', required)
-      label(for="files") Images:
+      label(for="files") Files:
         input#files(type='file', accept='image/*', multiple='',
-        name='files')
+          name='files')
+        small Max file size: #[span#labelMaxFileSize] MB.
       label(for='checkboxSpoiler') Spoiler
         input#checkboxSpoiler(type='checkbox', name='spoiler')
     fieldset.sendPost
@@ -34,6 +35,7 @@ mixin postForm(options)
           //-  optional and this element will still be there. Put 'required'
           //-  back when disabled elements are truly removed from sent page
           input#fieldCaptcha(type='text', name='captcha')
+          small: a(href='/noCookieCaptcha.js') No cookies?
       input.button.submit#jsButton(type='button',
         onclick=actionFunction, value=actionName, style='display: none;')
       input.button.submit#formButton(type='submit', value=actionName)

@@ -11,7 +11,8 @@ var refreshTimer;
 var lastRefresh;
 var currentRefresh;
 var manualRefresh;
-var foundPosts
+var foundPosts;
+var hiddenCaptcha = !document.getElementById('captchaDiv');
 
 var postCellTemplate = '<input type="checkbox" class="deletionCheckBox">'
     + ' <span class="labelSubject"></span> <a class="linkName"></a> <span class="labelRole">'
@@ -61,7 +62,7 @@ if (!DISABLE_JS) {
 }
 
 function reloadCaptcha() {
-  document.cookie = 'captchaid=; path=/captcha.js;';
+  document.cookie = 'captchaid=; path=/;';
   document.getElementById('captchaImage').src = '/captcha.js#'
       + new Date().toString();
 
@@ -92,7 +93,12 @@ function saveThreadSettings() {
 var replyCallback = function(status, data) {
 
   if (status === 'ok') {
-    refreshPosts();
+    document.getElementById('fieldMessage').value = '';
+    document.getElementById('fieldSubject').value = '';
+
+    setTimeout(function() {
+      refreshPosts();
+    }, 2000);
   } else {
     alert(status + ': ' + JSON.stringify(data));
   }
@@ -100,6 +106,11 @@ var replyCallback = function(status, data) {
 
 replyCallback.stop = function() {
   replyButton.style.display = 'inline';
+
+  if (!hiddenCaptcha) {
+    reloadCaptcha();
+    document.getElementById('fieldCaptcha').value = '';
+  }
 };
 
 function padDateField(value) {
@@ -343,8 +354,6 @@ function sendReplyData(files) {
 
   var threadId = document.getElementById('threadIdentifier').value;
 
-  var hiddenCaptcha = !document.getElementById('captchaDiv');
-
   if (!hiddenCaptcha) {
     var typedCaptcha = document.getElementById('fieldCaptcha').value.trim();
   }
@@ -367,8 +376,9 @@ function sendReplyData(files) {
   } else if (typedPassword.length > 8) {
     alert('Password is too long, keep it under 8 characters.');
     return;
-  } else if (!hiddenCaptcha && typedCaptcha.length !== 6) {
-    alert('Captchas are exactly 6 characters long.');
+  } else if (!hiddenCaptcha && typedCaptcha.length !== 6
+      && typedCaptcha.length !== 24) {
+    alert('Captchas are exactly 6 (24 if no cookies) characters long.');
     return;
   } else if (/\W/.test(typedCaptcha)) {
     alert('Invalid captcha.');

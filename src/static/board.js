@@ -15,7 +15,7 @@ if (!DISABLE_JS) {
 }
 
 function reloadCaptcha() {
-  document.cookie = 'captchaid=; path=/captcha.js;';
+  document.cookie = 'captchaid=; path=/;';
 
   document.getElementById('captchaImage').src = '/captcha.js#'
       + new Date().toString();
@@ -76,8 +76,9 @@ function sendThreadData(files) {
   } else if (typedPassword.length > 8) {
     alert('Password is too long, keep it under 8 characters.');
     return;
-  } else if (!hiddenCaptcha && typedCaptcha.length !== 6) {
-    alert('Captchas are exactly 6 characters long.');
+  } else if (!hiddenCaptcha && typedCaptcha.length !== 6
+      && typedCaptcha.length !== 24) {
+    alert('Captchas are exactly 6 (24 if no cookies) characters long.');
     return;
   } else if (/\W/.test(typedCaptcha)) {
     alert('Invalid captcha.');

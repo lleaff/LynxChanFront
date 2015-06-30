@@ -30,5 +30,6 @@
   "catalogPage":          "pages/catalog.html",
   "catalogCell":          "cmp/catalogCell.html",
   "logsPage":             "pages/logs.html",
-  "logCell":              "cmp/logCell.html"
+  "logCell":              "cmp/logCell.html",
+  "noCookieCaptchaPage":  "pages/noCookieCaptcha.html"
 }

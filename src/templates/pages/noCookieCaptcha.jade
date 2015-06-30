@@ -1,0 +1,23 @@
+extends ../jade/bare.jade
+
+block headerTitle
+  +title('No-cookie captcha')
+
+block styles
+  +style('ext.css')
+
+block content
+  div#divSolvedCaptcha
+    p
+      strong Captcha solved.
+      | Input this ID as the answer of the captcha when posting:
+      span#labelCaptchaId
+
+  p No problem! Solve this captcha here instead.
+  img#imageCaptcha
+  form(action='/solveCaptcha.js', method='post',
+    enctype='multipart/form-data')
+    input#inputCaptchaId(type='hidden', name='captchaId')
+    label(for='captchaAnswer') Answer
+      input(type='text', name='answer', required)
+    input(type='submit', value='Solve captcha')
