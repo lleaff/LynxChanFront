@@ -32,6 +32,8 @@
   "logsPage":             "pages/logs.html",
   "logCell":              "cmp/logCell.html",
   "previewPage":          "cmp/preview.html",
+  "filterManagement":     "pages/filterManagement.html",
+  "filterCell":           "cmp/filterCell.html",
   "boardsPage":           "pages/boards.html",
   "boardsCell":           "cmp/boardsCell.html",
   "noCookieCaptchaPage":  "pages/noCookieCaptcha.html"
