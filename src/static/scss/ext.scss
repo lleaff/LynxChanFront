@@ -1,2 +1,12 @@
 // Extra styles
-// For pages that most user aren't likely to view
+// For pages that most users aren't likely to view
+//------------------------------------------------------------
+
+@import 'sub/sass';
+
+//------------------------------------------------------------
+
+//noCookieCaptcha
+#labelCaptchaId {
+  @include altColors;
+}

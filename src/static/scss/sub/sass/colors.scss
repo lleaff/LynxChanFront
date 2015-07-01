@@ -6,6 +6,18 @@ $borderColorAlt: mix(palette('bgAlt'), palette('fgAlt'), 80%);
 
 $buttonBgColor: palette('bgAlt');
 
+@mixin mainColors {
+  background-color: palette('bgMain');
+  color: palette('fgMain');
+  border-color: $borderColorMain;
+}
+
+@mixin altColors {
+  background-color: palette('bgAlt');
+  color: palette('fgAlt');
+  border-color: $borderColorAlt;
+}
+
 @mixin headerColors {
   background-color: palette('bgAlt');
   color: palette('fgAlt');

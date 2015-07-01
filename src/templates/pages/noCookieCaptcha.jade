@@ -8,10 +8,8 @@ block append styles
 
 block middle
   div#divSolvedCaptcha
-    p
-      strong Captcha solved.
-      | Input this ID as the answer of the captcha when posting:
-      span#labelCaptchaId
+    p.
+      #[strong Captcha solved.] #[br]Input this ID as the answer of the captcha when posting: #[code: span#labelCaptchaId]
 
   p No problem! Solve this captcha here instead.
   img#imageCaptcha

@@ -1,12 +1,8 @@
 /* This stylesheet is included in all pages
  *------------------------------------------------------------*/
-@import 'sub/normalize';
-@import 'sub/box-sizing';
+@import 'sub/vendor';
 
-@import 'sub/functions';
-@import 'sub/theme';
-
-@import 'sub/colors';
+@import 'sub/sass';
 
 /*------------------------------------------------------------*
  * =General
@@ -23,6 +19,14 @@ body {
 
 a {
   color: mix(palette('fgMain'), palette('accentA'));
+}
+
+/* Naviguation */
+nav > ul {
+  list-style: none inside;
+}
+nav ul a {
+  text-decoration: none;
 }
 
 /*------------------------------------------------------------*
@@ -73,6 +77,14 @@ $logoHeight: $logoWidth / 3;
   object-fit: cover;
 }
 
+#userMenu {
+  display: block;
+  float: right;
+}
+
+/*------------------------------------------------------------*
+ * =Content, Middle
+ *------------------------------------------------------------*/
 #middle {
   padding: 0.3em;
 }
@@ -124,9 +136,6 @@ input[type="checkbox"] {
 }
 
 /* =Post content
- *------------------------------*/
-@import 'sub/postContent';
-
 /* =Catalog
  *------------------------------*/
-@import 'sub/catalog';
+@import 'sub/pages';
