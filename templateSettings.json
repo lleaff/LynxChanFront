@@ -32,5 +32,7 @@
   "logsPage":             "pages/logs.html",
   "logCell":              "cmp/logCell.html",
   "previewPage":          "cmp/preview.html",
+  "boardsPage":           "pages/boards.html",
+  "boardsCell":           "cmp/boardsCell.html",
   "noCookieCaptchaPage":  "pages/noCookieCaptcha.html"
 }
