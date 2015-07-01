@@ -34,6 +34,7 @@
   "previewPage":          "cmp/preview.html",
   "filterManagement":     "pages/filterManagement.html",
   "filterCell":           "cmp/filterCell.html",
+  "boardModerationPage":  "pages/boardModeration.html",
   "boardsPage":           "pages/boards.html",
   "boardsCell":           "cmp/boardsCell.html",
   "noCookieCaptchaPage":  "pages/noCookieCaptcha.html"

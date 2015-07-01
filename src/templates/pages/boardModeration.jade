@@ -1,0 +1,37 @@
+extends ../jade/base
+
+block headerTitle
+  +title('#labelTitle', 'Moderation')
+
+block append scripts
+  +script('reports.js')
+  +script('boardModeration.js')
+
+block content
+  section
+    | Owner: #[span#labelOwner]
+
+    section#transferForm
+      h1 Transfer board ownership
+      form(action='/transferBoardOwnerShip.js', method='post',
+          enctype='multipart/form-data')
+        input#boardTransferIdentifier(type='hidden', name='boardUri')
+        label(for='fieldTransferLogin') User login
+          input#fieldTransferLogin(type='text', name='userLogin')
+        input.button.submit#transferFormButton.careful(type='submit',
+            value='Transfer')
+        input.button.submit#transferJsButton.careful(type='button',
+            onclick='transferboard()', value='Transfer',
+            style='display: none;')
+        
+
+    section#deleteForm
+      h1 Delete board
+      form(action='/deleteBoard.js', method='post',
+          enctype='multipart/form-data')
+        input#boardDeletionIdentifier(type='hidden', name='boardUri')
+        input#deleteFormButton.button.submit.careful(type='submit',
+            value='Delete')
+        input#deleteJsButton.button.submit.careful(type='button',
+            value='Delete', onclick='deleteBoard()',
+            style='display: none;')

@@ -33,13 +33,13 @@ block content
           input#checkboxPin(name='pin', type='checkbox')
         input#controlBoardIdentifier(type='hidden', name='boardUri')
         input#controlThreadIdentifier(type='hidden', name='threadId')
-        input.button.submit#lockFormButton(type='submit',
+        input#lockFormButton.button.submit(type='submit',
           name='action', value='Lock')
-        input.button.submit#lockJsButton(type='button',
+        input#lockJsButton.button.submit(type='button',
           onclick='setLock()', value='Lock', style='display: none;')
-        input.button.submit#pinFormButton(type='submit',
+        input#pinFormButton.button.submit(type='submit',
           name='action', value='Pin')
-        input.button.submit#pinJsButton(type='button', onclick='setPin()',
+        input#pinJsButton.button.submit(type='button', onclick='setPin()',
           style='display: none;', value='Pin')
 
   form(method='post', action='../../contentActions.js',
@@ -69,11 +69,11 @@ block content
         name='action')
       input.button.submit#deleteJsButton(type='button',
         onclick='deletePosts()', value='Delete', style='display: none;')
-      input.button.submit.careful#inputBan(type='submit', value='Ban',
+      input#inputBan.button.submit.careful(type='submit', value='Ban',
         name='action')
-      input.button.submit.careful#banJsButton(type='button', 
+      input#banJsButton.button.submit.careful(type='button', 
         onclick='banPosts()', value='Ban', style='display: none;')
-      input.button.submit#reportFormButton(type='submit', value='Report',
+      input#reportFormButton.button.submit(type='submit', value='Report',
         name='action')
-      input.button.submit#reportJsButton(type='button',
+      input#reportJsButton.button.submit(type='button',
         onclick='reportPosts()', value='Report', style='display: none;')
