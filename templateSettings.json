@@ -31,5 +31,6 @@
   "catalogCell":          "cmp/catalogCell.html",
   "logsPage":             "pages/logs.html",
   "logCell":              "cmp/logCell.html",
+  "previewPage":          "cmp/preview.html",
   "noCookieCaptchaPage":  "pages/noCookieCaptcha.html"
 }

@@ -3,6 +3,11 @@ extends ../jade/base
 a(href='/account.js') Account
 block headerTitle
   +title(siteTitle)
+
+block pageMenu
+  +pageMenuEntry
+    a(href='/logs') Logs
+
 block content
   section
     p Welcome.
