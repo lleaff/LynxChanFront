@@ -35,7 +35,7 @@ mixin postForm(options)
           //-  optional and this element will still be there. Put 'required'
           //-  back when disabled elements are truly removed from sent page
           input#fieldCaptcha(type='text', name='captcha')
-          small: a(href='/noCookieCaptcha.js') No cookies?
+          small: a(href='/noCookieCaptcha.js', target='_blank') No cookies?
       input.button.submit#jsButton(type='button',
         onclick=actionFunction, value=actionName, style='display: none;')
       input.button.submit#formButton(type='submit', value=actionName)
