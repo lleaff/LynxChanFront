@@ -1,12 +1,12 @@
 extends ../jade/bare.jade
 
-block headerTitle
-  +title('No-cookie captcha')
+block title
+  | No-cookie captcha
 
 block styles
   +style('ext.css')
 
-block content
+block middle
   div#divSolvedCaptcha
     p
       strong Captcha solved.
