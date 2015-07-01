@@ -58,6 +58,9 @@ block content
           input#boardNameField(type='text', name='boardName')
         label(for='boardDescription') Board description
           input#boardDescriptionField(type='text', name='boardDescription')
+        label(for='anonymousNameField') Default name
+          input#anonymousNameField(type='text', name='anonymousName',
+              placeholder='Anonymous')
         label(for='disableIds') Disable thread-wise IDs
           input#disableIdsCheckbox(type='checkbox', name='disableIds')
         label(for='disableCaptcha') Disable captcha
@@ -72,11 +75,12 @@ block content
           input.button.submit#saveSettingsFormButton(type='submit',
             value='Save')
 
-    ul
+    nav: ul
       li: a#bannerManagementLink Banners
+      li: a#filterManagementLink Filters
 
   section#reports
-    ul
+    nav: ul
       li: a#closedReportsLink Closed reports
       li: a#bansLink Bans
       li: h4 Open reports:
