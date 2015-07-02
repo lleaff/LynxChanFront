@@ -37,5 +37,7 @@
   "boardModerationPage":  "pages/boardModeration.html",
   "boardsPage":           "pages/boards.html",
   "boardsCell":           "cmp/boardsCell.html",
-  "noCookieCaptchaPage":  "pages/noCookieCaptcha.html"
+  "noCookieCaptchaPage":  "pages/noCookieCaptcha.html",
+  "rangeBansPage":        "pages/rangeBans.html",
+  "rangeBanCell":        "cmp/rangeBanCell.html"
 }

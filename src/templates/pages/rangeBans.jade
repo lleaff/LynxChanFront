@@ -1,0 +1,24 @@
+extends ../jade/base
+
+//-block append scripts
+//-  +script('rangeBans.js')
+
+block headerTitle
+  +title('IP range bans')
+
+- var rangeFieldTip = 'Only the first two parts of the ip are taken into account'
+
+block content
+  section#placeRangeBans
+    form(action='/placeRangeBan.js', method='post',
+        enctype='multipart/form-data')
+      label(for='rangeField', title=rangeFieldTip) Ip range to be banned
+        input#rangeField(type='text', name='range', placeholder='127.0')
+      input#boardIdentifier(type='hidden', name='boardUri')
+      input#createFormButton.button.submit(type='submit',
+          value='Place range ban')
+      input#createJsButton.button.submit(type='button',
+          value='Place range ban', style='display: none;')
+
+  section#rangeBansList
+    ul#rangeBansDiv
