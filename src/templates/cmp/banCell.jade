@@ -1,9 +1,10 @@
-p. 
-  Reason: #[span.reasonLabel]
-  Expiration: #[span.expirationLabel]
-  Applied by: #[span.appliedByLabel]
-  Boards: #[span.boardLabel]
-fieldset
+ul.banDetails
+  li Id: #[span#idLabel]
+  li Reason: #[span.reasonLabel]
+  li Expiration: #[span.expirationLabel]
+  li Applied by: #[span.appliedByLabel]
+  li Boards: #[span.boardLabel]
+fieldset.liftBan
   input.submit.liftFormButton(type='submit', value='Lift')
   input.submit.liftJsButton(type='button', value='Lift',
     style='display: none;')

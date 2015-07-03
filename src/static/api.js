@@ -28,9 +28,15 @@ function handleConnectionResponse(xhr, delegate) {
   } else if (response.status === 'denied') {
     alert('You are not allowed to perform this operation.');
   } else if (response.status === 'banned') {
-    alert('You are banned from ' + response.data.board + ' until '
-        + new Date(response.data.expiration).toString() + '.\nReason: '
-        + response.data.reason);
+    if (response.data.range) {
+      alert('Your ip range ' + response.data.range + ' has been banned from '
+          + response.data.board + '.');
+    } else {
+
+      alert('You are banned from ' + response.data.board + ' until '
+          + new Date(response.data.expiration).toString() + '.\nReason: '
+          + response.data.reason + '.\nYour ban id: ' + response.data.banId);
+    }
   } else {
     delegate(response.status, response.data);
   }

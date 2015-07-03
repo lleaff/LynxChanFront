@@ -39,5 +39,6 @@
   "boardsCell":           "cmp/boardsCell.html",
   "noCookieCaptchaPage":  "pages/noCookieCaptcha.html",
   "rangeBansPage":        "pages/rangeBans.html",
-  "rangeBanCell":        "cmp/rangeBanCell.html"
+  "rangeBanCell":         "cmp/rangeBanCell.html",
+  "rangeBanPage":         "pages/rangeBanned.html"
 }
