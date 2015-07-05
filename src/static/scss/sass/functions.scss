@@ -11,6 +11,16 @@
   @return mix(call($compiledArgumentList...), $color, $weight);
 }
 
+// Makes color more or less 'intense' depending on global
+//  theme's lightness
+//------------------------------------------------------------
+@function intense-color($color, $weight: 50%) {
+// TODO
+}
+@function intense-value($color, $weight: 50%) {
+// TODO
+}
+
 // Change $color to use the given value form $sourceColor
 //------------------------------------------------------------
 @function take-red($color, $sourceColor, $weight: 100%) {

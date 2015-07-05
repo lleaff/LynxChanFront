@@ -1,0 +1,7 @@
+@mixin negatePadding($top: 0, $right: 0, $bottom: 0, $left: 0) {
+  @if $top    != 0 { margin-top:    -$top; }
+  @if $right  != 0 { margin-right:  -$right; }
+  @if $bottom != 0 { margin-bottom: -$bottom; }
+  @if $left   != 0 { margin-left:   -$left; }
+}
+

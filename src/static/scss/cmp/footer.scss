@@ -1,0 +1,9 @@
+@import '../sass';
+
+#pageFooter {
+  @include altColors;
+}
+
+#pageFooterItems {
+  font-size: 0.7em;
+}

@@ -1,9 +1,6 @@
+include variables
+
 //-=Settings
-//- Require data passed by gulp 'jade'
-//------------------------------------------------------------
-- var baseStylesUrls  = [ baseStaticUrl+"/css/main.css" ];
-- var baseScriptsUrls = [ baseStaticUrl+'/settings.js', baseStaticUrl+'/api.js'];
-- var siteLogoUrl = baseStaticUrl+'/images/logo.png';
 
 //- Mixins
 //------------------------------------------------------------
@@ -47,8 +44,9 @@ html
               block content
 
         //-Footer
-        footer
+        footer#pageFooter
           block footer
+            include footer
         block scripts
           for scriptUrl in baseScriptsUrls
             script(src=scriptUrl)

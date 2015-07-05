@@ -1,8 +1,27 @@
 /* This stylesheet is included in all pages
  *------------------------------------------------------------*/
-@import 'sub/vendor';
+@import 'vendor';
+@import 'sass';
 
-@import 'sub/sass';
+/*------------------------------------------------------------*
+ * =Layout
+ *------------------------------------------------------------*/
+html {
+  min-height: 100vh;
+}
+
+body {
+  display: table; /* Yes */
+  border-collapse: collapse;
+  height: 100vh;
+
+}
+
+#pageFooter {
+  display: table-footer-group;
+
+  width: 100%;
+}
 
 /*------------------------------------------------------------*
  * =General
@@ -27,59 +46,6 @@ nav > ul {
 }
 nav ul a {
   text-decoration: none;
-}
-
-/*------------------------------------------------------------*
- * =Header
- *------------------------------------------------------------*/
-$headerPadding: 0.3em;
-$logoWidth: 21em;
-$logoHeight: $logoWidth / 3;
-
-#pageHeader {
-  border-bottom: solid 1px;
-  padding: $headerPadding;
-  height: $logoHeight;
-
-  @include headerColors;
-}
-
-#headerTitle {
-  font-size: 1em;
-  float: left;
-  margin: 0;
-  display: block;
-  height: 3em;
-}
-#headerTitle .mainTitle {
-  font-size:2em;
-  display: block;
-}
-#headerTitle .subTitle {
-  display: block;
-  font-size:1em;
-}
-
-#headerLogo {
-  float: left;
-  margin-left: -$headerPadding;
-  margin-top: -$headerPadding;
-  margin-right: $headerPadding;
-
-  width: $logoWidth;
-  height: $logoHeight;
-  overflow: hidden;
-}
-#bannerImage {
-  width: inherit;
-  height: inherit;
-  //height: inherit;
-  object-fit: cover;
-}
-
-#userMenu {
-  display: block;
-  float: right;
 }
 
 /*------------------------------------------------------------*
@@ -114,10 +80,11 @@ input, button, textarea {
 /* =Button
  *------------------------------*/
 .button {
-  background-color: $buttonBgColor;
+  @include buttonColors;
 }
 
 .submit {
+  @include buttonColors;
 }
 
 /* =Checkbox
@@ -138,4 +105,8 @@ input[type="checkbox"] {
 /* =Post content
 /* =Catalog
  *------------------------------*/
-@import 'sub/pages';
+@import 'pages';
+
+/* =Components
+ *------------------------------*/
+@import 'cmp';

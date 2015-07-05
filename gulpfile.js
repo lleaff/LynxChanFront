@@ -97,10 +97,10 @@ var basePaths = {
 var paths = {
 	js:         basePaths.source+'static/',
 	scss:       basePaths.source+'static/scss/',
-	scssExtras: basePaths.source+'static/scss/sub/',
+	scssExtras: basePaths.source+'static/scss/{cmp/,pages/,sass/,vendor/}',
 	css:        basePaths.source+'static/css/',
 	html:       basePaths.source+'templates/',
-	jade:       basePaths.source+'templates/{pages/,cmp/}',
+	jade:       basePaths.source+'templates/{cmp/,pages/}',
 	jadeExtras: basePaths.source+'templates/jade/', /* For watching */
   png:        basePaths.source+'templates/cmp/images/',
 	sourcemaps: '../sourcemaps/',
