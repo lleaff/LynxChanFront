@@ -24,7 +24,10 @@ block content
         fieldset
           label(for='emailField') E-mail
             input#emailField(type='email', name='email',
-            placeholder='Email', required)
+            placeholder='Email')
+          label(for='checkboxAlwaysSign') Always use role signature
+            input#checkboxAlwaysSign(type='checkbox', name='alwaysSignRole')
+            +help('Posting', 'eg: Volunteer')
           input.button.submit#saveFormButton(type='submit', value='Save')
           input.button.submit#saveJsButton(type='button', value='Save',
             onclick='save()', style='display: none;')

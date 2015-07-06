@@ -1,5 +1,6 @@
+//-------------------------------------------------------------
 //-=Mixins
-//------------------------------------------------------------
+//-------------------------------------------------------------
 //- Usage: +style('main.css')
 mixin style(relativePath)
   link(rel='stylesheet', href=baseStaticUrl+'/css/'+relativePath)
@@ -8,6 +9,7 @@ mixin style(relativePath)
 mixin script(relativePath)
   script(src=baseStaticUrl+'/'+relativePath)
 
+//-------------------------------
 //- Format title automatically
 //- Allows passing direct title(s) text or their id by CSS notation
 mixin title(mainTitle, subTitle, mainLink, subLink)
@@ -38,7 +40,17 @@ mixin pageMenuEntry()
   li
     block
 
+//-------------------------------
+mixin help(anchor, helpText)
+  - var helpPage = '/help.html';
+  - function formatAnchor(orig) { return orig.toLowerCase().replace(/ /g, '-'); }
+  - var helpSectionUrl = anchor ? helpPage+'#'+formatAnchor(anchor) : '#';
+  - var helpText = helpText || '';
+  span.help
+    a(href=helpSectionUrl, alt=helpText) ?
+    
 
+//-------------------------------------------------------------
 //-=Helper functions
 //-------------------------------------------------------------
 //- Get an object of the form

@@ -1,0 +1,11 @@
+extends ../../templates/jade/base
+
+block headerTitle
+  +title('Help page')
+
+block append styles
+  +style('ext.css')
+
+block content
+  section#postingHelp
+    include:markdown-it ../../res/md/helpPosting.md

@@ -1,3 +1,7 @@
+var settingsRelation = {
+  checkboxAlwaysSign : 'alwaySignRole'
+};
+
 if (!DISABLE_JS) {
   document.getElementById('logoutJsButton').style.display = 'inline';
   document.getElementById('newBoardJsButton').style.display = 'inline';
@@ -54,6 +58,16 @@ function changePassword() {
 
 function save() {
 
+  var selectedSettings = [];
+
+  for (var key in settingsRelation) {
+
+    if (document.getElementById(key).checked) {
+      selectedSettings.push(settingsRelation[key]);
+    }
+
+  }
+
   var typedEmail = document.getElementById('emailField').value.trim();
 
   if (typedEmail.length > 64) {
@@ -61,7 +75,8 @@ function save() {
   } else {
 
     apiRequest('changeAccountSettings', {
-      email : typedEmail
+      email : typedEmail,
+      settings : selectedSettings
     }, function requestComplete(status, data) {
 
       if (status === 'ok') {
