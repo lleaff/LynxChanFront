@@ -28,9 +28,11 @@ block content
       enctype='multipart/form-data')
       fieldset
         label(for='checkboxLock') Lock
-          input#checkboxLock(name='lock', type='checkbox')
+          input#checkboxLock(type='checkbox', name='lock')
         label(for='checkboxPin') Pin
-          input#checkboxPin(name='pin', type='checkbox')
+          input#checkboxPin(type='checkbox', name='pin')
+        label(for='checkboxCyclic') Cyclic
+          input#checkboxCyclic(type='checkbox', name='cyclic')
         input#controlBoardIdentifier(type='hidden', name='boardUri')
         input#controlThreadIdentifier(type='hidden', name='threadId')
         input#lockFormButton.button.submit(type='submit',

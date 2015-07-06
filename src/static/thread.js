@@ -74,7 +74,8 @@ function saveThreadSettings() {
     boardUri : boardUri,
     threadId : threadId,
     pin : document.getElementById('checkboxPin').checked,
-    lock : document.getElementById('checkboxLock').checked
+    lock : document.getElementById('checkboxLock').checked,
+    cyclick : document.getElementById('checkboxCyclic').checked
   }, function setLock(status, data) {
 
     if (status === 'ok') {
