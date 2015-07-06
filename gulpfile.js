@@ -83,9 +83,10 @@ url.base = url.protocol+'://'+url.domain+':'+url.port;
 url.baseStatic = url.protocol+'://'+'static.'+url.domain+':'+url.port;
 
 jadeSettings = concatObjects(jadeSettings, {
-  siteTitle: siteTitle,
-  baseUrl: url.base,
-  baseStaticUrl: url.baseStatic
+  siteTitle:      siteTitle,
+  siteLicense:    siteLicense,
+  baseUrl:        url.base,
+  baseStaticUrl:  url.baseStatic
 });
 
 var basePaths = {

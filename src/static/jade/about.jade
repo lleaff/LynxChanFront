@@ -1,0 +1,23 @@
+extends ../../templates/jade/base
+
+block title
+  | #{siteTitle} - About
+
+block headerTitle
+  +title('About')
+
+block append styles
+  +style('ext.css')
+
+block content
+  section#aboutPage
+    h1
+      #{siteTitle}
+      if siteLicense
+        #[small siteLicense]
+
+    main#aboutPageSiteDesc
+      include:markdown-it ../../res/md/aboutSiteDescription.md
+
+    section#aboutPageEngineDesc
+      include:markdown-it ../../res/md/aboutEngineDescription.md
