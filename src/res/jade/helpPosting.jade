@@ -1,0 +1,77 @@
+a(name='posting'): h1 Posting
+a(name='tripcodes'): h2 Tripcodes
+p.
+  To use a tripcode, add a #[code #] in your name. After the #[code #],
+  add the password for the tripcode. #[br]
+  The tripcode will aplly a hash to the password and display the hashed
+  password instead (what's called the tripcode).
+p.
+  To use a secure tripcode, add #[code ##] instead. A secure tripcode will
+  generate a random text that will only be displayed if your password
+  matches.
+
+a(name='role-signatures'): h2 Role signatures
+p.
+  If you wish to display your global or board role when posting, put
+  #[code: span(title='case insensitive') #rs] in your name, like a tripcode.
+  You can't use your role signature and a tripcode at the same time. #[br]
+  You can also chose to always display your role signature by going into
+  your account settings.
+
+a(name='formatting'): h2 Formatting
+a(name='post-quote'): h3 Post quote
+p.
+  If you write #[code >>] and then the ID number of a post made in the same
+  board, it will create a link to this post.
+
+p.usageExample
+  a.quoteLink(href='#') >>713705
+
+a(name='board-link'): h3 Board link
+p.
+  If you write #[code >>>] and then add a board's URI between slashes, it
+  will create a link to that board.
+
+p.usageExample
+  a.quoteLink(href='#') >>>/furry/
+
+a(name='cross-board-quote'): h3 Cross-board quote
+p.
+  It's also possible to quote posts from other boards. Just append a post ID
+  number to a board link.
+
+p.usageExample
+  a.quoteLink(href='#') >>>/cuteboys/15
+
+a(name='greentext'): h3 Greentext
+p.
+  If you add a #[code >] at the start of a line, for some reason the text
+  will be green until the end of the line.
+
+p.usageExample#greenTextExample
+  span.greenText >mfw
+  br
+  span.greenText >kek
+  br
+  span.greenText >how does this work
+
+a(name='spoiler'): h3 Spoiler
+p
+  | Surround your text with 
+  code [spoiler]
+  |  and 
+  code [/spoiler]
+  |  tags to hide your text until it is hovered over. You can't break lines
+  | between the two tags.
+
+p.usageExample
+  span.spoiler nobody loves you
+
+a(name='urls'): h3 Urls
+p.
+  Urls beginning with #[code http] or #[code https] will automatically be
+  converted to links.
+
+p.usageExample
+  a(href='https://instagram.com/taylorswift/')
+    | https://instagram.com/taylorswift/
