@@ -40,5 +40,7 @@
   "noCookieCaptchaPage":  "pages/noCookieCaptcha.html",
   "rangeBansPage":        "pages/rangeBans.html",
   "rangeBanCell":         "cmp/rangeBanCell.html",
-  "rangeBanPage":         "pages/rangeBanned.html"
+  "rangeBanPage":         "pages/rangeBanned.html",
+  "hashBansPage":         "pages/hashBans.html",
+  "hashBanCell":          "cmp/hashBanCell.html"
 }

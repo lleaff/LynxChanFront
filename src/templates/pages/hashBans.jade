@@ -1,0 +1,22 @@
+extends ../jade/base
+
+block headerTitle
+  +title('File bans')
+
+block append scripts
+  +script('hashBans.js')
+
+- var exampleHash = '9e107d9d372bb6826bd81d3542a419d6'; 
+
+block content
+  section
+    form#placeHashBanForm(action='/placeHashBan.js', method='post',
+        enctype='multipart/form-data')
+      label(for='hashField') MD5 hash of the file to be banned:
+        input#hashField(type='text', name='hash', placeholder=exampleHash)
+        input#boardIdentifier(type='hidden', name='boardUri')
+        input#createFormButton(type='submit', value='Place hash ban')
+        input#createJsButton(type='button', value='Place hash ban',
+            onclick='placeHashBan()', style='display: none;')
+
+  section#hashBansDiv
