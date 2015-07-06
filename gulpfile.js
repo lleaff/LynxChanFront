@@ -197,6 +197,9 @@ gulp.task('images', function() {
 ========================== */
 gulp.task('sync', ['browser-sync']);
 gulp.task('browser-sync', ['build'], function() {
+  var browserSyncPort = argv.syncport || 3000;
+  url.base = url.protocol+'://'+url.domain+':'+browserSyncPort;
+
   if (gulpSettings.startCommand) {
     child_process.spawnSync();
     child_process.execSync(gulpSettings.startCommand);
@@ -204,16 +207,16 @@ gulp.task('browser-sync', ['build'], function() {
 
   browserSync.init({
     proxy: {
-      target: "localhost:8080",
-      port: 3000
+      target: url.domain+':'+url.port,
+      port: browserSyncPort
     }
   });
 
   gulp.watch([filesRecur.scss, filesRecur.scssExtras, filesRecur.css],
              ['css'])
              .on('change', serverRefresh);
-  gulp.watch([filesRecur.jade, filesRecur.jadeExtras],
-             ['html', 'jade', 'browserReload']);
+  gulp.watch([filesRecur.jade, filesRecur.jadeExtras, filesRecur.jadeStatic],
+             ['html', 'jade', 'jadeStatic', 'browserReload']);
   gulp.watch(files.html, ['html', 'browserReload']);
 });
 
@@ -240,6 +243,21 @@ gulp.task('clear', function() {
         (outPaths[outPath]).slice(0, outPaths[outPath].length - 1),
         {log: true});
   });
+});
+
+/* =Help
+========================== */
+gulp.task('help', function() {
+  console.log([
+    package.name+'\'s gulp tasks and options',
+    '---------------------------',
+    '[all]',
+    '\t--production:\tNo sourcemaps, ...',
+    '\t--ugly:\t\tMinify code',
+    '[default, build]\tProcess all necessarily files',
+    '[sync, browser-sync]\tWatch files and reload browser automatically with browser-sync, default port is 3000',
+    '\t--syncport:\tBrowser-sync instance port'
+  ].join('\n'));
 });
 
 /*------------------------------------------------------------- 
