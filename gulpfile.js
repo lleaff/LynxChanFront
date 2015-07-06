@@ -100,7 +100,7 @@ var paths = {
 	scssExtras: basePaths.source+'static/scss/{cmp/,pages/,sass/,vendor/}',
 	css:        basePaths.source+'static/css/',
 	html:       basePaths.source+'templates/',
-	jade:       basePaths.source+'templates/{cmp/,pages/}',
+	jade:       basePaths.source+'{templates/{cmp/,pages/},static/jade/}',
 	jadeExtras: basePaths.source+'templates/jade/', /* For watching */
   png:        basePaths.source+'templates/cmp/images/',
 	sourcemaps: '../sourcemaps/',
@@ -126,7 +126,8 @@ var outPaths = {
  *-------------------------------------------------------------*/
 gulp.task('default', ['build']);
 
-/*============ Build ============== */
+/* =Build
+========================== */
 gulp.task('build', ['js', 'html', 'css', 'otherFiles'], function() {
   if (basePaths.build !== './') {
     console.log('Built project to: '+basePaths.build);
@@ -182,6 +183,8 @@ gulp.task('images', function() {
 });
 
 /*============ Utility ============== */
+/* =Watching
+========================== */
 gulp.task('sync', ['browser-sync']);
 gulp.task('browser-sync', ['build'], function() {
   if (gulpSettings.startCommand) {
@@ -217,7 +220,8 @@ gulp.task('browserReload', ['html'], function() {
   serverRefresh();
 });
 
-/*============  ============== */
+/* =Clean built files
+========================== */
 gulp.task('clean', ['clear']);
 gulp.task('clear', function() {
   Object.keys(outPaths).forEach(function(outPath) {
