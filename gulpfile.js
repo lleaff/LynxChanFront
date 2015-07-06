@@ -101,24 +101,28 @@ var paths = {
 	scssExtras: basePaths.source+'static/scss/{cmp/,pages/,sass/,vendor/}',
 	css:        basePaths.source+'static/css/',
 	html:       basePaths.source+'templates/',
-	jade:       basePaths.source+'{templates/{cmp/,pages/},static/jade/}',
+	jade:       basePaths.source+'templates/{cmp/,pages/}',
 	jadeExtras: basePaths.source+'templates/jade/', /* For watching */
+  jadeStatic: basePaths.source+'static/jade/',
   png:        basePaths.source+'templates/cmp/images/',
 	sourcemaps: '../sourcemaps/',
 };
 var filesRecur = {}; /* { js: src/static/** /*.js, ... } */
 Object.keys(paths).forEach(function(ft) {
-  filesRecur[ft] = paths[ft]+'**/*.'+ft;
+  var ext = keepFirstWordFromCamelCase(ft);
+  filesRecur[ft] = paths[ft]+'**/*.'+ext;
 });
 var files = {}; /* { js: src/static/*.js, ... } */
 Object.keys(paths).forEach(function(ft) {
-  files[ft] = paths[ft]+'*.'+ft;
+  var ext = keepFirstWordFromCamelCase(ft);
+  files[ft] = paths[ft]+'*.'+ext;
 });
 
 var outPaths = {
   js:         basePaths.build+'static/',
   css:        basePaths.build+'static/css/',
 	html:       basePaths.build+'templates/',
+  htmlStatic: basePaths.build+'static/',
   png:        basePaths.build+'templates/cmp/images/',
 };
 
@@ -157,10 +161,15 @@ gulp.task('moveHtml', function() {
     .pipe(gulp.dest(outPaths.html));
 });
 
-gulp.task('jade', ['moveHtml'], function() {
+gulp.task('jade', ['moveHtml', 'jadeStatic'], function() {
     return gulp.src(filesRecur.jade)
       .pipe(jade({ pretty: !g.ugly, data: jadeSettings }))
       .pipe(gulp.dest(outPaths.html));
+});
+gulp.task('jadeStatic', function() {
+    return gulp.src(filesRecur.jadeStatic)
+      .pipe(jade({ pretty: !g.ugly, data: jadeSettings }))
+      .pipe(gulp.dest(outPaths.htmlStatic));
 });
 
 gulp.task('html', ['moveHtml', 'jade']);
@@ -253,6 +262,19 @@ function concatObjects(obj1, obj2) {
     });
   });
   return obj;
+}
+
+function keepFirstWordFromCamelCase(camel) {
+  function isLowerCase(ch) {
+    return ch.toLowerCase() === ch;
+  }
+
+  var firstWord = '';
+  for (var i = 0; i < camel.length && isLowerCase(camel[i]); ++i) {
+    firstWord = firstWord+camel[i];
+  }
+
+  return firstWord;
 }
 
 /*============= File operations ============= */

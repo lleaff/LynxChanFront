@@ -11,13 +11,12 @@ block append styles
 
 block content
   section#aboutPage
-    h1
-      #{siteTitle}
+    h1= siteTitle
       if siteLicense
-        #[small siteLicense]
+        small siteLicense
 
     main#aboutPageSiteDesc
-      include:markdown-it ../../res/md/aboutSiteDescription.md
+      include:markdown ../../res/md/aboutSiteDescription.md
 
     section#aboutPageEngineDesc
-      include:markdown-it ../../res/md/aboutEngineDescription.md
+      include:markdown ../../res/md/aboutEngineDescription.md

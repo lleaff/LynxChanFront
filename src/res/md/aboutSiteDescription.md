@@ -1,1 +1,1 @@
-{Potentially length description of your chan here}
+{Potentially lengthy description of your chan here}

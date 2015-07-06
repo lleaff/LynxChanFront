@@ -22,7 +22,6 @@
     "gulp-strip-css-comments": "latest",
     "gulp-uglify": "latest",
     "gulp-util": "latest",
-    "markdown-it": "latest",
     "yargs": "latest"
   },
   "author": "lleaff"
