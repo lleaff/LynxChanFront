@@ -3,36 +3,36 @@ hr
 
 a(name='tripcodes'): h2 Tripcodes
 p.
-  To use a tripcode, add a #[code #] in your name. After the #[code #],
-  add the password for the tripcode. #[br]
-  The tripcode will aplly a hash to the password and display the hashed
-  password instead (what's called the tripcode).
+  To use a tripcode, add a #[code #] in the name field followed by a
+  password for the tripcode. #[br]
+  A hash will be applied to the password and the result will be displayed
+  instead.
 p.
-  To use a secure tripcode, add #[code ##] instead. A secure tripcode will
-  generate a random text that will only be displayed if your password
-  matches.
+  To use a secure tripcode, prepend two #[code #] instead of one. A secure
+  tripcode will generate a random text that will only be displayed if
+  your password matches.
 
 a(name='role-signatures'): h2 Role signatures
 p.
   If you wish to display your global or board role when posting, put
-  #[code: span(title='case insensitive') #rs] in your name, like a tripcode.
+  #[code: span.detail(title='case insensitive') #rs] in the name field.
   You can't use your role signature and a tripcode at the same time. #[br]
-  You can also chose to always display your role signature by going into
-  your account settings.
+  There is a setting in #[a(href=accountSettingsUrl) account settings]
+  to always display your role signature by default.
 
 a(name='formatting'): h2 Formatting
 a(name='post-quote'): h3 Post quote
 p.
-  If you write #[code >>] and then the ID number of a post made in the same
-  board, it will create a link to this post.
+  If you write #[code >>] followed by the ID number of a post made in
+  the same board, a link to this post will be created.
 
 p.usageExample
   a.quoteLink(href='#') >>713705
 
 a(name='board-link'): h3 Board link
 p.
-  If you write #[code >>>] and then add a board's URI between slashes, it
-  will create a link to that board.
+  If you write #[code >>>] followed by a board's URI between slashes, a
+  link to that board will be created.
 
 p.usageExample
   a.quoteLink(href='#') >>>/furry/
@@ -48,7 +48,7 @@ p.usageExample
 a(name='greentext'): h3 Greentext
 p.
   If you add a #[code >] at the start of a line, for some reason the text
-  will be green until the end of the line.
+  following it will be green.
 
 p.usageExample#greenTextExample
   span.greenText >mfw
@@ -59,12 +59,12 @@ p.usageExample#greenTextExample
 
 a(name='spoiler'): h3 Spoiler
 p
-  | Surround your text with 
+  | Text surrounded by 
   code [spoiler]
   |  and 
   code [/spoiler]
-  |  tags to hide your text until it is hovered over. You can't break lines
-  | between the two tags.
+  |  tags will be masked until it is hovered over. You can't break
+  | lines between the two tags.
 
 p.usageExample
   span.spoiler nobody loves you
@@ -72,7 +72,7 @@ p.usageExample
 a(name='urls'): h3 Urls
 p.
   Urls beginning with #[code http] or #[code https] will automatically be
-  converted to links.
+  converted to hyperlinks.
 
 p.usageExample
   a(href='https://instagram.com/taylorswift/')
