@@ -1,0 +1,12 @@
+@import '../sass';
+
+.greenText {
+  color: take-lightness(#0f0, palette('fgMain'));
+}
+
+.spoiler {
+  $spoilerColor: soft-value(
+    change-color(#000, $lightness: lightness(palette('fgMain'))));
+  color: $spoilerColor;
+  background-color: $spoilerColor;
+}
