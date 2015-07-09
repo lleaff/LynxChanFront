@@ -6,20 +6,40 @@
 /*------------------------------------------------------------*
  * =Layout
  *------------------------------------------------------------*/
-html {
-  min-height: 100vh;
+//@include debugBorders; //DEBUG
+
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
-body {
-  display: table; /* Yes */
-  border-collapse: collapse;
-  height: 100vh;
-
+#pageHeader {
+  width: 100%;
 }
+
+#notFooter {
+  min-height: 100%;
+}
+#notFooter:after {
+  content: "";
+  display: block;
+}
+
+@mixin compensatePageFooterHeight($height) {
+  #notFooter {
+    margin-bottom: -$pageFooterHeight;
+  }
+
+  #pageFooter, #notFooter:after {
+    height: $pageFooterHeight;
+  }
+}
+
+@include compensatePageFooterHeight($pageFooterHeight);
 
 #pageFooter {
-  display: table-footer-group;
-
   width: 100%;
 }
 
@@ -30,7 +50,6 @@ body {
   background-color: palette('bgMain');
   color: palette('fgMain');
 
-  margin: 0;
   padding: 0;
 
   font-family: sans-serif;
@@ -38,6 +57,12 @@ body {
 
 a {
   color: mix(palette('fgMain'), palette('accentA'));
+}
+
+code {
+  background-color: rgba(palette('bgAlt'), 0.5);
+  color: mix(palette('fgMain'), palette('fgAlt'), 30);
+  font-family: $monospaceFont
 }
 
 /* Naviguation */
@@ -48,6 +73,10 @@ nav ul a {
   text-decoration: none;
 }
 
+hr {
+  opacity: 0.1;
+}
+
 /*------------------------------------------------------------*
  * =Content, Middle
  *------------------------------------------------------------*/
@@ -55,9 +84,17 @@ nav ul a {
   padding: 0.3em;
 }
 
+#content p {
+  padding: 1em;
+}
+
 /*------------------------------------------------------------*
  * =Input
  *------------------------------------------------------------*/
+fieldset {
+  border: none;
+}
+
 input, button, textarea {
   background-color: palette('bgAlt');
   border: solid 1px $borderColorAlt;
@@ -86,6 +123,12 @@ input, button, textarea {
 .submit {
   @include buttonColors;
 }
+
+//.transparent {
+//  background: transparent;
+//  border: none!important;
+//  font-size: 0;
+//}
 
 /* =Checkbox
  *------------------------------*/

@@ -1,9 +1,18 @@
 @import '../sass';
 
+$pageFooterPaddingHorizontal: 5em;
+
 #pageFooter {
   @include altColors;
+  border-top: 1px solid $borderColorAlt;
+  border-bottom: none;
+  margin: 0;
 }
 
 #pageFooterItems {
-  font-size: 0.7em;
+  margin: 0;
+  padding: $pageFooterPaddingTop $pageFooterPaddingHorizontal ($pageFooterPaddingTop / 2) $pageFooterPaddingHorizontal;
+
+  font-size: $pageFooterItemsSize;
+  text-align: center;
 }

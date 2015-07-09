@@ -1,0 +1,11 @@
+/* =General
+------------------------------------------------------------*/
+$emMostCommonPxSize: 14;
+
+/* =Footer
+------------------------------------------------------------*/
+$pageFooterItemCount: 3;
+$pageFooterItemsSize: 0.7em;
+$pageFooterPaddingTop: 1em;
+$pageFooterHeight: ($pageFooterItemsSize + 0.2) * $pageFooterItemCount +
+  $pageFooterPaddingTop;

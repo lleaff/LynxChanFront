@@ -6,6 +6,6 @@
 }
 
 .catalogHeader {
+  height: 128px + 16px; //Fallback
   height: calc(128px + 1em);
-
 }

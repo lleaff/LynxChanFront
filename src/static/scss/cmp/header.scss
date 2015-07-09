@@ -8,9 +8,13 @@ $logoWidth: 21em;
 $logoHeight: $logoWidth / 3;
 
 #pageHeader {
-  border-bottom: solid 1px;
+  $borderBottomSize: 1px;
+
+  border-bottom: solid $borderBottomSize;
   padding: $headerPadding;
-  height: $logoHeight;
+
+  height: $logoHeight; //Fallback
+  height: calc(#{$logoHeight} + #{$borderBottomSize});
 
   @include headerColors;
 }
@@ -23,12 +27,12 @@ $logoHeight: $logoWidth / 3;
   height: 3em;
 }
 #headerTitle .mainTitle {
-  font-size:2em;
+  font-size: 2em;
   display: block;
 }
 #headerTitle .subTitle {
   display: block;
-  font-size:1em;
+  font-size: 1em;
 }
 
 #headerLogo {
@@ -40,10 +44,10 @@ $logoHeight: $logoWidth / 3;
   height: $logoHeight;
   overflow: hidden;
 }
+
 #bannerImage {
   width: inherit;
   height: inherit;
-  //height: inherit;
   object-fit: cover;
 }
 

@@ -10,3 +10,16 @@
 #labelCaptchaId {
   @include altColors;
 }
+
+//help page
+.usageExample:before {
+  content: 'Example';
+  display: block;
+  font-size: 0.8em;
+  margin-bottom: 1em;
+  
+  @include altColors;
+}
+
+.usageExample {
+}
