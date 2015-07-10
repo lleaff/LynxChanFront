@@ -19,7 +19,8 @@ function reloadCaptcha() {
 
   document.getElementById('captchaImage').src = '/captcha.js#'
       + new Date().toString();
-
+  /* Clear the text field */
+  document.getElementById('fieldCaptcha').value = "";
 }
 
 var postCallback = function requestComplete(status, data) {

@@ -63,9 +63,11 @@ if (!DISABLE_JS) {
 
 function reloadCaptcha() {
   document.cookie = 'captchaid=; path=/;';
+
   document.getElementById('captchaImage').src = '/captcha.js#'
       + new Date().toString();
-
+  /* Clear the text field */
+  document.getElementById('fieldCaptcha').value = "";
 }
 
 function saveThreadSettings() {
@@ -75,7 +77,7 @@ function saveThreadSettings() {
     threadId : threadId,
     pin : document.getElementById('checkboxPin').checked,
     lock : document.getElementById('checkboxLock').checked,
-    cyclick : document.getElementById('checkboxCyclic').checked
+    cyclic : document.getElementById('checkboxCyclic').checked
   }, function setLock(status, data) {
 
     if (status === 'ok') {

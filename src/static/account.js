@@ -1,5 +1,5 @@
 var settingsRelation = {
-  checkboxAlwaysSign : 'alwaySignRole'
+  checkboxAlwaysSign : 'alwaysSignRole'
 };
 
 if (!DISABLE_JS) {
@@ -60,7 +60,7 @@ function save() {
 
   var selectedSettings = [];
 
-  for (var key in settingsRelation) {
+  for ( var key in settingsRelation) {
 
     if (document.getElementById(key).checked) {
       selectedSettings.push(settingsRelation[key]);

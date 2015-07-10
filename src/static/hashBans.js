@@ -11,7 +11,7 @@ if (!DISABLE_JS) {
   document.getElementById('createFormButton').style.display = 'none';
   document.getElementById('createJsButton').style.display = 'inline';
 
-  var hashBansDiv = document.getElementById('hashBansdiv');
+  var hashBansDiv = document.getElementById('hashBansDiv');
 
   for (var j = 0; j < hashBansDiv.childNodes.length; j++) {
     processHashBanCell(hashBansDiv.childNodes[j]);
@@ -20,7 +20,7 @@ if (!DISABLE_JS) {
 
 function processHashBanCell(cell) {
 
-  var button = cell.getElementsByClassName('liftjsButton')[0];
+  var button = cell.getElementsByClassName('liftJsButton')[0];
   button.style.display = 'inline';
 
   button.onclick = function() {
@@ -32,12 +32,12 @@ function processHashBanCell(cell) {
 }
 
 function liftHashBan(hashBan) {
-  apiRequest('liftHashban', {
+  apiRequest('liftHashBan', {
     hashBanId : hashBan
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
-      
+
       location.reload(true);
 
     } else {
@@ -59,14 +59,15 @@ function placeHashBan() {
   }
 
   apiRequest('placeHashBan', parameters,
-            function requestComplete(status, data) {
+      function requestComplete(status, data) {
 
-              if (status === 'ok') {
+        if (status === 'ok') {
 
-                location.reload(true);
+          location.reload(true);
 
-              } else {
-                alert(status + ': ' + JSON.stringify(data));
-              }
-            });
+        } else {
+          alert(status + ': ' + JSON.stringify(data));
+        }
+      });
+
 }
