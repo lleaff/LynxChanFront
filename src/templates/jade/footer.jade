@@ -1,10 +1,9 @@
 include variables
 
-h1
-  a(href=baseUrl)= siteTitle
-      if siteLicense
-        | ' - '#{siteLicense}
 nav
   ul#pageFooterItems
+    li: a(href=baseUrl)= siteTitle
+        if siteLicense
+          | ' - '#{siteLicense}
     li: a(href=helpPageUrl) Help
     li: a(href=aboutPageUrl) About

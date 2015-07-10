@@ -8,32 +8,30 @@ mixin postForm(options)
     fieldset.authorInfo
       div#divName
         label(for="fieldName") Name:
-          input#fieldName(type='text', name='name', placeholder='Name')
+        input#fieldName(type='text', name='name', placeholder='Name')
       label(for="fieldEmail") Email:
-        input#fieldEmail(name='email', type='text', placeholder='Email')
+      input#fieldEmail(name='email', type='text', placeholder='Email')
       label(for="fieldPassword") Password:
-        input#fieldPassword(name='password', type='password',
-        placeholder='Password')
+      input#fieldPassword(name='password', type='password',
+          placeholder='Password')
     fieldset.messageArea
       label(for="fieldSubject") Subject:
-        input#fieldSubject(type='text', name='subject',
+      input#fieldSubject(type='text', name='subject',
         placeholder='Subject')
       label(for="fieldMessage") Message:
-        textarea#fieldMessage(rows='8', cols='50', name='message', required)
+      textarea#fieldMessage(rows='8', cols='50', name='message', required)
       label(for="files") Files:
-        input#files(type='file', accept='image/*', multiple='',
+      input#files(type='file', accept='image/*', multiple='',
           name='files')
-        small Max file size: #[span#labelMaxFileSize] MB.
+      small.info Max file size: #[span#labelMaxFileSize] MB.
       label(for='checkboxSpoiler') Spoiler
-        input#checkboxSpoiler(type='checkbox', name='spoiler')
+      input#checkboxSpoiler(type='checkbox', name='spoiler')
     fieldset.sendPost
       div#captchaDiv
-        label(for="fieldCaptcha", style='display: none;') Captcha
+        label(for="fieldCaptcha") Captcha
         img#captchaImage(src='/captcha.js')
-        //- Input can't be 'required' since the captcha may be
-        //-  optional and this element will still be there. Put 'required'
-        //-  back when disabled elements are truly removed from sent page
-        input#fieldCaptcha(type='text', name='captcha')
+        input#fieldCaptcha(type='text', name='captcha', required,
+            placeholder='......')
         input#reloadCaptchaButton(type='button',
             onclick='reloadCaptcha()', value='Reload captcha',
             style='display: none;')

@@ -212,12 +212,16 @@ gulp.task('browser-sync', ['build'], function() {
     }
   });
 
-  gulp.watch([filesRecur.scss, filesRecur.scssExtras, filesRecur.css],
-             ['css'])
-             .on('change', serverRefresh);
-  gulp.watch([filesRecur.jade, filesRecur.jadeExtras, filesRecur.jadeStatic],
-             ['html', 'jade', 'jadeStatic', 'browserReload']);
-  gulp.watch(files.html, ['html', 'browserReload']);
+  gulp.watch(
+    [filesRecur.scss, filesRecur.scssExtras, filesRecur.css],
+    ['css'])
+    .on('change', serverRefresh);
+  gulp.watch(
+    [filesRecur.jade, filesRecur.jadeExtras, filesRecur.jadeStatic],
+    ['html', 'jade', 'jadeStatic', 'browserReload']);
+  gulp.watch(
+    files.html,
+    ['html', 'browserReload']);
 });
 
 function serverRefresh() {
