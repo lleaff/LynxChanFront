@@ -11,13 +11,13 @@
   @if $left   != 0 { margin-left:   -$left; }
 }
 
+@mixin marginHorizontal($value) {
+  margin-left: $value;
+  margin-right: $value;
+}
+
 @mixin hideLabel($labelForAttribute) {
   label[for=#{$labelForAttribute}] {
     display: none;
   }
-}
-
-@mixin marginHorizontal($value) {
-  margin-left: $value;
-  margin-right: $value;
 }

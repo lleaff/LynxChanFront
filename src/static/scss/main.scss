@@ -8,7 +8,6 @@
  *------------------------------------------------------------*/
 //@include debugBorders; //DEBUG
 
-
 html, body {
   height: 100%;
   width: 100%;
@@ -21,10 +20,12 @@ html, body {
 
 #notFooter {
   min-height: 100%;
+  padding-bottom: $defaultPadding;
 }
 #notFooter:after {
   content: "";
   display: block;
+  clear: both;
 }
 
 @mixin compensatePageFooterHeight($height) {
@@ -98,8 +99,8 @@ fieldset {
 }
 
 input, button, textarea {
-  background-color: palette('bgAlt');
-  border: solid 1px $borderColorAlt;
+  //background-color: palette('bgAlt');
+  //border: solid 1px $borderColorAlt;
   color: palette('fgAlt');
 }
 
