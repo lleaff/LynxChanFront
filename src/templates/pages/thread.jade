@@ -13,16 +13,17 @@ block headerTitle
 block append userMenu
   +userMenuEntry
     a#linkManagement Manage Board
-  +userMenuEntry
-    a#linkMod Moderate thread
 
 block pageMenu
   +pageMenuEntry
     a(href='../catalog.html') Catalog
+  +pageMenuEntry
+    a#linkMod Moderate thread
 
-block content
+block prepend middle
   include ../jade/replyThread.jade
 
+block content
   #divControls
     form(action='/threadControls.js', method='post',
       enctype='multipart/form-data')

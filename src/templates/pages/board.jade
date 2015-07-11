@@ -20,8 +20,10 @@ block pageMenu
   +pageMenuEntry
     a#linkModeration Board actions
 
-block content
+block prepend middle
   include ../jade/createThread
+
+block content
   #divPostings
   label(for='reportFieldReason') Reason
     input#reportFieldReason(type='text', name='reason',
