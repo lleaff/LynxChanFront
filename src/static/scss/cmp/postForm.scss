@@ -32,12 +32,12 @@ $singleLineFieldRowHeight: 1.5em;
   @each $ID in $IDs {
     $top: $height * $index;
 
-    label[for='#{$ID}'] {
+    #postFormWrapper label[for='#{$ID}'] {
       position: absolute;
       left: 0;
       top: $top;
     }
-    ##{$ID} {
+    #postFormWrapper ##{$ID} {
       position: absolute;
       right: 0;
       top: $top;
@@ -56,19 +56,19 @@ $singleLineFieldRowHeight: 1.5em;
 
 /* =User information
  *------------------------------*/
-label[for='fieldName'] {
+#postFormWrapper label[for='fieldName'] {
 }
-#fieldName {
-}
-
-label[for='fieldEmail'] {
-}
-#fieldEmail {
+#postFormWrapper #fieldName {
 }
 
-label[for='fieldPassword'] {
+#postFormWrapper label[for='fieldEmail'] {
 }
-#fieldPassword {
+#postFormWrapper #fieldEmail {
+}
+
+#postFormWrapper label[for='fieldPassword'] {
+}
+#postFormWrapper #fieldPassword {
 }
 
 
