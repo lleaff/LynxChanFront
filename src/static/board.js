@@ -4,10 +4,10 @@ var boardUri = document.getElementById('boardIdentifier').value;
 if (!DISABLE_JS) {
 
   var postButton = document.getElementById('jsButton');
-  postButton.style.display = 'inline';
+  postButton.style.display = '';
 
   if (document.getElementById('captchaDiv')) {
-    document.getElementById('reloadCaptchaButton').style.display = 'inline';
+    document.getElementById('reloadCaptchaButton').style.display = '';
   }
 
   document.getElementById('formButton').style.display = 'none';
@@ -79,7 +79,7 @@ function sendThreadData(files) {
     return;
   } else if (!hiddenCaptcha && typedCaptcha.length !== 6
       && typedCaptcha.length !== 24) {
-    alert('Captchas are exactly 6 (24 if no cookies) characters long.');
+    alert('Captchas are exactly 6 characters long.\n(or 24 in the case of a no-cookie ID)');
     return;
   } else if (/\W/.test(typedCaptcha)) {
     alert('Invalid captcha.');
