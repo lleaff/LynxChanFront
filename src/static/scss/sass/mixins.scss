@@ -17,3 +17,7 @@
   }
 }
 
+@mixin marginHorizontal($value) {
+  margin-left: $value;
+  margin-right: $value;
+}

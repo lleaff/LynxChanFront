@@ -5,7 +5,7 @@ mixin postForm(options)
   //- .postForm
   form(id=attributes.id, class=attributes.class+' postForm',
     method='post', action=actionFile, enctype='multipart/form-data')
-    fieldset.authorInfo
+    fieldset#authorInfo
       div#divName
         label(for="fieldName") Name:
         input#fieldName(type='text', name='name', placeholder='Name')
@@ -14,29 +14,34 @@ mixin postForm(options)
       label(for="fieldPassword") Password:
       input#fieldPassword(name='password', type='password',
           placeholder='Password')
-    fieldset.messageArea
+    fieldset#messageArea
       label(for="fieldSubject") Subject:
       input#fieldSubject(type='text', name='subject',
         placeholder='Subject')
       label(for="fieldMessage") Message:
-      textarea#fieldMessage(rows='8', cols='50', name='message', required)
-      label(for="files") Files:
-      input#files(type='file', accept='image/*', multiple='',
-          name='files')
-      small.info Max file size: #[span#labelMaxFileSize] MB.
-      label(for='checkboxSpoiler') Spoiler
-      input#checkboxSpoiler(type='checkbox', name='spoiler')
-    fieldset.sendPost
-      div#captchaDiv
+      textarea#fieldMessage(name='message', required)
+      fieldset#messageFiles
+        #filesWrapper
+          label(for="files") Files:
+          input#files(type='file', accept='image/*', multiple='',
+              name='files')
+        small.info#filesInfo Max file size: #[span#labelMaxFileSize] MB.
+        #filesSpoiler
+          label(for='checkboxSpoiler') Spoiler
+          input#checkboxSpoiler(type='checkbox', name='spoiler')
+    fieldset#sendPost
+      #captchaDiv
         label(for="fieldCaptcha") Captcha
         img#captchaImage(src='/captcha.js')
         input#fieldCaptcha(type='text', name='captcha', required,
             placeholder='......')
-        input#reloadCaptchaButton(type='button',
+        input.button#reloadCaptchaButton(type='button',
             onclick='reloadCaptcha()', value='Reload captcha',
             style='display: none;')
-        small: a(href='/noCookieCaptcha.js', target='_blank') No cookies?
-      input.button.submit#jsButton(type='button',
-        onclick=actionFunction, value=actionName, style='display: none;')
-      input.button.submit#formButton(type='submit', value=actionName)
+        small.info#noCookiesCaptchaLink
+          a(href='/noCookieCaptcha.js', target='_blank') No cookies?
+      input.postSubmit.button.submit#jsButton(type='button',
+          onclick=actionFunction, value=actionName, style='display: none;')
+      input.postSubmit.button.submit#formButton(type='submit',
+          value=actionName)
     block

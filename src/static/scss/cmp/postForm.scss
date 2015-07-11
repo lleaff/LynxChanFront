@@ -1,0 +1,169 @@
+@import '../sass';
+//------------------------------
+
+$postFormExternalPadding: 1em;
+$postFormPadding: 1em;
+
+// $captchaImageRealDimensions: 300*100px
+$captchaImageWidth: (300 / $emMostCommonPxSize) * 1em;
+
+$postFormInternalWidth: $captchaImageWidth + $postFormPadding;
+
+$singleLineFieldRowHeight: 1.5em;
+
+//------------------------------
+
+#postFormWrapper {
+  border: $borderStyle $borderWidth $postFormBorderColor;
+  background: $postFormBg;
+  padding: $postFormExternalPadding;
+  display: inline-block; // Shrink width to fit content
+  float: right;
+}
+
+.postForm {
+  box-sizing: content-box;
+  position: relative;
+  width: $postFormInternalWidth;
+}
+
+@mixin positionConsecutivePostFormRows($IDs, $height) {
+  $index: 0;
+  @each $ID in $IDs {
+    $top: $height * $index;
+
+    label[for='#{$ID}'] {
+      position: absolute;
+      left: 0;
+      top: $top;
+    }
+    ##{$ID} {
+      position: absolute;
+      right: 0;
+      top: $top;
+    }
+
+    $index: $index + 1;
+  }
+
+  #fieldMessage {
+    margin-top: $height * $index;
+  }
+}
+@include positionConsecutivePostFormRows(
+  'fieldName' 'fieldEmail' 'fieldPassword' 'fieldSubject',
+  $singleLineFieldRowHeight);
+
+/* =User information
+ *------------------------------*/
+label[for='fieldName'] {
+}
+#fieldName {
+}
+
+label[for='fieldEmail'] {
+}
+#fieldEmail {
+}
+
+label[for='fieldPassword'] {
+}
+#fieldPassword {
+}
+
+
+/* =Content
+ *------------------------------*/
+label[for='fieldSubject'] {
+}
+#fieldSubject {
+}
+
+@include hideLabel('fieldMessage');
+label[for='fieldMessage'] {
+}
+
+$textAreaOversizeCompensation: 2px;
+
+#fieldMessage {
+  $widthFallback: 100%;
+  $width: calc(100% - #{$textAreaOversizeCompensation});
+  $height: (153 / $emMostCommonPxSize) * 1em;
+  width: $widthFallback;
+  width: $width;
+  min-width: $widthFallback;
+  min-width: $width;
+  height: $height;
+  min-height: $height / 2;
+  padding: 0;
+}
+
+#messageFiles {
+  width: $postFormInternalWidth;
+}
+
+#filesWrapper {
+  display: block;
+}
+#filesWrapper > label {
+  display: inline-block;
+  padding-top: 0.3em;     //Magic number, not good. TODO
+}
+
+#files {
+  float: right;
+}
+#filesInfo {
+  display: inline-block;
+  clear: right;
+  float: right;
+}
+#filesSpoiler {
+  display: inline-block;
+  float: left;
+} // TODO: vertically center checkbox
+
+/* =Captcha
+ *------------------------------*/
+$captchaCharactersCount: 6;
+
+#captchaDiv {
+  width: $captchaImageWidth;
+}
+
+@include hideLabel('captchaImage');
+$captchaImageRatio: 1 / 3;
+#captchaImage {
+  width: $captchaImageWidth;
+  height: $captchaImageWidth * $captchaImageRatio;
+}
+
+
+$fieldCaptchaHeight: 1.5em;
+
+@include hideLabel('fieldCaptcha');
+label[for='fieldCaptcha'] {
+}
+#fieldCaptcha {
+  height: $fieldCaptchaHeight;
+  width: #{$captchaCharactersCount}em;
+  font-family: $monospaceFont;
+}
+
+#reloadCaptchaButton {
+  height: $fieldCaptchaHeight;
+  margin: 0;
+  padding: 0;
+}
+
+#noCookiesCaptchaLink {
+  float: left;
+}
+
+.postSubmit {
+  max-width: $postFormInternalWidth;
+  display: block;
+  @include marginHorizontal(auto);
+  margin-top: $postFormExternalPadding * 0.6;
+  padding: 0.3em 0.6em;
+}

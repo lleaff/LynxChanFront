@@ -7,6 +7,7 @@
 //============================================================
 // Colors here must reference colors in the theme's palette with
 //  palette('key'), without assuming anything about their value
+//  (except sufficient contrast between foreground and background)
 //============================================================
 
 $borderColorMain: mix(palette('bgMain'), palette('fgMain'), 80%);
@@ -29,12 +30,25 @@ $borderColorAlt: mix(palette('bgAlt'), palette('fgAlt'), 80%);
   border-color: $borderColorAlt;
 }
 
-$buttonBgOpacity: 0.1;
-$buttonBgColor: mix(palette('fgAlt'), palette('bgAlt'), 70%);
-$buttonFgColor: palette('bgAlt');
+$buttonBgOpacity: 0.5;
+
+$submitBgColor: mix(palette('fgAlt'), palette('bgAlt'), 50%);
+$submitFgColor: palette('bgMain');
+
+$buttonBgColor: mix(palette('bgAlt'), $submitBgColor, 70%);
+$buttonFgColor: palette('fgAlt');
 
 @mixin buttonColors {
   background-color: $buttonBgColor;
   color: $buttonFgColor;
-  border-color: $buttonFgColor;
+  border-color: mix($buttonBgColor, palette('fgMain'));
 }
+
+@mixin submitColors {
+  background-color: $submitBgColor;
+  color: $submitFgColor;
+  border-color: mix($buttonBgColor, palette('fgMain'));
+}
+
+$postFormBg: palette('bgAlt');
+$postFormBorderColor: $borderColorAlt;

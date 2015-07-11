@@ -2,10 +2,15 @@
 ------------------------------------------------------------*/
 $emMostCommonPxSize: 14;
 
+/* =Inputs
+------------------------------------------------------------*/
+$buttonPadding: initial;
+$buttonMargin: initial;
+
 /* =Footer
 ------------------------------------------------------------*/
-$pageFooterItemCount: 3;
+$pageFooterRowCount: 3;
 $pageFooterItemsSize: 0.7em;
 $pageFooterPaddingTop: 1em;
-$pageFooterHeight: ($pageFooterItemsSize + 0.2) * $pageFooterItemCount +
+$pageFooterHeight: ($pageFooterItemsSize + 0.2) * $pageFooterRowCount +
   $pageFooterPaddingTop;

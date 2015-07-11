@@ -1,8 +1,9 @@
 include postForm
 
-+postForm({
-  actionName:'Create thread',
-  actionFile:'newThread.js',
-  actionFunction:'postThread()'
-  })#newThreadForm.postForm
-  input#boardIdentifier(type='hidden', name='boardUri')
+section#postFormWrapper
+  +postForm({
+    actionName:'Create thread',
+    actionFile:'newThread.js',
+    actionFunction:'postThread()'
+    })#newThreadForm.postForm
+    input#boardIdentifier(type='hidden', name='boardUri')

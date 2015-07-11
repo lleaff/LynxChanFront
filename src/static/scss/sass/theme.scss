@@ -7,9 +7,13 @@ $palette-colors: (
   'fgAlt':      #252525,
 
   'accentA':    #2277a0,
+  'accentB':    #FF98A2,
 
   'warning':    #f9b3bc
 );
 
 //$regularFont: ;
 $monospaceFont: 'Meslo LG S DZ', Monaco, monospace;
+
+$borderStyle: solid;
+$borderWidth: 1px;

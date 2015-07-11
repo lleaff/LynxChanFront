@@ -93,6 +93,8 @@ hr {
  *------------------------------------------------------------*/
 fieldset {
   border: none;
+  padding: 0;
+  margin: 0;
 }
 
 input, button, textarea {
@@ -118,10 +120,17 @@ input, button, textarea {
  *------------------------------*/
 .button {
   @include buttonColors;
+  margin: $buttonMargin;
+  padding: $buttonPadding;
 }
 
 .submit {
-  @include buttonColors;
+  $submitMargin: $buttonMargin;
+  $submitPadding: $buttonPadding;
+
+  @include submitColors;
+  margin: $submitMargin;
+  padding: $submitPadding;
 }
 
 //.transparent {
