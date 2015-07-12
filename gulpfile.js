@@ -45,7 +45,6 @@ var debug               = require('gulp-debug'); /* DEBUG */
  * =Variables
  *------------------------------------------------------------*/
 /*============= Setting files ============= */
-/* Placeholder function */
 function getGeneralSettings() {
   /* Possible paths */
   var posPaths = [
@@ -69,10 +68,11 @@ function getGeneralSettings() {
  *      frontEnd,
  *      backEnd
  *    },
+ *    outputFolder,
  *    startCommand,
  *    reloadCommand */
 var gulpSettings  = JSON.parse(
-  tryReadFileSync('gulpsettings.json', {log: true}) ||
+  tryReadFileSync('gulpSettings.json', {log: true}) ||
     "{}");
 var settings      = JSON.parse(getGeneralSettings() || "{}");
 var jadeSettings  = JSON.parse(
@@ -110,8 +110,9 @@ jadeSettings = concatObjects(jadeSettings, {
 
 var basePaths = {
 	source: 'src/',
-	build: argv.output ? './'+argv.output+'/' : (
-    argv.o ? './'+argv.o+'/' : './'),
+	build: argv.output || argv.o ? (argv.output || argv.o)+'/' : (
+    gulpSettings.outputFolder ? gulpSettings.outputFolder+'/' :
+      './'),
 };
 
 var paths = {
@@ -274,13 +275,16 @@ gulp.task('clear', function() {
 gulp.task('help', function() {
   console.log([
     package.name+'\'s gulp tasks and options',
-    '---------------------------',
+    '--------------------------------------------------',
     '[all]',
-    '\t--production:\tNo sourcemaps, ...',
-    '\t--ugly:\t\tMinify code',
+    '\t--production\tBuild for deployment as opposed to development version (no sourcemaps, ...)',
+    '\t--ugly\t\tMinify code',
+    '\t--output, -o\tFolder in which to output the built files',
     '[default, build]\tProcess all necessarily files',
     '[sync, browser-sync]\tWatch files and reload browser automatically with browser-sync, default port is 3000',
-    '\t--syncport:\tBrowser-sync instance port'
+    '\t--syncport\tBrowser-sync port',
+    '[clear, clean]\tDelete built files',
+    '\t--blank\t\tDon\'t delete, only print name of files that would be deleted'
   ].join('\n'));
 });
 
