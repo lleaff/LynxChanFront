@@ -1,16 +1,9 @@
-input.deletionCheckBox(type='checkbox')
-span.labelSubject
-a.linkName
-span.labelRole
-span.labelCreated
-span.spanId
-  span.labelId
-span.lockIndicator Locked
-span.pinIndicator Pinned
-span.cyclicIndicator Cyclic
-a.linkSelf
-a.linkReply Reply
-span.panelRange Ip range: #[span.labelRange]
-div.panelUploads
-div.divMessage
-div.divBanMessage
+extends ../jade/postContent.jade
+
+block append postInfo
+  a.linkReply Reply
+
+block opIndicators
+  span.lockIndicator.fa.fa-lock(title='Locked')
+  span.pinIndicator.fa.fa-thumb-tack(title='Pinned')
+  span.cyclicIndicator.fa.fa-refresh(title='Cyclic')

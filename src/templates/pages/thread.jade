@@ -25,7 +25,7 @@ block prepend middle
 
 block content
   #divControls
-    form(action='/threadControls.js', method='post',
+    form(action='/changeThreadSettings.js', method='post',
       enctype='multipart/form-data')
       fieldset
         label(for='checkboxLock') Lock
@@ -36,14 +36,9 @@ block content
           input#checkboxCyclic(type='checkbox', name='cyclic')
         input#controlBoardIdentifier(type='hidden', name='boardUri')
         input#controlThreadIdentifier(type='hidden', name='threadId')
-        input#lockFormButton.button.submit(type='submit',
-          name='action', value='Lock')
-        input#lockJsButton.button.submit(type='button',
-          onclick='setLock()', value='Lock', style='display: none;')
-        input#pinFormButton.button.submit(type='submit',
-          name='action', value='Pin')
-        input#pinJsButton.button.submit(type='button', onclick='setPin()',
-          style='display: none;', value='Pin')
+        input#settingsFormButton(type='submit', value='Save')
+        button#settingsJsButton(type='button',  style='display: none;'
+            onclick='saveThreadSettings()') Save
 
   form(method='post', action='../../contentActions.js',
     enctype='multipart/form-data')

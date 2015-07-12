@@ -38,7 +38,7 @@ mixin postForm(options)
         button#reloadCaptchaButton(type='button',
             onclick='reloadCaptcha()', value='Reload captcha',
             style='display: none;')
-          span.fa.fa-refresh
+          span.fa.fa-refresh(title='Reload captcha')
         small.info#noCookiesCaptchaLink
           a(href='/noCookieCaptcha.js', target='_blank') No cookies?
       input.postSubmit.button.submit#jsButton(type='button',
