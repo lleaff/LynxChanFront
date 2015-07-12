@@ -1,6 +1,5 @@
-# Build instructions
-Navigate to the front-end's root directory and call:
-```
-npm install
-node ./node_modules/gulp/bin/gulp.js --production
-```
+`static` Static files served by the back-end  
+
+`templates` Template files used by the back-end to generate HTML documents  
+
+`res` Resource files used during the compilation phase only  
