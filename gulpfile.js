@@ -5,6 +5,7 @@ g.ugly = argv.ugly || argv.u;
 g.production = argv.production || argv.p;
 g.blank = argv.test || argv.blank;
 
+
 /*------------------------------------------------------------
  * =Modules
  *------------------------------------------------------------ */
@@ -39,7 +40,8 @@ var imagemin            = require('gulp-imagemin');
 
 var debug               = require('gulp-debug'); /* DEBUG */
 
-/*------------------------------------------------------------- 
+
+/*-------------------------------------------------------------
  * =Variables
  *------------------------------------------------------------*/
 /*============= Setting files ============= */
@@ -61,7 +63,14 @@ function getGeneralSettings() {
   return fileContent;
 }
 
-/* keys: generalSettingsPath, startCommand, reloadCommand */
+/* gulpSettings.json keys:
+ *    generalSettingsPath,
+ *    languagePackPath: {
+ *      frontEnd,
+ *      backEnd
+ *    },
+ *    startCommand,
+ *    reloadCommand */
 var gulpSettings  = JSON.parse(
   tryReadFileSync('gulpsettings.json', {log: true}) ||
     "{}");
@@ -82,12 +91,22 @@ var url = {
 url.base = url.protocol+'://'+url.domain+':'+url.port;
 url.baseStatic = url.protocol+'://'+'static.'+url.domain+':'+url.port;
 
+var lang = concatObjects(
+  gulpSettings.languagePack.frontEnd,
+  gulpSettings.languagePack.backEnd
+);
+
+/* Settings forwarded to jade by gulp */
 jadeSettings = concatObjects(jadeSettings, {
   siteTitle:      siteTitle,
   siteLicense:    settings.siteLicense,
   baseUrl:        url.base,
-  baseStaticUrl:  url.baseStatic
+  baseStaticUrl:  url.baseStatic,
+  lang:           lang,
+  l:              lang    /* shorthand */
 });
+
+/*========================== */
 
 var basePaths = {
 	source: 'src/',
@@ -126,7 +145,8 @@ var outPaths = {
   png:        basePaths.build+'templates/cmp/images/',
 };
 
-/*------------------------------------------------------------- 
+
+/*-------------------------------------------------------------
  *  =Tasks
  *-------------------------------------------------------------*/
 gulp.task('default', ['build']);
@@ -237,7 +257,7 @@ gulp.task('browserReload', ['html'], function() {
   serverRefresh();
 });
 
-/* =Clean built files
+/* =Remove built files
 ========================== */
 gulp.task('clean', ['clear']);
 gulp.task('clear', function() {
@@ -264,7 +284,8 @@ gulp.task('help', function() {
   ].join('\n'));
 });
 
-/*------------------------------------------------------------- 
+
+/*-------------------------------------------------------------
  * =Helper functions
  *------------------------------------------------------------*/
 function commentString(string, fileType) {

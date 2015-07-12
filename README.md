@@ -6,6 +6,7 @@ A front-end for [Lynx Chan](https://gitlab.com/mrseth/LynxChan)
 * Responsive, one interface for both desktop and mobile
 * Graceful degradation, provide fallbacks for non-JS and legacy browser users while avoiding unnecessary polyfills
 * Accessibility, using HTML5 semantic elements and microformats where appropriate
+* Themable, the look and feel of the CSS can be customized by editing a single short file
 
 ## Technologies used
 
@@ -26,3 +27,14 @@ If you want to do work on the front-end then I advise you to install gulp global
 sudo npm install -g gulp
 ```
 Call `gulp help` when inside the project for a list of available taks and options.
+
+#### Configuration
+`gulpSettings.json` in the same directory as `gulpfile.js`, all keys are optional (except `generalSettingsPath` if the front-end (`fe`) is not situated directly next to the back-end (`be`)):  
+
+* `generalSettingsPath`: Path to the back-end's general settings file, used to set things such as the chan's name (usual location: `${BACK_END}/settings/general.json`),
+* `languagePackPath`: {
+  *   `backEnd`: Path to the default language pack (json),
+  *   `frontEnd`: Path to the front-end's language pack  
+  },
+* `startCommand`: Command executed when starting `gulp browser-sync`,
+* `reloadCommand`: Command executed by `gulp browser-sync` before reloading the browser
