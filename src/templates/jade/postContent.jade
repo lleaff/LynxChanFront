@@ -1,16 +1,17 @@
-header
-  input.deletionCheckBox(type='checkbox')
-  block postInfo
-    span.labelSubject
-    a.linkName
-    span.labelRole
-    span.labelCreated
-    span.spanId
-      span.labelId
-    block opIndicators
-    a.linkSelf
-    span.panelRange Ip range: #[span.labelRange]
 article
-  .panelUploads
-  .divMessage
-.divBanMessage
+  header
+    input.deletionCheckBox(type='checkbox')
+    block postInfo
+      span.labelSubject
+      a.linkName
+      span.labelRole
+      span.labelCreated
+      span.spanId
+        span.labelId
+      block opIndicators
+      a.linkSelf
+      span.panelRange Ip range: #[span.labelRange]
+  section
+    .panelUploads
+    p.divMessage
+  .divBanMessage
