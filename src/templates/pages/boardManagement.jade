@@ -8,84 +8,84 @@ block headerTitle
 
 block content
   section#ownerControlDiv
-    h2 Add volunteer
+    h2 #{l.titAddVolunteer}
     form(action='/setVolunteer.js', method='post',
         enctype='multipart/form-data')
       fieldset
-        label(for='addVolunteerFieldLogin') User login:
+        label(for='addVolunteerFieldLogin') #{l.guiUserLogin}:
           input#addVolunteerFieldLogin(type='text', name='login', required)
         input(type='hidden', name='add', value='true')
         input#addVolunteerBoardIdentifier(type='hidden', name='boardUri')
         input.button.submit#addVolunteerJsButton(type='button',
-          onclick='addVolunteer()', value='Add volunteer',
+          onclick='addVolunteer()', value=l.guiAddVolunteer,
           style='display: none;')
         input.button.submit#addVolunteerFormButton(type='submit',
-          value='Add volunteer')
+          value=l.guiAddVolunter)
 
-    h2 Ownership transfer
+    h2 #{l.titOwnershipTransfer}
     form(action='/transferBoardOwnership.js', method='post',
       enctype='multipart/form-data')
       fieldset
-        label(for='transferBoardFieldLogin') User login:
+        label(for='transferBoardFieldLogin') #{l.guiUserLogin}:
           input#transferBoardFieldLogin(type='text', name='login', required)
         input#transferBoardIdentifier(type='hidden', name='boardUri')
         input.button.submit#transferBoardJsButton(type='button',
-          onclick='transferBoard()', value='Transfer board',
+          onclick='transferBoard()', value=l.guiTransferBoardOwnership,
           style='display: none;')
         input.button.submit#transferBoardFormButton(type='submit',
-          value='Transfer board')
+          value=l.guiTransferBoardOwnership)
 
-    h2 Delete board
+    h2 #{l.titDeleteBoard}
     form(method='post', action='/deleteBoard.js',
       enctype='multipart/form-data')
       fieldset
         input#deletionIdentifier(name='boardUri', type='hidden')
         input.button.submit#deleteBoardFormButton(type='submit',
-          value='Delete board')
+          value=l.guiDeleteBoard)
         input.button.submit#deleteBoardJsButton(type='button',
-          onclick='deleteBoard()', value='Delete board',
+          onclick='deleteBoard()', value=l.guiDeleteBoard,
           style='display: none;')
 
-    h2 Volunteers
+    h2 #{l.titVolunteers}
     section#volunteersDiv
 
-    h2 Settings
+    h2 #{l.titBoardSettings}
     form(action='/setBoardSettings.js', method='post',
       enctype='multipart/form-data')
       fieldset
         input#boardSettingsIdentifier(type='hidden', name='boardUri')
-        label(for='boardName') Board name
-          input#boardNameField(type='text', name='boardName')
-        label(for='boardDescription') Board description
-          input#boardDescriptionField(type='text', name='boardDescription')
-        label(for='anonymousNameField') Default name
-          input#anonymousNameField(type='text', name='anonymousName',
-              placeholder='Anonymous')
-        label(for='disableIds') Disable thread-wise IDs
-          input#disableIdsCheckbox(type='checkbox', name='disableIds')
-        label(for='disableCaptcha') Disable captcha
-          input#disableCaptchaCheckbox(type='checkbox',
-          name='disableCaptcha')
-        label(for='forceAnonymity')
-          span(title='No name field when posting') Force anonymity
-          input#forceAnonymityCheckbox(type='checkbox',
+        label(for='boardName') #{l.guiBoardName}
+        input#boardNameField(type='text', name='boardName')
+        label(for='boardDescription') #{l.guiBoardDescription}
+        input#boardDescriptionField(type='text', name='boardDescription')
+        label(for='anonymousNameField') #{l.guiDefaultName}
+        input#anonymousNameField(type='text', name='anonymousName',
+            placeholder=l.phDefaultName)
+        label(for='disableIds') #{l.guiDisableThreadWiseIDs}
+        input#disableIdsCheckbox(type='checkbox', name='disableIds')
+        label(for='disableCaptcha') #{l.guiDisableCaptcha}
+        input#disableCaptchaCheckbox(type='checkbox',
+            name='disableCaptcha')
+        label(for='forceAnonymity') #{l.guiForceAnonymity}
+          +help(l.helpForceAnonymity, l.infoForceAnonymity) 
+        input#forceAnonymityCheckbox(type='checkbox',
             name='forceAnonymity')
-          input.button.submit#saveSettingsJsButton(type='button',
-            value='Save', onclick='saveSettings()', style='display: none')
-          input.button.submit#saveSettingsFormButton(type='submit',
-            value='Save')
+        input.button.submit#saveSettingsJsButton(type='button',
+            value=l.guiSave, onclick='saveSettings()', style='display: none')
+        input.button.submit#saveSettingsFormButton(type='submit',
+            value=l.guiSave)
 
     nav: ul
-      li: a#bannerManagementLink Banners
-      li: a#filterManagementLink Filters
+      li: a#bannerManagementLink #{l.titBanners}
+      li: a#filterManagementLink #{l.titFilters}
 
   section#reportsAndBanslinks
     nav: ul
-      li: a#closedReportsLink Closed reports
-      li: a#bansLink Bans
-      li: a#rangeBansLink IP range bans
-      li: a#hashBansLink File bans
-      li: h3 Open reports:
+      li: a#closedReportsLink #{l.titClosedReports}
+      li: a#bansLink #{l.titBans}
+      li: a#rangeBansLink #{l.titIPRangeBans}
+      li: a#hashBansLink #{l.titFileBans}
+      li: h3 #{l.titOpenReports}:
         #reportDiv
 
 

@@ -1,11 +1,12 @@
 ul.banDetails
-  li Id: #[span.idLabel]
-  li Reason: #[span.reasonLabel]
-  li Expiration: #[span.expirationLabel]
-  li Applied by: #[span.appliedByLabel]
-  li Boards: #[span.boardLabel]
+  li #{l.guiID}: #[span.idLabel]
+  li #{l.guiBannedReason}: #[span.reasonLabel]
+  li #{l.guiExpiration}: #[span.expirationLabel]
+  li #{l.guiAppliedBy}: #[span.appliedByLabel]
+  li #{l.guiBoards}: #[span.boardLabel]
 fieldset.liftBan
-  input.submit.liftFormButton(type='submit', value='Lift')
-  input.submit.liftJsButton(type='button', value='Lift',
-    style='display: none;')
+  input.submit.liftFormButton(type='submit',
+      value=l.guiLiftBanAction)
+  input.submit.liftJsButton(type='button',
+      value=l.guiLiftBanAction, style='display: none;')
   input.idIdentifier(type='hidden', name='banId')

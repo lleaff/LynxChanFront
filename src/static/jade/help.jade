@@ -1,14 +1,14 @@
 extends ../../templates/jade/base
 
 block title
-  | #{siteTitle} - Help page
+  | #{siteTitle} - #{l.titHelp}
 
 block headerTitle
-  +title('Help page')
+  +title(titHelpPage)
 
 block append styles
   +style('ext.css')
 
 block content
   section#postingHelp
-    include ../../res/jade/helpPosting.jade
+    include $LANGUAGE_PACK/jade/helpPosting.jade

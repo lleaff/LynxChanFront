@@ -1,10 +1,10 @@
 extends ../../templates/jade/base
 
 block title
-  | #{siteTitle} - About
+  | #{siteTitle} - #{l.titAbout}
 
 block headerTitle
-  +title('About')
+  +title(l.titAboutPage)
 
 block append styles
   +style('ext.css')
@@ -16,7 +16,7 @@ block content
         small siteLicense
 
     main#aboutPageSiteDesc
-      include:markdown ../../res/md/aboutSiteDescription.md
+      include:markdown $LANGUAGE_PACK/md/aboutSiteDescription.md
 
     section#aboutPageEngineDesc
-      include:markdown ../../res/md/aboutEngineDescription.md
+      include:markdown $LANGUAGE_PACK/md/aboutEngineDescription.md

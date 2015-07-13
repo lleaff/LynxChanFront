@@ -1,46 +1,50 @@
 mixin postForm(options)
   - var actionFile      = '../../'+options.actionFile
-  - var actionName      = options.actionName
+  - var actionName      = options.actionName == 'Reply' ? l.postForm.ReplyAction : l.postForm.CreateThreadAction;
   - var actionFunction  = options.actionFunction
   //- .postForm
   form(id=attributes.id, class=attributes.class+' postForm',
     method='post', action=actionFile, enctype='multipart/form-data')
     fieldset#authorInfo
-      div#divName
-        label(for="fieldName") Name:
-        input#fieldName(type='text', name='name', placeholder='Name')
-      label(for="fieldEmail") Email:
-      input#fieldEmail(name='email', type='text', placeholder='Email')
-      label(for="fieldPassword") Password:
+      #divName
+        label(for="fieldName") #{l.postForm.Name}:
+        input#fieldName(type='text', name='name',
+            placeholder=#{l.postForm.phName})
+      label(for="fieldEmail") #{l.postForm.Email}:
+      input#fieldEmail(name='email', type='text',
+          placeholder=#{l.postForm.phEmail})
+      label(for="fieldPassword") #{l.postForm.Password}:
       input#fieldPassword(name='password', type='password',
-          placeholder='Password')
+          placeholder=#{l.postForm.phPassword})
     fieldset#messageArea
-      label(for="fieldSubject") Subject:
+      label(for="fieldSubject") #{l.postForm.Subject}:
       input#fieldSubject(type='text', name='subject',
-        placeholder='Subject')
-      label(for="fieldMessage") Message:
+        placeholder=#{l.postForm.phSubject})
+      label(for="fieldMessage") #{l.postForm.Message}
       textarea#fieldMessage(name='message', required)
       fieldset#messageFiles
         #filesWrapper
-          label(for="files") Files:
+          label(for="files") #{l.postForm.Files}:
           input#files(type='file', accept='image/*', multiple='',
               name='files')
-        small.info#filesInfo Max file size: #[span#labelMaxFileSize] MB.
+          small.info#filesInfo #{l.postForm.MaxFileSizeLabel}:
+            | #[span#labelMaxFileSize] MB.
         #filesSpoiler
-          label(for='checkboxSpoiler') Spoiler
+          label(for='checkboxSpoiler') #{l.postForm;Spoiler}
           input#checkboxSpoiler(type='checkbox', name='spoiler')
     fieldset#sendPost
       #captchaDiv
-        label(for="fieldCaptcha") Captcha
+        label(for="fieldCaptcha") #{l.postForm.Captcha}
         img#captchaImage(src='/captcha.js')
         input#fieldCaptcha(type='text', name='captcha', required,
             placeholder='......')
         button#reloadCaptchaButton(type='button',
-            onclick='reloadCaptcha()', value='Reload captcha',
-            alt='Reload captcha', style='display: none;')
+            onclick='reloadCaptcha()', value=#{l.postForm.ReloadCaptcha},
+            alt=#{l.postForm.ReloadCaptcha}, style='display: none;')
           span.fa.fa-refresh
         small.info#noCookiesCaptchaLink
-          a(href='/noCookieCaptcha.js', target='_blank') No cookies?
+          a(href='/noCookieCaptcha.js', target='_blank')
+            | #{l.postForm.NoCookiesCaptchaLink}
       input.postSubmit.button.submit#jsButton(type='button',
           onclick=actionFunction, value=actionName, style='display: none;')
       input.postSubmit.button.submit#formButton(type='submit',

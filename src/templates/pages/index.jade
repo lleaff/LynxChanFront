@@ -1,16 +1,16 @@
 extends ../jade/base
 
-a(href='/account.js') Account
+a(href='/account.js') #{l.titAccount}
 block headerTitle
   +title(siteTitle)
 
 block pageMenu
   +pageMenuEntry
-    a(href='/logs') Logs
+    a(href='/logs') #{l.titLogs}
 
 block content
-  p Welcome.
+  include $LANGUAGE_PACK/jade/frontPageMessage.jade
   section
-    h1 Top boards
+    h1 #{l.titTopBoards}
     nav#divBoards
-    footer: h2: a(href='/boards.js') All boards
+    footer: h2: a(href='/boards.js') #{l.titAllBoards}

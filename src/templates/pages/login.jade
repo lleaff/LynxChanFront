@@ -2,53 +2,54 @@ extends ../jade/base
 
 block content
   section
-    h1 Login
+    h1 #{l.titLogin}
     form(action='/login.js', enctype='multipart/form-data', method='post')
       fieldset
-        label(for='loginFieldLogin') Username
-          input#loginFieldLogin(type='text', name='login',
-          placeholder='Username', required)
-        label(for='loginFieldPassword') Password
-          input#loginFieldPassword(type='password', name='password',
-          required)
-        input.button.submit#loginFormButton(type='submit', value='Login')
-        input.button.submit#loginJsButton(type='button',
-          onclick='loginUser()', value='Login', style='display: none;')
+        label(for='loginFieldLogin') #{l.guiUsername}
+        input#loginFieldLogin(type='text', name='login',
+            placeholder=l.phUsername, required)
+        label(for='loginFieldPassword') #{l.guiPassword}
+        input#loginFieldPassword(type='password', name='password',
+            required)
+      input.button.submit#loginFormButton(type='submit',
+          value=l.guiLogin)
+      input.button.submit#loginJsButton(type='button',
+        onclick='loginUser()', value=l.guiLogin, style='display: none;')
 
   section#divCreation
-    h1 Register
+    h1 #{l.titRegister}
     form(action='/registerAccount.js', enctype='multipart/form-data',
-      method='post')
+        method='post')
       fieldset
         label(for='registerFieldLogin')
-          span(title='Required') Login*
-          input#registerFieldLogin(type='text', name='login',
-          placeholder='Username', required)
+          span(title='Required') #{l.guiUsername}*
+        input#registerFieldLogin(type='text', name='login',
+            placeholder=l.phUsername, required)
         label(for='registerFieldPassword')
-          span(title='Required') Password*
-          input#registerFieldPassword(type='password', name='password',
-          required)
-        label(for='registerFieldEmail') Email
-          input#registerFieldEmail(type='email', name='email',
-          placeholder='Email')
-        input.button.submit#registerFormButton(type='submit',
-          value='Register')
-        input.button.submit#registerJsButton(type='button',
-          onclick='registerAccount()', value='Register',
+          span(title='Required') #{l.guiPassword}*
+        input#registerFieldPassword(type='password', name='password',
+            required)
+        label(for='registerFieldEmail') #{l.guiEmail}
+        input#registerFieldEmail(type='email', name='email',
+            placeholder=l.phEmail)
+      input.button.submit#registerFormButton(type='submit',
+          value=l.guiRegister)
+      input.button.submit#registerJsButton(type='button',
+          onclick='registerAccount()', value=l.guiRegister,
           style='display: none;')
 
   section
-    h1 Recover account
+    h1 #{l.titRecoverAccount}
     form(action='/requestAccountRecovery.js',
-      enctype='multipart/form-data', method='post')
+        enctype='multipart/form-data', method='post')
       fieldset
-        label(for='recoverFieldLogin') Login
-          input#recoverFieldLogin(type='text', name='login',
-          placeholder='Username', required)
-        input.button.submit#recoverFormButton(type='submit',
-          value='Request recovery')
-        input.button.submit#recoverJsButton(type='button',
-          onclick='recoverAccount()', value='Request recovery',
+        label(for='recoverFieldLogin') #{l.guiUsername}
+        input#recoverFieldLogin(type='text', name='login',
+            placeholder=l.phUsername, required)
+      input.button.submit#recoverFormButton(type='submit',
+          value=l.guiRequestRecovery)
+      input.button.submit#recoverJsButton(type='button',
+          onclick='recoverAccount()', value=l.guiRequestRecovery,
           style='display: none;')
 
 block append scripts

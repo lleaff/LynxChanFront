@@ -5,20 +5,21 @@ block headerTitle
 
   form#addStaffForm(method='post', enctype='multipart/form-data',
     action='/setGlobalRole.js')
-    label(for='fieldLogin') User login: 
-      input#fieldLogin(type='text', name='login',
-        placeholder='Username', required)
-    label(for='newStaffCombo') Role:
-      select#newStaffCombo(name='role', required)
+    label(for='fieldLogin') #{l.guiUserLogin}: 
+    input#fieldLogin(type='text', name='login',
+        placeholder=#{l.phUserLogin}, required)
+    label(for='newStaffCombo') #{l.guiRole}:
+    select#newStaffCombo(name='role', required)
     input.button.submit#addJsButton(type='button', onclick='addUser()',
-      value='Add user', style='display: none;')
-    input.button.submit#addFormButton(type='submit', value='Add user')
+        value=#{l.guiAddUser}, style='display: none;')
+    input.button.submit#addFormButton(type='submit',
+        value=#{l.guiAddUser})
   div#divStaff
   ul
-    li: a#bansLink(href='/bans.js') Bans
-    li: a#rangeBansLink(href='/rangeBans.js') IP range bans
-    li: a#hashBansLink(href='/hashBans.js') File bans
-    li: a(href='/closedReports.js') Closed reports
+    li: a#bansLink(href='/bans.js') #{l.titBans}
+    li: a#rangeBansLink(href='/rangeBans.js') #{l.titIPRangeBans}
+    li: a#hashBansLink(href='/hashBans.js') #{l.titFileBans}
+    li: a(href='/closedReports.js') #{l.titClosedReports}
       div#reportDiv
 
 block append scripts

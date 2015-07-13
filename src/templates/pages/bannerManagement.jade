@@ -1,22 +1,22 @@
 extends ../jade/base.jade
 
 block headerTitle
-  +title('Banner management')
+  +title(l.titBannerManagement)
 
 block content
   section
-    h3 New banner
+    h3 #{l.titNewBanner}
     form(action='/createBanner.js', method='post',
       enctype='multipart/form-data')
       fieldset
         input#boardIdentifier(type='hidden', name='boardUri')
         input#files(type='file', name='files')
         input.button.submit#addFormButton(type='submit',
-          value='Add banner')
+          value=l.guiAddBanner)
         input.button.submit#addJsButton(type='button',
-          value='Add banner', onclick='addBanner()',
+          value=l.guiAddBanner, onclick='addBanner()',
           style='display: none')
 
   section
-    h3 Existing banners
+    h3 #{l.titExistingBanners}
     div#bannersDiv

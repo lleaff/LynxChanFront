@@ -1,7 +1,7 @@
 extends ../jade/bare.jade
 
 block title
-  | No-cookie captcha
+  | #{l.titNoCookieCaptcha}
 
 block append styles
   +style('ext.css')
@@ -9,13 +9,14 @@ block append styles
 block middle
   div#divSolvedCaptcha
     p.
-      #[strong Captcha solved.] #[br]Input this ID as the answer of the captcha when posting: #[code: span#labelCaptchaId]
+      #[strong #{l.guiCaptchaSolved}.] #[br]
+      #{l.guiInputThisIDMessage}: #[code: span#labelCaptchaId]
 
-  p No problem! Solve this captcha here instead.
+  p #{l.guiNoCookieCaptchaWelcomeMessage}
   img#imageCaptcha
   form(action='/solveCaptcha.js', method='post',
     enctype='multipart/form-data')
     input#inputCaptchaId(type='hidden', name='captchaId')
-    label(for='captchaAnswer') Answer
-      input(type='text', name='answer', required)
-    input(type='submit', value='Solve captcha')
+    label(for='captchaAnswer') #{l.guiCaptchaAnswer}
+    input(type='text', name='answer', required)
+    input(type='submit', value=l.guiSubmitCaptchaAnswer)

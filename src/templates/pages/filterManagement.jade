@@ -1,25 +1,25 @@
 extends ../jade/base.jade
 
 block headerTitle
-  +title('Filter management')
+  +title(l.titFilterManagement)
 
 block append scripts
   +script('filterManagement.js')
 
 block content
   section#newFilter
-    h1 New filter
+    h1 #{l.titNewFilter}
     form(action='/createFilter.js', method='post',
         enctype='multipart/form-data')
       input(type='hidden', name='boardUri', id='boardIdentifier')
-      label(for='fieldOriginalTerm') Original term
+      label(for='fieldOriginalTerm') #{l.guiFilterOriginalTerm}
         input#fieldOriginalTerm(type='text', name='originalTerm')
-      label(for='fieldReplacementTerm') Replacement term
+      label(for='fieldReplacementTerm') #{l.guiFilterReplacementTerm}
         input#fieldReplacementTerm(type='text', name='replacementTerm')
-      input#addFormButton(type='submit', value='Add filter')
+      input#addFormButton(type='submit', value=l.guiNewFilter)
       input#addJsButton(type='button', onclick='addFilter()',
-          value='Add filter', style='display: none;')
+          value=l.guiNewFilter, style='display: none;')
 
   section#existingFilters
-    h1 Existing filters
+    h1 #{l.titExistingFilters}
     div#divFilters

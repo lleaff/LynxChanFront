@@ -1,7 +1,7 @@
 extends ../jade/base
 
 block headerTitle
-  +title('#labelTitle', 'Moderation')
+  +title('#labelTitle', l.titBoardModeration)
 
 block append scripts
   +script('reports.js')
@@ -9,29 +9,29 @@ block append scripts
 
 block content
   section
-    | Owner: #[span#labelOwner]
+    | #{l.guiBoardOwner}: #[span#labelOwner]
 
     section#transferForm
-      h1 Transfer board ownership
+      h1 #{l.titOwnershipTransfer}
       form(action='/transferBoardOwnerShip.js', method='post',
           enctype='multipart/form-data')
         input#boardTransferIdentifier(type='hidden', name='boardUri')
-        label(for='fieldTransferLogin') User login
-          input#fieldTransferLogin(type='text', name='userLogin')
+        label(for='fieldTransferLogin') #{l.guiUserLogin}
+        input#fieldTransferLogin(type='text', name='userLogin')
         input.button.submit#transferFormButton.careful(type='submit',
-            value='Transfer')
+            value=l.guiTransferBoardOwnership)
         input.button.submit#transferJsButton.careful(type='button',
-            onclick='transferboard()', value='Transfer',
+            onclick='transferboard()', value=l.guiTransferBoardOwnership,
             style='display: none;')
         
 
     section#deleteForm
-      h1 Delete board
+      h1 #{l.titDeleteBoard}
       form(action='/deleteBoard.js', method='post',
           enctype='multipart/form-data')
         input#boardDeletionIdentifier(type='hidden', name='boardUri')
         input#deleteFormButton.button.submit.careful(type='submit',
-            value='Delete')
+            value=l.guiDeleteBoard)
         input#deleteJsButton.button.submit.careful(type='button',
-            value='Delete', onclick='deleteBoard()',
+            value=l.guiDeleteBoard, onclick='deleteBoard()',
             style='display: none;')

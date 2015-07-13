@@ -2,6 +2,7 @@ extends ../jade/bare
 
 block middle
   h4#labelMessage
-  p.
-    If you are not redirected within 3 seconds,
-    click #[a#linkRedirect here] to be redirected.
+    p.
+      #{l.guiRedirectMessage.start}
+       #[a#linkRedirect here]
+       #{l.guiRedirectMessage.end}

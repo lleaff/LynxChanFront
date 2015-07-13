@@ -7,68 +7,71 @@ block append scripts
 
 block content
   section#account
-    h4 Logged in as #[span#labelLogin]
+    h4 #{l.guiLoggedInAs} #[span#labelLogin]
 
     form(action='/logout.js')
       input.button.submit.careful#logoutJsButton(type='button',
-        value='Logout', onclick='logout()', style='display: none')
+        value=l.guiLogout, onclick='logout()', style='display: none')
       input.button.submit.careful#logoutFormButton(type='submit',
-          value='Logout')
+        value=l.guiLogout)
 
-    a#globalManagementLink(href='/globalManagement.js') Global management
+    a#globalManagementLink('/globalManagement.js')
+      | #{l.guiGlobalManagement}
 
   section#accountSettings
-    h1 Settings
+    h1 #{l.guiSettings}
     form(action='/changeAccountSettings.js', method='post',
       enctype='multipart/form-data')
         fieldset
-          label(for='emailField') E-mail
-            input#emailField(type='email', name='email',
-                placeholder='Email')
-          label(for='checkboxAlwaysSign') Always use role signature
+          label(for='emailField') #{l.guiEmail}
+            input#emailField(type='email', name='email')
+          label(for='checkboxAlwaysSign') #{l.guiAlwaysUseRoleSignature}
             input#checkboxAlwaysSign(type='checkbox', name='alwaysSignRole')
-            +help('Posting', 'eg: Volunteer')
-          input.button.submit#saveFormButton(type='submit', value='Save')
-          input.button.submit#saveJsButton(type='button', value='Save',
-              onclick='save()', style='display: none;')
+            +help(l.helpPosting, l.infoRoleSignature)
+              input.button.submit#saveFormButton(type='submit',
+                  value=l.guiSave)
+              input.button.submit#saveJsButton(type='button',
+                value=l.guiSave, onclick='save()',
+                  style='display: none;')
 
-    h2 Password change
+    h2 #{l.titPasswordChange} 
     form(action='/changeAccountPassword.js', method='post',
       enctype='multipart/form-data')
       fieldset
         input#fieldPassword(type='password', name='password', required)
-        label(for='fieldNewPassword') New password
+        label(for='fieldNewPassword') #{l.guiNewPassword}
             input#fieldNewPassword(type='password', name='newPassword',
             required)
-        label(for='fieldConfirmation') Confirm new password
+        label(for='fieldConfirmation') #{l.guiConfirmNewPassword}
             input#fieldConfirmation(type='password', name='confirmation',
             required)
         input.button.submit#passwordFormButton(type='submit',
-            value='Change password')
+            value=l.guiChangePassword)
         input.button.submit#passwordJsButton(type='button',
-            value='Change password', style='display: none;'
+            value=l.guiChangePassword, style='display: none;'
             onclick='changePassword()')
 
   section#boardCreationDiv
-    h1 Create board
+    h1 #{l.titCreateBoard} 
     form(action='/createBoard.js', enctype='multipart/form-data',
       method='post')
       fieldset
-        label(for='newBoardFieldUri', title='[a-b]') Board URI
-          input#newBoardFieldUri(type='text', name='boardUri',
-              placeholder='URI', required)
-        label(for='newBoardFieldName') Board name
-          input#newBoardFieldName(type='text', name='boardName',
-              placeholder='Name', required)
-        label(for='newBoardFieldDescription') Board description:
-          input#newBoardFieldDescription(type='text',
-              name='boardDescription', placeholder='Description', required)
+        label(for='newBoardFieldUri', title='[a-b]') #{l.guiBoardURI}
+        input#newBoardFieldUri(type='text', name='boardUri',
+            placeholder=l.phBoardUri, required)
+        label(for='newBoardFieldName') #{l.guiBoardName}
+        input#newBoardFieldName(type='text', name='boardName',
+            placeholder=l.phBoardName, required)
+        label(for='newBoardFieldDescription') #{l.guiBoardDescription}:
+        input#newBoardFieldDescription(type='text',
+            name='boardDescription', placeholder=l.phBoardDescription,
+            required)
         input.button.submit#newBoardJsButton(type='button',
             onclick='createBoard()', style='display: none',
-            value='Create board')
+            value=l.guiCreateBoard)
         input.button.submit#newBoardFormButton(type='submit',
-            value='Create board')
+            value=l.guiCreateBoard)
 
   section#ownedBoards
-    h1 Owned boards
+    h1 #{l.titOwnedBoards}
     #boardsDiv

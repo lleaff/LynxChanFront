@@ -16,29 +16,29 @@ block append userMenu
 
 block pageMenu
   +pageMenuEntry
-    a(href='catalog.html') Catalog
+    a(href='catalog.html') #{l.titCatalog}
   +pageMenuEntry
-    a#linkModeration Board actions
+    a#linkModeration #{l.titBoardActions}
 
 block prepend middle
   include ../jade/createThread
 
 block content
   main#divPostings
-  label(for='reportFieldReason') Reason
+  label(for='reportFieldReason') #{l.guiReportReason}
     input#reportFieldReason(type='text', name='reason',
-      placeholder='Reason')
-  label(for='deletionFieldPasword') Password
+      placeholder=l.phReportReason)
+  label(for='deletionFieldPasword') #{l.guiPassword}
     input#deletionFieldPassword(type='password', name='password')
-  label(for='checkboxGlobal') Global
+  label(for='checkboxGlobal') #{l.guiGlobalLabel}
     input#checkboxGlobal(type='checkbox', name='global')
-  input.button.submit#deleteFormButton(type='submit', value='Delete',
+  input.button.submit#deleteFormButton(type='submit', value=l.guiDelete,
     name='action')
   input.button.submit#deleteJsButton(type='button',
-    onclick='deletePosts()', value='Delete', style='display: none;')
-  input.button.submit#reportFormButton(type='submit', value='Report',
+    onclick='deletePosts()', value=l.guiDelete, style='display: none;')
+  input.button.submit#reportFormButton(type='submit', value=l.guiReport,
     name='action')
   input.button.submit#reportJsButton(type='button',
-    onclick='reportPosts()', value='Report', style='display: none;')
+    onclick='reportPosts()', value=l.guiReport, style='display: none;')
 
   nav#divPages

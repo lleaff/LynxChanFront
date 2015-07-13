@@ -12,13 +12,13 @@ block headerTitle
 
 block append userMenu
   +userMenuEntry
-    a#linkManagement Manage Board
+    a#linkManagement #{l.guiManageBoard}
 
 block pageMenu
   +pageMenuEntry
-    a(href='../catalog.html') Catalog
+    a(href='../catalog.html') #{l.titCatalog}
   +pageMenuEntry
-    a#linkMod Moderate thread
+    a#linkMod #{l.guiModerateThread}
 
 block prepend middle
   include ../jade/replyThread.jade
@@ -26,52 +26,56 @@ block prepend middle
 block content
   #divControls
     form(action='/changeThreadSettings.js', method='post',
-      enctype='multipart/form-data')
+        enctype='multipart/form-data')
       fieldset
-        label(for='checkboxLock') Lock
-          input#checkboxLock(type='checkbox', name='lock')
-        label(for='checkboxPin') Pin
-          input#checkboxPin(type='checkbox', name='pin')
-        label(for='checkboxCyclic') Cyclic
-          input#checkboxCyclic(type='checkbox', name='cyclic')
+        label(for='checkboxLock') #{l.guiLockAction}
+        input#checkboxLock(type='checkbox', name='lock')
+        label(for='checkboxPin') #{l.guiPinAction}
+        input#checkboxPin(type='checkbox', name='pin')
+        label(for='checkboxCyclic') #{l.guiCylicAction}
+        input#checkboxCyclic(type='checkbox', name='cyclic')
         input#controlBoardIdentifier(type='hidden', name='boardUri')
         input#controlThreadIdentifier(type='hidden', name='threadId')
-        input#settingsFormButton(type='submit', value='Save')
-        button#settingsJsButton(type='button',  style='display: none;'
-            onclick='saveThreadSettings()') Save
+      input#settingsFormButton(type='submit', value=l.guiSave)
+      button#settingsJsButton(type='button',  style='display: none;'
+          onclick='saveThreadSettings()', value=l.guiSave)
 
   form(method='post', action='../../contentActions.js',
-    enctype='multipart/form-data')
+      enctype='multipart/form-data')
     main#divPostings
     fieldset.divRefresh(style='diplay: none;')
-      label(for='refreshCheckbox') Auto #[span#labelRefresh]
-        input#refreshCheckbox( type='checkbox', checked,
+      label(for='refreshCheckbox')
+        | #{l.guiAutoRefreshLabel} #[span#labelRefresh]
+      input#refreshCheckbox(type='checkbox', checked,
           onchange='changeRefresh()')
       input#refreshButton(type='button', onclick='refreshPosts(true)',
-        value='Refresh')
+          value=l.guiRefreshThread)
     fieldset.contentAction
-      label(for='reportFieldReason') Reason
-        input#reportFieldReason(type='text', name='reason',
-          placeholder='Reason')
+      label(for='reportFieldReason') #{l.guiReportReason}
+      input#reportFieldReason(type='text', name='reason',
+          placeholder=l.phReportReason)
       fieldset#divBanInput
-        label(for='fieldExpiration') Expiration
-          input#fieldExpiration(type='date', name='expiration',
-          placeholder='Expiration', required)
-        label(for='fieldBanMessage') Ban message
-          input#fieldBanMessage(type='text', name='banMessage')
-      label(for='deletionFieldPassword') Password
-        input#deletionFieldPassword(type='password', name='password')
-      label(for='checkboxGlobal') Global
-        input#checkboxGlobal(type='checkbox', name='global')
-      input.button.submit#deleteFormButton(type='submit', value='Delete',
-        name='action')
+        label(for='fieldExpiration') #{l.guiExpiration}
+        input#fieldExpiration(type='date', name='expiration',
+            placeholder=l.phExpiration, required)
+        label(for='fieldBanMessage') #{l.guiBanMessage}
+        input#fieldBanMessage(type='text', name='banMessage')
+      label(for='deletionFieldPassword') #{l.guiPassword}
+      input#deletionFieldPassword(type='password', name='password')
+      label(for='checkboxGlobal') #{l.guiGlobalLabel}
+      input#checkboxGlobal(type='checkbox', name='global')
+      input.button.submit#deleteFormButton(type='submit',
+          value=l.guiDelete, name='action')
       input.button.submit#deleteJsButton(type='button',
-        onclick='deletePosts()', value='Delete', style='display: none;')
-      input#inputBan.button.submit.careful(type='submit', value='Ban',
-        name='action')
+          value=l.guiDelete, onclick='deletePosts()',
+          style='display: none;')
+      input#inputBan.button.submit.careful(type='submit',
+          value=l.guiBanAction, name='action')
       input#banJsButton.button.submit.careful(type='button', 
-        onclick='banPosts()', value='Ban', style='display: none;')
-      input#reportFormButton.button.submit(type='submit', value='Report',
-        name='action')
+          value=l.guiBanAction, onclick='banPosts()',
+          style='display: none;')
+      input#reportFormButton.button.submit(type='submit',
+          value=l.guiReportAction, name='action')
       input#reportJsButton.button.submit(type='button',
-        onclick='reportPosts()', value='Report', style='display: none;')
+          value=l.guiReportAction, onclick='reportPosts()',
+          style='display: none;')

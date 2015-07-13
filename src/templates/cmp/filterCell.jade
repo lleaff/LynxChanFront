@@ -1,9 +1,9 @@
-| Original term: #[span.labelOriginal]
+| #{l.guiFilterOriginalTerm}: #[span.labelOriginal]
 br
-| Replacement term: #[span.labelReplacement]
+| #{l.guiFilterReplacementTerm}: #[span.labelReplacement]
 
 input.boardIdentifier(type='hidden', name='boardUri')
 input.filterIdentifier(type='hidden', name='filterIdentifier')
-input.deleteFormButton(type='submit', value='Delete')
-input.deleteJsButton(type='button', value='Delete',
+input.deleteFormButton(type='submit', value=l.guiDelete)
+input.deleteJsButton(type='button', value=l.guiDelete,
     style='display: none;')

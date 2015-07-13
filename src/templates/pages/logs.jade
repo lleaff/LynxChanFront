@@ -1,26 +1,27 @@
 extends ../jade/base.jade
 
 block append headerTitle
-  +title('Logs')
+  +title(l.titLogs)
 
 block content
   section#logSearch
     form(action='logs.js', method='get')
       fieldset
-        label(for='checkboxExcludeGlobals') Exclude global entries
-          input#checkboxExcludeGlobals(type='checkbox',
+        label(for='checkboxExcludeGlobals')
+          | #{l.guiSearchExcludeGlobalEntries}
+        input#checkboxExcludeGlobals(type='checkbox',
             name='excludeGlobals')
-        label(for='fieldBoard') Board
-          input#fieldBoard(type='text', name='boardUri', placeholder='URI')
-        label(for='fieldUser') User
-          input#fieldUser(type='text', name='user')
-        label(for='fieldAfter') Only after
-          input#fieldAfter(type='text', name='after')
-        label(for='fieldBefore') Only before
-          input#fieldBefore(type='text', name='before')
-        label(for='comboboxType') Type
-          select#comboboxType(name='type')
-        input(type='submit', value='Search')
+        label(for='fieldBoard') #{l.guiSearchBoard}
+        input#fieldBoard(type='text', name='boardUri', placeholder='URI')
+        label(for='fieldUser') #{l.guiSearchUser}
+        input#fieldUser(type='text', name='user')
+        label(for='fieldAfter') #{l.guiSearchTypeOnlyBefore}
+        input#fieldAfter(type='text', name='after')
+        label(for='fieldBefore') #{l.guiSearchOnlyAfter}
+        input#fieldBefore(type='text', name='before')
+        label(for='comboboxType') #{l.guiSearchType}
+        select#comboboxType(name='type')
+      input(type='submit', value=l.guiSearch)
 
   section#divLogs
   section#divPages

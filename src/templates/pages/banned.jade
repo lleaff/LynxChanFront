@@ -1,13 +1,15 @@
 extends ../jade/base.jade
 
 block headerTitle
-  +title('Banned!')
+  +title(l.titBanned)
 
 block content
   p.
-    You are banned from #[span#boardLabel] until
+    #{l.guiBannedMessage.YouAreBanned}
+    #{l.guiBannedMessage.fromBoard} #[span#boardLabel]
+    #{l.guiBannedMessage.until}
     #[span#expirationLabel].
   p.
-    Reason: #[span#reasonLabel]
+    #{l.guiBannedReason}: #[span#reasonLabel]
     #[br]
-    Ban ID: #[span#idLabel]
+    #{l.guiBanID}: #[span#idLabel]

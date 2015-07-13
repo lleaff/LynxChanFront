@@ -1,6 +1,7 @@
 li
-  h1 Range: #[span.rangeLabel]
+  h1 #{l.guiRangeBanCellLabelRange}: #[span.rangeLabel]
   input.idIdentifier(type='hiden', name='banId')
-  input.liftFormButton.button.submit(type='submit', value='Lift ban')
-  input.liftJsButton.button.submit(type='button', value='Lift ban',
-      style='display: none;')
+  input.liftFormButton.button.submit(type='submit',
+      value=l.guiLiftRangeBan)
+  input.liftJsButton.button.submit(type='button',
+      value=l.guiLiftRangeBan, style='display: none;')

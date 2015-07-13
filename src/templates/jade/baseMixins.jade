@@ -42,7 +42,7 @@ mixin pageMenuEntry()
 
 //-------------------------------
 mixin help(anchor, helpText)
-  - var helpPage = '/help.html';
+  - var helpPage = helpPageUrl;
   - function formatAnchor(orig) { return orig.toLowerCase().replace(/ /g, '-'); }
   - var helpSectionUrl = anchor ? helpPage+'#'+formatAnchor(anchor) : '#';
   - var helpText = helpText || '';

@@ -1,9 +1,9 @@
 extends ../jade/postContent.jade
 
 block append postInfo
-  a.linkReply Reply
+  a.linkReply #{l.guiReplyLink}
 
 block opIndicators
-  span.lockIndicator.fa.fa-lock(title='Locked')
-  span.pinIndicator.fa.fa-thumb-tack(title='Pinned')
-  span.cyclicIndicator.fa.fa-refresh(title='Cyclic')
+  span.lockIndicator.fa.fa-lock(title=l.guiLockLabel)
+  span.pinIndicator.fa.fa-thumb-tack(title=l.guiPinlabel)
+  span.cyclicIndicator.fa.fa-refresh(title=l.guiCyclicLabel)
