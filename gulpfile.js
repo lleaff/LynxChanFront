@@ -1,5 +1,5 @@
 /* Command line arguments */var argv = require('yargs').argv;
-var g = {}; /* Global variables */
+var g = this; /* Global variables */
 g.ugly = argv.ugly || argv.u;
 g.production = argv.production || argv.p;
 g.blank = argv.test || argv.blank;
@@ -91,7 +91,7 @@ var jadeLocals = JSON.parse(
     "{}");
 
 var package = require('./package.json');
-/*========================== */
+//==========================
 var CWD = process.cwd(); /* Project's root (same place as gulpfile.js) */
 
 var siteTitle = settings.siteTitle || "Undefined site title";
@@ -105,7 +105,14 @@ var url = {
 url.base = url.protocol+'://'+url.domain+':'+url.port;
 url.baseStatic = url.protocol+'://'+'static.'+url.domain+':'+url.port;
 
-/*========================== */
+//==========================
+var themeFile = argv.theme || argv.t || gulpSettings.themeFile;
+themeFile = typeof(themeFile) === 'string' ? themeFile : undefined;
+
+console.info('[i]\tUsing '+(!themeFile ? 'default theme.' :
+                            'theme: '+path.basename(themeFile)));
+
+//==========================
 var languagePacks = {
   fe: path.resolve((gulpSettings.languagePack &&
        gulpSettings.languagePack.frontEndFolder) ||
@@ -121,7 +128,7 @@ var lang = {
   fe: require(languagePacks.fe+'/strings.json'),
   be: require(languagePacks.be)
 };
-/*========================== */
+//==========================
 
 /* Variables forwarded to jade by gulp */
 jadeLocals = concatObjects(jadeLocals, {
@@ -133,7 +140,7 @@ jadeLocals = concatObjects(jadeLocals, {
   l:              lang.fe    /* shorthand */
 });
 
-/*========================== */
+//==========================
 
 var basePaths = {
 	source: 'src/',
@@ -172,6 +179,8 @@ var outPaths = {
   htmlStatic: basePaths.build+'static/',
   png:        basePaths.build+'templates/cmp/images/',
 };
+
+var relativeRootDir = '../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..';
 
 
 /*-------------------------------------------------------------
@@ -219,16 +228,17 @@ gulp.task('moveHtml', function() {
 /* =Jade
 ------------------------------*/
 var jadeRegex = {
-  languagePackInclude:
-    /((^|\n)\s+\binclude(:.*\b)? )(\$LANGUAGE_PACK)/g
+  languagePackInclude: {
+    match: /((^|\n)\s+\binclude(:.*\b)? )(\$LANGUAGE_PACK)/g,
+    replace: '$1'+relativeRootDir+languagePacks.fe
+  }
 };
-
-var relativeRootDir = '../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..';
 
 gulp.task('jade', ['moveHtml', 'jadeStatic'], function() {
     var combined = combiner.obj([
       gulp.src(filesRecur.jade)
-        .pipe(replace(jadeRegex.languagePackInclude, '$1'+relativeRootDir+languagePacks.fe))
+        .pipe(replace(jadeRegex.languagePackInclude.match,
+                      jadeRegex.languagePackInclude.replace))
         .pipe(jade(
           { pretty: !g.ugly, data: jadeLocals }))
         .pipe(gulp.dest(outPaths.html))
@@ -240,7 +250,8 @@ gulp.task('jade', ['moveHtml', 'jadeStatic'], function() {
 gulp.task('jadeStatic', function() {
     var combined = combiner.obj([
       gulp.src(filesRecur.jadeStatic)
-        .pipe(replace(jadeRegex.languagePackInclude, '$1'+relativeRootDir+languagePacks.fe))
+        .pipe(replace(jadeRegex.languagePackInclude.match,
+                      jadeRegex.languagePackInclude.replace))
         .pipe(jade(
           { pretty: !g.ugly, data: jadeLocals }))
         .pipe(gulp.dest(outPaths.htmlStatic))
@@ -254,10 +265,18 @@ gulp.task('html', ['moveHtml', 'jade']);
 
 /* =CSS =SCSS =SASS
 ------------------------------*/
+var scssRegex = {
+  themeImport: {
+    match: /((^|\n)\s+@import )'theme';/g,
+    replace: '$1'+relativeRootDir+themeFile
+  }
+};
+
 gulp.task('css', function() {
   var combined = combiner.obj([
     gulp.src([files.scss, files.css, '!'+paths.scssExtras+'*'])
       .pipe(gulpif(!g.production, sourcemaps.init()))
+        .pipe(gulpif(themeFile, replace(scssRegex.themeImport)))
         .pipe(sass({ style: (g.ugly ? 'compressed' : 'nested')})
               .on('error', sass.logError))
         .pipe(gulpif(g.production, stripCssComments()))
@@ -353,6 +372,8 @@ gulp.task('help', function() {
     '\t--output, -o\tFolder in which to output the built files, overrides the value configured in gulpSettings.json',
     '\t--backend, --be\tBack-end\'s path, overrides the value configured in gulpSettings.json',
     '[default, build]\tProcess all necessarily files',
+    '[css, scss]',
+    '\t--theme, -t\tPath to .scss theme file to use instead of the default one,  overrides the value configured in gulpSettings.json',
     '[sync, browser-sync]\tWatch files and reload browser automatically with browser-sync, default port is 3000',
     '\t--syncport\tBrowser-sync port',
     '[clear, clean]\tDelete built files',
