@@ -106,11 +106,15 @@ url.base = url.protocol+'://'+url.domain+':'+url.port;
 url.baseStatic = url.protocol+'://'+'static.'+url.domain+':'+url.port;
 
 //==========================
-var themeFile = argv.theme || argv.t || gulpSettings.themeFile;
-themeFile = typeof(themeFile) === 'string' ? themeFile : undefined;
+var themeFolder = argv.theme || argv.t || gulpSettings.themeFolder;
+themeFolder = typeof(themeFolder) === 'string' ?
+  path.resolve(themeFolder) :
+  undefined;
+console.info('[i]\tUsing '+(!themeFolder ? 'default theme.' :
+                            'theme: '+path.basename(themeFolder)));
+themeFolder = themeFolder || './src/static/scss/sass/defaultTheme/';
 
-console.info('[i]\tUsing '+(!themeFile ? 'default theme.' :
-                            'theme: '+path.basename(themeFile)));
+
 
 //==========================
 var languagePacks = {
@@ -229,7 +233,7 @@ gulp.task('moveHtml', function() {
 ------------------------------*/
 var jadeRegex = {
   languagePackInclude: {
-    match: /((^|\n)\s+\binclude(:.*\b)? )(\$LANGUAGE_PACK)/g,
+    match: /((^|\n)(\s+)?\binclude(:.*\b)? )(\$LANGUAGE_PACK)/g,
     replace: '$1'+relativeRootDir+languagePacks.fe
   }
 };
@@ -265,19 +269,13 @@ gulp.task('html', ['moveHtml', 'jade']);
 
 /* =CSS =SCSS =SASS
 ------------------------------*/
-var scssRegex = {
-  themeImport: {
-    match: /((^|\n)\s+@import )'theme';/g,
-    replace: '$1'+relativeRootDir+themeFile
-  }
-};
-
 gulp.task('css', function() {
   var combined = combiner.obj([
     gulp.src([files.scss, files.css, '!'+paths.scssExtras+'*'])
       .pipe(gulpif(!g.production, sourcemaps.init()))
-        .pipe(gulpif(themeFile, replace(scssRegex.themeImport)))
-        .pipe(sass({ style: (g.ugly ? 'compressed' : 'nested')})
+        .pipe(sass({
+          includePaths: [themeFolder],
+          style: (g.ugly ? 'compressed' : 'nested')})
               .on('error', sass.logError))
         .pipe(gulpif(g.production, stripCssComments()))
         .pipe(gulpif(g.ugly, minifyCss()))
@@ -373,7 +371,7 @@ gulp.task('help', function() {
     '\t--backend, --be\tBack-end\'s path, overrides the value configured in gulpSettings.json',
     '[default, build]\tProcess all necessarily files',
     '[css, scss]',
-    '\t--theme, -t\tPath to .scss theme file to use instead of the default one,  overrides the value configured in gulpSettings.json',
+    '\t--theme, -t\tPath to a folder containing the theme.scss file to use instead of the default one, overrides the value configured in gulpSettings.json',
     '[sync, browser-sync]\tWatch files and reload browser automatically with browser-sync, default port is 3000',
     '\t--syncport\tBrowser-sync port',
     '[clear, clean]\tDelete built files',
