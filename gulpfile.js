@@ -109,7 +109,7 @@ url.baseStatic = url.protocol+'://'+'static.'+url.domain+':'+url.port;
 var languagePacks = {
   fe: path.resolve((gulpSettings.languagePack &&
        gulpSettings.languagePack.frontEndFolder) ||
-       './src/res/default-en_US'),
+       './src/res/languagePacks/default-en_US'), /* Default language pack */
   be: path.resolve((gulpSettings.languagePack &&
        gulpSettings.languagePack.backEndJson) ||
        backEndPath+'/defaultLanguagePack.json')
