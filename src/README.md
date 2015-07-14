@@ -2,4 +2,4 @@
 
 `templates` Template files used by the back-end to generate HTML documents  
 
-`res` Resource files used during the compilation phase only  
+`res` Resource files used during the compilation phase only, contains the default language-pack  

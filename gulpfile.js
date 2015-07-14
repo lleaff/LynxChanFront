@@ -87,7 +87,7 @@ var settings = JSON.parse(tryReadFileSync(
     "{}");
 
 var jadeLocals = JSON.parse(
-  tryReadFileSync('./src/templates/jadeVariables.json', {log: true}) ||
+  tryReadFileSync('./src/templates/jadeLocals.json', {log: true}) ||
     "{}");
 
 var package = require('./package.json');
