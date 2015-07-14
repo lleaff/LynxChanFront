@@ -7,13 +7,13 @@ block headerTitle
     action='/setGlobalRole.js')
     label(for='fieldLogin') #{l.guiUserLogin}: 
     input#fieldLogin(type='text', name='login',
-        placeholder=#{l.phUserLogin}, required)
+        placeholder=l.phUserLogin, required)
     label(for='newStaffCombo') #{l.guiRole}:
     select#newStaffCombo(name='role', required)
     input.button.submit#addJsButton(type='button', onclick='addUser()',
-        value=#{l.guiAddUser}, style='display: none;')
+        value=l.guiAddUser, style='display: none;')
     input.button.submit#addFormButton(type='submit',
-        value=#{l.guiAddUser})
+        value=l.guiAddUser)
   div#divStaff
   ul
     li: a#bansLink(href='/bans.js') #{l.titBans}

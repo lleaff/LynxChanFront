@@ -1,0 +1,22 @@
+// =Color theme
+//  Yotsuba B
+//------------------------------------------------------------
+$palette-colors: (
+  'bgMain':     #eef2ff,
+  'fgMain':     #000000,
+  'bgAlt':      #d6daf0,
+  'fgAlt':      #000000,
+
+  'accentA':    #9988ee,
+  'accentB':    #e04000,
+
+  'warning':    #f9b3bc
+);
+
+//$regularFont: ;
+$monospaceFont: 'Meslo LG S DZ', Monaco, monospace;
+
+$borderStyle: solid;
+$borderWidth: 1px;
+
+$defaultPadding: 1em;

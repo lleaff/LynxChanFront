@@ -1,5 +1,4 @@
-/* Command line arguments */
-var argv = require('yargs').argv;
+/* Command line arguments */var argv = require('yargs').argv;
 var g = {}; /* Global variables */
 g.ugly = argv.ugly || argv.u;
 g.production = argv.production || argv.p;
@@ -11,21 +10,23 @@ g.blank = argv.test || argv.blank;
  *------------------------------------------------------------ */
 /*============= Misc ============= */
 var fs                  = require('fs');
-var browserSyncModule = require('browser-sync');
-var browserSync       = browserSyncModule.create();
+var browserSyncModule   = require('browser-sync');
+var browserSync         = browserSyncModule.create();
 //var merge               = require('merge-stream');
 //var es                  = require('event-stream');
 var child_process       = require('child_process');
+var path                = require('path');
 /*============= Gulp operations ============= */
 var gulp                = require('gulp');
 var gutil               = require('gulp-util');
 var gulpif              = require('gulp-if');
+var combiner            = require('stream-combiner2');
 /*============= Content operations ============= */
 /* General */
 var sourcemaps          = require('gulp-sourcemaps'); /* sourcemaps */
 var concat              = require('gulp-concat'); /* sourcemaps */
 //var insert              = require('gulp-insert');
-//var replace             = require('gulp-replace');
+var replace             = require('gulp-replace');
 /* js */
 var uglify              = require('gulp-uglify'); /* sourcemaps */
 /* scss */
@@ -45,21 +46,22 @@ var debug               = require('gulp-debug'); /* DEBUG */
  * =Variables
  *------------------------------------------------------------*/
 /*============= Setting files ============= */
-function getGeneralSettings() {
+function getBackEndPath() {
   /* Possible paths */
   var posPaths = [
-    gulpSettings && gulpSettings.generalSettingsPath,
-    '../be/settings/general.json',
-    '../LynxChan/src/be/settings/general.json'
+    argv.be || argv.backend,
+    gulpSettings && gulpSettings.backEndPath,
+    '../be/',
+    '../LynxChan/src/be/'
   ];
   var fileContent;
   for (var i = 0; fileContent === undefined && i < posPaths.length; ++i) {
-    fileContent = tryReadFileSync(posPaths[i]);
+    if (tryReadFileSync(posPaths[i]+'/settings/general.json')) {
+      return path.resolve(posPaths[i]);
+    }
   }
-  if (!fileContent) {
-    console.log("[getGeneralSettings] No \"general.json\" found.");
-  }
-  return fileContent;
+  /* Not found */
+  console.log('[getBackEndPath] Back-end not found, edit gulpSettings.json to either specify "backEndPath" or specify both "generalSettingsPath" and "languagePack.backEndJson" (the back-end\'s path can also be specified with the option --backend)');
 }
 
 /* gulpSettings.json keys:
@@ -71,15 +73,27 @@ function getGeneralSettings() {
  *    outputFolder,
  *    startCommand,
  *    reloadCommand */
-var gulpSettings  = JSON.parse(
+var gulpSettings = JSON.parse(
   tryReadFileSync('gulpSettings.json', {log: true}) ||
     "{}");
-var settings      = JSON.parse(getGeneralSettings() || "{}");
-var jadeSettings  = JSON.parse(
-  tryReadFileSync('./src/templates/jadeSettings.json', {log: true}) ||
+
+var backEndPath = (gulpSettings.languagePack.backEndJson &&
+                  gulpSettings.generalSettingsPath) ?
+  undefined : getBackEndPath();
+
+var settings = JSON.parse(tryReadFileSync(
+  gulpSettings.generalSettingsPath ||
+    backEndPath+'/settings/general.json', {log: true}) ||
     "{}");
-var package       = require('./package.json');
+
+var jadeLocals = JSON.parse(
+  tryReadFileSync('./src/templates/jadeVariables.json', {log: true}) ||
+    "{}");
+
+var package = require('./package.json');
 /*========================== */
+var CWD = process.cwd(); /* Project's root (same place as gulpfile.js) */
+
 var siteTitle = settings.siteTitle || "Undefined site title";
 
 var url = {
@@ -91,19 +105,32 @@ var url = {
 url.base = url.protocol+'://'+url.domain+':'+url.port;
 url.baseStatic = url.protocol+'://'+'static.'+url.domain+':'+url.port;
 
-var lang = concatObjects(
-  gulpSettings.languagePack.frontEnd,
-  gulpSettings.languagePack.backEnd
-);
+/*========================== */
+var languagePacks = {
+  fe: path.resolve((gulpSettings.languagePack &&
+       gulpSettings.languagePack.frontEndFolder) ||
+       './src/res/default-en_US'),
+  be: path.resolve((gulpSettings.languagePack &&
+       gulpSettings.languagePack.backEndJson) ||
+       backEndPath+'/defaultLanguagePack.json')
+};
+console.info('[i]\tUsing language packs:\n\tBE:\t'+
+             languagePacks.be+'\n\tFE:\t'+languagePacks.fe+'/strings.json');
 
-/* Settings forwarded to jade by gulp */
-jadeSettings = concatObjects(jadeSettings, {
+var lang = {
+  fe: require(languagePacks.fe+'/strings.json'),
+  be: require(languagePacks.be)
+};
+/*========================== */
+
+/* Variables forwarded to jade by gulp */
+jadeLocals = concatObjects(jadeLocals, {
   siteTitle:      siteTitle,
   siteLicense:    settings.siteLicense,
   baseUrl:        url.base,
   baseStaticUrl:  url.baseStatic,
-  lang:           lang,
-  l:              lang    /* shorthand */
+  lang:           lang.fe,
+  l:              lang.fe    /* shorthand */
 });
 
 /*========================== */
@@ -169,12 +196,19 @@ gulp.task('otherFiles', function() {
     .pipe(gulp.dest(basePaths.build));
 });
 
+/* =JS =Javascript
+------------------------------*/
 gulp.task('js', function() {
-  return gulp.src(filesRecur.js)
-    .pipe(gulpif(!g.production, sourcemaps.init()))
-      .pipe(gulpif(g.ugly, uglify()))
-    .pipe(gulpif(!g.production, sourcemaps.write(paths.sourcemaps)))
-    .pipe(gulp.dest(outPaths.js));
+  var combined = combiner.obj([
+    gulp.src(filesRecur.js)
+      .pipe(gulpif(!g.production, sourcemaps.init()))
+        .pipe(gulpif(g.ugly, uglify()))
+      .pipe(gulpif(!g.production, sourcemaps.write(paths.sourcemaps)))
+      .pipe(gulp.dest(outPaths.js))
+  ]);
+
+  combined.on('error', console.error.bind(console));
+  return combined;
 });
 
 gulp.task('moveHtml', function() {
@@ -182,35 +216,72 @@ gulp.task('moveHtml', function() {
     .pipe(gulp.dest(outPaths.html));
 });
 
+/* =Jade
+------------------------------*/
+var jadeRegex = {
+  languagePackInclude:
+    /((^|\n)\s+\binclude(:.*\b)? )(\$LANGUAGE_PACK)/g
+};
+
+var relativeRootDir = '../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..';
+
 gulp.task('jade', ['moveHtml', 'jadeStatic'], function() {
-    return gulp.src(filesRecur.jade)
-      .pipe(jade({ pretty: !g.ugly, data: jadeSettings }))
-      .pipe(gulp.dest(outPaths.html));
+    var combined = combiner.obj([
+      gulp.src(filesRecur.jade)
+        .pipe(replace(jadeRegex.languagePackInclude, '$1'+relativeRootDir+languagePacks.fe))
+        .pipe(jade(
+          { pretty: !g.ugly, data: jadeLocals }))
+        .pipe(gulp.dest(outPaths.html))
+    ]);
+    
+    combined.on('error', console.error.bind(console));
+    return combined;
 });
 gulp.task('jadeStatic', function() {
-    return gulp.src(filesRecur.jadeStatic)
-      .pipe(jade({ pretty: !g.ugly, data: jadeSettings }))
-      .pipe(gulp.dest(outPaths.htmlStatic));
+    var combined = combiner.obj([
+      gulp.src(filesRecur.jadeStatic)
+        .pipe(replace(jadeRegex.languagePackInclude, '$1'+relativeRootDir+languagePacks.fe))
+        .pipe(jade(
+          { pretty: !g.ugly, data: jadeLocals }))
+        .pipe(gulp.dest(outPaths.htmlStatic))
+    ]);
+    
+    combined.on('error', console.error.bind(console));
+    return combined;
 });
 
 gulp.task('html', ['moveHtml', 'jade']);
 
+/* =CSS =SCSS =SASS
+------------------------------*/
 gulp.task('css', function() {
-  return gulp.src([files.scss, files.css, '!'+paths.scssExtras+'*'])
-    .pipe(gulpif(!g.production, sourcemaps.init()))
-      .pipe(sass({ style: (g.ugly ? 'compressed' : 'nested')})
-            .on('error', sass.logError))
-      .pipe(gulpif(g.production, stripCssComments()))
-      .pipe(gulpif(g.ugly, minifyCss()))
-    .pipe(gulpif(!g.production, sourcemaps.write(paths.sourcemaps)))
-    .pipe(gulp.dest(outPaths.css))
-    .pipe(browserSync.stream());
+  var combined = combiner.obj([
+    gulp.src([files.scss, files.css, '!'+paths.scssExtras+'*'])
+      .pipe(gulpif(!g.production, sourcemaps.init()))
+        .pipe(sass({ style: (g.ugly ? 'compressed' : 'nested')})
+              .on('error', sass.logError))
+        .pipe(gulpif(g.production, stripCssComments()))
+        .pipe(gulpif(g.ugly, minifyCss()))
+      .pipe(gulpif(!g.production, sourcemaps.write(paths.sourcemaps)))
+      .pipe(gulp.dest(outPaths.css))
+      .pipe(browserSync.stream())
+  ]);
+
+  combined.on('error', console.error.bind(console));
+  return combined;
 });
 
+/* =Images
+------------------------------*/
 gulp.task('images', function() {
-  return gulp.src(files.png)
-    .pipe(gulpif(g.production), imagemin())
-    .pipe(gulp.dest(outPaths.png));
+  var combined = combiner.obj([
+    gulp.src(files.png)
+      .pipe(gulpif(g.production), imagemin())
+      .pipe(gulp.dest(outPaths.png))
+  ]);
+
+  combined.on('error', console.error.bind(console));
+  return combined;
 });
 
 /*============ Utility ============== */
@@ -279,7 +350,8 @@ gulp.task('help', function() {
     '[all]',
     '\t--production\tBuild for deployment as opposed to development version (no sourcemaps, ...)',
     '\t--ugly\t\tMinify code',
-    '\t--output, -o\tFolder in which to output the built files',
+    '\t--output, -o\tFolder in which to output the built files, overrides the value configured in gulpSettings.json',
+    '\t--backend, --be\tBack-end\'s path, overrides the value configured in gulpSettings.json',
     '[default, build]\tProcess all necessarily files',
     '[sync, browser-sync]\tWatch files and reload browser automatically with browser-sync, default port is 3000',
     '\t--syncport\tBrowser-sync port',

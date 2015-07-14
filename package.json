@@ -16,12 +16,14 @@
     "gulp-imagemin": "latest",
     "gulp-jade": "latest",
     "gulp-minify-css": "latest",
+    "gulp-replace": "^0.5.3",
     "gulp-sass": "latest",
     "gulp-shell": "latest",
     "gulp-sourcemaps": "latest",
     "gulp-strip-css-comments": "latest",
     "gulp-uglify": "latest",
     "gulp-util": "latest",
+    "stream-combiner2": "^1.0.2",
     "yargs": "latest"
   },
   "author": "lleaff"
