@@ -232,7 +232,7 @@ gulp.task('js', function() {
     combined[i] =
       gulp.src(jsPaths[name])
         .pipe(gulpif(!g.production, sourcemaps.init()))
-          .pipe(concat(name+'.js'))
+          .pipe(concat('../'+name+'.js'))
           .pipe(gulpif(g.ugly, uglify()))
         .pipe(gulpif(!g.production, sourcemaps.write(paths.sourcemaps.js)))
         .pipe(gulp.dest(outPaths.js+name));
@@ -240,7 +240,7 @@ gulp.task('js', function() {
     combined[i].on('error', console.error.bind(console));
   });
 
-  return merge.apply(combined);
+  return merge.apply(this, combined);
 });
 
 /*
