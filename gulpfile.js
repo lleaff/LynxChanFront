@@ -154,15 +154,17 @@ var basePaths = {
 };
 
 var paths = {
-	js:         basePaths.source+'static/',
-	scss:       basePaths.source+'static/scss/',
-	scssExtras: basePaths.source+'static/scss/{cmp/,pages/,sass/,vendor/}',
-	css:        basePaths.source+'static/css/',
-	html:       basePaths.source+'templates/',
-	jade:       basePaths.source+'templates/{cmp/,pages/}',
-	jadeExtras: basePaths.source+'templates/jade/', /* For watching */
-  jadeStatic: basePaths.source+'static/jade/',
-  png:        basePaths.source+'templates/cmp/images/',
+	js:           basePaths.source+'static/',
+	scss:         basePaths.source+'static/scss/',
+  /* For watching */
+	scssExtras:   basePaths.source+'static/scss/{cmp/,pages/,sass/,vendor/}',
+	css:          basePaths.source+'static/css/',
+  scssThemeFolder:  themeFolder, /* For watching */
+	html:         basePaths.source+'templates/',
+	jade:         basePaths.source+'templates/{cmp/,pages/}',
+	jadeExtras:   basePaths.source+'templates/jade/', /* For watching */
+  jadeStatic:   basePaths.source+'static/jade/',
+  png:          basePaths.source+'templates/cmp/images/',
 	sourcemaps: '../sourcemaps/',
 };
 var filesRecur = {}; /* { js: src/static/** /*.js, ... } */
@@ -302,7 +304,7 @@ gulp.task('images', function() {
 });
 
 /*============ Utility ============== */
-/* =Watching
+/* =Watching, =Sync, =Browser-Sync
 ========================== */
 gulp.task('sync', ['browser-sync']);
 gulp.task('browser-sync', ['build'], function() {
@@ -322,7 +324,8 @@ gulp.task('browser-sync', ['build'], function() {
   });
 
   gulp.watch(
-    [filesRecur.scss, filesRecur.scssExtras, filesRecur.css],
+    [filesRecur.scss, filesRecur.scssExtras, filesRecur.css,
+      filesRecur.scssThemeFolder],
     ['css'])
     .on('change', serverRefresh);
   gulp.watch(
