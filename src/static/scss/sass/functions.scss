@@ -1,3 +1,7 @@
+//============================================================
+// =Modify
+//============================================================
+
 // Mix $color by $weight with the color obtained by calling $function with
 //  $color followed by the given arguments.
 //------------------------------------------------------------
@@ -11,24 +15,61 @@
   @return mix(call($compiledArgumentList...), $color, $weight);
 }
 
-// Makes color more or less 'intense' depending on global
-//  theme's lightness
+// Makes color more or less 'intense' compared to a reference
+//  color, uses $strongestContrast and $weakerContrast variables
+//  obtained from `palette('{fg|bg}{Main|Alt}')` as references.
+// ie.: like 'darken()' but will 'lighten()' instead if the reference
+//  color is dark.
 //------------------------------------------------------------
-@function intense-color($color, $weight: 50%) {
-// TODO
-  @return $color;
+// Intensify
+//------------------------------
+@function intensify-saturation($color, $contrastedColor, $weight: 50%) {
+  $weightedSaturationContrast: abs($strongestSaturationContrast / 100) *
+    contrast($color, $contrastedColor);
+ @return mix(
+    $color,
+    scale-color($color, $lightness: $weightedSaturationContrast),
+    $weight);
 }
-@function intense-value($color, $weight: 50%) {
-// TODO
-  @return $color;
+@function intensify-lightness($color, $contrastedColor, $weight: 50%) {
+  $weightedContrast: abs($strongestContrast / 100) *
+    contrast($color, $contrastedColor);
+ @return mix(
+    $color,
+    scale-color($color, $lightness: $weightedContrast),
+    $weight);
 }
-@function soft-color($color, $weight: 50%) {
-// TODO
-  @return $color;
+// Apply all intensify functions
+@function intensify($color, $contrastedColor, $weight: 50%) {
+  @return intensify-lightness(
+    intensify-saturation($color, $contrastedColor, $weight),
+    $contrastedColor,
+    $weight);
 }
-@function soft-value($color, $weight: 50%) {
-// TODO
-  @return $color;
+
+// Soften
+//------------------------------
+@function soften-saturation($color, $contrastedColor, $weight: 50%) {
+    $weightedSaturationContrast: abs($weakerSaturationContrast / 100) *
+      contrast($color, $contrastedColor);
+  @return mix($color,
+    scale-color($color, $lightness: -$weightedSaturationContrast),
+    $weight);
+}
+@function soften-lightness($color, $contrastedColor, $weight: 50%) {
+  $weightedContrast: abs($weakerContrast / 100) *
+    contrast($color, $contrastedColor);
+ @return mix(
+    $color,
+    scale-color($color, $lightness: -$weightedContrast),
+    $weight);
+}
+// Apply all soften functions
+@function soften($color, $contrastedColor, $weight: 50%) {
+  @return soften-lightness(
+    soften-saturation($color, $contrastedColor, $weight),
+    $contrastedColor,
+    $weight);
 }
 
 // Change $color to use the given value form $sourceColor
@@ -60,4 +101,25 @@
 @function take-alpha($color, $sourceColor, $weight: 100%) {
   @return mix(change-color($color, $alpha: alpha($sourceColor)),
     $color, $weight);
+}
+
+//============================================================
+// =Get
+//============================================================
+
+//   returns: [-100, 100]
+//           > 0: dark on light
+//           < 0: light on dark
+@function contrast-lightness($fgColor, $bgColor) {
+  @return lightness($bgColor) - lightness($fgColor);
+}
+@function contrast($fgColor, $bgColor) { 
+  @return contrast-lightness($fgColor, $bgColor);
+}
+
+//   returns: [-100, 100]
+//           > 0: dull on vibrant
+//           < 0: vibrant on dull
+@function contrast-saturation($fgColor, $bgColor) {
+  @return saturation($bgColor) - saturation($fgColor);
 }

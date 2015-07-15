@@ -11,45 +11,70 @@
 //  (except sufficient contrast between foreground and background)
 //============================================================
 
-$borderColorMain: mix(palette('bgMain'), palette('fgMain'), 80%);
+//============================================================
+// [-100, 100]
+// > 0: dark on light
+// < 0: light on dark
+$mainContrast: contrast(palette('fgMain'), palette('bgMain'));
+$altContrast:  contrast(palette('fgAlt'), palette('bgAlt'));
+
+$strongestContrast: max(abs($mainContrast), abs($altContrast));
+$weakerContrast:    min(abs($mainContrast), abs($altContrast));
+
+// [-100, 100]
+// > 0: saturated on dull
+// < 0: dull on saturated
+$mainSaturationContrast: contrast-saturation(palette('fgMain'), palette('bgMain'));
+$altSaturationContrast:  contrast-saturation(palette('fgAlt'), palette('bgAlt'));
+
+$strongestSaturationContrast:
+  max(abs($mainSaturationContrast), abs($altSaturationContrast));
+$weakerSaturationContrast:
+  min(abs($mainSaturationContrast), abs($altSaturationContrast));
+
+//=============================================================
+$borderColorMain:       mix(palette('bgMain'), palette('fgMain'), 80%);
 @mixin mainColors {
-  background-color: palette('bgMain');
-  color: palette('fgMain');
-  border-color: $borderColorMain;
+  background-color:     palette('bgMain');
+  color:                palette('fgMain');
+  border-color:         $borderColorMain;
 }
 
-$borderColorAlt: mix(palette('bgAlt'), palette('fgAlt'), 80%);
+$borderColorAlt:        mix(palette('bgAlt'), palette('fgAlt'), 80%);
 @mixin altColors {
-  background-color: palette('bgAlt');
-  color: palette('fgAlt');
-  border-color: $borderColorAlt;
+  background-color:     palette('bgAlt');
+  color:                palette('fgAlt');
+  border-color:         $borderColorAlt;
 }
 
+//=============================================================
 @mixin headerColors {
-  background-color: palette('bgAlt');
-  color: palette('fgAlt');
-  border-color: $borderColorAlt;
+  background-color:     palette('bgAlt');
+  color:                palette('fgAlt');
+  border-color:         $borderColorAlt;
 }
 
-$buttonBgOpacity: 0.5;
+//=============================================================
+$buttonBgOpacity:       0.5;
 
-$submitBgColor: mix(palette('fgAlt'), palette('bgAlt'), 50%);
-$submitFgColor: palette('bgMain');
+$submitBgColor:         mix(palette('fgAlt'), palette('bgAlt'), 50%);
+$submitFgColor:         palette('bgMain');
 
-$buttonBgColor: mix(palette('bgAlt'), $submitBgColor, 70%);
-$buttonFgColor: palette('fgAlt');
+$buttonBgColor:         mix(palette('bgAlt'), $submitBgColor, 70%);
+$buttonFgColor:         palette('fgAlt');
 
 @mixin buttonColors {
-  background-color: $buttonBgColor;
-  color: $buttonFgColor;
-  border-color: mix($buttonBgColor, palette('fgMain'));
+  background-color:     $buttonBgColor;
+  color:                $buttonFgColor;
+  border-color:         mix($buttonBgColor, palette('fgMain'));
 }
 
 @mixin submitColors {
-  background-color: $submitBgColor;
-  color: $submitFgColor;
-  border-color: mix($buttonBgColor, palette('fgMain'));
+  background-color:     $submitBgColor;
+  color:                $submitFgColor;
+  border-color:         mix($buttonBgColor, palette('fgMain'));
 }
 
-$postFormBg: palette('bgAlt');
-$postFormBorderColor: $borderColorAlt;
+//=============================================================
+$postFormBg:            palette('bgAlt');
+$postFormBorderColor:   $borderColorAlt;
