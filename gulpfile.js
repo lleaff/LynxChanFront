@@ -112,7 +112,7 @@ themeFolder = typeof(themeFolder) === 'string' ?
   undefined;
 console.info('[i]\tUsing '+(!themeFolder ? 'default theme.' :
                             'theme: '+path.basename(themeFolder)));
-themeFolder = themeFolder || './src/static/scss/sass/defaultTheme/';
+themeFolder = themeFolder || './src/static/scss/sass/dummyThemeFolder/';
 
 
 

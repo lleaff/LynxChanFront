@@ -10,12 +10,12 @@ $palette-colors: (
   'accentB':    #FF98A2,
 
   'warning':    #f9b3bc
-);
+) !default;
 
 //$regularFont: ;
-$monospaceFont: 'Meslo LG S DZ', Monaco, monospace;
+$monospaceFont: 'Meslo LG S DZ', Monaco, monospace !default;
 
-$borderStyle: solid;
-$borderWidth: 1px;
+$borderStyle: solid !default;
+$borderWidth: 1px !default;
 
-$defaultPadding: 1em;
+$defaultPadding: 1em !default;

@@ -1,5 +1,6 @@
 @import 'functions';
 @import 'theme';
+@import 'defaultTheme';
 
 @function palette($key) {
   @return map-get($palette-colors, $key);
