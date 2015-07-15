@@ -3,6 +3,9 @@ extends ../jade/base
 block headerTitle
   +title(l.titBannerManagement)
 
+block append bottomScripts
+  +script('ext.js')
+
 block content
   section
     h3 #{l.titNewBanner}

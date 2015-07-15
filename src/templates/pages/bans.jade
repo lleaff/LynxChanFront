@@ -1,6 +1,9 @@
 extends ../jade/base
 
-block append scripts
+block append bottomScripts
+  +script('ext.js')
+
+block append styles
   +script('ext.css')
 
 block headerTitle
@@ -8,6 +11,3 @@ block headerTitle
 
 block content
   main#bansDiv
-
-block append scripts
-  +script('bans.js')

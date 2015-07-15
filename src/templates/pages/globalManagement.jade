@@ -1,5 +1,8 @@
 extends ../jade/base
 
+block append bottomScripts
+  +script('ext.js')
+
 block headerTitle
   +title('#userLabel')
 
@@ -21,7 +24,3 @@ block headerTitle
     li: a#hashBansLink(href='/hashBans.js') #{l.titFileBans}
     li: a(href='/closedReports.js') #{l.titClosedReports}
       div#reportDiv
-
-block append scripts
-  +script('reports.js')
-  +script('globalManagement.js')

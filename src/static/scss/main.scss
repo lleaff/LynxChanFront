@@ -151,8 +151,26 @@ input[type="checkbox"] {
 /* =Board and Thread
  *------------------------------*/
 .opCell {
+  @include mainColors();
 }
 .postCell {
+  @include altColors();
+}
+
+.panelUploads {
+  .fileInfo {
+
+  }
+  .infoLabel {
+  }
+
+  .imgLink {
+    display: block;
+  }
+
+}
+
+.uploadCell {
 }
 
 /* =Post content

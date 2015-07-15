@@ -19,6 +19,9 @@ html
         block styles
           for styleUrl in baseStylesUrls
             link(rel="stylesheet", href=styleUrl)
+        block topScripts
+          for scriptUrl in baseTopScriptsUrls
+            script(src=scriptUrl)
     body
       block body
         #notFooter
@@ -47,6 +50,6 @@ html
         footer#pageFooter
           block footer
             include footer
-        block scripts
-          for scriptUrl in baseScriptsUrls
+        block bottomScripts
+          for scriptUrl in baseBottomScriptsUrls
             script(src=scriptUrl)

@@ -37,7 +37,7 @@ All keys are optional (except `generalSettingsPath` if the front-end (`fe`) is n
   *   `backEnd`: Path to the back-end's language pack (json).
   *   `frontEnd`: Path to the front-end's language pack (json).
   }
-* `themeFolder`: Path to a folder containing a `theme.scss` file to use instead of the default one.
+* `themeFolder`: Path to a folder containing a `theme.scss` file, whose variables will override any of the variables in `src/static/scss/sass/defaultTheme.scss`.
 * `outputFolder`: Path to the folder in which to output the built files.
 * `startCommand`: Command executed when starting `gulp browser-sync`.
 * `reloadCommand`: Command executed by `gulp browser-sync` before reloading the browser.

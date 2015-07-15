@@ -12,7 +12,7 @@ g.blank = argv.test || argv.blank;
 var fs                  = require('fs');
 var browserSyncModule   = require('browser-sync');
 var browserSync         = browserSyncModule.create();
-//var merge               = require('merge-stream');
+var merge               = require('merge-stream');
 //var es                  = require('event-stream');
 var child_process       = require('child_process');
 var path                = require('path');
@@ -153,8 +153,16 @@ var basePaths = {
       './'),
 };
 
+var outPaths = {
+  js:         basePaths.build+'static/js/',
+  css:        basePaths.build+'static/css/',
+	html:       basePaths.build+'templates/',
+  htmlStatic: basePaths.build+'static/',
+  png:        basePaths.build+'templates/cmp/images/',
+};
+
 var paths = {
-	js:           basePaths.source+'static/',
+	js:           basePaths.source+'static/js/',
 	scss:         basePaths.source+'static/scss/',
   /* For watching */
 	scssExtras:   basePaths.source+'static/scss/{cmp/,pages/,sass/,vendor/}',
@@ -165,8 +173,14 @@ var paths = {
 	jadeExtras:   basePaths.source+'templates/jade/', /* For watching */
   jadeStatic:   basePaths.source+'static/jade/',
   png:          basePaths.source+'templates/cmp/images/',
-	sourcemaps: '../sourcemaps/',
+	sourcemaps:   {}, /* Filled below */
 };
+
+Object.keys(paths).forEach(function(path) {
+  paths.sourcemaps[path] = '../sourcemaps/';
+});
+paths.sourcemaps.js = '../'+paths.sourcemaps.js;
+
 var filesRecur = {}; /* { js: src/static/** /*.js, ... } */
 Object.keys(paths).forEach(function(ft) {
   var ext = keepFirstWordFromCamelCase(ft);
@@ -177,17 +191,6 @@ Object.keys(paths).forEach(function(ft) {
   var ext = keepFirstWordFromCamelCase(ft);
   files[ft] = paths[ft]+'*.'+ext;
 });
-
-var outPaths = {
-  js:         basePaths.build+'static/',
-  css:        basePaths.build+'static/css/',
-	html:       basePaths.build+'templates/',
-  htmlStatic: basePaths.build+'static/',
-  png:        basePaths.build+'templates/cmp/images/',
-};
-
-var relativeRootDir = '../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..';
-
 
 /*-------------------------------------------------------------
  *  =Tasks
@@ -213,19 +216,35 @@ gulp.task('otherFiles', function() {
 
 /* =JS =Javascript
 ------------------------------*/
-gulp.task('js', function() {
-  var combined = combiner.obj([
-    gulp.src(filesRecur.js)
-      .pipe(gulpif(!g.production, sourcemaps.init()))
-        .pipe(gulpif(g.ugly, uglify()))
-      .pipe(gulpif(!g.production, sourcemaps.write(paths.sourcemaps)))
-      .pipe(gulp.dest(outPaths.js))
-  ]);
+var jsOutNames = [ 'pre', 'post', 'ext' ];
+/* Allows settings concat order when needed */
+var jsPaths = {
+  pre: [ paths.js+'pre/settings.js', paths.js+'pre/*.js' ],
+  post: [ paths.js+'post/*.js' ],
+  ext: [ paths.js+'ext/*.js' ]
+};
 
-  combined.on('error', console.error.bind(console));
-  return combined;
+gulp.task('js', function() {
+
+  var combined = [];
+
+  jsOutNames.forEach(function(name, i) {
+    combined[i] =
+      gulp.src(jsPaths[name])
+        .pipe(gulpif(!g.production, sourcemaps.init()))
+          .pipe(concat(name+'.js'))
+          .pipe(gulpif(g.ugly, uglify()))
+        .pipe(gulpif(!g.production, sourcemaps.write(paths.sourcemaps.js)))
+        .pipe(gulp.dest(outPaths.js+name));
+
+    combined[i].on('error', console.error.bind(console));
+  });
+
+  return merge.apply(combined);
 });
 
+/*
+------------------------------*/
 gulp.task('moveHtml', function() {
     gulp.src(filesRecur.html)
     .pipe(gulp.dest(outPaths.html));
@@ -233,6 +252,8 @@ gulp.task('moveHtml', function() {
 
 /* =Jade
 ------------------------------*/
+var relativeRootDir = '../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..';
+
 var jadeRegex = {
   languagePackInclude: {
     match: /((^|\n)(\s+)?\binclude(:.*\b)? )(\$LANGUAGE_PACK)/g,
@@ -281,7 +302,7 @@ gulp.task('css', function() {
               .on('error', sass.logError))
         .pipe(gulpif(g.production, stripCssComments()))
         .pipe(gulpif(g.ugly, minifyCss()))
-      .pipe(gulpif(!g.production, sourcemaps.write(paths.sourcemaps)))
+      .pipe(gulpif(!g.production, sourcemaps.write(paths.sourcemaps.css)))
       .pipe(gulp.dest(outPaths.css))
       .pipe(browserSync.stream())
   ]);

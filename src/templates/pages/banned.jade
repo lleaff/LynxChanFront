@@ -3,6 +3,9 @@ extends ../jade/base
 block headerTitle
   +title(l.titBanned)
 
+block append bottomScripts
+  +script('ext.js')
+
 block content
   p.
     #{l.guiBannedMessage.YouAreBanned}

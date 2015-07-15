@@ -1,5 +1,8 @@
 extends ../jade/bare
 
+block append bottomScripts
+  +script('ext.js')
+
 block middle
   section.box-center
     h1 #{l.titRangeBanned}

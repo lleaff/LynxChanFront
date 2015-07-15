@@ -1,5 +1,8 @@
 extends ../jade/base
 
+block append bottomScripts
+  +script('ext.js')
+
 block append styles
   +style('ext.css')
 
@@ -87,8 +90,3 @@ block content
       li: a#hashBansLink #{l.titFileBans}
       li: h3 #{l.titOpenReports}:
         #reportDiv
-
-
-block append scripts
-  +script('reports.js')
-  +script('boardManagement.js')

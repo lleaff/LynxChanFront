@@ -3,9 +3,8 @@ extends ../jade/base
 block headerTitle
   +title('#labelTitle', l.titBoardModeration)
 
-block append scripts
-  +script('reports.js')
-  +script('boardModeration.js')
+block append bottomScripts
+  +script('ext.js')
 
 block content
   section
