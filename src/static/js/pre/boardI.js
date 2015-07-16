@@ -5,13 +5,13 @@ if (pageId === 'board') {
     var boardUri = document.getElementById('boardIdentifier').value;
 
     var postButton = document.getElementById('jsButton');
-    postButton.style.display = '';
+    showElement(postButton);
 
     if (document.getElementById('captchaDiv')) {
-      document.getElementById('reloadCaptchaButton').style.display = '';
+      showElement(document.getElementById('reloadCaptchaButton'));
     }
 
-    document.getElementById('formButton').style.display = 'none';
+    removeElement(document.getElementById('formButton'));
 
   });
 }

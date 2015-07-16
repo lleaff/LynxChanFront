@@ -30,7 +30,7 @@ if (pageId === 'thread') {
     boardUri = document.getElementById('boardIdentifier').value;
     var divPostings = document.getElementById('divPostings');
 
-    document.getElementsByClassName('divRefresh')[0].style.display = 'inline';
+    showElement(document.getElementsByClassName('divRefresh')[0]);
 
     refreshLabel = document.getElementById('labelRefresh');
 
@@ -39,18 +39,18 @@ if (pageId === 'thread') {
     threadId = document.getElementsByClassName('opCell')[0].id;
 
     if (document.getElementById('controlThreadIdentifier')) {
-      document.getElementById('settingsJsButon').style.display = 'inline';
-      document.getElementById('settingsFormButon').style.display = 'none';
+      showElement(document.getElementById('settingsJsButon'));
+      removeElement(document.getElementById('settingsFormButon'));
     }
 
     replyButton = document.getElementById('jsButton');
-    replyButton.style.display = '';
+    showElement(replyButton);
 
     if (document.getElementById('captchaDiv')) {
-      document.getElementById('reloadCaptchaButton').style.display = '';
+      showElement(document.getElementById('reloadCaptchaButton'));
     }
 
-    document.getElementById('formButton').style.display = 'none';
+    removeElement(document.getElementById('formButton'));
 
     var replies = document.getElementsByClassName('postCell');
 

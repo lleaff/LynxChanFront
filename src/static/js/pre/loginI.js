@@ -1,13 +1,13 @@
 if (pageId === 'login') {
   bodyOnLoadStack.push(function() {
 
-    document.getElementById('registerJsButton').style.display = 'inline';
-    document.getElementById('loginJsButton').style.display = 'inline';
-    document.getElementById('recoverJsButton').style.display = 'inline';
+    showElement(document.getElementById('registerJsButton'));
+    showElement(document.getElementById('loginJsButton'));
+    showElement(document.getElementById('recoverJsButton'));
 
-    document.getElementById('recoverFormButton').style.display = 'none';
-    document.getElementById('registerFormButton').style.display = 'none';
-    document.getElementById('loginFormButton').style.display = 'none';
+    removeElement(document.getElementById('recoverFormButton'));
+    removeElement(document.getElementById('registerFormButton'));
+    removeElement(document.getElementById('loginFormButton'));
 
   });
 }
