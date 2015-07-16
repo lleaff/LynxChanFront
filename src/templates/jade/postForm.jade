@@ -19,7 +19,7 @@ mixin postForm(options)
     fieldset#messageArea
       label(for="fieldSubject") #{l.postForm.Subject}:
       input#fieldSubject(type='text', name='subject',
-        placeholder=l.postForm.phSubject)
+        placeholder=l.postForm.phSubject, autocomplete='off')
       label(for="fieldMessage") #{l.postForm.Message}
       textarea#fieldMessage(name='message', required)
       fieldset#messageFiles
@@ -37,7 +37,7 @@ mixin postForm(options)
         label(for='fieldCaptcha') #{l.postForm.Captcha}
         img#captchaImage(src='/captcha.js')
         input#fieldCaptcha(type='text', name='captcha', required,
-            placeholder='......')
+            placeholder='......', autocomplete='off')
         button#reloadCaptchaButton(type='button',
             onclick='reloadCaptcha()', value=l.postForm.ReloadCaptcha,
             alt=l.postForm.ReloadCaptcha, style='display: none;')

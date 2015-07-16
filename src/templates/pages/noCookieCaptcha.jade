@@ -16,7 +16,8 @@ block middle
   img#imageCaptcha
   form(action='/solveCaptcha.js', method='post',
     enctype='multipart/form-data')
-    input#inputCaptchaId(type='hidden', name='captchaId')
+    input#inputCaptchaId(type='hidden', name='captchaId',
+        autocomplete='off')
     label(for='captchaAnswer') #{l.guiCaptchaAnswer}
     input(type='text', name='answer', required)
     input(type='submit', value=l.guiSubmitCaptchaAnswer)
