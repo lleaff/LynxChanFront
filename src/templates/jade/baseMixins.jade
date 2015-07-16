@@ -48,7 +48,11 @@ mixin help(anchor, helpText)
   - var helpText = helpText || '';
   span.help
     a(href=helpSectionUrl, alt=helpText) ?
-    
+
+
+//-------------------------------
+mixin pageId(pageString)
+  script pageId = #{pageId};
 
 //-------------------------------------------------------------
 //-=Helper functions

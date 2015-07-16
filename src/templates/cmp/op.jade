@@ -4,6 +4,7 @@ block append postInfo
   a.linkReply #{l.guiReplyLink}
 
 block opIndicators
-  span.lockIndicator.fa.fa-lock(title=l.guiLockLabel)
-  span.pinIndicator.fa.fa-thumb-tack(title=l.guiPinlabel)
-  span.cyclicIndicator.fa.fa-refresh(title=l.guiCyclicLabel)
+  span.threadStatus
+    span.lockIndicator.fa.fa-lock(title=l.guiLockLabel)
+    span.pinIndicator.fa.fa-thumb-tack(title=l.guiPinlabel)
+    span.cyclicIndicator.fa.fa-refresh(title=l.guiCyclicLabel)

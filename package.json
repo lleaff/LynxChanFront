@@ -23,8 +23,8 @@
     "gulp-strip-css-comments": "latest",
     "gulp-uglify": "latest",
     "gulp-util": "latest",
-    "merge-stream": "^0.1.8",
-    "stream-combiner2": "^1.0.2",
+    "merge-stream": "latest",
+    "stream-combiner2": "latest",
     "yargs": "latest"
   },
   "author": "lleaff"
