@@ -1,8 +1,8 @@
-var loadedPreviews = [];
-var loadingPreviews = [];
-var quoteReference = {};
+if (pageId === 'board' || pageId === 'thread') {
 
-if (!DISABLE_JS) {
+  var loadedPreviews = [];
+  var loadingPreviews = [];
+  var quoteReference = {};
 
   document.getElementById('deleteJsButton').style.display = 'inline';
   document.getElementById('reportJsButton').style.display = 'inline';

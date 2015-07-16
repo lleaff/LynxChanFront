@@ -1,6 +1,6 @@
-var boardIdentifier;
+if (pageId === 'boardManagement') {
 
-if (!DISABLE_JS) {
+  var boardIdentifier;
 
   if (document.getElementById('ownerControlDiv')) {
 

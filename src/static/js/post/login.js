@@ -1,15 +1,3 @@
-if (!DISABLE_JS) {
-
-  document.getElementById('registerJsButton').style.display = 'inline';
-  document.getElementById('loginJsButton').style.display = 'inline';
-  document.getElementById('recoverJsButton').style.display = 'inline';
-
-  document.getElementById('recoverFormButton').style.display = 'none';
-  document.getElementById('registerFormButton').style.display = 'none';
-  document.getElementById('loginFormButton').style.display = 'none';
-
-}
-
 function recoverAccount() {
 
   var typedLogin = document.getElementById('recoverFieldLogin').value.trim();
@@ -85,7 +73,7 @@ function registerAccount() {
       if (status === 'ok') {
 
         document.cookie = 'login=' + typedLogin;
-        document.cookie = 'hash=' + data
+        document.cookie = 'hash=' + data;
 
         window.location.pathname = '/account.js';
 

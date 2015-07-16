@@ -1,6 +1,6 @@
-var boardUri;
+if (pageId === 'rangeBans') {
 
-if (!DISABLE_JS) {
+  var boardUri;
 
   var boardIdentifier = document.getElementById('boardIdentifier');
 

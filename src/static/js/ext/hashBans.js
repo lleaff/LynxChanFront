@@ -1,6 +1,6 @@
-var boardUri;
+if (pageId === 'hashBans') {
 
-if (!DISABLE_JS) {
+  var boardUri;
 
   var boardIdentifier = document.getElementById('boardIdentifier');
 

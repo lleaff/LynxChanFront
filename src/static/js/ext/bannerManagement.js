@@ -1,6 +1,6 @@
-var boardIdentifier = document.getElementById('boardIdentifier').value;
+if (pageId === 'bannerManagement') {
 
-if (!DISABLE_JS) {
+  var boardIdentifier = document.getElementById('boardIdentifier').value;
 
   document.getElementById('addJsButton').style.display = 'inline';
 

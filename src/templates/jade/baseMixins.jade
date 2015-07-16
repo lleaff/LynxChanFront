@@ -51,8 +51,10 @@ mixin help(anchor, helpText)
 
 
 //-------------------------------
+//- Must be called in a script tag
+//- Id must be a camelCased string
 mixin pageId(pageString)
-  script pageId = #{pageId};
+  | window.pageId = '#{pageString}';
 
 //-------------------------------------------------------------
 //-=Helper functions

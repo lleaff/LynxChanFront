@@ -1,4 +1,4 @@
-if (!DISABLE_JS) {
+if (pageId === 'bans') {
 
   var bansDiv = document.getElementById('bansDiv');
 

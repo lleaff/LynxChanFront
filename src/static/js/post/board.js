@@ -1,19 +1,3 @@
-var board = true;
-var boardUri = document.getElementById('boardIdentifier').value;
-
-if (!DISABLE_JS) {
-
-  var postButton = document.getElementById('jsButton');
-  postButton.style.display = '';
-
-  if (document.getElementById('captchaDiv')) {
-    document.getElementById('reloadCaptchaButton').style.display = '';
-  }
-
-  document.getElementById('formButton').style.display = 'none';
-
-}
-
 function reloadCaptcha() {
   document.cookie = 'captchaid=; path=/;';
 

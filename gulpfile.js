@@ -219,7 +219,12 @@ gulp.task('otherFiles', function() {
 var jsOutNames = [ 'pre', 'post', 'ext' ];
 /* Allows settings concat order when needed */
 var jsPaths = {
-  pre: [ paths.js+'pre/settings.js', paths.js+'pre/*.js' ],
+  pre: [
+    paths.js+'pre/settings.js',
+    paths.js+'pre/head.js',
+    paths.js+'pre/*I.js',
+    paths.js+'pre/tail.js'
+  ],
   post: [ paths.js+'post/*.js' ],
   ext: [ paths.js+'ext/*.js' ]
 };

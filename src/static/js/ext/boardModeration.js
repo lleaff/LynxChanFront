@@ -1,6 +1,6 @@
-var boardIdentifier;
+if (pageId === 'boardModeration') {
 
-if (!DISABLE_JS) {
+  var boardIdentifier;
 
   document.getElementById('transferJsButton').style.display = 'inline';
   document.getElementById('deleteJsButton').style.display = 'inline';

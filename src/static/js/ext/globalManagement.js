@@ -1,4 +1,5 @@
-if (!DISABLE_JS) {
+if (pageId === 'globalManagement') {
+
   document.getElementById('addJsButton').style.display = 'inline';
 
   document.getElementById('addFormButton').style.display = 'none';

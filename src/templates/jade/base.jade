@@ -19,7 +19,9 @@ html
         block styles
           for styleUrl in baseStylesUrls
             link(rel="stylesheet", href=styleUrl)
-        block pageId
+        block topInlineScript
+          script
+            block pageId
         block topScripts
           for scriptUrl in baseTopScriptsUrls
             script(src=scriptUrl)
