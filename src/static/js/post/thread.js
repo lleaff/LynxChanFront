@@ -100,7 +100,7 @@ function formatFileSize(size) {
 }
 
 function setUploadLinks(cell, file) {
-  var thumbLink = cell.getElementsByClassName('imageLink')[0];
+  var thumbLink = cell.getElementsByClassName('imgLink')[0];
   thumbLink.href = file.path;
 
   var img = document.createElement('img');
@@ -220,6 +220,13 @@ function addPost(post) {
   postCell.setAttribute('class', 'postCell');
 
   setPostInnerElements(boardUri, threadId, post, postCell);
+
+  var imageLinkElements = postCell.getElementsByClassName('imgLink');
+  var imageLinks = [];
+  for (var i = 0; i < imageLinkElements.length; ++i) {
+    imageLinks[i] = imageLinkElements[i];
+    processImageLink(imageLinks[i]);
+  }
 
   divPostings.appendChild(postCell);
 }

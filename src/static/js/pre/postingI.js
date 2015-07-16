@@ -4,26 +4,23 @@ if (pageId === 'board' || pageId === 'thread') {
   var loadingPreviews = [];
   var quoteReference = {};
 
-  document.getElementById('deleteJsButton').style.display = 'inline';
-  document.getElementById('reportJsButton').style.display = 'inline';
+  showElement(document.getElementById('deleteJsButton'));
+  showElement(document.getElementById('reportJsButton'));
 
   if (!board && document.getElementById('inputBan')) {
 
-    document.getElementById('banJsButton').style.display = 'inline';
-
-    document.getElementById('inputBan').style.display = 'none';
+    showElement(document.getElementById('banJsButton'));
+    removeElement(document.getElementById('inputBan'));
   }
 
-  document.getElementById('reportFormButton').style.display = 'none';
-  document.getElementById('deleteFormButton').style.display = 'none';
+  removeElement(document.getElementById('reportFormButton'));
+  removeElement(document.getElementById('deleteFormButton'));
 
   var quotes = document.getElementsByClassName('quoteLink');
 
-  for (var i = 0; i < quotes.length; i++) {
-    var quote = quotes[i];
-
+  quotes.forEach(function(quote) {
     processQuote(quote);
-  }
+  });
 
 }
 

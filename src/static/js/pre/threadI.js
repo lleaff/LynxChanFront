@@ -23,7 +23,7 @@ if (pageId === 'thread') {
       ' class="labelId"></span></span> <a class="linkSelf"></a><div class="panelUploads"></div>' +
       '<div class="divMessage" /></div><div class="divBanMessage"></div><br>';
 
-    var uploadCellTemplate = '<a class="nameLink"></a>(<span class="infoLabel"> </span>)<br><a class="imageLink"></a>';
+    var uploadCellTemplate = '<a class="nameLink"></a>(<span class="infoLabel"> </span>)<br><a class="imgLink"></a>';
 
     var sizeOrders = [ 'B', 'KB', 'MB', 'GB', 'TB' ];
 
