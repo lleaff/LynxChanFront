@@ -441,7 +441,7 @@ function markPost(id) {
   markedPosting = document.getElementById(id);
 
   if (markedPosting && markedPosting.className === 'postCell') {
-    markedPosting.setAttribute('class', 'markedPost');
+    markedPosting.className += ' markedPost';
   }
 }
 
