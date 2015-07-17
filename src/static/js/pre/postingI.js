@@ -18,6 +18,8 @@ if (pageId === 'board' || pageId === 'thread') {
 
   var quotes = document.getElementsByClassName('quoteLink');
 
+  console.log("QUOTES:", quotes);
+
   quotes.forEach(function(quote) {
     processQuote(quote);
   });

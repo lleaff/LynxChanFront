@@ -1,4 +1,3 @@
-
 function reloadCaptcha() {
   document.cookie = 'captchaid=; path=/;';
 
@@ -31,28 +30,30 @@ function saveThreadSettings() {
 
 }
 
-var replyCallback = function(status, data) {
+if (pageId === 'thread') {
+  var replyCallback = function(status, data) {
 
-  if (status === 'ok') {
-    document.getElementById('fieldMessage').value = '';
-    document.getElementById('fieldSubject').value = '';
+    if (status === 'ok') {
+      document.getElementById('fieldMessage').value = '';
+      document.getElementById('fieldSubject').value = '';
 
-    setTimeout(function() {
-      refreshPosts();
-    }, 2000);
-  } else {
-    alert(status + ': ' + JSON.stringify(data));
-  }
-};
+      setTimeout(function() {
+        refreshPosts();
+      }, 2000);
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  };
 
-replyCallback.stop = function() {
-  replyButton.style.display = 'inline';
+  replyCallback.stop = function() {
+    replyButton.style.display = 'inline';
 
-  if (!hiddenCaptcha) {
-    reloadCaptcha();
-    document.getElementById('fieldCaptcha').value = '';
-  }
-};
+    if (!hiddenCaptcha) {
+      reloadCaptcha();
+      document.getElementById('fieldCaptcha').value = '';
+    }
+  };
+}
 
 function padDateField(value) {
   if (value < 10) {
@@ -176,9 +177,12 @@ function setPostComplexElements(postCell, post, boardUri, threadId) {
   }
 
   var link = postCell.getElementsByClassName('linkSelf')[0];
-  link.innerHTML = post.postId;
+  var linkQuote = postCell.getElementsByClassName('linkQuote')[0];
+  linkQuote.innerHTML = post.postId;
+  linkQuote.href = '/'+boardUri+'res'+threadId+'.html#q'+post.postId;
 
-  var deletionCheckbox = postCell.getElementsByClassName('deletionCheckBox')[0];
+  var deletionCheckbox =
+    postCell.getElementsByClassName('deletionCheckBox')[0];
 
   link.href = '/' + boardUri + '/res/' + threadId + '.html#' + post.postId;
 
@@ -229,6 +233,14 @@ function addPost(post) {
   }
 
   divPostings.appendChild(postCell);
+
+  var quotes = postCell.getElementsByClassName('quoteLink');
+  for (i = 0; i < quotes.length; ++i) {
+    var quote = quotes[i];
+    processQuote(quote);
+  }
+
+  processPostingQuote(postCell.getElementsByClassName('linkQuote')[0]);
 }
 
 var refreshCallback = function(error, data) {
@@ -268,10 +280,12 @@ var refreshCallback = function(error, data) {
 
 };
 
-refreshCallback.stop = function() {
-  refreshButton.style.display = 'inline';
+if (pageId === 'thread') {
+  refreshCallback.stop = function() {
+    refreshButton.style.display = 'inline';
 
-};
+  };
+}
 
 function refreshPosts(manual) {
 
@@ -405,4 +419,34 @@ function changeRefresh() {
 
   autoRefresh = !autoRefresh;
 
+}
+
+if (pageId === 'thread') {
+  var postingQuotes = document.getElementsByClassName('linkQuote');
+
+  for (var i = 0; i < postingQuotes.length; i++) {
+    processPostingQuote(postingQuote[i]);
+  }
+}
+
+function markPost(id) {
+  if (isNaN(id)) { return; }
+
+  if (markedPosting && markedPosting.className === 'markedPost') {
+    markedPosting.setAttribute('class', 'postCell');
+  }
+
+  markedPosting = document.getElementById(id);
+
+  if (markedPosting && markedPosting.className === 'postCell') {
+    markedPosting.setAttribute('class', 'markedPost');
+  }
+}
+
+function processPostingQuote(link) {
+  link.onclick = function() {
+    var toQuote = link.href.match(/#q(\d+)/);
+
+    document.getElementById('fieldMessage').value += '>>' + toQuote[1];
+  };
 }

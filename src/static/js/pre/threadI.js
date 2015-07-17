@@ -16,11 +16,14 @@ if (pageId === 'thread') {
     var manualRefresh;
     var foundPosts;
     var hiddenCaptcha = !document.getElementById('captchaDiv');
+    var markedPosting;
 
-    var postCellTemplate = '<input type="checkbox" class="deletionCheckBox">' +
-      ' <span class="labelSubject"></span> <a class="linkName"></a> <span class="labelRole">' +
+    var postCellTemplate =
+      '<input type="checkbox" class="deletionCheckBox">' +
+      '<span class="labelSubject"></span> <a class="linkName"></a> <span class="labelRole">' +
       '</span> <span class="labelCreated"></span><span class="spanId"> Id: <span' +
-      ' class="labelId"></span></span> <a class="linkSelf"></a><div class="panelUploads"></div>' +
+      ' class="labelId"></span></span> <a class="linkSelf"></a><div class="linkQuote"></div>' +
+      '<div class="panelUploads"></div>' +
       '<div class="divMessage" /></div><div class="divBanMessage"></div><br>';
 
     var uploadCellTemplate = '<a class="nameLink"></a>(<span class="infoLabel"> </span>)<br><a class="imgLink"></a>';
@@ -59,6 +62,15 @@ if (pageId === 'thread') {
     }
 
     changeRefresh();
+
+    var hash = window.location.hash.substring(1);
+
+    if (hash.indexOf('q') === 0 && hash.length > 1) {
+      document.getElementById('fieldMessage').value = '>>' +
+        hash.substring(1);
+    } else if (hash.length > 1) {
+      markPost(hash);
+    }
 
   });
 }
