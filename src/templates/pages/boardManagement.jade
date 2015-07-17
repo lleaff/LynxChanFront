@@ -39,8 +39,8 @@ block content
           value=l.guiTransferBoardOwnership)
 
     h2 #{l.titDeleteBoard}
-    form(method='post', action='/deleteBoard.js',
-      enctype='multipart/form-data')
+    form(action='/deleteBoard.js', method='post',
+        enctype='multipart/form-data')
       fieldset
         input#deletionIdentifier(name='boardUri', type='hidden')
         input.button.submit#deleteBoardFormButton(type='submit',
@@ -49,12 +49,22 @@ block content
           onclick='deleteBoard()', value=l.guiDeleteBoard,
           style='display: none;')
 
+    h2 #{l.titCustomCSS}
+    form(action='/setCustomCss.js', method='post',
+        enctype='multipart/form-data')
+      input#customCssIdentifier(type='hidden', name='boardUri')
+      input#files(type='files', name='files')
+      input#cssFormButton(type='submit', value=l.guiUploadCustomCSS)
+      input#cssJsButton(type='button', value=l.guiUploadCustomCSS,
+          onclick='setCss()', style='display: none')
+      +help('', l.infoCustomCSS)
+
     h2 #{l.titVolunteers}
     section#volunteersDiv
 
     h2 #{l.titBoardSettings}
     form(action='/setBoardSettings.js', method='post',
-      enctype='multipart/form-data')
+        enctype='multipart/form-data')
       fieldset
         input#boardSettingsIdentifier(type='hidden', name='boardUri')
         label(for='boardName') #{l.guiBoardName}

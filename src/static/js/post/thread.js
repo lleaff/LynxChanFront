@@ -36,6 +36,8 @@ if (pageId === 'thread') {
     if (status === 'ok') {
       document.getElementById('fieldMessage').value = '';
       document.getElementById('fieldSubject').value = '';
+      //document.getElementById('files').type = 'text';
+      document.getElementById('files').type = 'file';
 
       setTimeout(function() {
         refreshPosts();

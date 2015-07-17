@@ -4,17 +4,24 @@ if (pageId === 'boardManagement') {
 
   if (document.getElementById('ownerControlDiv')) {
 
-    document.getElementById('addVolunteerJsButton').style.display = 'inline';
-    document.getElementById('transferBoardJsButton').style.display = 'inline';
-    document.getElementById('deleteBoardJsButton').style.display = 'inline';
-    document.getElementById('saveSettingsJsButton').style.display = 'inline';
+    showElement(document.getElementById('addVolunteerJsButton'));
+    removeElement(document.getElementById('addVolunteerFormButton'));
 
-    document.getElementById('saveSettingsFormButton').style.display = 'none';
-    document.getElementById('deleteBoardFormButton').style.display = 'none';
-    document.getElementById('addVolunteerFormButton').style.display = 'none';
-    document.getElementById('transferBoardFormButton').style.display = 'none';
+    showElement(document.getElementById('transferBoardJsButton'));
+    removeElement(document.getElementById('transferBoardFormButton'));
 
-    boardIdentifier = document.getElementById('addVolunteerBoardIdentifier').value;
+    showElement(document.getElementById('deleteBoardJsButton'));
+    removeElement(document.getElementById('deleteBoardFormButton'));
+
+    showElement(document.getElementById('saveSettingsJsButton'));
+    removeElement(document.getElementById('saveSettingsFormButton'));
+
+    showElement(document.getElementById('cssJsButton'));
+    removeElement(document.getElementById('cssFormButton'));
+
+
+    boardIdentifier =
+      document.getElementById('addVolunteerBoardIdentifier').value;
 
     var volunteerDiv = document.getElementById('volunteersDiv');
 
@@ -141,3 +148,53 @@ function deleteBoard() {
   });
 
 }
+
+function makeCssRequest(files) {
+  apiRequest('setCustomCss', {
+    files : files || [],
+    boardUri : boardIdentifier,
+  }, function requestComplete(status, data) {
+
+    //document.getElementById('files').type = 'text';
+    document.getElementById('files').type = 'file';
+
+    if (status === 'ok') {
+
+      if (files) {
+        alert('New CSS set.');
+      } else {
+        alert('CSS deleted.');
+      }
+
+    } else {
+      alert(status + ': ' + JSON.stringify(data));
+    }
+  });
+}
+
+function setCss() {
+
+  var file = document.getElementById('files').files[0];
+
+  if (!file) {
+    makeCssRequest();
+    return;
+  }
+
+  var reader = new FileReader();
+
+  reader.onloadend = function(e) {
+
+    // style exception, too simple
+    makeCssRequest([ {
+      name : file.name,
+      content : reader.result
+    } ]);
+    // style exception, too simple
+
+  };
+
+  reader.readAsDataURL(file);
+
+}
+
