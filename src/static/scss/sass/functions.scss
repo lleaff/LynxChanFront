@@ -27,16 +27,16 @@
   $weightedSaturationContrast: abs($strongestSaturationContrast / 100) *
     contrast($color, $contrastedColor);
  @return mix(
-    $color,
     scale-color($color, $lightness: $weightedSaturationContrast),
+    $color,
     $weight);
 }
 @function intensify-lightness($color, $contrastedColor, $weight: 50%) {
   $weightedContrast: abs($strongestContrast / 100) *
     contrast($color, $contrastedColor);
  @return mix(
-    $color,
     scale-color($color, $lightness: $weightedContrast),
+    $color,
     $weight);
 }
 // Apply all intensify functions
@@ -52,16 +52,17 @@
 @function soften-saturation($color, $contrastedColor, $weight: 50%) {
     $weightedSaturationContrast: abs($weakerSaturationContrast / 100) *
       contrast($color, $contrastedColor);
-  @return mix($color,
+  @return mix(
     scale-color($color, $lightness: -$weightedSaturationContrast),
+    $color,
     $weight);
 }
 @function soften-lightness($color, $contrastedColor, $weight: 50%) {
   $weightedContrast: abs($weakerContrast / 100) *
     contrast($color, $contrastedColor);
  @return mix(
-    $color,
     scale-color($color, $lightness: -$weightedContrast),
+    $color,
     $weight);
 }
 // Apply all soften functions
