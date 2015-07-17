@@ -136,7 +136,10 @@ if (pageId === 'board' || pageId === 'thread') {
   };
 
   var imageLinkElements = document.getElementsByClassName('imgLink');
-  var imageLinks = [].concat(imageLinkElements);
+  var imageLinks = [];
+  for (var i = 0; i < imageLinkElements.length; ++i) {
+    imageLinks[i] = imageLinkElements[i];
+  }
 
   imageLinks.forEach(function(imgLink) {
     processImageLink(imgLink);
@@ -149,7 +152,7 @@ function setClickableImage(link) {
   var parent = link.parentNode;
 
   link.onclick = function(mouseEvent) {
-    expandImage(mouseEvent, link);
+    return expandImage(mouseEvent, link);
   };
 }
 
@@ -174,16 +177,17 @@ function expandImage(mouseEvent, link) {
 
   /* Click animation could be inserted here */
 
-  var expanded = link.getElementsByClassName('imgExpand')[0];
+  var expanded = link.getElementsByClassName('imgExpanded')[0];
 
   /* If image has already been expanded in the past,
    * don't create another <img> */
   if (expanded) {
     thumb.style.display = 'none';
     showElement(expanded);
-
+    return false;
   } else {
     var expandedSrc = link.href;
+
     /* If the thumb is the same image as the source, do nothing */
     if (thumb.src === expandedSrc) {
       return false;

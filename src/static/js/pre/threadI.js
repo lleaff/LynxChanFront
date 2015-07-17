@@ -1,22 +1,22 @@
 if (pageId === 'thread') {
   bodyOnLoadStack.push(function() {
 
-    var boardUri;
-    var threadId;
-    var board = false;
-    var replyButton;
-    var refreshButton;
-    var lastReplyId = 0;
-    var lastRefreshWaiting = 0;
-    var refreshLabel;
-    var autoRefresh;
-    var refreshTimer;
-    var lastRefresh;
-    var currentRefresh;
-    var manualRefresh;
-    var foundPosts;
-    var hiddenCaptcha = !document.getElementById('captchaDiv');
-    var markedPosting;
+    window.boardUri = undefined;
+    window.threadId = undefined;
+    window.board = false;
+    window.replyButton = undefined;
+    window.refreshButton = undefined;
+    window.lastReplyId = 0;
+    window.lastRefreshWaiting = 0;
+    window.refreshLabel = undefined;
+    window.autoRefresh = undefined;
+    window.refreshTimer = undefined;
+    window.lastRefresh = undefined;
+    window.currentRefresh = undefined;
+    window.manualRefresh = undefined;
+    window.foundPosts = undefined;
+    window.hiddenCaptcha = !document.getElementById('captchaDiv');
+    window.markedPosting = undefined;
 
     var postCellTemplate =
       '<input type="checkbox" class="deletionCheckBox">' +

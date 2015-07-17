@@ -1,7 +1,7 @@
 if (pageId === 'board') {
   bodyOnLoadStack.push(function() {
 
-    var board = true;
+    window.board = true;
     var boardUri = document.getElementById('boardIdentifier').value;
 
     var postButton = document.getElementById('jsButton');

@@ -3,7 +3,7 @@
 var bodyOnLoadStack = [];
 
 function removeElement(domElement) {
-  domElement.parent.removeChild(domElement);
+  domElement.parentNode.removeChild(domElement);
 }
 
 function showElement(domElement) {

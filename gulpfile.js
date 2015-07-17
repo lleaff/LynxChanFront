@@ -222,6 +222,9 @@ var jsPaths = {
   pre: [
     paths.js+'pre/settings.js',
     paths.js+'pre/head.js',
+    paths.js+'pre/boardI.js',
+    paths.js+'pre/threadI.js',
+    paths.js+'pre/postingI.js',
     paths.js+'pre/*I.js',
     paths.js+'pre/tail.js'
   ],

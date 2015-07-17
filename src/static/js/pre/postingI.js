@@ -1,28 +1,27 @@
 if (pageId === 'board' || pageId === 'thread') {
+  bodyOnLoadStack.push(function() {
+    var loadedPreviews = [];
+    var loadingPreviews = [];
+    var quoteReference = {};
 
-  var loadedPreviews = [];
-  var loadingPreviews = [];
-  var quoteReference = {};
+    showElement(document.getElementById('deleteJsButton'));
+    showElement(document.getElementById('reportJsButton'));
 
-  showElement(document.getElementById('deleteJsButton'));
-  showElement(document.getElementById('reportJsButton'));
+    if (!board && document.getElementById('inputBan')) {
 
-  if (!board && document.getElementById('inputBan')) {
+      showElement(document.getElementById('banJsButton'));
+      removeElement(document.getElementById('inputBan'));
+    }
 
-    showElement(document.getElementById('banJsButton'));
-    removeElement(document.getElementById('inputBan'));
-  }
+    removeElement(document.getElementById('reportFormButton'));
+    removeElement(document.getElementById('deleteFormButton'));
 
-  removeElement(document.getElementById('reportFormButton'));
-  removeElement(document.getElementById('deleteFormButton'));
+    var quotes = document.getElementsByClassName('quoteLink');
 
-  var quotes = document.getElementsByClassName('quoteLink');
+    for (var i = 0; i < quotes.length; ++i) {
+      processQuote(quote);
+    }
 
-  console.log("QUOTES:", quotes);
-
-  quotes.forEach(function(quote) {
-    processQuote(quote);
   });
-
 }
 

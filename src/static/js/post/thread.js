@@ -427,7 +427,7 @@ if (pageId === 'thread') {
   var postingQuotes = document.getElementsByClassName('linkQuote');
 
   for (var i = 0; i < postingQuotes.length; i++) {
-    processPostingQuote(postingQuote[i]);
+    processPostingQuote(postingQuotes[i]);
   }
 }
 
