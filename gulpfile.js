@@ -355,6 +355,10 @@ gulp.task('browser-sync', ['build'], function() {
     ['css'])
     .on('change', serverRefresh);
   gulp.watch(
+    [filesRecur.js],
+    ['js'])
+    .on('change', serverRefresh);
+  gulp.watch(
     [filesRecur.jade, filesRecur.jadeExtras, filesRecur.jadeStatic],
     ['html', 'jade', 'jadeStatic', 'browserReload']);
   gulp.watch(
