@@ -37,12 +37,41 @@ html, body {
     height: $pageFooterHeight;
   }
 }
-
 @include compensatePageFooterHeight($pageFooterHeight);
 
 #pageFooter {
   width: 100%;
 }
+
+@mixin extendAndPaddBeyondPostForm () {
+  margin-right: -$postFormExternalWidth - $defaultPadding * 2;
+  padding-right: $postFormExternalWidth - $defaultPadding * 2;
+  margin-left: -$defaultPadding;
+  padding-left: $defaultPadding;
+}
+
+.opCell {
+  @include extendAndPaddBeyondPostForm;
+}
+
+#postFormWrapper {
+  padding: $postFormExternalPadding;
+  width: $postFormExternalWidth;
+  display: block;
+  float: right;
+}
+
+#threadContent, #boardContent {
+  margin-right: $postFormExternalWidth;
+  padding-right: $defaultPadding;
+}
+
+#divPages {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
 
 /*------------------------------------------------------------*
  * =General
@@ -57,7 +86,8 @@ body {
 }
 
 a {
-  color: mix(palette('fgMain'), palette('accentA'));
+  color: $linkColor;
+  text-decoration: none;
 }
 
 code {
@@ -82,6 +112,7 @@ hr {
  * =Content, Middle
  *------------------------------------------------------------*/
 #middle {
+  position: relative;
   padding: $defaultPadding;
 }
 
@@ -148,30 +179,6 @@ input[type="checkbox"] {
 /*------------------------------------------------------------*
  * =Page specific
  *------------------------------------------------------------*/
-/* =Board and Thread
- *------------------------------*/
-.opCell {
-  @include mainColors();
-}
-.postCell {
-  @include altColors();
-}
-
-.panelUploads {
-  .fileInfo {
-
-  }
-  .infoLabel {
-  }
-
-  .imgLink {
-    display: block;
-  }
-
-}
-
-.uploadCell {
-}
 
 /* =Post content
 /* =Catalog

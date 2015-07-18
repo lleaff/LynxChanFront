@@ -2,7 +2,7 @@ extends ../jade/base
 
 a(href='/account.js') #{l.titAccount}
 block headerTitle
-  +title(siteTitle)
+  +title(siteTitle, '', '.')
 
 block pageMenu
   +pageMenuEntry
@@ -10,10 +10,10 @@ block pageMenu
 
 block content
   include $LANGUAGE_PACK/jade/frontPageMessage.jade
-  section
+  section#indexBoardList
     h1 #{l.titTopBoards}
     nav#divBoards
-    footer: h2: a(href='/boards.js') #{l.titAllBoards}
+    footer: a(href='/boards.js') #{l.titAllBoards}
 
 block pageId
   +pageId('index')

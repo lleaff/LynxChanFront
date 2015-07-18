@@ -1,0 +1,15 @@
+@import '../sass';
+
+#indexBoardList {
+  display: block;
+  margin: 0 auto;
+}
+
+#divBoards {
+  padding-bottom: $defaultPadding;
+
+  a {
+    font-family: $monospaceFont;
+    text-decoration: none;
+  }
+}

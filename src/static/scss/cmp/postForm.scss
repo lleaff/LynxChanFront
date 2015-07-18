@@ -1,14 +1,5 @@
 @import '../sass';
 //------------------------------
-
-$postFormExternalPadding: 1em;
-$postFormPadding: 1em;
-
-// $captchaImageRealDimensions: 300*100px
-$captchaImageWidth: (300 / $emMostCommonPxSize) * 1em;
-
-$postFormInternalWidth: $captchaImageWidth + $postFormPadding;
-
 $singleLineFieldRowHeight: 1.5em;
 
 //------------------------------
@@ -16,9 +7,6 @@ $singleLineFieldRowHeight: 1.5em;
 #postFormWrapper {
   border: $borderStyle $borderWidth $postFormBorderColor;
   background: $postFormBg;
-  padding: $postFormExternalPadding;
-  display: inline-block; // Shrink width to fit content
-  float: right;
 }
 
 .postForm {

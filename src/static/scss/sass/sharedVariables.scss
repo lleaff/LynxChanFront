@@ -1,14 +1,32 @@
-/* =General
-------------------------------------------------------------*/
+@import 'defaultTheme';
+
+// =General
+//------------------------------------------------------------
 $emMostCommonPxSize: 14;
 
-/* =Inputs
-------------------------------------------------------------*/
+// =Inputs
+//------------------------------------------------------------
 $buttonPadding: initial;
 $buttonMargin: initial;
 
-/* =Footer
-------------------------------------------------------------*/
+// =Post form
+//------------------------------------------------------------
+// $captchaImageRealDimensions: 300*100px
+$captchaImageWidth: (300 / $emMostCommonPxSize) * 1em;
+$postFormPadding: 1em;
+$postFormExternalPadding: 1em;
+$postFormInternalWidth: $captchaImageWidth + $postFormPadding * 2;
+$postFormExternalWidth: $postFormInternalWidth + $postFormPadding * 2;
+
+// =Posts layout
+//------------------------------------------------------------
+$opPaddingRight: $postFormExternalWidth + ($defaultPadding * 2);
+$opPaddingLeft: $defaultPadding * 2; 
+$replyMarginRight: $defaultPadding * 1.2;
+$replyMarginLeft: $opPaddingLeft + ($replyMarginRight - $opPaddingLeft); 
+
+// =Footer
+//------------------------------------------------------------
 $pageFooterRowCount: 3;
 $pageFooterItemsSize: 0.7em;
 $pageFooterPaddingTop: 1em;

@@ -20,3 +20,6 @@ $borderStyle: solid;
 $borderWidth: 1px;
 
 $defaultPadding: 1em;
+
+//$markedPostHue: hue(map-get($palette-colors, 'accentA'));
+$markedPostHue: hue(#00f);//DEBUG

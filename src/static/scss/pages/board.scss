@@ -1,0 +1,8 @@
+@import '../sass';
+
+#divPages {
+  text-align: center;
+
+  a:before { content: "["; }
+  a:after  { content: "]"; }
+}

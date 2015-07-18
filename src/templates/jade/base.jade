@@ -38,17 +38,18 @@ html
                 block headerTitle
                   #{siteTitle}
               //-Menu
-              nav#userMenu
-                ul
-                  +userMenuEntry
-                    a(href='/account.js') #{l.guiAccount}
-                  block userMenu
+              nav#userMenu: ul
+                +userMenuEntry
+                  a(href='/account.js') #{l.guiAccount}
+                block userMenu
           #middle
             block middle
-              block pageMenu
               //-Content
-              section#content
-                block content
+              #contentWrapper
+                section(class=pageId ? pageId+'Content' : 'content')
+                  nav#pageMenu: ul
+                    block pageMenu
+                  block content
         //-Footer
         footer#pageFooter
           block footer

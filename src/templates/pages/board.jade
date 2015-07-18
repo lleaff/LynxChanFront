@@ -1,5 +1,7 @@
 extends ../jade/base
 
+- var pageId = 'board';
+
 block headerLogo
   img#bannerImage
 
@@ -21,6 +23,9 @@ block prepend middle
 
 block content
   main#divPostings
+
+  nav#divPages
+
   label(for='reportFieldReason') #{l.guiReportReason}
     input#reportFieldReason(type='text', name='reason',
       placeholder=l.phReportReason)
@@ -37,7 +42,5 @@ block content
   input.button.submit#reportJsButton(type='button',
     onclick='reportPosts()', value=l.guiReport, style='display: none;')
 
-  nav#divPages
-
 block pageId
-  +pageId('board')
+  +pageId(pageId)

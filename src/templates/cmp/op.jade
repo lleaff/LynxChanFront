@@ -1,10 +1,13 @@
 extends ../jade/postContent
 
-block append postInfo
-  a.linkReply #{l.guiReplyLink}
+block variables
+  - var postType = 'Op'
+
+block linkReply
+  li: a.linkReply [#{l.guiReplyLink}]
 
 block opIndicators
-  span.threadStatus
-    span.lockIndicator.fa.fa-lock(title=l.guiLockLabel)
-    span.pinIndicator.fa.fa-thumb-tack(title=l.guiPinlabel)
-    span.cyclicIndicator.fa.fa-refresh(title=l.guiCyclicLabel)
+  li: ul.threadStatus
+    li.lockIndicator.fa.fa-lock(title=l.guiLockLabel)
+    li.pinIndicator.fa.fa-thumb-tack(title=l.guiPinlabel)
+    li.cyclicIndicator.fa.fa-refresh(title=l.guiCyclicLabel)
