@@ -1,6 +1,6 @@
 @import '../sass';
 
-.postOp, .postCell {
+.postOp, .opWrapper {
   .labelRole {
     color: take-lightness(palette('warning'), $linkColor);
   }

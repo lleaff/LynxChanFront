@@ -12,7 +12,7 @@ $postInternalPadding: $defaultPadding * 0.9;
 
 $postOpBorderColor: intensify($opBackgroundColor, palette('fgMain'), 4);
 $postOpSpecialBorderColor: intensify(palette('bgAlt'), palette('fgMain'), 10);
-.opCell {
+.opWrapper {
   $opRegularBorder: 1px solid $postOpBorderColor;
 
   margin-top: $defaultPadding * 2.5; //Temporary TODO
@@ -50,13 +50,13 @@ $markedPostHue: hue(#0f0)!default;//DEBUG
   background-color: change-color($replyBackgroundColor, $hue: $markedPostHue);
   border-color: change-color($postReplyBorderColor, $hue: $markedPostHue);
 }
-.opCell .markedPost {
+.opWrapper .markedPost {
   background-color: change-color($opBackgroundColor, $hue: $markedPostHue);
 }
 
 
 /* Containers */
-.opCell {
+.opWrapper {
   //background-color: $opBackgroundColor;
 }
 .postCell {
@@ -89,7 +89,7 @@ $markedPostHue: hue(#0f0)!default;//DEBUG
   display: inline-block;
 }
 
-.opCell, .postCell {
+.opWrapper, .postCell {
   display: block;
 
   article{

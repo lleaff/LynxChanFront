@@ -50,7 +50,7 @@ html, body {
   padding-left: $defaultPadding;
 }
 
-.opCell {
+.opWrapper {
   @include extendAndPaddBeyondPostForm;
 }
 

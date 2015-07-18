@@ -2,6 +2,8 @@ block variables
   - var postType = 'Reply';
 
 block outer
+  if postType == 'Op'
+    | <div class="opWrapper">
   article(class='post'+postType)
     header(class='post'+postType+'Header')
       block postInfo
@@ -22,3 +24,5 @@ block outer
       .panelUploads
       p.divMessage
     .divBanMessage
+  if postType == 'Op'
+    | </div>
