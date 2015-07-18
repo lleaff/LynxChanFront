@@ -31,7 +31,7 @@ if (pageId === 'thread') {
     var sizeOrders = [ 'B', 'KB', 'MB', 'GB', 'TB' ];
 
     boardUri = document.getElementById('boardIdentifier').value;
-    var divPostings = document.getElementById('divPostings');
+    var divPosts = document.getElementsByClassName('divPosts')[0];
 
     showElement(document.getElementsByClassName('divRefresh')[0]);
 

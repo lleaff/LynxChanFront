@@ -234,7 +234,7 @@ function addPost(post) {
     processImageLink(imageLinks[i]);
   }
 
-  divPostings.appendChild(postCell);
+  divPosts.appendChild(postCell);
 
   var quotes = postCell.getElementsByClassName('quoteLink');
   for (i = 0; i < quotes.length; ++i) {
