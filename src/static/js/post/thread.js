@@ -222,6 +222,10 @@ function addPost(post) {
   var postCell = document.createElement('div');
   postCell.innerHTML = postCellTemplate;
 
+  if (post.files && post.files.length > 1) {
+    postCell.className += ' multipleUploads';
+  }
+
   postCell.id = post.postId;
   postCell.setAttribute('class', 'postCell');
 

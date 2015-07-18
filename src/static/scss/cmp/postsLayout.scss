@@ -88,6 +88,11 @@ $markedPostHue: hue(#0f0)!default;//DEBUG
 .uploadCell {
   display: inline-block;
 }
+// Fill width when post has multiple files
+.multipleUploads .panelUploads {
+  display: block;
+  width: 100%;
+}
 
 .opWrapper, .postCell {
   display: block;
