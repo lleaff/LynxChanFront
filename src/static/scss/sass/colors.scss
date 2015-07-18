@@ -5,18 +5,21 @@
 @function palette($key) {
   @return map-get($palette-colors, $key);
 }
+
 //============================================================
 // Colors here must reference colors in the theme's palette with
 //  palette('key'), without assuming anything about their value
-//  (except sufficient contrast between foreground and background)
+//  except sufficient contrast between foreground and background.
 //============================================================
 
+
+// =Contrast
 //============================================================
 // [-100, 100]
 // > 0: dark on light
 // < 0: light on dark
-$mainContrast: contrast(palette('fgMain'), palette('bgMain'));
-$altContrast:  contrast(palette('fgAlt'), palette('bgAlt'));
+$mainContrast: percToNum(contrast(palette('fgMain'), palette('bgMain')));
+$altContrast:  percToNum(contrast(palette('fgAlt'), palette('bgAlt')));
 
 $strongestContrast: max(abs($mainContrast), abs($altContrast));
 $weakerContrast:    min(abs($mainContrast), abs($altContrast));
@@ -24,8 +27,8 @@ $weakerContrast:    min(abs($mainContrast), abs($altContrast));
 // [-100, 100]
 // > 0: saturated on dull
 // < 0: dull on saturated
-$mainSaturationContrast: contrast-saturation(palette('fgMain'), palette('bgMain'));
-$altSaturationContrast:  contrast-saturation(palette('fgAlt'), palette('bgAlt'));
+$mainSaturationContrast: percToNum(contrast-saturation(palette('fgMain'), palette('bgMain')));
+$altSaturationContrast:  percToNum(contrast-saturation(palette('fgAlt'), palette('bgAlt')));
 
 $strongestSaturationContrast:
   max(abs($mainSaturationContrast), abs($altSaturationContrast));

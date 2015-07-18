@@ -27,7 +27,7 @@
   $weightedSaturationContrast: abs($strongestSaturationContrast / 100) *
     contrast($color, $contrastedColor);
  @return mix(
-    scale-color($color, $lightness: $weightedSaturationContrast),
+    adjust-color($color, $lightness: $weightedSaturationContrast),
     $color,
     $weight);
 }
@@ -35,7 +35,7 @@
   $weightedContrast: abs($strongestContrast / 100) *
     contrast($color, $contrastedColor);
  @return mix(
-    scale-color($color, $lightness: $weightedContrast),
+    adjust-color($color, $lightness: $weightedContrast),
     $color,
     $weight);
 }
@@ -50,18 +50,19 @@
 // Soften
 //------------------------------
 @function soften-saturation($color, $contrastedColor, $weight: 50%) {
-    $weightedSaturationContrast: abs($weakerSaturationContrast / 100) *
+    $weightedSaturationContrast: abs($weakerSaturationContrast) *
       contrast($color, $contrastedColor);
   @return mix(
-    scale-color($color, $lightness: -$weightedSaturationContrast),
+    adjust-color($color, $lightness: $weightedSaturationContrast),
     $color,
     $weight);
 }
 @function soften-lightness($color, $contrastedColor, $weight: 50%) {
-  $weightedContrast: abs($weakerContrast / 100) *
+
+  $weightedContrast: abs($weakerContrast) *
     contrast($color, $contrastedColor);
  @return mix(
-    scale-color($color, $lightness: -$weightedContrast),
+    adjust-color($color, $lightness: $weightedContrast),
     $color,
     $weight);
 }
@@ -102,6 +103,12 @@
 @function take-alpha($color, $sourceColor, $weight: 100%) {
   @return mix(change-color($color, $alpha: alpha($sourceColor)),
     $color, $weight);
+}
+
+//
+//------------------------------------------------------------
+@function percToNum($percentage) {
+  @return ($percentage / 100%);
 }
 
 //============================================================
