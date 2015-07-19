@@ -38,6 +38,7 @@ $fontColorContrast: 0.5 * $mainContrast!default;
 
 //=============================================================
 $linkColor:           mix(palette('fgMain'), palette('accentA'))!default;
+$linkHoverColor:      take-color($linkColor, palette('accentB'))!default;
 
 //=============================================================
 $borderColorMain:     mix(palette('bgMain'), palette('fgMain'), 80%);
@@ -53,6 +54,23 @@ $borderColorAlt:      mix(palette('bgAlt'), palette('fgAlt'), 80%);
   color:              palette('fgAlt');
   border-color:       $borderColorAlt;
 }
+
+// Posts
+//============================================================
+// Header
+$nameColor:           take($linkColor, palette('accentA'),
+                        $saturation: 100, $hue: 100)!default;
+$nameColor:           take($linkColor, palette('accentB'),
+                        $saturation: 100, $hue: 100)!default;
+// false -> normal, true -> bold or a numerical value (400 = normal, 700 = bold)
+$nameBold:            550!default;
+$nameEmailColor:      $linkColor!default;
+$roleColor:           take-lightness(palette('warning'), $linkColor)!default;
+
+$linkReplyColor:      $linkColor!default;
+// Message
+$greenTextColor:      take-lightness(#0f0, palette('fgMain'), 50%)!default;
+
 
 // =Buttons
 //=============================================================

@@ -6,23 +6,24 @@ block outer
     | <div class="opWrapper">
   article(class='post'+postType)
     header(class='post'+postType+'Header')
-      block postInfo
-        ul
-          li: input.deletionCheckBox(type='checkbox')
-          li.labelSubject
-          li: a.linkName
-          li.labelRole
-          li.labelCreated
-          li.spanId
-          li.labelId
-          block opIndicators
-          li: a.linkSelf No.
-          li: a.linkQuote
-          li.panelRange #{l.guiIPRangeLabel}: #[span.labelRange]
-          block linkReply
+      .postHeaderInner
+        input.deletionCheckBox(type='checkbox')
+        block postInfo
+          ul
+            li.labelSubject
+            li: a.linkName
+            li.labelRole
+            li.spanId #{l.postHeader.threadWiseIDPrefix}:#[span.labelId]
+            li.labelCreated
+            block opIndicators
+            li
+              | #[a.linkSelf #{l.postHeader.postNumberPrefix}]#[a.linkQuote]
+            li.panelRange #{l.guiIPRangeLabel}: #[span.labelRange]
+            block linkReply
     section.postContent
       .panelUploads
       p.divMessage
     .divBanMessage
   if postType == 'Op'
     | </div>
+    .labelOmission

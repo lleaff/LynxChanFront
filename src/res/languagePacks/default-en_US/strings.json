@@ -186,5 +186,10 @@
     "Board":                          "Board",
     "Time":                           "Time",
     "Description":                    ""
+  },
+  "postHeader": {
+    "postNumberPrefix":               "No.",
+    "threadWiseIDPrefix":             "ID"
   }
+
 }

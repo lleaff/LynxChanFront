@@ -43,15 +43,24 @@ html, body {
   width: 100%;
 }
 
-@mixin extendAndPaddBeyondPostForm () {
-  margin-right: -$postFormExternalWidth - $defaultPadding * 2;
-  padding-right: $postFormExternalWidth - $defaultPadding * 2;
-  margin-left: -$defaultPadding;
-  padding-left: $defaultPadding;
+@mixin extendAndPaddBeyondPostForm ($plus: false) {
+  @if $plus == false {
+  } @else {
+  }
 }
 
 .opWrapper {
-  @include extendAndPaddBeyondPostForm;
+    margin-right: -$defaultPadding;
+    padding-right: $postFormExternalWidth + $defaultPadding * 2;
+    margin-left: -$defaultPadding;
+    padding-left: $defaultPadding;
+}
+.postOp{ 
+  margin-left: -$defaultPadding;
+}
+.divPosts {
+    margin-right: $postFormExternalWidth + $defaultPadding * 2;
+    margin-left: -$defaultPadding;
 }
 
 #postFormWrapper {
@@ -69,7 +78,8 @@ html, body {
 #divPages {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 90%;
+  width: calc(100% - #{$defaultPadding});
 }
 
 
@@ -88,6 +98,9 @@ body {
 a {
   color: $linkColor;
   text-decoration: none;
+  &:hover {
+    color: $linkHoverColor;
+  }
 }
 
 code {

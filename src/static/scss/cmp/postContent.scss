@@ -1,13 +1,13 @@
 @import '../sass';
 
-.postOp, .opWrapper {
+.postCell, .opWrapper {
   .labelRole {
-    color: take-lightness(palette('warning'), $linkColor);
+    color: $roleColor;
   }
 }
 
 .greenText {
-  color: take-lightness(#0f0, palette('fgMain'), 60%);
+  color: $greenTextColor;
 }
 
 .spoiler {

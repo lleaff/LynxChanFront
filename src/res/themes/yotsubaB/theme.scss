@@ -2,24 +2,34 @@
 //  Yotsuba B
 //------------------------------------------------------------
 $palette-colors: (
-  'bgMain':     #eef2ff,
-  'fgMain':     #000000,
-  'bgAlt':      #d6daf0,
-  'fgAlt':      #000000,
+  'bgMain':      #eef2ff,
+  'fgMain':      #000000,
+  'bgAlt':       #d6daf0,
+  'fgAlt':       #000000,
 
-  'accentA':    #9988ee,
-  'accentB':    #e04000,
+  'accentA':     #9988ee,
+  'accentB':     #e04000,
 
-  'warning':    #f9b3bc
+  'warning':     #f9b3bc
 );
 
+//------------------------------------------------------------
 //$regularFont: ;
-$monospaceFont: 'Meslo LG S DZ', Monaco, monospace;
+$monospaceFont:  'Meslo LG S DZ', Monaco, monospace;
 
-$borderStyle: solid;
-$borderWidth: 1px;
+$borderStyle:    solid;
+$borderWidth:    1px;
 
 $defaultPadding: 1em;
 
 //$markedPostHue: hue(map-get($palette-colors, 'accentA'));
-$markedPostHue: hue(#00f);//DEBUG
+$markedPostHue:  hue(#00f);//DEBUG
+
+$linkHoverColor: #f00;
+
+$nameColor:      #117743;
+$nameBold:       600;
+$roleColor:      #f00;
+$subjectColor:   #0F0C5D;
+
+$greenTextColor: #789922;

@@ -24,7 +24,7 @@
 // Intensify
 //------------------------------
 @function intensify-saturation($color, $contrastedColor, $weight: 50%) {
-  $weightedSaturationContrast: abs($strongestSaturationContrast / 100) *
+  $weightedSaturationContrast: abs($strongestSaturationContrast) *
     contrast($color, $contrastedColor);
  @return mix(
     adjust-color($color, $lightness: $weightedSaturationContrast),
@@ -32,7 +32,7 @@
     $weight);
 }
 @function intensify-lightness($color, $contrastedColor, $weight: 50%) {
-  $weightedContrast: abs($strongestContrast / 100) *
+  $weightedContrast: abs($strongestContrast) *
     contrast($color, $contrastedColor);
  @return mix(
     adjust-color($color, $lightness: $weightedContrast),
@@ -105,10 +105,48 @@
     $color, $weight);
 }
 
+// Usage: take(#f00, #654, $red: 100, $lightness: 40, $weight: 90);
+@function take($color, $sourceColor, $weight: 100%,
+  $lightness: 0, $alpha: 0, $red: 0, $green: 0, $blue: 0, $hue: 0, $saturation: 0) {
+  @if red { $color: take-red($color, $sourceColor, $red); }
+  @if green { $color: take-green($color, $sourceColor, $green); }
+  @if blue { $color: take-blue($color, $sourceColor, $blue); }
+  @if lightness { $color: take-lightness($color, $sourceColor, $lightness); }
+  @if alpha { $color: take-alpha($color, $sourceColor, $alpha); }
+  @if hue { $color: take-hue($color, $sourceColor, $hue); }
+  @if saturation { $color: take-saturation($color, $sourceColor, $saturation); }
+  @return color;
+}
+
+// Shorthand for take-hue + take-saturation
+@function take-color($color, $sourceColor, $weight: 100%) {
+  @return take($color, $sourceColor,
+    $saturation: 100, $hue: 100, $weight: $weight)
+}
+
 //
 //------------------------------------------------------------
 @function percToNum($percentage) {
   @return ($percentage / 100%);
+}
+
+@function to-font-weight($weight) {
+  $normalWeight: 400; $boldWeight: 700;
+  @if ($weight == true) {
+    $weight: bold;
+  } @else {
+    @if (type-of($weight) != 'string') {
+      @if (unit($weight) == '%') {
+        $weight: $normalWeight +
+        (($weight / 100%) * ($boldWeight - $normalWeight));
+      } @else if $weight > 900 {
+        $weight: 900;
+      } @else if $weight < 100 {
+        $weight: 100;
+      }
+    }
+  }
+  @return $weight;
 }
 
 //============================================================

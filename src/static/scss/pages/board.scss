@@ -1,6 +1,8 @@
 @import '../sass';
 
 #divPages {
+  padding-top: $defaultPadding;
+
   text-align: center;
 
   a:before { content: "["; }
