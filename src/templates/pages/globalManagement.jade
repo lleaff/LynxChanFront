@@ -2,10 +2,13 @@ extends ../jade/base
 
 block append bottomScripts
   +script('ext.js')
+block append styles
+  +script('ext.css')
 
 block headerTitle
   +title('#userLabel')
 
+block content
   form#addStaffForm(method='post', enctype='multipart/form-data',
     action='/setGlobalRole.js')
     label(for='fieldLogin') #{l.guiUserLogin}: 

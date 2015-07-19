@@ -1,0 +1,27 @@
+extends ../jade/base
+
+block headerTitle
+  +title(l.titRulesManagement)
+
+block append bottomScripts
+  +script('ext.js')
+block append styles
+  +style('ext.css')
+
+block content
+  h1 New rule
+  form(action='/createRule.js', method='post',
+      enctype='multipart/form-data')
+    input#boardIdentifier(type='hidden', name='boardUri')
+    label.hidden(for='fieldRule') l.guiRule
+    input#fieldRule(type='text', name='rule')
+    input#addFormButton(type='submit',
+        value=l.guiAddRule)
+    input#addJsButton(type='button', onclick='addRule()',
+        value=l.guiAddRule, style='display: none;')
+
+  h1 Current rules
+  section#divRules
+
+block pageId
+  +pageId('ruleManagement')
