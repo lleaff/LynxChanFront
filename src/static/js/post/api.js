@@ -18,24 +18,27 @@ function handleConnectionResponse(xhr, delegate) {
   }
 
   if (response.status === 'error') {
-    alert('Internal server error. ' + response.data);
+    alert('Internal server error. '+response.data);
+  } else if (response.status === 'fileTooLarge') {
+    alert('File size exceeded maximum allowed'+
+          maxFileSize ? ' ('+maxFileSize+' MB).' : '.');
   } else if (response.status === 'blank') {
-    alert('Parameter ' + response.data + ' was sent in blank.');
+    alert('Parameter '+response.data+' was sent in blank.');
   } else if (response.status === 'tooLarge') {
     alert('Request refused because it was too large');
   } else if (response.status === 'construction') {
-    alert('This page is under construction. Come back later, your grandma is almost done sucking me.');
+    alert('This page is under construction.');
   } else if (response.status === 'denied') {
     alert('You are not allowed to perform this operation.');
   } else if (response.status === 'banned') {
     if (response.data.range) {
-      alert('Your ip range ' + response.data.range + ' has been banned from '
-          + response.data.board + '.');
+      alert('Your ip range '+response.data.range+' has been banned from '+
+            response.data.board + '.');
     } else {
 
-      alert('You are banned from ' + response.data.board + ' until '
-          + new Date(response.data.expiration).toString() + '.\nReason: '
-          + response.data.reason + '.\nYour ban id: ' + response.data.banId);
+      alert('You are banned from '+response.data.board+' until '+
+            new Date(response.data.expiration).toString()+'.\nReason: '+
+            response.data.reason+'.\nYour ban id: '+response.data.banId);
     }
   } else {
     delegate(response.status, response.data);

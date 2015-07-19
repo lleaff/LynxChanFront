@@ -145,6 +145,8 @@ if (pageId === 'board' || pageId === 'thread') {
     processImageLink(imgLink);
   });
 
+  window.maxFileSize =
+    +document.getElementById('labelMaxFileSize').innerHTML;
 }
 
 
