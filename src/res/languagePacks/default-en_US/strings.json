@@ -189,7 +189,8 @@
   },
   "postHeader": {
     "postNumberPrefix":               "No.",
-    "threadWiseIDPrefix":             "ID"
+    "threadWiseIDPrefix":             "ID",
+    "directLinkLabel":                "Singled-out post"
   }
 
 }
