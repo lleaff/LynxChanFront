@@ -77,7 +77,8 @@ var gulpSettings = JSON.parse(
   tryReadFileSync('gulpSettings.json', {log: true}) ||
     "{}");
 
-var backEndPath = (gulpSettings.languagePack.backEndJson &&
+var backEndPath = ((gulpSettings.languagePack &&
+                    gulpSettings.languagePack.backEndJson) &&
                   gulpSettings.generalSettingsPath) ?
   undefined : getBackEndPath();
 
