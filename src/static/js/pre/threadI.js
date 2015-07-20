@@ -42,8 +42,8 @@ if (pageId === 'thread') {
     threadId = document.getElementsByClassName('opCell')[0].id;
 
     if (document.getElementById('controlThreadIdentifier')) {
-      showElement(document.getElementById('settingsJsButon'));
-      removeElement(document.getElementById('settingsFormButon'));
+      showElement(document.getElementById('settingsJsButton'));
+      removeElement(document.getElementById('settingsFormButton'));
     }
 
     replyButton = document.getElementById('jsButton');

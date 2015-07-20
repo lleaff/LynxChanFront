@@ -42,14 +42,15 @@
   }
 }
 
-@mixin minorHeader($font-size: 1.1em, $coverBorder: 1px) {
+@mixin minorHeader($font-size: 0.95em, $coverBorder: 1px) {
   font-size: $font-size;
   display: block;
   background-color: $minorHeaderBgColor;
   color: $minorHeaderColor;
   font-weight: to-font-weight($minorHeaderBold);
+  letter-spacing: 0.1em;
   //font-family: $monospaceFont;
-  @include paddingVertical($defaultPadding / 4);
+  @include paddingVertical($defaultPadding / 2);
   @include paddingHorizontal($defaultPadding);
 
   margin: 0;

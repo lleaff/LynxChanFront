@@ -12,6 +12,16 @@ $internalPadding: $defaultPadding / 2;
 $buttonPadding: initial;
 $buttonMargin: initial;
 
+// =Header
+//------------------------------------------------------------
+$headerPadding: 0.3em;
+$logoWidth: 21em;
+$logoHeight: $logoWidth / 3;
+$pageHeaderBorderBottomSize: 1px;
+$pageHeaderHeight: $logoHeight; //Fallback
+$pageHeaderHeight: calc(#{$logoHeight} + #{$pageHeaderBorderBottomSize});
+
+
 // =Post form
 //------------------------------------------------------------
 // $captchaImageRealDimensions: 300*100px
@@ -25,6 +35,7 @@ $postFormExternalWidth: $postFormInternalWidth + $postFormPadding * 2;
 //------------------------------------------------------------
 $opPaddingRight: $postFormExternalWidth + ($defaultPadding * 2);
 $opPaddingLeft: $defaultPadding * 2; 
+$postOpMarginLeft: -$defaultPadding;
 $replyMarginRight: $defaultPadding * 1.2;
 $replyMarginLeft: $opPaddingLeft + ($replyMarginRight - $opPaddingLeft); 
 

@@ -48,7 +48,7 @@ html, body {
   padding-left: $defaultPadding;
 }
 .postOp{ 
-  margin-left: -$defaultPadding;
+  margin-left: $postOpMarginLeft;
 }
 .divPosts {
   margin-right: $postFormExternalWidth + $defaultPadding * 2;
@@ -58,6 +58,8 @@ html, body {
 #postFormWrapper {
   width: $postFormExternalWidth;
   display: block;
+  //top: $defaultPadding + $pageHeaderHeight;
+  //right: $defaultPadding;
   float: right;
 }
 
@@ -78,8 +80,11 @@ html, body {
  * =General
  *------------------------------------------------------------*/
 body {
-  background-color: palette('bgMain');
-  color: palette('fgMain');
+  @if $bodyBackground {
+    background: $bodyBackground;
+  } @else {
+    background-color: palette('bgMain');
+  }
 
   padding: 0;
 
@@ -148,7 +153,8 @@ fieldset {
 input, button, textarea {
   //background-color: palette('bgAlt');
   //border: solid 1px $borderColorAlt;
-  color: palette('fgAlt');
+  //color: palette('fgAlt');
+  box-shadow: none;
 }
 
 .secondary {

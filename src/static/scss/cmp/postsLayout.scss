@@ -17,15 +17,14 @@ $postOpSpecialBorderColor: $minorHeaderBgColor;
 $opRegularBorder: 1px solid $postOpInnerBorderColor;
 
 .opWrapper {
-  margin-top: $defaultPadding * 2.5; //Temporary TODO
   color: $opColor;
   //background-color: $opBackgroundColor;
-  border-top: $postOpSpecialBorderColor solid 1px;
+  border-top: intensify-lightness($postOpInnerBorderColor,
+    palette('fgMain'), 3) solid 1px;
 
   //border-bottom: $opRegularBorder; //set by .labelOmission instead
-  border-right: $opRegularBorder;
   /* Special border */
-  border-left: ($opPaddingLeft - $defaultPadding) solid $postOpSpecialBorderColor;
+  border-left: 5px /* ($opPaddingLeft - $defaultPadding) */ solid $postOpSpecialBorderColor;
 }
 
 $postMessageVerticalPadding: $defaultPadding * 1.2;
@@ -52,6 +51,7 @@ $markedPostHue: hue(#0f0)!default;//DEBUG
 
 .markedPost .postReply {
   background-color: change-color($replyBackgroundColor, $hue: $markedPostHue);
+
   border-color: change-color($postReplyBorderColor, $hue: $markedPostHue);
 }
 .opWrapper .markedPost {
@@ -59,8 +59,11 @@ $markedPostHue: hue(#0f0)!default;//DEBUG
 }
 
 
-/* Containers */
-.opWrapper {
+/* Containers
+------------------------------*/
+/* opCell contains the whole thread, not just the Op */
+.opCell {
+  margin-bottom: $defaultPadding * 2.5;
 }
 .postCell {
   margin-top: $defaultPadding / 2.3;
@@ -122,14 +125,26 @@ $markedPostHue: hue(#0f0)!default;//DEBUG
 }
 
 .labelOmission {
-  padding-top: $postInternalPadding / 3;
-  padding-left: $defaultPadding;
   $topBorderSize: 1px;
-  border-top: solid $topBorderSize $postOpInnerBorderColor;
+  $padding-top: $postInternalPadding / 3; 
+  padding-top: $padding-top;
+  $margin-left: $postOpMarginLeft;
+  margin-left: $margin-left;
+  padding-left: $defaultPadding + -$postOpMarginLeft;
   margin-top: -$topBorderSize; // Compensate so it looks like the border is part of .opWrapper
+  //border-top: solid $topBorderSize $postOpInnerBorderColor;
 
   color: soften-lightness(palette('fgMain'), palette('bgMain'), 70);
   font-size: $smallFontSize * 1.1;
+  &:before {
+    display: block;
+    content: "";
+    height: 1px;
+    background: linear-gradient(to right,  $postOpInnerBorderColor 50%,rgba(0,0,0,0) 100%);
+
+  margin-left: $postOpMarginLeft + $margin-left;
+  margin-top: calc(-#{$topBorderSize} - #{$padding-top}); // Compensate so it looks like the border is part of .opWrapper
+  }
 }
 
 .uploadCell .fileInfoInner {

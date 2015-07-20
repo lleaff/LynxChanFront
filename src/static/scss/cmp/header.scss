@@ -3,18 +3,11 @@
 /*------------------------------------------------------------*
  * =Header
  *------------------------------------------------------------*/
-$headerPadding: 0.3em;
-$logoWidth: 21em;
-$logoHeight: $logoWidth / 3;
-
 #pageHeader {
-  $borderBottomSize: 1px;
-
-  border-bottom: solid $borderBottomSize;
+  border-bottom: solid $pageHeaderBorderBottomSize;
   padding: $headerPadding;
 
-  height: $logoHeight; //Fallback
-  height: calc(#{$logoHeight} + #{$borderBottomSize});
+  height: $pageHeaderHeight;
 
   @include headerColors;
 }

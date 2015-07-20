@@ -20,7 +20,7 @@
     color: $nameEmailColor;
     text-decoration: underline;
     // Anonymous
-    .noEmailName {
+    &.noEmailName {
       color: $nameColor;
       text-decoration: none;
     }
@@ -34,9 +34,11 @@
 
 // Message body
 //------------------------------------------------------------
-
 // '>>12401'
-.linkQuote {
+.quoteLink {
+  @if $quoteLinkColor != $linkColor {
+    color: $quoteLinkColor;
+  }
 }
 
 // >mfw

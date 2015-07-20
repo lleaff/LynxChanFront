@@ -12,6 +12,9 @@ $palette-colors: (
   'warning':    #f9b3bc
 ) !default;
 
+// Whether or not accent colors are used in some additional places
+$vibrant: false!default;
+
 //$regularFont: ;
 $monospaceFont: 'Meslo LG S DZ', Monaco, monospace !default;
 

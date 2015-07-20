@@ -40,7 +40,10 @@ $fontColorContrast: 0.5 * $mainContrast!default;
 $linkColor:           mix(palette('fgMain'), palette('accentA'))!default;
 $linkHoverColor:      take-color($linkColor, palette('accentB'))!default;
 
-$minorHeaderBgColor:  intensify(palette('bgAlt'), palette('fgMain'), 10)!default;
+
+$minorHeaderBgColor:  if($vibrant,
+  palette('accentA'),
+  intensify(palette('bgAlt'), palette('fgMain'), 10))!default;
 $minorHeaderColor:    intensify($minorHeaderBgColor, palette('fgMain'), 45)!default;  
 $minorHeaderBold:     550;
 
@@ -59,6 +62,10 @@ $borderColorAlt:      mix(palette('bgAlt'), palette('fgAlt'), 80%);
   border-color:       $borderColorAlt;
 }
 
+// Body
+//============================================================
+$bodyBackground: false!default;
+
 // Posts
 //============================================================
 // Header
@@ -75,7 +82,7 @@ $subjectBold:         550!default;
 $linkReplyColor:      $linkColor!default;
 // Message
 $greenTextColor:      take-lightness(#0f0, palette('fgMain'), 50%)!default;
-
+$quoteLinkColor:      $linkColor!default;
 
 // =Buttons
 //=============================================================
