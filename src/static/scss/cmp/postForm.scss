@@ -1,41 +1,56 @@
 @import '../sass';
 //------------------------------
 $singleLineFieldRowHeight: 1.5em;
-
 //------------------------------
 
 #postFormWrapper {
   border: $borderStyle $borderWidth $postFormBorderColor;
-  background: $postFormBg;
+  background: $postFormBgColor;
+  color: $postFormColor;
+}
+#postFormWrapper h1 {
+  @include minorHeader($coverBorder: 1px);
 }
 
+
 .postForm {
+  margin-top: $postFormExternalPadding;
   box-sizing: content-box;
   position: relative;
-  width: $postFormInternalWidth;
+  width: $postFormInternalWidth + ($postFormExternalPadding * 2);
+  @include marginHorizontal(auto);
+  padding-bottom: $postFormExternalPadding;
+}
+
+#authorInfo, #messageArea, #captchaDiv, #sendPost {
+  @include paddingHorizontal($postFormExternalPadding);
+}
+#authorInfo {
+  padding-top: $postFormPadding;
 }
 
 @mixin positionConsecutivePostFormRows($IDs, $height) {
   $index: 0;
+  $offset: $postFormPadding;
   @each $ID in $IDs {
-    $top: $height * $index;
+    $top: ($height * $index) + $offset;
 
     #postFormWrapper label[for='#{$ID}'] {
       position: absolute;
-      left: 0;
+      left: $postFormExternalPadding;
       top: $top;
     }
     #postFormWrapper ##{$ID} {
       position: absolute;
-      right: 0;
+      right: $postFormExternalPadding;
       top: $top;
     }
 
     $index: $index + 1;
   }
 
-  #fieldMessage {
-    margin-top: $height * $index;
+  #authorInfo {
+    height: $height * $index;
   }
 }
 @include positionConsecutivePostFormRows(
@@ -91,15 +106,18 @@ $textAreaOversizeCompensation: 2px;
 }
 
 #filesWrapper {
+  width: $postFormInternalWidth;
   display: block;
 }
 #filesWrapper > label {
-  display: inline-block;
+  display: none;
   padding-top: 0.3em;     //Magic number, not good. TODO
 }
 
 #files {
+  width: $postFormInternalWidth;
   float: right;
+  color: soften-lightness($postFormColor, $postFormBgColor, 30);
 }
 #filesInfo {
   display: inline-block;
@@ -116,7 +134,9 @@ $textAreaOversizeCompensation: 2px;
 $captchaCharactersCount: 6;
 
 #captchaDiv {
-  width: $captchaImageWidth;
+  //width: $captchaImageWidth;
+  @include marginHorizontal(auto);
+  //display: block;
 }
 
 @include hideLabel('captchaImage');

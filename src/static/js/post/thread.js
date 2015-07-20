@@ -48,7 +48,7 @@ if (pageId === 'thread') {
   };
 
   replyCallback.stop = function() {
-    replyButton.style.display = 'inline';
+    replyButton.removeAttribute('disabled');
 
     if (!hiddenCaptcha) {
       reloadCaptcha();
@@ -70,7 +70,7 @@ function formatDateToDisplay(d) {
 
   var weekDays = [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ];
 
-  var month = padDateField(d.getMonth() + 1);
+  var month = padDateField(d.getMonth()+1);
 
   var year = d.getFullYear();
 
@@ -82,9 +82,9 @@ function formatDateToDisplay(d) {
 
   var second = padDateField(d.getSeconds());
 
-  var toReturn = month + '/' + day + '/' + year;
+  var toReturn = month+'/'+day+'/'+year;
 
-  return toReturn + ' (' + weekDay + ') ' + hour + ':' + minute + ':' + second;
+  return toReturn+' ('+weekDay+') '+hour+':'+minute+':'+second;
 }
 
 function formatFileSize(size) {
@@ -191,7 +191,8 @@ function setPostComplexElements(postCell, post, boardUri, threadId) {
   var checkboxName = boardUri + '-' + threadId + '-' + post.postId;
   deletionCheckbox.setAttribute('name', checkboxName);
 
-  setUploadCell(postCell.getElementsByClassName('panelUploads')[0], post.files);
+  setUploadCell(
+    postCell.getElementsByClassName('panelUploads')[0], post.files);
 }
 
 function setPostInnerElements(boardUri, threadId, post, postCell) {
@@ -288,13 +289,11 @@ var refreshCallback = function(error, data) {
 
 if (pageId === 'thread') {
   refreshCallback.stop = function() {
-    refreshButton.style.display = 'inline';
-
+    showElement(refreshButton);
   };
 }
 
 function refreshPosts(manual) {
-
   manualRefresh = manual;
 
   if (autoRefresh) {
@@ -351,7 +350,7 @@ function sendReplyData(files) {
     return;
   }
 
-  replyButton.style.display = 'none';
+  replyButton.setAttribute('disabled', '');
 
   apiRequest('replyThread', {
     name : forcedAnon ? null : typedName,

@@ -10,7 +10,7 @@ block outer
         input.deletionCheckBox(type='checkbox')
         block postInfo
           ul
-            li.linkPreview.fa.fa-link(title=l.postHeader.directLinkLabel)
+            li: a.linkPreview.fa.fa-link(title=l.postHeader.directLinkLabel)
             li.labelSubject
             li: a.linkName
             li.labelRole

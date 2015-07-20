@@ -13,7 +13,7 @@ $postInternalPadding: $defaultPadding * 0.9;
 
 $postOpInnerBorderColor: intensify($opBackgroundColor, palette('fgMain'), 4);
 $postReplyInnerBorderColor: intensify($replyBackgroundColor, palette('fgMain'), 4.5);
-$postOpSpecialBorderColor: intensify(palette('bgAlt'), palette('fgMain'), 10);
+$postOpSpecialBorderColor: $minorHeaderBgColor;
 $opRegularBorder: 1px solid $postOpInnerBorderColor;
 
 .opWrapper {
@@ -190,23 +190,6 @@ $postModActionWidth: 1em; //deletion checkbox or dropdown menu arrow, MAGIC
   }
   .spanId {
     margin-left: -0.1em; //Compensate for bigger name and role fonts
-  }
-
-  .linkName {
-    color: $nameEmailColor;
-    @if type-of($nameBold) == 'number' {
-      font-weight: to-font-weight($nameBold);
-    } @else if $nameBold {
-      font-weight: bold;
-    }
-    text-decoration: underline;
-  }
-  .linkName.noEmailName {
-    color: $nameColor;
-    text-decoration: none;
-  }
-  .linkReply {
-    color: $linkReplyColor;
   }
 
 }

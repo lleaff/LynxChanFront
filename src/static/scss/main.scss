@@ -28,43 +28,34 @@ html, body {
   clear: both;
 }
 
-@mixin compensatePageFooterHeight($height) {
-  #notFooter {
-    margin-bottom: -$pageFooterHeight;
-  }
-
-  #pageFooter, #notFooter:after {
-    height: $pageFooterHeight;
-  }
+/* Compensate page footer height */
+#notFooter {
+  margin-bottom: -$pageFooterHeight;
 }
-@include compensatePageFooterHeight($pageFooterHeight);
+
+#pageFooter, #notFooter:after {
+  height: $pageFooterHeight;
+}
 
 #pageFooter {
   width: 100%;
 }
 
-@mixin extendAndPaddBeyondPostForm ($plus: false) {
-  @if $plus == false {
-  } @else {
-  }
-}
-
 .opWrapper {
-    margin-right: -$defaultPadding;
-    padding-right: $postFormExternalWidth + $defaultPadding * 2;
-    margin-left: -$defaultPadding;
-    padding-left: $defaultPadding;
+  margin-right: -$defaultPadding;
+  padding-right: $postFormExternalWidth + $defaultPadding * 2;
+  margin-left: -$defaultPadding;
+  padding-left: $defaultPadding;
 }
 .postOp{ 
   margin-left: -$defaultPadding;
 }
 .divPosts {
-    margin-right: $postFormExternalWidth + $defaultPadding * 2;
-    margin-left: -$defaultPadding;
+  margin-right: $postFormExternalWidth + $defaultPadding * 2;
+  margin-left: -$defaultPadding;
 }
 
 #postFormWrapper {
-  padding: $postFormExternalPadding;
   width: $postFormExternalWidth;
   display: block;
   float: right;
@@ -95,12 +86,16 @@ body {
   font-family: sans-serif;
 }
 
-a {
+/* Link */
+a, .jsLink {
   color: $linkColor;
   text-decoration: none;
   &:hover {
     color: $linkHoverColor;
   }
+}
+.jsLink {
+  cursor: pointer;
 }
 
 code {
@@ -134,6 +129,7 @@ hr {
 #middle {
   position: relative;
   padding: $defaultPadding;
+  bottom: 0;
 }
 
 #content p {

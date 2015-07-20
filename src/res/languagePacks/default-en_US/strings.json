@@ -163,6 +163,8 @@
   "guiReportAction":                  "Report",
   "guiAppliedBy":                     "Applied by",
   "postForm": {
+    "titNewThread":                   "New thread",
+    "titNewReply":                    "Reply",
     "Name":                           "Name",
     "phName":                         "",
     "Email":                          "Email",

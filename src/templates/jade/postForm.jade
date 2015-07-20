@@ -1,8 +1,10 @@
 mixin postForm(options)
   - var actionFile      = '../../'+options.actionFile
   - var actionName      = options.actionName == 'Reply' ? l.postForm.ReplyAction : l.postForm.CreateThreadAction;
+  - var replyOrThread   = options.actionName == 'Reply' ? 'Reply' : 'Thread';
   - var actionFunction  = options.actionFunction
   //- .postForm
+  h1 #{l.postForm['titNew'+replyOrThread]}
   form(id=attributes.id, class=attributes.class+' postForm',
     method='post', action=actionFile, enctype='multipart/form-data')
     fieldset#authorInfo
@@ -32,8 +34,7 @@ mixin postForm(options)
         #filesSpoiler
           label(for='checkboxSpoiler') #{l.postForm.Spoiler}
           input#checkboxSpoiler(type='checkbox', name='spoiler')
-    fieldset#sendPost
-      #captchaDiv
+    fieldset#captchaDiv
         label(for='fieldCaptcha') #{l.postForm.Captcha}
         img#captchaImage(src='/captcha.js')
         input#fieldCaptcha(type='text', name='captcha', required,
@@ -45,6 +46,7 @@ mixin postForm(options)
         small.info#noCookiesCaptchaLink
           a(href='/noCookieCaptcha.js', target='_blank')
             | #{l.postForm.NoCookiesCaptchaLink}
+    fieldset#submit
       input.postSubmit.button.submit#jsButton(type='button',
           onclick=actionFunction, value=actionName, style='display: none;')
       input.postSubmit.button.submit#formButton(type='submit',

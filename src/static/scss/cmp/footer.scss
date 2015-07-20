@@ -11,7 +11,7 @@ $pageFooterPaddingHorizontal: 5em;
 
 #pageFooterItems {
   margin: 0;
-  padding: $pageFooterPaddingTop $pageFooterPaddingHorizontal ($pageFooterPaddingTop / 2) $pageFooterPaddingHorizontal;
+  padding: $pageFooterPaddingTop $pageFooterPaddingHorizontal 0 $pageFooterPaddingHorizontal;
 
   font-size: $pageFooterItemsSize;
   text-align: center;

@@ -424,7 +424,7 @@ function reportPosts() {
       alert('Content reported');
 
     } else {
-      alert(status + ': ' + JSON.stringify(data));
+      alert(status+': '+JSON.stringify(data));
     }
   });
 }
@@ -448,7 +448,7 @@ function deletePosts() {
       window.location.pathname = '/';
 
     } else {
-      alert(status + ': ' + JSON.stringify(data));
+      alert(status+': '+JSON.stringify(data));
     }
   });
 

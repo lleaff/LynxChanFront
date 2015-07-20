@@ -5,6 +5,7 @@
 $emMostCommonPxSize: 14;
 $smallFontSize: 0.8em;
 $animationSpeed: 0.2s!default;
+$internalPadding: $defaultPadding / 2;
 
 // =Inputs
 //------------------------------------------------------------
@@ -15,8 +16,8 @@ $buttonMargin: initial;
 //------------------------------------------------------------
 // $captchaImageRealDimensions: 300*100px
 $captchaImageWidth: (300 / $emMostCommonPxSize) * 1em;
-$postFormPadding: 1em;
-$postFormExternalPadding: 1em;
+$postFormExternalPadding: $defaultPadding / 2;
+$postFormPadding: $internalPadding;
 $postFormInternalWidth: $captchaImageWidth + $postFormPadding * 2;
 $postFormExternalWidth: $postFormInternalWidth + $postFormPadding * 2;
 

@@ -134,6 +134,8 @@
   $normalWeight: 400; $boldWeight: 700;
   @if ($weight == true) {
     $weight: bold;
+  } @else if ($weight == false) {
+    $weight: normal;
   } @else {
     @if (type-of($weight) != 'string') {
       @if (unit($weight) == '%') {
@@ -143,6 +145,8 @@
         $weight: 900;
       } @else if $weight < 100 {
         $weight: 100;
+      } @else {
+        $weight: floor($weight / 100) * 100;
       }
     }
   }

@@ -1,18 +1,53 @@
 @import '../sass';
 
-.postCell, .opWrapper {
+// Message header
+//------------------------------------------------------------
+.postOpHeader, .postReplyHeader {
+  // Board owner, Volunteer, ..
   .labelRole {
     color: $roleColor;
   }
+
+  .labelSubject {
+    @include font-weight-opt($subjectBold);
+    color: $subjectColor;
+  }
+
+  // Anonymous->sage
+  .linkName {
+    @include font-weight-opt($nameBold);
+
+    color: $nameEmailColor;
+    text-decoration: underline;
+    // Anonymous
+    .noEmailName {
+      color: $nameColor;
+      text-decoration: none;
+    }
+  }
+
+  // [Reply]
+  .linkReply {
+    color: $linkReplyColor;
+  }
 }
 
+// Message body
+//------------------------------------------------------------
+
+// '>>12401'
+.linkQuote {
+}
+
+// >mfw
 .greenText {
   color: $greenTextColor;
 }
 
+// Should be masked until hovered over
+$spoilerColor: soften-value(
+  change-color(#000, $lightness: lightness(palette('fgMain'))))!default;
 .spoiler {
-  $spoilerColor: soft-value(
-    change-color(#000, $lightness: lightness(palette('fgMain'))));
   color: $spoilerColor;
   background-color: $spoilerColor;
 }

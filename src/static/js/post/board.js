@@ -1,8 +1,8 @@
 function reloadCaptcha() {
   document.cookie = 'captchaid=; path=/;';
 
-  document.getElementById('captchaImage').src = '/captcha.js#'
-      + new Date().toString();
+  document.getElementById('captchaImage').src = '/captcha.js#'+
+    new Date().toString();
   /* Clear the text field */
   document.getElementById('fieldCaptcha').value = "";
 }
@@ -21,16 +21,15 @@ var postCallback = function requestComplete(status, data) {
 };
 
 postCallback.stop = function() {
-  postButton.style.display = 'inline';
+  postButton.removeAttribute('disabled');
 };
 
 function sendThreadData(files) {
 
   var forcedAnon = !document.getElementById('fieldName');
 
-  if (!forcedAnon) {
-    var typedName = document.getElementById('fieldName').value.trim();
-  }
+  var typedName = !forcedAnon ?
+    document.getElementById('fieldName').value.trim() : undefined;
 
   var typedEmail = document.getElementById('fieldEmail').value.trim();
   var typedMessage = document.getElementById('fieldMessage').value.trim();
@@ -39,9 +38,8 @@ function sendThreadData(files) {
 
   var hiddenCaptcha = !document.getElementById('captchaDiv');
 
-  if (!hiddenCaptcha) {
-    var typedCaptcha = document.getElementById('fieldCaptcha').value.trim();
-  }
+  var typedCaptcha = !hiddenCaptcha ?
+    document.getElementById('fieldCaptcha').value.trim() : undefined;
 
   if (!typedMessage.length) {
     alert('A message is mandatory.');
@@ -61,8 +59,8 @@ function sendThreadData(files) {
   } else if (typedPassword.length > 8) {
     alert('Password is too long, keep it under 8 characters.');
     return;
-  } else if (!hiddenCaptcha && typedCaptcha.length !== 6
-      && typedCaptcha.length !== 24) {
+  } else if (!hiddenCaptcha && typedCaptcha.length !== 6 &&
+             typedCaptcha.length !== 24) {
     alert('Captchas are exactly 6 characters long.\n(or 24 in the case of a no-cookie ID)');
     return;
   } else if (/\W/.test(typedCaptcha)) {
@@ -70,7 +68,7 @@ function sendThreadData(files) {
     return;
   }
 
-  postButton.style.display = 'none';
+  postButton.setAttribute('disabled', '');
 
   apiRequest('newThread', {
     name : forcedAnon ? null : typedName,
