@@ -1,55 +1,65 @@
 if (pageId === 'bannerManagement') {
 
-  var boardIdentifier = document.getElementById('boardIdentifier').value;
+  /* Function definitions
+  ------------------------------------------------------------*/
+  var processBannerCell = function(cell) {
 
-  document.getElementById('addJsButton').style.display = 'inline';
+    var button = cell.getElementsByClassName('deleteJsButton')[0];
+    showElement(button);
 
-  document.getElementById('addFormButton').style.display = 'none';
+    button.onclick = function() {
+      removeBanner(cell.getElementsByClassName('bannerIdentifier')[0].value);
+    };
 
-  var bannersDiv = document.getElementById('bannersDiv');
+    removeElement(cell.getElementsByClassName('deleteFormButton')[0]);
 
-  for (var j = 0; j < bannersDiv.childNodes.length; j++) {
-    processBannerCell(bannersDiv.childNodes[j]);
-  }
-
-}
-
-function processBannerCell(cell) {
-
-  var button = cell.getElementsByClassName('deleteJsButton')[0];
-  button.style.display = 'inline';
-
-  button.onclick = function() {
-    removeBanner(cell.getElementsByClassName('bannerIdentifier')[0].value);
   };
 
-  cell.getElementsByClassName('deleteFormButton')[0].style.display = 'none';
+  var addBanner = function() {
 
-}
+    var file = document.getElementById('files').files[0];
 
-function addBanner() {
+    if (!file) {
+      alert('You must select a file');
+      return;
+    }
 
-  var file = document.getElementById('files').files[0];
+    var reader = new FileReader();
 
-  if (!file) {
-    alert('You must select a file');
-    return;
-  }
+    reader.onloadend = function(e) {
 
-  var reader = new FileReader();
+      var files = [ {
+        name : file.name,
+        content : reader.result
+      } ];
 
-  reader.onloadend = function(e) {
+      // style exception, too simple
 
-    var files = [ {
-      name : file.name,
-      content : reader.result
-    } ];
+      apiRequest('createBanner', {
+        files : files,
+        boardUri : boardIdentifier,
+      }, function requestComplete(status, data) {
 
-    // style exception, too simple
+        if (status === 'ok') {
 
-    apiRequest('createBanner', {
-      files : files,
-      boardUri : boardIdentifier,
+          location.reload(true);
+
+        } else {
+          alert(status + ': ' + JSON.stringify(data));
+        }
+      });
+
+      // style exception, too simple
+
+    };
+
+    reader.readAsDataURL(file);
+
+  };
+
+  var removeBanner = function(bannerId) {
+    apiRequest('deleteBanner', {
+      bannerId : bannerId,
     }, function requestComplete(status, data) {
 
       if (status === 'ok') {
@@ -60,26 +70,17 @@ function addBanner() {
         alert(status + ': ' + JSON.stringify(data));
       }
     });
-
-    // style exception, too simple
-
   };
+  /*------------------------------------------------------------*/
 
-  reader.readAsDataURL(file);
+  var boardIdentifier = document.getElementById('boardIdentifier').value;
 
-}
+  showElement(document.getElementById('addJsButton'));
+  removeElement(document.getElementById('addFormButton'));
 
-function removeBanner(bannerId) {
-  apiRequest('deleteBanner', {
-    bannerId : bannerId,
-  }, function requestComplete(status, data) {
+  var bannersDiv = document.getElementById('bannersDiv');
+  for (var j = 0; j < bannersDiv.childNodes.length; j++) {
+    processBannerCell(bannersDiv.childNodes[j]);
+  }
 
-    if (status === 'ok') {
-
-      location.reload(true);
-
-    } else {
-      alert(status + ': ' + JSON.stringify(data));
-    }
-  });
 }

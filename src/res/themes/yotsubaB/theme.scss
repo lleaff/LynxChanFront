@@ -18,16 +18,16 @@ $palette-colors: (
 $monospaceFont:  'Meslo LG S DZ', Monaco, monospace;
 
 $vibrant: true;
-$drop-shadows: 'minimal';
+
+$dropShadows: 'full';
+$shadowsAlpha:  0.03;
 
 $borderStyle:    solid;
 $borderWidth:    1px;
 
 $defaultPadding: 1em;
 
-//$markedPostHue: hue(map-get($palette-colors, 'accentA'));
-$markedPostHue:  hue(#00F);//DEBUG
-
+$linkColor:      #34345C;
 $linkHoverColor: #F00;
 
 $nameColor:      #117743;
@@ -35,6 +35,9 @@ $nameBold:       600;
 $roleColor:      #F00;
 $subjectColor:   #0F0C5D;
 $subjectBold:       600;
+
+$markedPostBgColor:  #f0c0b0;
+$makredPostBorderColor: #d9bfb7;
 
 $quoteLinkColor: #D00;
 $greenTextColor: #789922;

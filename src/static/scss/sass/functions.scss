@@ -89,8 +89,14 @@
     $color, $weight);
 }
 @function take-hue($color, $sourceColor, $weight: 100%) {
-  @return mix(change-color($color, $hue: hue($sourceColor)),
-    $color, $weight);
+  //replaced because change-color(..., $hue) seems to be bugged
+  //@return mix(change-color($color, $hue: hue($sourceColor)),
+  //  $color, $weight);
+    @return mix(change-color($sourceColor,
+        $lightness: lightness($color),
+        $saturation: saturation($color),
+        $alpha: alpha($color)),
+      $color, $weight);
 }
 @function take-saturation($color, $sourceColor, $weight: 100%) {
   @return mix(change-color($color, $saturation: saturation($sourceColor)),
@@ -115,13 +121,19 @@
   @if alpha { $color: take-alpha($color, $sourceColor, $alpha); }
   @if hue { $color: take-hue($color, $sourceColor, $hue); }
   @if saturation { $color: take-saturation($color, $sourceColor, $saturation); }
-  @return color;
+  @return $color;
 }
 
 // Shorthand for take-hue + take-saturation
 @function take-color($color, $sourceColor, $weight: 100%) {
-  @return take($color, $sourceColor,
-    $saturation: 100, $hue: 100, $weight: $weight)
+  //replaced because change-color(..., $hue) seems to be bugged
+  //@return take($color, $sourceColor,
+  //  $saturation: 100, $hue: 100, $weight: $weight); 
+  @return mix(
+    take($sourceColor, $color,
+      $lightness: 100, $saturation: 100, $alpha: 100),
+    $sourceColor,
+    $weight);
 }
 
 //
@@ -172,4 +184,14 @@
 //           < 0: vibrant on dull
 @function contrast-saturation($fgColor, $bgColor) {
   @return saturation($bgColor) - saturation($fgColor);
+}
+
+@function get-drop-shadows-pref($value) {
+  @if $value == 'none' or $value == 0 {
+    @return false;
+  } @else if $value == 'minimal' or $value == 1 or $value == true {
+    @return 1;
+  } @else if $value == 'full' or $value == 2 {
+    @return 2;
+  }
 }

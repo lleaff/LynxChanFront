@@ -6,21 +6,25 @@ $opBackgroundColor: intensify-lightness(
   palette('bgMain'), palette('fgMain'), 5);
 $opColor: palette('fgMain');
 
-$replyBackgroundColor: palette('bgAlt');
-$replyColor: palette('fgAlt');
-
 $postInternalPadding: $defaultPadding * 0.9;
 
 $postOpInnerBorderColor: intensify($opBackgroundColor, palette('fgMain'), 4);
-$postReplyInnerBorderColor: intensify($replyBackgroundColor, palette('fgMain'), 4.5);
+$postReplyInnerBorderColor: intensify($replyBgColor, palette('fgMain'), 4.5);
 $postOpSpecialBorderColor: $minorHeaderBgColor;
 $opRegularBorder: 1px solid $postOpInnerBorderColor;
 
 .opWrapper {
+  $opBorderTopColor: intensify-lightness($postOpInnerBorderColor,
+    palette('fgMain'), 3);
   color: $opColor;
   //background-color: $opBackgroundColor;
-  border-top: intensify-lightness($postOpInnerBorderColor,
-    palette('fgMain'), 3) solid 1px;
+  border-top: $opBorderTopColor solid 1px;
+
+  @if $shadows >= 2 {
+    box-shadow: 0px #{-($shadowsRadius *1.5)} #{$shadowsRadius * 3} #{-$shadowsRadius * 1.5} $shadowsColor; 
+    //box-shadow: 0px 0 ($shadowsRadius * 2) -($shadowsRadius) $shadowsColor;
+    //border-top-color: soften-lightness($opBorderTopColor, $bodyBgColor, 30);
+  }
 
   //border-bottom: $opRegularBorder; //set by .labelOmission instead
   /* Special border */
@@ -37,25 +41,30 @@ $postReplyBorderColor: intensify(palette('bgAlt'), palette('fgMain'), 7);
 .postReply {
   border: solid 1px;
   color: $replyColor;
-  background-color: $replyBackgroundColor;
-
-  border: 1px $postReplyBorderColor;
+  background-color: $replyBgColor;
+  border-size: 1px;
+  border-color: $postReplyBorderColor;
   border-style: none solid solid none;
+  @if $shadows >= 2 {
+    box-shadow: ($shadowsRadius / 2) ($shadowsRadius / 3) $shadowsRadius -($shadowsRadius / 3) $shadowsColor;
+    border-color: soften-lightness($postReplyBorderColor, $bodyBgColor, (400 * $shadowsAlpha) );
+  }
 
   margin-left: $replyMarginLeft;
   margin-right: $replyMarginRight;
 }
 
-//$markedPostHue: (hue(palette('accentB')) + hue(palette('bgAlt'))) / 2!default;
-$markedPostHue: hue(#0f0)!default;//DEBUG
-
-.markedPost .postReply {
-  background-color: change-color($replyBackgroundColor, $hue: $markedPostHue);
-
-  border-color: change-color($postReplyBorderColor, $hue: $markedPostHue);
+@function chue($val) {
+  @return hue($val);
 }
-.opWrapper .markedPost {
-  background-color: change-color($opBackgroundColor, $hue: $markedPostHue);
+
+@if $markedPost {
+  .markedPost .postReply {
+    background-color: $markedPostBgColor;
+  }
+  .markedPost .postReplyHeader .postHeaderInner {
+    border-bottom-color: take-color($postReplyBorderColor, $markedPostBgColor);
+  }
 }
 
 
@@ -131,7 +140,7 @@ $markedPostHue: hue(#0f0)!default;//DEBUG
   $margin-left: $postOpMarginLeft;
   margin-left: $margin-left;
   padding-left: $defaultPadding + -$postOpMarginLeft;
-  margin-top: -$topBorderSize; // Compensate so it looks like the border is part of .opWrapper
+  //margin-top: -$topBorderSize; // Compensate so it looks like the border is part of .opWrapper
   //border-top: solid $topBorderSize $postOpInnerBorderColor;
 
   color: soften-lightness(palette('fgMain'), palette('bgMain'), 70);
@@ -140,7 +149,7 @@ $markedPostHue: hue(#0f0)!default;//DEBUG
     display: block;
     content: "";
     height: 1px;
-    background: linear-gradient(to right,  $postOpInnerBorderColor 50%,rgba(0,0,0,0) 100%);
+    background: linear-gradient(to right,  $postOpInnerBorderColor 30%,rgba(0,0,0,0) 100%);
 
   margin-left: $postOpMarginLeft + $margin-left;
   margin-top: calc(-#{$topBorderSize} - #{$padding-top}); // Compensate so it looks like the border is part of .opWrapper
@@ -187,10 +196,11 @@ $postModActionWidth: 1em; //deletion checkbox or dropdown menu arrow, MAGIC
   margin-bottom: $postMessageVerticalPadding;
 
   ul {
+    display: inline-block;
     position: relative;
     list-style: none;
-    padding: 0.15em 0 0 0.5em;
-    margin: 0 0 0 $postModActionWidth;
+    padding: 0.15em 0 0 0;
+    margin: 0 0 0 0.5em;
   }
   li {
     display: inline-block;
@@ -200,8 +210,11 @@ $postModActionWidth: 1em; //deletion checkbox or dropdown menu arrow, MAGIC
     }
   }
 
-  .labelCreated, .spanId, .linkSelf {
+  .labelCreated, .spanId {
     font-size: $postHeaderSmallFontSize;
+  }
+  .linkSelf {
+    font-size: (1em + $postHeaderSmallFontSize) / 2;
   }
   .spanId {
     margin-left: -0.1em; //Compensate for bigger name and role fonts
@@ -216,6 +229,7 @@ $postModActionWidth: 1em; //deletion checkbox or dropdown menu arrow, MAGIC
   border-bottom: 1px solid $postOpInnerBorderColor;
 }
 .postReplyHeader {
+  display: inline-block;
   background-color: $replyHeaderBackgroundColor;
 }
 .postReplyHeader .postHeaderInner {
@@ -237,4 +251,15 @@ input[type='checkbox'].deletionCheckBox {
 ------------------------------------------------------------*/
 .postContent {
   padding: 0 $postInternalPadding;
+}
+
+/* =Preview
+------------------------------------------------------------*/
+.postPreviewTooltip {
+  display: inline-block;
+  z-index: 10;
+
+  @if $shadows {
+    @include tooltipShadows();
+  }
 }

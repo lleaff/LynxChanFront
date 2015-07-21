@@ -83,7 +83,7 @@ body {
   @if $bodyBackground {
     background: $bodyBackground;
   } @else {
-    background-color: palette('bgMain');
+    background-color: $bodyBgColor;
   }
 
   padding: 0;

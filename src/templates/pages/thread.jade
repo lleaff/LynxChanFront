@@ -4,7 +4,7 @@ block headerLogo
     img#bannerImage
 
 block headerTitle
-  +title('#labelName', '#labelDescription', '..')
+  +title('#labelName', '#labelDescription', '/..')
 
 block append userMenu
   +userMenuEntry
@@ -34,7 +34,7 @@ block content
         input#controlThreadIdentifier(type='hidden', name='threadId')
       input#settingsFormButton(type='submit', value=l.guiSave)
       button#settingsJsButton(type='button',  style='display: none;'
-          onclick='saveThreadSettings()', value=l.guiSave)
+        onclick='saveThreadSettings()') #{l.guiSave}
 
   form(method='post', action='../../contentActions.js',
       enctype='multipart/form-data')

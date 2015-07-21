@@ -102,8 +102,15 @@
   "titRules":                         "Rules",
   "titRulesManagement":               "Rules management",
   "guiRule":                          "Rule",
+  "titCurrentRules":                  "Current rules",
   "guiDeleteRule":                    "Delete rule",
+  "titNewRule":                       "New rule",
   "guiAddRule":                       "Add rule",
+  "titPageBoardRules":                    "Board rules",
+  "guiBoardRulesLabel": {
+    "start":                          "",
+    "end":                            " rules:"
+  },
   "titLogs":                          "Logs",
   "titTopBoards":                     "Top boards",
   "titAllBoards":                     "All boards",

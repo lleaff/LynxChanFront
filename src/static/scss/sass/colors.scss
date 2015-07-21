@@ -10,6 +10,7 @@
 // Colors here must reference colors in the theme's palette with
 //  palette('key'), without assuming anything about their value
 //  except sufficient contrast between foreground and background.
+// Includes some variables that aren't strictly colors.
 //============================================================
 
 // =Contrast
@@ -45,7 +46,19 @@ $minorHeaderBgColor:  if($vibrant,
   palette('accentA'),
   intensify(palette('bgAlt'), palette('fgMain'), 10))!default;
 $minorHeaderColor:    intensify($minorHeaderBgColor, palette('fgMain'), 45)!default;  
-$minorHeaderBold:     550;
+$minorHeaderBold:     550!default;
+
+// Shadows
+//============================================================
+$dropShadows: minimal!default;
+$shadows: get-drop-shadows-pref($dropShadows);
+$shadowsBaseColor:    intensify-lightness(palette('bgMain'), palette('fgMain'))!default;
+$shadowsAlpha:        0.15!default;
+$shadowsColor:        rgba($shadowsBaseColor, $shadowsAlpha)!default;
+$shadowsRadius:       0.4em!default;
+@mixin tooltipShadows() {
+  box-shadow: 0 0 #{$shadowsRadius * 5} rgba($shadowsBaseColor, $shadowsAlpha * 1.5 * $shadows);
+};
 
 //=============================================================
 $borderColorMain:     mix(palette('bgMain'), palette('fgMain'), 80%);
@@ -65,9 +78,13 @@ $borderColorAlt:      mix(palette('bgAlt'), palette('fgAlt'), 80%);
 // Body
 //============================================================
 $bodyBackground: false!default;
+$bodyBgColor:    palette('bgMain')!default;
 
 // Posts
 //============================================================
+$replyBgColor: palette('bgAlt');
+$replyColor: palette('fgAlt');
+
 // Header
 $nameColor:           take($linkColor, palette('accentA'),
                     $saturation: 100, $hue: 100)!default;
@@ -81,6 +98,10 @@ $subjectBold:         550!default;
 
 $linkReplyColor:      $linkColor!default;
 // Message
+//Can either be a color to take the hue from, or 'false' to disable markedPost styling
+$markedPost: palette('accentB')!default; 
+$markedPostBgColor:   if($markedPost, take-hue($replyBgColor, $markedPost, 90%), false)!default;
+
 $greenTextColor:      take-lightness(#0f0, palette('fgMain'), 50%)!default;
 $quoteLinkColor:      $linkColor!default;
 

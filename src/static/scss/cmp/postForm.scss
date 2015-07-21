@@ -7,6 +7,10 @@ $singleLineFieldRowHeight: 1.5em;
   border: $borderStyle $borderWidth $postFormBorderColor;
   background: $postFormBgColor;
   color: $postFormColor;
+  @if $shadows {
+    box-shadow: 0 0 $shadowsRadius $shadowsColor;
+    border-color: soften($postFormBorderColor, $bodyBgColor, (600 * $shadowsAlpha));
+  }
 }
 #postFormWrapper h1 {
   @include minorHeader($coverBorder: 1px);
