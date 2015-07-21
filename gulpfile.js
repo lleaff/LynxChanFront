@@ -312,12 +312,14 @@ Object.keys(lang).forEach(function(str) {
 });
 
 var scssPreprocessedFile = paths.scss+'preprocessed.scss';
+var scssMainFile = paths.scss+'main.scss';
 
 gulp.task('css', function() {
   var combined = combiner.obj([
+    merge(gulp.src(scssMainFile)
+      .pipe(preprocess({context: sassContext })),
     gulp.src(['!'+paths.scssExtras+'*', '!'+scssPreprocessedFile,
-             files.scss, files.css])
-      .pipe(preprocess({context: sassContext }))
+             '!'+scssMainFile, files.scss, files.css]))
       .pipe(gulpif(!g.production, sourcemaps.init()))
         .pipe(sass({
           includePaths: [themeFolder],
