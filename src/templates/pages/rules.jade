@@ -1,0 +1,11 @@
+extends ../jade/base
+
+block headerTitles
+  +title(l.titBoardRules, '', '..')
+
+block content
+  h1
+    | #{l.guiBoardRulesLabel.start}
+    | #[span#boardLabel]
+    | #{l.guiBoardRulesLabel.end}
+  table#divRules

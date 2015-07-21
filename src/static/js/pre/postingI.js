@@ -1,8 +1,8 @@
 if (pageId === 'board' || pageId === 'thread') {
   bodyOnLoadStack.push(function() {
-    var loadedPreviews = [];
-    var loadingPreviews = [];
-    var quoteReference = {};
+    window.loadedPreviews = [];
+    window.loadingPreviews = [];
+    window.quoteReference = {};
 
     showElement(document.getElementById('deleteJsButton'));
     showElement(document.getElementById('reportJsButton'));
@@ -19,7 +19,7 @@ if (pageId === 'board' || pageId === 'thread') {
     var quotes = document.getElementsByClassName('quoteLink');
 
     for (var i = 0; i < quotes.length; ++i) {
-      processQuote(quote);
+      processQuote(quotes[i]);
     }
 
   });

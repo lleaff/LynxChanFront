@@ -287,7 +287,8 @@ function processQuote(quote) {
 
   quote.onmouseenter = function() {
     tooltip.setAttribute('class', 'postPreviewTooltip');
-    tooltip.style.display = 'inline';
+    tooltip.style.display = 'block';
+    tooltip.style.backgroundColor = '#ccc';
 
     if (loadedPreviews.indexOf(quoteUrl) < 0 &&
         loadingPreviews.indexOf(quoteUrl) < 0) {

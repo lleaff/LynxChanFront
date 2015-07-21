@@ -3,13 +3,13 @@ extends ../jade/base
 block headerTitle
   +title(l.titRulesManagement)
 
-block append bottomScripts
-  +script('ext.js')
 block append styles
   +style('ext.css')
+block append bottomScripts
+  +script('ext.js')
 
 block content
-  h1 New rule
+  h1 #{l.titNewRule}
   form(action='/createRule.js', method='post',
       enctype='multipart/form-data')
     input#boardIdentifier(type='hidden', name='boardUri')
@@ -20,7 +20,7 @@ block content
     input#addJsButton(type='button', onclick='addRule()',
         value=l.guiAddRule, style='display: none;')
 
-  h1 Current rules
+  h1 #{l.titCurrentRules}
   section#divRules
 
 block pageId
