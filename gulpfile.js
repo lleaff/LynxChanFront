@@ -21,6 +21,7 @@ var gulp                = require('gulp');
 var gutil               = require('gulp-util');
 var gulpif              = require('gulp-if');
 var combiner            = require('stream-combiner2');
+var preprocess          = require('gulp-preprocess');
 /*============= Content operations ============= */
 /* General */
 var sourcemaps          = require('gulp-sourcemaps'); /* sourcemaps */
@@ -301,9 +302,22 @@ gulp.task('html', ['moveHtml', 'jade']);
 
 /* =CSS =SCSS =SASS
 ------------------------------*/
+/* eg.: the string '__thumbSize' will be replaced by '128' */
+var sassContext = {};
+Object.keys(settings).forEach(function(setting) {
+  sassContext['__'+setting] = settings[setting];
+});
+Object.keys(lang).forEach(function(str) {
+  sassContext['l.'+str] = settings[str];
+});
+
+var scssPreprocessedFile = paths.scss+'preprocessed.scss';
+
 gulp.task('css', function() {
   var combined = combiner.obj([
-    gulp.src([files.scss, files.css, '!'+paths.scssExtras+'*'])
+    gulp.src(['!'+paths.scssExtras+'*', '!'+scssPreprocessedFile,
+             files.scss, files.css])
+      .pipe(preprocess({context: sassContext }))
       .pipe(gulpif(!g.production, sourcemaps.init()))
         .pipe(sass({
           includePaths: [themeFolder],

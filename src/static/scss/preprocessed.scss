@@ -1,0 +1,43 @@
+// See:
+//    $BACK_END/src/be/Readme.md
+//    https://gitlab.com/mrseth/LynxChan/blob/master/src/be/Readme.md#back-end-settings
+//  for a list of available settings.
+//------------------------------------------------------------
+//  Set !default values as keys may be optional.
+//  Enclose in @ifdef/@endif as Sass will throw on an empty statement.
+//------------------------------------------------------------
+
+$siteTitle: 'myWebsite'!default;
+// @ifdef __siteTitle
+$siteTitle: /* @echo __siteTitle */;
+// @endif
+
+$latestPostCount: 5!default;
+// @ifdef __latestPostCount
+$latestPostCount: /* @echo __latestPostCount */;
+// @endif
+
+$maxFiles: 3!default;
+// @ifdef __maxFiles
+$maxFiles: /* @echo __maxFiles */;
+// @endif
+
+$topBoardsCount: 25!default;
+// @ifdef __topBoardsCount
+$topBoardsCount: /* @echo __topBoardsCount */;
+// @endif
+
+$boardsPerPage: 50!default;
+// @ifdef __boardsPerPage
+$boardsPerPage: /* @echo __boardsPerPage */;
+// @endif
+
+$webmThumb: false!default;
+// @ifdef __webmThumb
+$webmThumb: /* @echo __webmThumb */;
+// @endif
+
+$thumbSize: 128px!default;
+// @ifdef __thumbSize
+$thumbSize: /* @echo __thumbSize */;
+// @endif

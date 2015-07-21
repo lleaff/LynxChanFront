@@ -16,6 +16,7 @@
     "gulp-imagemin": "latest",
     "gulp-jade": "latest",
     "gulp-minify-css": "latest",
+    "gulp-preprocess": "^1.2.0",
     "gulp-replace": "^0.5.3",
     "gulp-sass": "latest",
     "gulp-shell": "latest",
