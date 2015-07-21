@@ -7,9 +7,9 @@ block outer
   article(class='post'+postType)
     header(class='post'+postType+'Header')
       .postHeaderInner
-        input.deletionCheckBox(type='checkbox')
+        ul
+          li: input.deletionCheckBox(type='checkbox')
         block postInfo
-          ul
             li: a.linkPreview.fa.fa-link(title=l.postHeader.directLinkLabel)
             li.labelSubject
             li: a.linkName

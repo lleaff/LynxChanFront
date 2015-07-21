@@ -2,6 +2,9 @@
 // =Modify
 //============================================================
 
+// Colors
+//============================================================
+
 // Mix $color by $weight with the color obtained by calling $function with
 //  $color followed by the given arguments.
 //------------------------------------------------------------
@@ -74,6 +77,32 @@
     $weight);
 }
 
+// Return an automatically contrasted color
+//------------------------------------------------------------
+@function intense-lightness($color, $threshold: 50%, $weight: 100%) {
+  @if lightness($color) < $threshold {
+    $scale: $mainContrast;
+  } @else {
+    $scale: -$mainContrast;
+  }
+  $adjusted: adjust-color($color, $lightness: $scale * 100);
+  @return mix($adjusted, $color, $weight);
+}
+
+@function intense-saturation($color, $threshold: 50%, $weight: 100%) {
+  @if lightness($color) < $threshold {
+    $scale: $mainSaturationContrast;
+  } @else {
+    $scale: -$mainSaturationContrast;
+  }
+  $adjusted: adjust-color($color, $lightness: $scale * 100);
+  @return mix($adjusted, $color, $weight);
+}
+
+@function intense($color, $threshold: 50%, $weight: 100%) {
+  @return $intense-lightness($color, $threshold, $weight);
+}
+
 // Change $color to use the given value form $sourceColor
 //------------------------------------------------------------
 @function take-red($color, $sourceColor, $weight: 100%) {
@@ -137,7 +166,7 @@
 }
 
 //
-//------------------------------------------------------------
+//============================================================
 @function percToNum($percentage) {
   @return ($percentage / 100%);
 }
@@ -193,5 +222,7 @@
     @return 1;
   } @else if $value == 'full' or $value == 2 {
     @return 2;
+  } @else if type-of($value) == 'number' {
+    @return $value;
   }
 }

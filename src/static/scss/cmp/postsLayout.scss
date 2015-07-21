@@ -37,7 +37,7 @@ $postMessageVerticalPadding: $defaultPadding * 1.2;
   padding-bottom: $postMessageVerticalPadding;
 }
 
-$postReplyBorderColor: intensify(palette('bgAlt'), palette('fgMain'), 7);
+$postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7);
 .postReply {
   border: solid 1px;
   color: $replyColor;
@@ -78,6 +78,12 @@ $postReplyBorderColor: intensify(palette('bgAlt'), palette('fgMain'), 7);
   margin-top: $defaultPadding / 2.3;
 }
 
+.uploadCell {
+  display: inline-block;
+  padding-right: $postInternalPadding;
+  margin-top: $postInternalPadding / 2;
+}
+
 .panelUploads {
   float: left;
   display: inline-table;
@@ -99,6 +105,8 @@ $postReplyBorderColor: intensify(palette('bgAlt'), palette('fgMain'), 7);
 
   .imgLink {
     display: table-cell;
+    min-width: 1em;
+    min-height: 1em;
   }
 
   .imgExpanded {
@@ -106,12 +114,6 @@ $postReplyBorderColor: intensify(palette('bgAlt'), palette('fgMain'), 7);
     width: 100%;
   }
 
-}
-
-.uploadCell {
-  display: inline-block;
-  padding-right: $postInternalPadding;
-  margin-top: $postInternalPadding / 2;
 }
 
 // Fill width when post has multiple files
@@ -190,13 +192,14 @@ $postReplyColor: soften-lightness(palette('fgAlt'), palette('bgAlt'), $fontColor
   }
 }
 
-$postModActionWidth: 1em; //deletion checkbox or dropdown menu arrow, MAGIC
+$postModActionWidth: 1.5em; //deletion checkbox or dropdown menu arrow, MAGIC
 .postOpHeader, .postReplyHeader {
 
   margin-bottom: $postMessageVerticalPadding;
 
   ul {
     display: inline-block;
+    float: left;
     position: relative;
     list-style: none;
     padding: 0.15em 0 0 0;
@@ -238,9 +241,9 @@ $postModActionWidth: 1em; //deletion checkbox or dropdown menu arrow, MAGIC
 }
 
 input[type='checkbox'].deletionCheckBox {
-  float: left;
-  margin-top: 0.07em; //MAGIC
-  margin-left: 0.07em;
+  //float: left;
+  //margin-top: 0.07em; //MAGIC
+  //margin-left: 0.07em;
 }
 .postOpHeader, .postReplyHeader {
   li:nth-child(2) {

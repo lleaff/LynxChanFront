@@ -15,7 +15,7 @@
 
 // =Contrast
 //============================================================
-// [-100, 100]
+// [-1, 1]
 // > 0: dark on light
 // < 0: light on dark
 $mainContrast: percToNum(contrast(palette('fgMain'), palette('bgMain')))!default;
@@ -24,7 +24,7 @@ $altContrast:  percToNum(contrast(palette('fgAlt'), palette('bgAlt')))!default;
 $strongestContrast: max(abs($mainContrast), abs($altContrast))!default;
 $weakerContrast:    min(abs($mainContrast), abs($altContrast))!default;
 
-// [-100, 100]
+// [-1, 1]
 // > 0: saturated on dull
 // < 0: dull on saturated
 $mainSaturationContrast: percToNum(contrast-saturation(palette('fgMain'), palette('bgMain')))!default;
@@ -45,7 +45,7 @@ $linkHoverColor:      take-color($linkColor, palette('accentB'))!default;
 $minorHeaderBgColor:  if($vibrant,
   palette('accentA'),
   intensify(palette('bgAlt'), palette('fgMain'), 10))!default;
-$minorHeaderColor:    intensify($minorHeaderBgColor, palette('fgMain'), 45)!default;  
+$minorHeaderColor:    intense-lightness($minorHeaderBgColor, $weight: 60%)!default;  
 $minorHeaderBold:     550!default;
 
 // Shadows
@@ -82,8 +82,8 @@ $bodyBgColor:    palette('bgMain')!default;
 
 // Posts
 //============================================================
-$replyBgColor: palette('bgAlt');
-$replyColor: palette('fgAlt');
+$replyBgColor: palette('bgAlt')!default;
+$replyColor: palette('fgAlt')!default;
 
 // Header
 $nameColor:           take($linkColor, palette('accentA'),

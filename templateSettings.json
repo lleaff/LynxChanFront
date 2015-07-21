@@ -46,5 +46,5 @@
   "ruleManagementPage":   "pages/ruleManagement.html",
   "ruleManagementCell":   "cmp/ruleManagementCell.html",
   "rulesPage":            "pages/rules.html",
-  "ruleCell":             "cmp/rule.html"
+  "ruleCell":             "cmp/ruleCell.html"
 }
