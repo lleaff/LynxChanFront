@@ -1,5 +1,29 @@
-if (pageId === 'board' || pageId === 'thread') {
+function iterateSelectedFiles(currentIndex, files, fileChooser, callback) {
+  window.callback = callback;
+  console.log('CALLBACK?', callback);//DEBUG
+  if (currentIndex < fileChooser.files.length) {
+    var reader = new FileReader();
 
+    reader.onloadend = function(e) {
+
+      files.push({
+        name : fileChooser.files[currentIndex].name,
+        content : reader.result
+      });
+
+      iterateSelectedFiles(currentIndex + 1, files, fileChooser, callback);
+
+    };
+
+    reader.readAsDataURL(fileChooser.files[currentIndex]);
+  } else {
+    window.callback(files);
+  }
+
+}
+
+if (pageId === 'board' || pageId === 'thread') {
+  console.log('posting.js');
   var MIMETYPES = {
     a:       'application/octet-stream',
     ai:      'application/postscript',
@@ -139,73 +163,90 @@ if (pageId === 'board' || pageId === 'thread') {
   var imageLinks = [];
   for (var i = 0; i < imageLinkElements.length; ++i) {
     imageLinks[i] = imageLinkElements[i];
+    processImageLink(imageLinks[i], i);
   }
-
-  imageLinks.forEach(function(imgLink) {
-    processImageLink(imgLink);
-  });
 
   window.maxFileSize =
     +document.getElementById('labelMaxFileSize').innerHTML;
 }
 
+function processImageLink(link, i) {
+  var mime = getMime(link.href);
 
-function setClickableImage(link) {
-  var parent = link.parentNode;
+  if (mime.indexOf('image/') > -1) {
+    var obj = window.imageList[i] = {};
+    obj.element        = link.getElementsByTagName('img')[0];
+    obj.thumbSrc       = obj.element.getAttribute('src');
+    obj.link           = link;
+    obj.container      = link.parentNode; /* .uploadCell */
+    obj.maxThumbWidth  = obj.container.style.maxWidth;
+    obj.maxThumbHeight = obj.container.style.maxHeight;
+    setClickableImage(obj);
 
-  link.onclick = function(mouseEvent) {
-    return expandImage(mouseEvent, link);
+  } else if (mime =='video/webm') {
+    setWebm(link);
+  }
+}
+function setClickableImage(obj) {
+  obj.link.onclick = function(event) {
+    return initialImageExpand(event, obj);
   };
 }
 
 /* mouseEvent.target -> link */
-function expandImage(mouseEvent, link) {
+function initialImageExpand(event, obj) {
   /* return: false -> Don't follow link, true -> Follow link */
 
   /* If event was fired by middle mouse button or combined with
    * the ctrl key, act as a normal link */
-  if (mouseEvent.which === 2 || mouseEvent.ctrlKey) {
+  if (event.which === 2 || event.ctrlKey) {
     return true;
-  }
-
-  var thumb = link.getElementsByTagName('img')[0];
-
-  /* If image is expanded */
-  if (thumb.style.display === 'none') {
-    link.getElementsByClassName('imgExpanded')[0].style.display = 'none';
-    showElement(thumb);
-    return false;
   }
 
   /* Click animation could be inserted here */
 
-  var expanded = link.getElementsByClassName('imgExpanded')[0];
-
-  /* If image has already been expanded in the past,
-   * don't create another <img> */
-  if (expanded) {
-    thumb.style.display = 'none';
-    showElement(expanded);
-    return false;
-  } else {
-    var expandedSrc = link.href;
-
-    /* If the thumb is the same image as the source, do nothing */
-    if (thumb.src === expandedSrc) {
-      return false;
-    }
-
-    expanded = document.createElement('img');
-    expanded.setAttribute('src', expandedSrc);
-    expanded.setAttribute('class', 'imgExpanded');
-
-    thumb.style.display = 'none';
-    link.appendChild(expanded);
+  obj.origSrc = obj.link.href;
+  /* If the thumb is the same image as the source, do nothing */
+  if (obj.origSrc === obj.thumbSrc) {
     return false;
   }
+  obj.element.setAttribute('src', obj.origSrc);
+  obj.expanded = true;
+  obj.container.style.maxWidth  = '';
+  obj.container.style.maxHeight = '';
+  obj.link.className += ' imgExpanded';
+
+  obj.link.onclick = function(event) {
+    return toggleImage(event, obj);
+  };
+  return false;
 }
 
-function setWebm(link) {
+function toggleImage(event, obj) {
+  /* If event was fired by middle mouse button or combined with
+   * the ctrl key, act as a normal link */
+  if (event.which === 2 || event.ctrlKey) {
+    return true;
+  }
+
+  var el = obj.element;
+  if (obj.expanded) {
+    obj.container.style.maxHeight = el.maxThumbHeight;
+    obj.container.style.maxWidth = el.maxThumbWidth;
+    removeClass(obj.link, 'imgExpanded');
+    el.setAttribute('src', obj.thumbSrc);
+    obj.expanded = false;
+  } else {
+    el.setAttribute('src', obj.origSrc);
+    obj.container.style.maxHeight = '';
+    obj.container.style.maxWidth  = '';
+    obj.link.className += ' imgExpanded';
+    obj.expanded = true;
+  }
+  return false;
+}
+
+function setWebm(link, uploadCell, maxWidth, maxHeight) {
 
   var path = link.href;
   var parent = link.parentNode;
@@ -227,7 +268,7 @@ function setWebm(link) {
   hideLink.style.display = 'none';
   hideLink.setAttribute('class', 'hideLink');
   hideLink.onclick = function() {
-    newThumb.style.display = 'inline';
+    newThumb.style.display = '';
     video.style.display = 'none';
     hideLink.style.display = 'none';
     video.pause();
@@ -237,26 +278,20 @@ function setWebm(link) {
   newThumb.setAttribute('src', link.childNodes[0].src);
   newThumb.onclick = function() {
     newThumb.style.display = 'none';
-    video.style.display = 'inline';
-    hideLink.style.display = 'inline';
+    video.style.display = '';
+    uploadCell.style.maxWidth  = maxWidth;
+    uploadCell.style.maxHeight = maxHeight;
+    hideLink.style.display = '';
     video.play();
   };
 
   videoContainer.appendChild(hideLink);
   videoContainer.appendChild(video);
+  uploadCell.style.maxWidth  = '';
+  uploadCell.style.maxHeight = '';
   videoContainer.appendChild(newThumb);
 
   parent.replaceChild(videoContainer, link);
-}
-
-function processImageLink(link) {
-  var mime = getMime(link.href);
-
-  if (mime.indexOf('image/') > -1) {
-    setClickableImage(link);
-  } else if (mime =='video/webm') {
-    setWebm(link);
-  }
 }
 
 function processQuote(quote) {

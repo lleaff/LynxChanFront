@@ -111,7 +111,7 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7);
     min-height: 1em;
   }
 
-  .imgExpanded {
+  .imgExpanded img {
     max-width: 100%;
     width: 100%;
   }
@@ -244,9 +244,11 @@ $postModActionWidth: 1.5em; //deletion checkbox or dropdown menu arrow, MAGIC
   border-bottom: 1px solid $postReplyInnerBorderColor;
 }
 li.deletionCheckBoxWrap {
-  display: block;
+  display: inline-block;
   position: relative;
-  height: 16px;
+  margin-top: 0.2em;
+  height: 1em;
+  width: 1em;
 }
 input[type='checkbox'].deletionCheckBox {
   display: inline;
@@ -254,6 +256,11 @@ input[type='checkbox'].deletionCheckBox {
   //margin-top: 0.07em; //MAGIC
   //margin-left: 0.07em;
 }
+
+.postOpHeader .linkPreviewWrap {
+  display: none; /* That link is pretty much useless for the end-users */
+}
+
 .postOpHeader, .postReplyHeader {
   li:nth-child(2) {
   }

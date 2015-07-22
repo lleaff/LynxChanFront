@@ -1,4 +1,7 @@
 if (pageId === 'board' || pageId === 'thread') {
+  /* Objects containing information about post user images */
+  window.imageList = [];
+
   bodyOnLoadStack.push(function() {
     window.loadedPreviews = [];
     window.loadingPreviews = [];
@@ -8,7 +11,6 @@ if (pageId === 'board' || pageId === 'thread') {
     showElement(document.getElementById('reportJsButton'));
 
     if (!board && document.getElementById('inputBan')) {
-
       showElement(document.getElementById('banJsButton'));
       removeElement(document.getElementById('inputBan'));
     }
