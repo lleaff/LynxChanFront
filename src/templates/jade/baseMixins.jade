@@ -9,6 +9,14 @@ mixin style(relativePath)
 mixin script(relativePath)
   script(src=baseStaticUrl+'/js/'+relativePath)
 
+mixin favicon(url)
+  if url
+    - var iconUrl = url;
+  else
+    - var iconUrl = baseStaticUrl+'/favicon.ico';
+  link(rel='shortcut icon', href=iconUrl,
+      type='image/x-icon')
+
 //-------------------------------
 //- Format title automatically
 //- Allows passing direct title(s) text or their id by CSS notation

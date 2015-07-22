@@ -13,12 +13,14 @@ html
   block html
     head
       block head
-        meta(charset="utf-8")
+        meta(charset='utf-8')
         title 
           block title
         block styles
           for styleUrl in baseStylesUrls
-            link(rel="stylesheet", href=styleUrl)
+            link(rel='stylesheet', href=styleUrl)
+        block favicon
+          +favicon()
         block topInlineScript
           script
             block pageId
