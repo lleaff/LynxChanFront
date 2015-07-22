@@ -39,5 +39,5 @@ $webmThumb: /* @echo __webmThumb */;
 
 $thumbSize: 128px!default;
 // @ifdef __thumbSize
-$thumbSize: /* @echo __thumbSize */;
+$thumbSize: /* @echo __thumbSize */px;
 // @endif

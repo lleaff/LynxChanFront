@@ -3,6 +3,15 @@ if (pageId === 'board' || pageId === 'thread') {
   window.imageList = [];
 
   bodyOnLoadStack.push(function() {
+
+    /* ---TEMPORARY begin---*/
+    /* Replace .uploadCell <div>'s with <figure>'s */
+    var uploadCells = document.body.getElementsByClassName('uploadCell');
+    for (var i = 0; i < uploadCells.length; ++i) {
+      replaceTag(uploadCells[i], 'figure');
+    }
+    /* ---TEMPORARY end---*/
+
     window.loadedPreviews = [];
     window.loadingPreviews = [];
     window.quoteReference = {};

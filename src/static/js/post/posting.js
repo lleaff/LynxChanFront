@@ -1,6 +1,5 @@
 function iterateSelectedFiles(currentIndex, files, fileChooser, callback) {
   window.callback = callback;
-  console.log('CALLBACK?', callback);//DEBUG
   if (currentIndex < fileChooser.files.length) {
     var reader = new FileReader();
 
@@ -23,7 +22,6 @@ function iterateSelectedFiles(currentIndex, files, fileChooser, callback) {
 }
 
 if (pageId === 'board' || pageId === 'thread') {
-  console.log('posting.js');
   var MIMETYPES = {
     a:       'application/octet-stream',
     ai:      'application/postscript',

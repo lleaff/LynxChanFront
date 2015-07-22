@@ -72,7 +72,7 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7);
 ------------------------------*/
 /* opCell contains the whole thread, not just the Op */
 .opCell {
-  margin-bottom: $defaultPadding * 2.5;
+  padding-bottom: $defaultPadding * 2.5;
 }
 .postCell {
   margin-top: $defaultPadding / 2.3;
@@ -81,22 +81,17 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7);
 .uploadCell {
   display: inline-block;
   padding-right: $postInternalPadding;
-  margin-top: $postInternalPadding / 2;
-  max-width:  $thumbSize;
-  max-height: $thumbSize;
+  margin: $postInternalPadding / 2 0 0 0;
+  //max-width:  $thumbSize;
+  //max-height: $thumbSize;
 }
 
 .panelUploads {
   float: left;
-  display: inline-table;
+  //display: inline-table;
   border-collapse: collapse;
   margin-top: -$postMessageVerticalPadding;
 
-  .fileInfo {
-    display: table-caption;
-    caption-side: bottom;
-    line-height: 0.9em;
-  }
   /* eg. 21502435.jpg */
   .nameLink {
     margin-right: 1em;
@@ -106,7 +101,7 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7);
   }
 
   .imgLink {
-    display: table-cell;
+    //display: table-cell;
     min-width: 1em;
     min-height: 1em;
   }
@@ -116,6 +111,43 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7);
     width: 100%;
   }
 
+}
+
+
+.panelUploads .fileInfo {
+ // display: table-caption;
+ // caption-side: bottom;
+  //line-height: 0.9em;
+  overflow: hidden;
+  position: relative;
+}
+
+.originalNameLink {
+  width: 50%;
+  max-width: 50%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+}
+.uploadCell .fileInfoInner {
+  display: block;
+  text-overflow: ellipsis;
+  width: 100%;
+
+  border-bottom: 1px solid transparent;
+  opacity: 0;
+  @if $animationSpeed {
+    transition: opacity ($animationSpeed * 0.5) ease-in-out;
+  }
+  overflow: hidden;
+}
+.opWrapper .uploadCell:hover .fileInfoInner {
+  opacity: 1;
+  border-bottom-color: $postOpInnerBorderColor;
+}
+.postCell .uploadCell:hover .fileInfoInner {
+  opacity: 1;
+  border-bottom-color: $postReplyInnerBorderColor;
 }
 
 // Fill width when post has multiple files
@@ -158,20 +190,6 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7);
   margin-left: $postOpMarginLeft + $margin-left;
   margin-top: calc(-#{$topBorderSize} - #{$padding-top}); // Compensate so it looks like the border is part of .opWrapper
   }
-}
-
-.uploadCell .fileInfoInner {
-  display: inline-block;
-
-  border-bottom: 1px solid transparent;
-  opacity: 0;
-  @if $animationSpeed {
-    transition: opacity ($animationSpeed * 0.5) ease-in-out;
-  }
-}
-.uploadCell:hover .fileInfoInner {
-  opacity: 1;
-  border-bottom-color: $postOpInnerBorderColor;
 }
 
 /* =Post Header

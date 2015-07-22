@@ -84,30 +84,7 @@ function sendThreadData(files) {
 
 }
 
-function iterateSelectedFiles(currentIndex, files, fileChooser) {
-
-  if (currentIndex < fileChooser.files.length) {
-    var reader = new FileReader();
-
-    reader.onloadend = function(e) {
-
-      files.push({
-        name : fileChooser.files[currentIndex].name,
-        content : reader.result
-      });
-
-      iterateSelectedFiles(currentIndex + 1, files, fileChooser);
-
-    };
-
-    reader.readAsDataURL(fileChooser.files[currentIndex]);
-  } else {
-    sendThreadData(files);
-  }
-
-}
-
 function postThread() {
-
-  iterateSelectedFiles(0, [], document.getElementById('files'));
+  iterateSelectedFiles(0, [],
+                       document.getElementById('files'), sendThreadData);
 }

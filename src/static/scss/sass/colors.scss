@@ -129,9 +129,9 @@ $buttonFgColor:       palette('fgAlt');
 
 // =Post form
 //=============================================================
-$postFormBgColor:     palette('bgAlt');
-$postFormBorderColor: $borderColorAlt;
-$postFormColor:       palette('fgAlt');
+$postFormBgColor:     palette('bgAlt')!default;
+$postFormBorderColor: $borderColorAlt!default;
+$postFormColor:       palette('fgAlt')!default;
 
 // =Header
 //=============================================================

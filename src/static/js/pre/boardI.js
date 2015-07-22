@@ -2,9 +2,9 @@ if (pageId === 'board') {
   bodyOnLoadStack.push(function() {
 
     window.board = true;
-    var boardUri = document.getElementById('boardIdentifier').value;
+    window.boardUri = document.getElementById('boardIdentifier').value;
 
-    var postButton = document.getElementById('jsButton');
+    window.postButton = document.getElementById('jsButton');
     showElement(postButton);
 
     if (document.getElementById('captchaDiv')) {

@@ -1,7 +1,7 @@
 function reloadCaptcha() {
   document.cookie = 'captchaid=; path=/;';
 
-  document.getElementById('captchaImage').src = '/captcha.js#' +
+  document.getElementById('captchaImage').src = '/captcha.js#'+
     new Date().toString();
   /* Clear the text field */
   document.getElementById('fieldCaptcha').value = "";
@@ -24,7 +24,7 @@ function saveThreadSettings() {
       location.reload(true);
 
     } else {
-      alert(status + ': ' + JSON.stringify(data));
+      alert(status+': '+JSON.stringify(data));
     }
   });
 
@@ -67,21 +67,13 @@ function padDateField(value) {
 
 function formatDateToDisplay(d) {
   var day = padDateField(d.getDate());
-
   var weekDays = [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ];
-
   var month = padDateField(d.getMonth()+1);
-
   var year = d.getFullYear();
-
   var weekDay = weekDays[d.getDay()];
-
   var hour = padDateField(d.getHours());
-
   var minute = padDateField(d.getMinutes());
-
   var second = padDateField(d.getSeconds());
-
   var toReturn = month+'/'+day+'/'+year;
 
   return toReturn+' ('+weekDay+') '+hour+':'+minute+':'+second;
@@ -98,7 +90,7 @@ function formatFileSize(size) {
 
   }
 
-  return size.toFixed(2) + ' ' + sizeOrders[orderIndex];
+  return size.toFixed(2)+' '+sizeOrders[orderIndex];
 
 }
 
@@ -133,7 +125,7 @@ function setUploadCell(node, files) {
     var infoString = formatFileSize(file.size);
 
     if (file.width) {
-      infoString += ', ' + file.width + 'x' + file.height;
+      infoString += ', '+file.width+'x'+file.height;
     }
 
     cell.getElementsByClassName('infoLabel')[0].innerHTML = infoString;
@@ -186,9 +178,9 @@ function setPostComplexElements(postCell, post, boardUri, threadId) {
   var deletionCheckbox =
     postCell.getElementsByClassName('deletionCheckBox')[0];
 
-  link.href = '/' + boardUri + '/res/' + threadId + '.html#' + post.postId;
+  link.href = '/'+boardUri+'/res/'+threadId+'.html#'+post.postId;
 
-  var checkboxName = boardUri + '-' + threadId + '-' + post.postId;
+  var checkboxName = boardUri+'-'+threadId+'-'+post.postId;
   deletionCheckbox.setAttribute('name', checkboxName);
 
   setUploadCell(
@@ -202,7 +194,7 @@ function setPostInnerElements(boardUri, threadId, post, postCell) {
   linkName.innerHTML = post.name;
 
   if (post.email) {
-    linkName.href = 'mailto:' + post.email;
+    linkName.href = 'mailto:'+post.email;
   } else {
     linkName.className += ' noEmailName';
   }
@@ -302,7 +294,7 @@ function refreshPosts(manual) {
 
   refreshButton.style.display = 'none';
 
-  localRequest('/' + boardUri + '/res/' + threadId + '.json', refreshCallback);
+  localRequest('/'+boardUri+'/res/'+threadId+'.json', refreshCallback);
 
 }
 
@@ -367,31 +359,8 @@ function sendReplyData(files) {
 
 }
 
-function iterateSelectedFiles(currentIndex, files, fileChooser) {
-
-  if (currentIndex < fileChooser.files.length) {
-    var reader = new FileReader();
-
-    reader.onloadend = function(e) {
-
-      files.push({
-        name : fileChooser.files[currentIndex].name,
-        content : reader.result
-      });
-
-      iterateSelectedFiles(currentIndex + 1, files, fileChooser);
-
-    };
-
-    reader.readAsDataURL(fileChooser.files[currentIndex]);
-  } else {
-    sendReplyData(files);
-  }
-
-}
-
 function postReply() {
-  iterateSelectedFiles(0, [], document.getElementById('files'));
+  iterateSelectedFiles(0, [], document.getElementById('files'), sendReplyData);
 }
 
 function startTimer(time) {
@@ -452,6 +421,6 @@ function processPostingQuote(link) {
   link.onclick = function() {
     var toQuote = link.href.match(/#q(\d+)/);
 
-    document.getElementById('fieldMessage').value += '>>' + toQuote[1];
+    document.getElementById('fieldMessage').value += '>>'+toQuote[1];
   };
 }

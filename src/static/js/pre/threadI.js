@@ -18,7 +18,7 @@ if (pageId === 'thread') {
     window.hiddenCaptcha = !document.getElementById('captchaDiv');
     window.markedPosting = undefined;
 
-    var postCellTemplate =
+    window.postCellTemplate =
       '<input type="checkbox" class="deletionCheckBox">' +
       '<span class="labelSubject"></span> <a class="linkName"></a> <span class="labelRole">' +
       '</span> <span class="labelCreated"></span><span class="spanId"> Id: <span' +
@@ -26,12 +26,12 @@ if (pageId === 'thread') {
       '<div class="panelUploads"></div>' +
       '<div class="divMessage" /></div><div class="divBanMessage"></div><br>';
 
-    var uploadCellTemplate = '<a class="nameLink"></a>(<span class="infoLabel"> </span>)<br><a class="imgLink"></a>';
+    window.uploadCellTemplate = '<a class="nameLink"></a>(<span class="infoLabel"> </span>)<br><a class="imgLink"></a>';
 
-    var sizeOrders = [ 'B', 'KB', 'MB', 'GB', 'TB' ];
+    window.sizeOrders = [ 'B', 'KB', 'MB', 'GB', 'TB' ];
 
     boardUri = document.getElementById('boardIdentifier').value;
-    var divPosts = document.getElementsByClassName('divPosts')[0];
+    window.divPosts = document.getElementsByClassName('divPosts')[0];
 
     showElement(document.getElementsByClassName('divRefresh')[0]);
 
@@ -55,7 +55,7 @@ if (pageId === 'thread') {
 
     removeElement(document.getElementById('formButton'));
 
-    var replies = document.getElementsByClassName('postCell');
+    window.replies = document.getElementsByClassName('postCell');
 
     if (replies && replies.length) {
       lastReplyId = replies[replies.length - 1].id;

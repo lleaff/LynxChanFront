@@ -213,6 +213,7 @@ gulp.task('otherFiles', function() {
   ].map(function(ft) { return '!'+basePaths.source+'**/*.'+ft; });
 
   return gulp.src([basePaths.source+'**/*.*'].concat(excludeTypes))
+    .pipe(debug())
     .pipe(gulp.dest(basePaths.build));
 });
 

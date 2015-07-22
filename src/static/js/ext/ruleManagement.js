@@ -1,4 +1,4 @@
-if (pageID === 'ruleManagement') {
+if (pageId === 'ruleManagement') {
   var boardIdentifier = document.getElementById('boardIdentifier').value;
 
   showElement(document.getElementById('addJsButton'));
