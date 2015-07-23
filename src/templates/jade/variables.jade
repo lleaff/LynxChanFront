@@ -10,11 +10,15 @@
 //- baseUrl
 //- baseStaticUrl
 - var baseStylesUrls        = [ baseStaticUrl+"/css/main.css" ];
-- var baseTopScriptsUrls    = [ baseStaticUrl+'/js/pre.js'];
-- var baseBottomScriptsUrls = [ baseStaticUrl+'/js/post.js'];
+- var baseTopScriptsUrls    = [ ];
+- var baseBottomScriptsUrls = [ baseStaticUrl+'/js/pre.js', baseStaticUrl+'/js/post.js'];
 - var siteLogoUrl           = baseStaticUrl+'/images/logo.png';
+- var preloadUrls = [ baseStaticUrl+'/js/pre.js' ];
 
 - var helpPageUrl           = baseStaticUrl+'/help.html'
 - var aboutPageUrl          = baseStaticUrl+'/about.html'
 - var accountSettingsUrl    = baseUrl+'/account.js'
 
+mixin preloads(additional)
+  for url in preloadUrls.concat(additional)
+    link(href=url)

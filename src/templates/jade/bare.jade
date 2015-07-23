@@ -1,4 +1,5 @@
 //- Minimal page
+include variables
 include baseMixins
 
 doctype html
@@ -17,6 +18,8 @@ html
         script
           block pageId
       block topScripts
+      block preloads
+        +preloads()
     body
       block body
       div#middle

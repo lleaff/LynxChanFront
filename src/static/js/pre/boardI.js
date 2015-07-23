@@ -1,18 +1,15 @@
 if (pageId === 'board') {
-  bodyOnLoadStack.push(function() {
+  window.board = true;
+  window.boardUri = document.getElementById('boardIdentifier').value;
 
-    window.board = true;
-    window.boardUri = document.getElementById('boardIdentifier').value;
+  window.postButton = document.getElementById('jsButton');
+  showElement(postButton);
 
-    window.postButton = document.getElementById('jsButton');
-    showElement(postButton);
+  if (document.getElementById('captchaDiv')) {
+    showElement(document.getElementById('reloadCaptchaButton'));
+  }
 
-    if (document.getElementById('captchaDiv')) {
-      showElement(document.getElementById('reloadCaptchaButton'));
-    }
+  removeElement(document.getElementById('formButton'));
 
-    removeElement(document.getElementById('formButton'));
-
-  });
 }
 

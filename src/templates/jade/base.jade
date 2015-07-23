@@ -11,6 +11,7 @@ include baseMixins
 doctype html
 html
   block html
+    //-HEAD============================================================
     head
       block head
         meta(charset='utf-8')
@@ -27,10 +28,13 @@ html
         block topScripts
           for scriptUrl in baseTopScriptsUrls
             script(src=scriptUrl)
+        block preloads
+          +preloads()
+    //-BODY============================================================
     body
       block body
         #notFooter
-          //-Header
+          //-Header______________________________
           header#pageHeader
             block header
               #headerLogo
@@ -39,20 +43,20 @@ html
               h1#headerTitle
                 block headerTitle
                   #{siteTitle}
-              //-Menu
+              //-Menu______________________________
               nav#userMenu: ul
                 +userMenuEntry
                   a(href='/account.js') #{l.guiAccount}
                 block userMenu
           #middle
             block middle
-              //-Content
+              //-Content______________________________
               #contentWrapper
                 section(class=pageId ? pageId+'Content' : 'content')
                   nav#pageMenu: ul
                     block pageMenu
                   block content
-        //-Footer
+        //-Footer______________________________
         footer#pageFooter
           block footer
             include footer

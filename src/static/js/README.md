@@ -1,7 +1,7 @@
-`pre` -> `head` Global variables, and UI-affecting JS: starting DOM manipulation, ...  
+`pre` -> `$body` *(preloaded in head)* Global variables and UI-affecting JS: starting DOM manipulation, ...  
 ###### order:
   * settings.js
-  * variables.js
+  * head.js
   * *I.js
   * tail.js
 
