@@ -1,0 +1,17 @@
+extends ../../templates/jade/base
+
+block title
+  | #{siteTitle} - #{l.titModerationHelp}
+
+block headerTitle
+  +title(l.titModerationHelpPage)
+
+block append bottomScripts
+  +script('ext.js')
+
+block append styles
+  +style('ext.css')
+
+block content
+  main#moderationHelp
+    include $LANGUAGE_PACK/jade/moderationHelpPage.jade

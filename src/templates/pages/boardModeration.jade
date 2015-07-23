@@ -6,6 +6,10 @@ block headerTitle
 block append bottomScripts
   +script('ext.js')
 
+block append pageMenu
+  +pageMenuEntry
+    a(href=baseStaticUrl+'/moderation.html') Moderation help
+
 block content
   section
     | #{l.guiBoardOwner}: #[span#labelOwner]

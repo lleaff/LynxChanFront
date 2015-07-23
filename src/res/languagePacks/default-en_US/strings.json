@@ -194,6 +194,8 @@
   "titAbout":                         "About",
   "titAboutPage":                     "About",
   "guiReplyLink":                     "Reply",
+  "titModerationHelp":                "Moderation instructions",
+  "titModerationHelpPage":            "Moderation instructions",
   "logCell": {
     "Type":                           "Type",
     "User":                           "User",
