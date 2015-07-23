@@ -308,7 +308,7 @@ function sendReplyData(files) {
   var typedEmail = document.getElementById('fieldEmail').value.trim();
   var typedMessage = document.getElementById('fieldMessage').value.trim();
   var typedSubject = document.getElementById('fieldSubject').value.trim();
-  var typedPassword = document.getElementById('fieldPassword').value.trim();
+  var typedPassword = document.getElementById('fieldPostingPassword').value.trim();
 
   var threadId = document.getElementById('threadIdentifier').value;
 

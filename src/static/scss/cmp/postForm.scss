@@ -58,7 +58,7 @@ $singleLineFieldRowHeight: 1.5em;
   }
 }
 @include positionConsecutivePostFormRows(
-  'fieldName' 'fieldEmail' 'fieldPassword' 'fieldSubject',
+  'fieldName' 'fieldEmail' 'fieldPostingPassword' 'fieldSubject',
   $singleLineFieldRowHeight);
 
 /* =User information
@@ -73,9 +73,9 @@ $singleLineFieldRowHeight: 1.5em;
 #postFormWrapper #fieldEmail {
 }
 
-#postFormWrapper label[for='fieldPassword'] {
+#postFormWrapper label[for='fieldPostingPassword'] {
 }
-#postFormWrapper #fieldPassword {
+#postFormWrapper #fieldPostingPassword {
 }
 
 
