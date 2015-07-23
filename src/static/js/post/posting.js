@@ -172,9 +172,9 @@ function processImageLink(link, i) {
   var mime = getMime(link.href);
 
   if (mime.indexOf('image/') > -1) {
-    var obj = window.imageList[i] = {};
-    obj.element        = link.getElementsByTagName('img')[0];
-    obj.thumbSrc       = obj.element.getAttribute('src');
+    var obj = {};
+    obj.thumb          = link.getElementsByTagName('img')[0];
+    obj.thumbSrc       = obj.thumb.getAttribute('src');
     obj.link           = link;
     obj.container      = link.parentNode; /* .uploadCell */
     obj.maxThumbWidth  = obj.container.style.maxWidth;
@@ -201,19 +201,32 @@ function initialImageExpand(event, obj) {
     return true;
   }
 
-  /* Click animation could be inserted here */
+  obj.thumb.style.opacity = 0.9; /* Immediate feedback, then transition */
+  clickAnim(obj.thumb, {
+            manualUnset: true,
+            duration: 400,
+            opacity: 0.5
+  });
 
-  obj.origSrc = obj.link.href;
-  /* If the thumb is the same image as the source, do nothing */
-  if (obj.origSrc === obj.thumbSrc) {
-    return false;
+  obj.expandedSrc = obj.link.href;
+
+  if (obj.expandedSrc === obj.thumbSrc) {
+    obj.thumb.className += ' imgExpanded';
+  } else {
+    obj.expanded = document.createElement('img');
+    obj.expanded.setAttribute('src', obj.expandedSrc);
+    obj.expanded.setAttribute('style', 'display: none;');
+    obj.expanded.setAttribute('class', 'imgExpanded');
+    obj.link.appendChild(obj.expanded);
+
+    obj.expanded.onload = function(e) {
+      obj.thumb.style.display = 'none';
+      obj.expanded.style.display = '';
+      obj.container.style.maxWidth  = '';
+      obj.container.style.maxHeight = '';
+      clickAnim(obj.thumb, { unset: true });
+    };
   }
-  obj.element.setAttribute('src', obj.origSrc);
-  obj.expanded = true;
-  obj.container.style.maxWidth  = '';
-  obj.container.style.maxHeight = '';
-  obj.link.className += ' imgExpanded';
-
   obj.link.onclick = function(event) {
     return toggleImage(event, obj);
   };
@@ -226,26 +239,28 @@ function toggleImage(event, obj) {
   if (event.which === 2 || event.ctrlKey) {
     return true;
   }
-
-  var el = obj.element;
-  if (obj.expanded) {
-    obj.container.style.maxHeight = el.maxThumbHeight;
-    obj.container.style.maxWidth = el.maxThumbWidth;
-    removeClass(obj.link, 'imgExpanded');
-    el.setAttribute('src', obj.thumbSrc);
-    obj.expanded = false;
-  } else {
-    el.setAttribute('src', obj.origSrc);
+  var el = obj.thumb;
+  if (obj.expandedSrc === obj.thumbSrc) {
+    if (obj.thumb.className.indexOf('imgExpanded') != -1) {
+      removeClass(obj.thumb, 'imgExpanded');
+    } else {
+      obj.thumb.className += 'imgExpanded';
+    }
+  } else if (obj.expanded.style.display === 'none') {
+    obj.thumb.style.display = 'none';
     obj.container.style.maxHeight = '';
     obj.container.style.maxWidth  = '';
-    obj.link.className += ' imgExpanded';
-    obj.expanded = true;
+    obj.expanded.style.display = '';
+  } else {
+    obj.expanded.style.display = 'none';
+    obj.container.style.maxHeight = el.maxThumbHeight;
+    obj.container.style.maxWidth = el.maxThumbWidth;
+    obj.thumb.style.display = '';
   }
   return false;
 }
 
 function setWebm(link, uploadCell, maxWidth, maxHeight) {
-
   var path = link.href;
   var parent = link.parentNode;
 

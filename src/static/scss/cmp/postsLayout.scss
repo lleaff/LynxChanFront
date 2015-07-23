@@ -106,7 +106,7 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7);
     min-height: 1em;
   }
 
-  .imgExpanded img {
+  .imgExpanded {
     max-width: 100%;
     width: 100%;
   }

@@ -1,15 +1,14 @@
 if (pageId === 'board' || pageId === 'thread') {
   /* Objects containing information about post user images */
-  window.imageList = [];
 
   bodyOnLoadStack.push(function() {
 
-    /* ---TEMPORARY begin---*/
+    /* ---TEMPORARY begin---TODO*/
     /* Replace .uploadCell <div>'s with <figure>'s */
-    var uploadCells = document.body.getElementsByClassName('uploadCell');
-    for (var i = 0; i < uploadCells.length; ++i) {
-      replaceTag(uploadCells[i], 'figure');
-    }
+    //var uploadCells = document.body.getElementsByClassName('uploadCell');
+    //for (var i = 0; i < uploadCells.length; ++i) {
+    //  replaceTag(uploadCells[i], 'figure');
+    //}
     /* ---TEMPORARY end---*/
 
     window.loadedPreviews = [];
