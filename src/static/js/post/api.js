@@ -30,12 +30,13 @@ function handleConnectionResponse(xhr, delegate) {
     alert('This page is under construction.');
   } else if (response.status === 'denied') {
     alert('You are not allowed to perform this operation.');
+  } else if (response.status === 'maintenance') {
+    alert('This site is undergoing maintenance, all of its functionality has been temporarily disabled.');
   } else if (response.status === 'banned') {
     if (response.data.range) {
       alert('Your ip range '+response.data.range+' has been banned from '+
             response.data.board + '.');
     } else {
-
       alert('You are banned from '+response.data.board+' until '+
             new Date(response.data.expiration).toString()+'.\nReason: '+
             response.data.reason+'.\nYour ban id: '+response.data.banId);

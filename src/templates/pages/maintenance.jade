@@ -1,0 +1,11 @@
+extends ../jade/bare
+
+block append styles
+  +style('ext.css')
+
+block middle
+  h1 #{l.titMaintenance}
+  p
+    | #{l.guiMaintenanceMesssage.start}
+    | #{siteTitle}
+    | #{l.guiMaintenanceMesssage.end}

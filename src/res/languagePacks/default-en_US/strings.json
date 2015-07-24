@@ -36,6 +36,11 @@
   },
   "guiBannedReason":                  "Reason",
   "guiBanID":                         "Ban ID",
+  "titMaintenance":                   "Maintenance",
+  "guiMaintenanceMessage": {
+    "start":                          "",
+    "end":                            " is undergoing maintenance, all functionality has been disabled temporarily."
+  },
   "titBannerManagement":              "Banner management",
   "titNewBanner":                     "New banner",
   "guiAddBanner":                     "Add banner",
