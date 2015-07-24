@@ -1,0 +1,23 @@
+extends ../jade/base
+
+block append styles
+  +style('ext.css')
+block append bottomScripts
+  +script('ext.js')
+
+block headerTitle
+  +title(l.titEditPost)
+
+block middle
+  form(action='/saveEdit.js', method='post',
+      enctype='multipart/form-data').editForm
+    label(for='fieldMessage') #{l.guiMessageFieldEditLabel}
+    textarea#fieldMessage(name='message', rows='8', cols='50')
+
+    input#boardIdentifier(type='hidden', name='boardUri')
+    input#threadIdentifier(type='hidden', name='threadId')
+    input#postIdentifier(type='hidden', name='postId')
+
+    input#saveFormButton(type='submit', value=l.guiEditSave)
+    input#saveJsButton(type='button', value=l.guiEditSave,
+        onclick='save()', style='display: none;')

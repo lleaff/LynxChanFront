@@ -21,10 +21,12 @@ block outer
             | #[a.linkSelf #{l.postHeader.postNumberPrefix}]#[a.linkQuote]
           li.panelRange #{l.guiIPRangeLabel}: #[span.labelRange]
           block linkReply
+          a.linkEdit #{l.guiPostEdit}
     section.postContent
       .panelUploads
       p.divMessage
     .divBanMessage
+    .labelLastEdit
   if postType == 'Op'
     | </div>
     .labelOmission

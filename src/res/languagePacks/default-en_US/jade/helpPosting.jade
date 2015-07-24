@@ -26,51 +26,101 @@ p.
   If you write #[code= '>>'] followed by the ID number of a post made in
   the same board, a link to this post will be created.
 
-p.usageExample
-  a.quoteLink(href='#') >>713705
+.usageExample
+  p: a.quoteLink(href='#') >>713705
 
 a(name='board-link'): h3 Board link
 p.
   If you write #[code= '>>>'] followed by a board's URI between slashes, a
   link to that board will be created.
 
-p.usageExample
-  a.quoteLink(href='#') >>>/furry/
+.usageExample
+  p: a.quoteLink(href='#') >>>/furry/
 
 a(name='cross-board-quote'): h3 Cross-board quote
 p.
   It's also possible to quote posts from other boards. Just append a post ID
   number to a board link.
 
-p.usageExample
-  a.quoteLink(href='#') >>>/cuteboys/15
+.usageExample
+  p: a.quoteLink(href='#') >>>/cuteboys/15
 
-a(name='greentext'): h3 Greentext
+a(name='tags'): h3 Tags
+a(name='greentext'): h4 Greentext
 p.
   If you add a #[code= '>'] at the start of a line, for some reason the text
   following it will be green.
 
-p.usageExample#greenTextExample
-  span.greenText >mfw
-  br
-  span.greenText >kek
-  br
-  span.greenText >how does this work
+.usageExample#greenTextExample
+p
+  span.greenText >mfw #[br]
+  span.greenText >kek #[br]
+  span.greenText >how does this work #[br]
 
-a(name='spoiler'): h3 Spoiler
+a(name='redtext'): h4 Redtext
+p.
+  Surround your text with #[code= '=='] to make it important.
+
+.usageExample
+  pre ==I'm so small and insignificant why does no one notice me==
+  p.result
+    span.redText Hi everyone how it's going? It's beautiful outside!
+
+a(name='italic'): h4 Italic
+
+.usageExample
+  pre This place is giving me a feeling of ''deja vu''...
+  p.result This place is giving me a feeling of #[em deja vu]...
+
+a(name='underline'): h4 Underline
+
+.usageExample
+  pre Do __not__ abuse these features or bad things __will__ happen.
+  p.result Do #[u not] abuse these features or bad things #[em will] happen.
+
+a(name='bold'): h4 Bold
+
+.usageExample
+  pre '''such wow much text formatting'''
+  p.result.
+    #[strong such wow much text formatting] #[br]
+    #[span.divBanMessage (USER WAS BANNED FOR THIS POST)]
+
+a(name='strikethrough'): h4 Strikethrough
+
+.usageExample
+  pre I'm writing my next essay on 
+
+a(name='spoiler'): h4 Spoiler
 p. 
   Text surrounded by #[code= '[spoiler] '] and #[code= ' [/spoiler] ']
   tags will be masked until it is hovered over.  #[br]
   You can't break lines between the two tags.
 
-p.usageExample
-  span.spoiler nobody loves you
+.usageExample
+  pre My favorite pokemon is [spoiler]pikachu[/spoiler]
+  p.result
+    | My favorite pokemon is #[span.spoiler= 'you    ']
+
+a(name='code'): h4 Code
+p.
+  Surround your code with #[code= '[code] '] and #[code= ' [/code]'] tags
+  to use a monospace font and keep indentation.
+
+.usageExample
+  pre.
+    if (Tweeter= #{siteTitle})
+      cout << "Block." << endl;
+    else
+      if ( Tweet=Negative)
+        cout << "Block" << endl;
 
 a(name='urls'): h3 Urls
 p.
   Urls beginning with #[code http] or #[code https] will automatically be
   converted to hyperlinks.
 
-p.usageExample
-  a(href='https://instagram.com/taylorswift/')
+.usageExample
+  p
+    a(href='https://instagram.com/taylorswift/')
     | https://instagram.com/taylorswift/

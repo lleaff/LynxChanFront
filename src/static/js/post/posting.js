@@ -148,6 +148,9 @@ if (pageId === 'board' || pageId === 'thread') {
     zip:     'application/zip'
   };
 
+  var playableTypes = [ 'video/webm', 'audio/mpeg', 'video/mp4' ];
+  var videoTypes = [ 'video/webm', 'video/mp4' ];
+
   var getMime = function getMime(pathName) {
 
     var pathParts = pathName.split('.');
@@ -189,8 +192,8 @@ function processImageLink(link, i) {
     obj.maxThumbHeight = obj.container.style.maxHeight;
     setClickableImage(obj);
 
-  } else if (mime =='video/webm') {
-    setWebm(link);
+  } else if (playableTypes.indexOf(mime) > -1) {
+    setPlayer(link, mime);
   }
 }
 function setClickableImage(obj) {
@@ -268,15 +271,15 @@ function toggleImage(event, obj) {
   return false;
 }
 
-function setWebm(link, uploadCell, maxWidth, maxHeight) {
+function setPlayer(link, mime, uploadCell, maxWidth, maxHeight) {
   var path = link.href;
   var parent = link.parentNode;
 
   var src = document.createElement('source');
   src.setAttribute('src', link.href);
-  src.setAttribute('type', 'video/webm');
+  src.setAttribute('type', mime);
 
-  var video = document.createElement('video');
+  var video = document.createElement(videoTypes.indexOf(mime) > -1 ? 'video' : 'audio');
   video.setAttribute('controls', true);
   video.style.display = 'none';
   video.appendChild(src);

@@ -16,6 +16,7 @@ if (pageId === 'thread') {
   window.hiddenCaptcha = !document.getElementById('captchaDiv');
   window.markedPosting = undefined;
 
+  /* Outdated, TODO set up built cells insert with gulp-preprocess */
   window.postCellTemplate =
     '<input type="checkbox" class="deletionCheckBox">' +
     '<span class="labelSubject"></span> <a class="linkName"></a> <span class="labelRole">' +
@@ -27,6 +28,8 @@ if (pageId === 'thread') {
   window.uploadCellTemplate = '<a class="nameLink"></a>(<span class="infoLabel"> </span>)<br><a class="imgLink"></a>';
 
   window.sizeOrders = [ 'B', 'KB', 'MB', 'GB', 'TB' ];
+
+  window.guiEditInfo = 'Edited last time by {$login} on {$date}.';
 
   boardUri = document.getElementById('boardIdentifier').value;
   window.divPosts = document.getElementsByClassName('divPosts')[0];

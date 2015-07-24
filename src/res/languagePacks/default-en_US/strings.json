@@ -72,6 +72,7 @@
   "guiDefaultName":                   "Default name",
   "phDefaultName":                    "Anonymous",
   "guiDisableThreadWiseIDs":          "Disable thread-wise IDs",
+  "guiAllowCodeTags":                 "Allow code tags",
   "guiDisableCaptcha":                "Disable captcha",
   "guiForceAnonymity":                "Force anonymity",
   "helpForceAnonymity":               "",
@@ -199,6 +200,10 @@
   "titAbout":                         "About",
   "titAboutPage":                     "About",
   "guiReplyLink":                     "Reply",
+  "guiPostEdit":                      "Edit",
+  "guiMessageFieldEditLabel":         "Message",
+  "titEditPost":                      "Edit",
+  "guiEditSave":                      "Save",
   "titModerationHelp":                "Moderation instructions",
   "titModerationHelpPage":            "Moderation instructions",
   "logCell": {

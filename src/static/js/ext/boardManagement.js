@@ -19,11 +19,12 @@ if (pageId === 'boardManagement') {
     if (document.getElementById('disableIdsCheckbox').checked) {
       settings.push('disableIds');
     }
-
+    if (document.getElementById('allowCodeCheckbox').checked) {
+      settings.push('allowCode');
+    }
     if (document.getElementById('disableCaptchaCheckbox').checked) {
       settings.push('disableCaptcha');
     }
-
     if (document.getElementById('forceAnonymityCheckbox').checked) {
       settings.push('forceAnonymity');
     }

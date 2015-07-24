@@ -1,0 +1,35 @@
+<h1>Global moderation</h1><p>Any account has a numeric global role assigned to it. Any role under 4 is global.</p><ul><li>Root: 0</li><li>Admin: 1</li><li>Volunteer: 2</li><li>Janitor: 3</li></ul><p>Anything above 3, or undefined, is considered a regular user. Janitors are able to delete any post or thread on the site and to close global reports. <br/>
+Volunteers are able able to lift and issue any kind of global ban.</p><p>Roots are able to assign admins. <br/>
+Admins are able to add or remove volunteers and janitors and to delete and
+transfer boards. They are also able to create boards even when board creation is disabled. <br/>
+The first admin or root will have to have its role set using the terminal
+arguments. Consult the readme.md in LynxChan's src/be for instructions on that. Any role has all the powers of the less privileged] roles. A link to the global staff tools is found on the <em>Account</em> page.
+</p><h1>Board moderation</h1><p>A board has a board owner and board volunteers. Board volunteers are added by the board owner and are able to delete content on the board, lock, pin and make threads cyclic, close board reports and apply bans for the board. <br/>
+Board owners can change the board settings and add rules, filters, banners, and custom css. They can also transfer the board ownership or delete the board.
+</p><h3>Custom CSS</h3><p>Board owners can add a <abbr>css</abbr> file to their boards by using the upload form on the board management page. It will be applied after the standard CSS and thus override its declarations (keep in mind the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity">CSS specificity rules</a> though). <br/>
+To delete the custom <abbr>css</abbr> file, click the upload button without entering any files.
+</p><h2>Reports</h2><p>Any non-banned user is able to report content. <br/>
+Open reports will be displayed on the main moderation page with a link to the reported content and an option to <abbr title="dismiss">close</abbr> the report. <br/>
+Closed reports are archived on the closed reports page.
+</p><h2>Deleting content</h2><p>As long as you are logged in, your global role and board role will be automatically verified when you try to delete content <em>AS LONG AS YOU DON'T INPUT A PASSWORD</em>. <br/>
+If you input a password, your account will not be validated and the system will try to use the regular deletion password you provided.
+</p><h2>Acessing the moderation tools</h2><p>On each thread is a link that will lead you to the moderation page for that board and thread.
+</p><h2>Thread settings</h2><p>Threads have 3 moderator settings: pin, lock and cyclic. <br/>
+<em>Pin</em> will make a thread be listed above all others, no matter how long it was it's last bump.  <br/>
+<em>Lock</em> will prevent anyone from posting on a thread. <br/>
+<em>Cyclic</em> will make the thread never go into auto-sage mode. Instead it will delete old posts when it hits the post count limit that would trigger auto-sage.
+</p><h2>Bans</h2><p>To apply bans, select the checkboxes on the left top corner of postings and write an expiration for the ban. The date format must be parseable using the date parse of javascript. <br/></p><h6>Examples</h6><p class="examples"><time>01/02/2016</time> will ban the user until February 1st of 2016. <br/>
+<time>01/02/2016 12:30</time> will ban the user until the same date at 12:30 of the same day. <br/>
+Bans can be lifted from the <em>bans</em> page that can be accessed from the moderation pages. <br/>
+Optionally, you can enter a ban reason and message. The ban message will be displayed on the post itself instead of the default ban message set in the site configurations. Global staff with the power to apply bans can select the checkbox to apply a global ban. <br/>
+The ban reason will appear to the user and on the bans list.
+</p><h2>IP range bans</h2><p>It is also possible to ban entire IP ranges based on its first two parts. Notice that the range of the poster's IP can be seen on the moderation page for threads. Enter this range on the box in the range bans page and select to apply it.
+</p><h2>File bans</h2><p>Files can also be banned, keeping anyone from posting them. Copy the <abbr>md5</abbr> hash of the file shown in the thread moderation page and input it on the hash bans page. Keep in mind that the slightest modification to a file will change its hash.
+</p><h1>Board settings</h1><p>There are many ways to customize how a board works in general. <br/>
+The board name, its description, and the default name for anonymous users can be changed.
+<em>Disable captcha</em> will disable captcha for the board completely. Keep in mind that this will expose the board to flood since there are no anti-flood tools in place yet. <br/>
+<em>Force anonymity</em> will disable the name field completely. Role signature can still be used by appropriate users. <br/>
+By default users can be identified <em>inside threads</em> by an unique ID that will use the user's IP. This behavior can be disabled by checking the option to disable <em>thread-wise IDs</em>. <br/>
+</p><h2>Filters</h2><p>Filters automatically swap a term for another term on newly posted posts. This isf useful to censor potentially triggering content.
+</p><h2>Banners</h2><p>The board owner can add customized banners to their board, they will be displayed randomly for users.
+</p><h2>Rules</h2><p>Rules can be written and will be made visible on the board's <em title="/{BOARD}/rules.html">rules page</em>.</p>

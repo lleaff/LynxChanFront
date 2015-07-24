@@ -46,10 +46,17 @@
   color: $greenTextColor;
 }
 
+.redText {
+  color: $redTextColor;
+  font-size: $redTextFontSize;
+  font-weight: $redTextBold;
+}
+
 // Should be masked until hovered over
-$spoilerColor: soften-value(
-  change-color(#000, $lightness: lightness(palette('fgMain'))))!default;
 .spoiler {
   color: $spoilerColor;
   background-color: $spoilerColor;
+}
+.spoiler:hover {
+  color: $spoilerColorHover;
 }

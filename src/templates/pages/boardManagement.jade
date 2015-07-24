@@ -67,24 +67,35 @@ block content
         enctype='multipart/form-data')
       fieldset
         input#boardSettingsIdentifier(type='hidden', name='boardUri')
+
         label(for='boardName') #{l.guiBoardName}
         input#boardNameField(type='text', name='boardName')
+
         label(for='boardDescription') #{l.guiBoardDescription}
         input#boardDescriptionField(type='text', name='boardDescription')
+
         label(for='anonymousNameField') #{l.guiDefaultName}
         input#anonymousNameField(type='text', name='anonymousName',
             placeholder=l.phDefaultName)
+
         label(for='disableIds') #{l.guiDisableThreadWiseIDs}
         input#disableIdsCheckbox(type='checkbox', name='disableIds')
+
+        label(for='allowCodeCheckbox') #{l.guiAllowCodeTags}
+        input#allowCodeCheckbox(type='checkbox', name='allowCode')
+
         label(for='disableCaptcha') #{l.guiDisableCaptcha}
         input#disableCaptchaCheckbox(type='checkbox',
             name='disableCaptcha')
+
         label(for='forceAnonymity') #{l.guiForceAnonymity}
           +help(l.helpForceAnonymity, l.infoForceAnonymity) 
         input#forceAnonymityCheckbox(type='checkbox',
             name='forceAnonymity')
+
         input.button.submit#saveSettingsJsButton(type='button',
-            value=l.guiSave, onclick='saveSettings()', style='display: none')
+            value=l.guiSave, onclick='saveSettings()',
+            style='display: none')
         input.button.submit#saveSettingsFormButton(type='submit',
             value=l.guiSave)
 

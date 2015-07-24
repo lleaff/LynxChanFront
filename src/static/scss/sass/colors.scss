@@ -103,7 +103,15 @@ $markedPost: palette('accentB')!default;
 $markedPostBgColor:   if($markedPost, take-hue($replyBgColor, $markedPost, 90%), false)!default;
 
 $greenTextColor:      take-lightness(#0f0, palette('fgMain'), 50%)!default;
+$redTextColor:        take-lightness(#f00, palette('fgMain'), 50%)!default;
+$redTextFontSize:     1.05em;
+$redTextBold:         bold;
 $quoteLinkColor:      $linkColor!default;
+
+$spoilerColor: soften-lightness(
+  change-color(#000, $lightness: lightness(palette('fgMain'))),
+  $replyBgColor)!default;
+$spoilerColorHover: intense-lightness($spoilerColor)!default;
 
 // =Buttons
 //=============================================================

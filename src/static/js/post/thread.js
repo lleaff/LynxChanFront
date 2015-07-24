@@ -94,6 +94,20 @@ function formatFileSize(size) {
 
 }
 
+function setLastEditedLabel(post, cell) {
+  var editedLabel = cell.getElementsByClassName('labelLaastEdit')[0];
+
+  if (post.lastEditTime) {
+    var formatedDate = formatDateToDisplay(new Date(post.lastEditTime));
+
+    editedLabel.innerHTML = guiEditInfo.replace('{$date}', formatedDate)
+      .replace('{$login}', post.lastEditLogin);
+  } else {
+    removeElement(editedLabel);
+  }
+
+}
+
 function setUploadLinks(cell, file) {
   var thumbLink = cell.getElementsByClassName('imgLink')[0];
   thumbLink.href = file.path;
@@ -157,6 +171,8 @@ function setPostHideableElements(postCell, post) {
   } else {
     banMessageLabel.innerHTML = post.banMessage;
   }
+
+  setLastEditedLabel(post, postCell);
 
 }
 
