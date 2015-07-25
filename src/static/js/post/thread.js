@@ -345,7 +345,7 @@ function sendReplyData(files) {
   } else if (typedEmail.length > 64) {
     alert('Email is too long, keep it under 64 characters.');
     return;
-  } else if (typedSubject.length > 32) {
+  } else if (typedSubject.length > 128) {
     alert('Subject is too long, keep it under 128 characters.');
     return;
   } else if (typedPassword.length > 8) {

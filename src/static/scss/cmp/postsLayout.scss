@@ -72,7 +72,7 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7%);
 .panelUploads {
   float: left;
   border-collapse: collapse;
-  padding-right: $postInternalPadding * 1.6;
+  padding-right: $postInternalPadding * 2;
 
   .imgLink {
     display: table-cell;
@@ -161,11 +161,12 @@ $postHeaderMarginBottom: $postMessageVerticalPadding * 0.7;
 
 
   /* Makes the text go under the image if the space available next to it
-   *  becomes too narrow. */
+   *  becomes narrower than $textBumberWidth */
+  $textBumperWidth: 10em;
   .textBumper {
     display: inline-block;
     height: 0px;
-    width: 10em;
+    width: $textBumperWidth;
   }
   .textBumperReturn {
     height: 0px;
