@@ -11,15 +11,38 @@
   @include altColors;
 }
 
-//help page
+//Help page
+$usageExamplePadding: $defaultPadding / 2;
+$usageExampleMargin: $defaultPadding;
+
+.usageExample {
+  margin: $usageExampleMargin;
+  padding-bottom: $usageExamplePadding;
+  max-width: 40em;
+
+  color: $replyColor;
+  background-color: $replyBgColor;
+}
+.usageExample pre, .usageExample p {
+  display: inline-block;
+  $padding: $usageExamplePadding;
+}
 .usageExample:before {
+  @include minorHeader($onlyColors: true);
+  
   content: 'Example';
   display: block;
   font-size: 0.8em;
-  margin-bottom: 1em;
-  
-  @include altColors;
 }
 
-.usageExample {
+.usageExample .result:before {
+  $color: intense-lightness($replyBgColor, $weight: 60%);
+
+  content: 'Result';
+  display: block;
+  width: 100%;
+  font-size: 0.8em;
+  color: $color;
+  border-bottom: solid 1px intense-lightness($replyBgColor, $weight: 10%);
+  
 }

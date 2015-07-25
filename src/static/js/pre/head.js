@@ -1,15 +1,28 @@
-console.log('head.js - BEGIN PARSING');//DEBUG
+if (VERBOSE) { console.log('head.js - BEGIN PARSING'); }//DEBUG
+
+/* Avoid 'pageId is undefined' */
+if (pageId === undefined) { var pageId = null; }
 
 /* =DOM Manipulation
 ============================================================*/
 /* Direct
 ------------------------------*/
 function removeElement(domElement) {
-  domElement.parentNode.removeChild(domElement);
+  try { //DEBUG
+    domElement.parentNode.removeChild(domElement);
+  } catch(e) { //DEBUG
+    console.log(e); //DEBUG
+    throw(e); //DEBUG
+  } //DEBUG
 }
 
 function showElement(domElement) {
-  domElement.style.display = '';
+  try { //DEBUG
+    domElement.style.display = '';
+  } catch(e) { //DEBUG
+    console.log(e); //DEBUG
+    throw(e); //DEBUG
+  } //DEBUG
 }
 
 /* Meta

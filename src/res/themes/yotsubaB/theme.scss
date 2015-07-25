@@ -14,6 +14,10 @@ $palette-colors: (
 );
 
 //------------------------------------------------------------
+$headerBgColor: transparent;
+$headerBorderColor: transparent;
+
+//------------------------------------------------------------
 //$regularFont: ;
 $monospaceFont:  'Meslo LG S DZ', Monaco, monospace;
 
@@ -42,4 +46,4 @@ $makredPostBorderColor: #d9bfb7;
 $quoteLinkColor: #D00;
 $greenTextColor: #789922;
 
-$bodyBackground: linear-gradient(to bottom, #D1D5EE, rgba(0,0,0,0) 14em) #EEF2FF no-repeat;
+$bodyBackground: linear-gradient(to bottom, #D1D5EE, #EEF2FF 18em) #EEF2FF no-repeat;

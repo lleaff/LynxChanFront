@@ -58,12 +58,13 @@ function apiRequest(page, parameters, delegate) {
 
   if ('withCredentials' in xhr) {
     xhr.open('POST', API_DOMAIN + page, true);
+    //xhr.withCredentials = true;
   } else if (typeof XDomainRequest != 'undefined') {
 
     xhr = new XDomainRequest();
     xhr.open('POST', API_DOMAIN + page);
   } else {
-    alert('This site can\'t run js on your shitty browser because it does not support CORS requests. Disable js and try again.');
+    alert('This site can\'t run JS on your browser because it does not support CORS requests. Disable JavaScript and try again.');
 
     return;
   }

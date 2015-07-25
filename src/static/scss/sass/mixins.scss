@@ -42,7 +42,7 @@
   }
 }
 
-@mixin minorHeader($font-size: 0.95em, $coverBorder: 1px) {
+@mixin minorHeader($font-size: 0.95em, $coverBorder: 1px, $onlyColors: false) {
   font-size: $font-size;
   display: block;
   background-color: $minorHeaderBgColor;
@@ -50,13 +50,15 @@
   font-weight: to-font-weight($minorHeaderBold);
   letter-spacing: 0.1em;
   //font-family: $monospaceFont;
-  @include paddingVertical($defaultPadding / 2);
-  @include paddingHorizontal($defaultPadding);
+  @if $onlyColors == false {
+    @include paddingVertical($defaultPadding / 2);
+    @include paddingHorizontal($defaultPadding);
 
-  margin: 0;
-  @if $coverBorder {
-    margin-top:   -$coverBorder;
-    margin-left:  -$coverBorder;
-    margin-right: -$coverBorder;
+    margin: 0;
+    @if $coverBorder {
+      margin-top:   -$coverBorder;
+      margin-left:  -$coverBorder;
+      margin-right: -$coverBorder;
+    }
   }
 }

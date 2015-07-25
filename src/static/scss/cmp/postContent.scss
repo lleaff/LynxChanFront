@@ -8,11 +8,6 @@
     color: $roleColor;
   }
 
-  .labelSubject {
-    @include font-weight-opt($subjectBold);
-    color: $subjectColor;
-  }
-
   // Anonymous->sage
   .linkName {
     @include font-weight-opt($nameBold);
@@ -32,6 +27,12 @@
   }
 }
 
+.labelSubject { // In catalog too
+  @include font-weight-opt($subjectBold);
+  color: $subjectColor;
+}
+
+
 // Message body
 //------------------------------------------------------------
 // '>>12401'
@@ -46,7 +47,7 @@
   color: $greenTextColor;
 }
 
-.redText {
+.redText, .divBanMessage {
   color: $redTextColor;
   font-size: $redTextFontSize;
   font-weight: $redTextBold;
@@ -59,4 +60,26 @@
 }
 .spoiler:hover {
   color: $spoilerColorHover;
+}
+
+$postCodeBgColor: soften-lightness(
+  intensify-saturation($replyBgColor, $replyColor, $weight: 30),
+  $replyColor, $weight: 50)!default;
+$postCodeColor: soften-lightness($replyColor, $postCodeBgColor, 10)!default;
+$postCodeBorderColor: intensify($postCodeBgColor, $postCodeColor, $weight: 10%)!default;
+
+.divMessage code {
+  font-size: 0.9em;
+  white-space:  pre;
+
+  background-color: $postCodeBgColor;
+  color: $postCodeColor;
+  border: 1px solid $postCodeBorderColor;
+
+  display: inline-block;
+  padding: 0.5em;
+  //padding-left: 0.1em;
+  //padding-right: 0.1em;
+  //margin-left: -0.1em;
+  //margin-right: -0.1em;
 }

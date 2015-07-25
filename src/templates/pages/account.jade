@@ -22,15 +22,15 @@ block content
       enctype='multipart/form-data')
         fieldset
           label(for='emailField') #{l.guiEmail}
-            input#emailField(type='email', name='email')
+          input#emailField(type='email', name='email')
           label(for='checkboxAlwaysSign') #{l.guiAlwaysUseRoleSignature}
-            input#checkboxAlwaysSign(type='checkbox', name='alwaysSignRole')
-            +help(l.helpPosting, l.infoRoleSignature)
-              input.button.submit#saveFormButton(type='submit',
-                  value=l.guiSave)
-              input.button.submit#saveJsButton(type='button',
-                value=l.guiSave, onclick='save()',
-                  style='display: none;')
+          input#checkboxAlwaysSign(type='checkbox', name='alwaysSignRole')
+          +help(l.help.roleSignatures, l.infoRoleSignature)
+          input.button.submit#saveFormButton(type='submit',
+              value=l.guiSave)
+          input.button.submit#saveJsButton(type='button',
+              value=l.guiSave, onclick='save()',
+              style='display: none;')
 
     h2 #{l.titPasswordChange} 
     form(action='/changeAccountPassword.js', method='post',
@@ -38,10 +38,10 @@ block content
       fieldset
         input#fieldPassword(type='password', name='password', required)
         label(for='fieldNewPassword') #{l.guiNewPassword}
-            input#fieldNewPassword(type='password', name='newPassword',
+        input#fieldNewPassword(type='password', name='newPassword',
             required)
         label(for='fieldConfirmation') #{l.guiConfirmNewPassword}
-            input#fieldConfirmation(type='password', name='confirmation',
+        input#fieldConfirmation(type='password', name='confirmation',
             required)
         input.button.submit#passwordFormButton(type='submit',
             value=l.guiChangePassword)

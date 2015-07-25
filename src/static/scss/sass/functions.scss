@@ -26,14 +26,6 @@
 //------------------------------------------------------------
 // Intensify
 //------------------------------
-@function intensify-saturation($color, $contrastedColor, $weight: 50%) {
-  $weightedSaturationContrast: abs($strongestSaturationContrast) *
-    contrast($color, $contrastedColor);
- @return mix(
-    adjust-color($color, $lightness: $weightedSaturationContrast),
-    $color,
-    $weight);
-}
 @function intensify-lightness($color, $contrastedColor, $weight: 50%) {
   $weightedContrast: abs($strongestContrast) *
     contrast($color, $contrastedColor);
@@ -42,30 +34,37 @@
     $color,
     $weight);
 }
+@function intensify-saturation($color, $contrastedColor, $weight: 50%) {
+  $weightedSaturationContrast: abs($strongestSaturationContrast) *
+    contrast($color, $contrastedColor);
+ @return mix(
+    adjust-color($color, $saturation: abs($weightedSaturationContrast)),
+    $color,
+    $weight);
+}
 // Apply all intensify functions
 @function intensify($color, $contrastedColor, $weight: 50%) {
-  @return intensify-lightness(
-    intensify-saturation($color, $contrastedColor, $weight),
+  @return intensify-saturation(
+    intensify-lightness($color, $contrastedColor, $weight),
     $contrastedColor,
     $weight);
 }
 
 // Soften
 //------------------------------
-@function soften-saturation($color, $contrastedColor, $weight: 50%) {
-    $weightedSaturationContrast: abs($weakerSaturationContrast) *
-      contrast($color, $contrastedColor);
-  @return mix(
-    adjust-color($color, $lightness: $weightedSaturationContrast),
+@function soften-lightness($color, $contrastedColor, $weight: 50%) {
+  $weightedContrast: -$weakerContrast *
+    abs(contrast($color, $contrastedColor));
+ @return mix(
+    adjust-color($color, $lightness: -$weightedContrast),
     $color,
     $weight);
 }
-@function soften-lightness($color, $contrastedColor, $weight: 50%) {
-
-  $weightedContrast: abs($weakerContrast) *
-    contrast($color, $contrastedColor);
- @return mix(
-    adjust-color($color, $lightness: $weightedContrast),
+@function soften-saturation($color, $contrastedColor, $weight: 50%) {
+    $weightedSaturationContrast: abs($weakerSaturationContrast) *
+      abs(contrast($color, $contrastedColor));
+  @return mix(
+    adjust-color($color, $saturation: -$weightedSaturationContrast),
     $color,
     $weight);
 }

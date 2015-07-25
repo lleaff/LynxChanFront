@@ -24,7 +24,11 @@ block outer
           a.linkEdit #{l.guiPostEdit}
     section.postContent
       .panelUploads
-      p.divMessage
+      //- Presentational element that prevents the text from being too narrow
+      .messageWrap
+        .textBumper 
+        br.textBumperReturn
+        p.divMessage
     .divBanMessage
     .labelLastEdit
   if postType == 'Op'

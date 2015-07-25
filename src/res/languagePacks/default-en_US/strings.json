@@ -11,7 +11,9 @@
   "titNotFound":                      "Not found",
   "guiGlobalManagement":              "Global management",
   "guiAlwaysUseRoleSignature":        "Always use role signature",
-  "helpPosting":                      "Posting",
+  "help": {
+    "roleSignatures":                 "Role signatures"
+  },
   "infoRoleSignature":                "eg: Volunteer",
   "titPasswordChange":                "Password change",
   "guiNewPassword":                   "New password",
@@ -19,7 +21,7 @@
   "guiChangePassword":                "Change password",
   "titCreateBoard":                   "Create board",
   "guiBoardURI":                      "Board URI",
-  "phBoardUri":                       "uri",
+  "phBoardUri":                       "",
   "guiBoardName":                     "Board name",
   "phBoardName":                      "",
   "guiBoardDescription":              "Board description",

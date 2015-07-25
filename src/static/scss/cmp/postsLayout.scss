@@ -2,26 +2,14 @@
 
 /* =Board and Thread
  *------------------------------*/
-$opBackgroundColor: intensify-lightness(
-  palette('bgMain'), palette('fgMain'), 5);
-$opColor: palette('fgMain');
-
-$postInternalPadding: $defaultPadding * 0.9;
-
-$postOpInnerBorderColor: intensify($opBackgroundColor, palette('fgMain'), 4);
-$postReplyInnerBorderColor: intensify($replyBgColor, palette('fgMain'), 4.5);
-$postOpSpecialBorderColor: $minorHeaderBgColor;
-$opRegularBorder: 1px solid $postOpInnerBorderColor;
-
 .opWrapper {
-  $opBorderTopColor: intensify-lightness($postOpInnerBorderColor,
-    palette('fgMain'), 3);
   color: $opColor;
   //background-color: $opBackgroundColor;
   border-top: $opBorderTopColor solid 1px;
 
   @if $shadows >= 2 {
-    box-shadow: 0px #{-($shadowsRadius *1.5)} #{$shadowsRadius * 3} #{-$shadowsRadius * 1.5} $shadowsColor; 
+    //Replaced by gradient at .opCell's bottom
+    //box-shadow: 0px #{-($shadowsRadius *1.5)} #{$shadowsRadius * 3} #{-$shadowsRadius * 1.5} $shadowsColor; 
     //box-shadow: 0px 0 ($shadowsRadius * 2) -($shadowsRadius) $shadowsColor;
     //border-top-color: soften-lightness($opBorderTopColor, $bodyBgColor, 30);
   }
@@ -33,11 +21,7 @@ $opRegularBorder: 1px solid $postOpInnerBorderColor;
 
 $postMessageVerticalPadding: $defaultPadding * 1.2;
 
-.postReply {
-  padding-bottom: $postMessageVerticalPadding;
-}
-
-$postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7);
+$postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7%);
 .postReply {
   border: solid 1px;
   color: $replyColor;
@@ -49,7 +33,6 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7);
     box-shadow: ($shadowsRadius / 2) ($shadowsRadius / 3) $shadowsRadius -($shadowsRadius / 3) $shadowsColor;
     border-color: soften-lightness($postReplyBorderColor, $bodyBgColor, (400 * $shadowsAlpha) );
   }
-
   margin-left: $replyMarginLeft;
   margin-right: $replyMarginRight;
 }
@@ -79,7 +62,7 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7);
 }
 
 .uploadCell {
-  display: inline-block;
+  display: inline-table;
   padding-right: $postInternalPadding;
   margin: $postInternalPadding / 2 0 0 0;
   //max-width:  $thumbSize;
@@ -88,20 +71,11 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7);
 
 .panelUploads {
   float: left;
-  //display: inline-table;
   border-collapse: collapse;
-  margin-top: -$postMessageVerticalPadding;
-
-  /* eg. 21502435.jpg */
-  .nameLink {
-    margin-right: 1em;
-  }
-  /* eg. 41.02 KB, 395x526 */
-  .infoLabel {
-  }
+  padding-right: $postInternalPadding * 1.6;
 
   .imgLink {
-    //display: table-cell;
+    display: table-cell;
     min-width: 1em;
     min-height: 1em;
   }
@@ -113,34 +87,54 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7);
 
 }
 
+/* File info
+------------------------------*/
+$fileInfoEms: 0.8; // inherited from <small>
 
-.panelUploads .fileInfo {
- // display: table-caption;
- // caption-side: bottom;
-  //line-height: 0.9em;
-  overflow: hidden;
-  position: relative;
-}
+.panelUploads {
+  .fileInfo {
+    display: table-caption;
+    caption-side: bottom;
 
-.originalNameLink {
-  width: 50%;
-  max-width: 50%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  display: block;
-}
-.uploadCell .fileInfoInner {
-  display: block;
-  text-overflow: ellipsis;
-  width: 100%;
-
-  border-bottom: 1px solid transparent;
-  opacity: 0;
-  @if $animationSpeed {
-    transition: opacity ($animationSpeed * 0.5) ease-in-out;
+    //line-height: 0.9em;
+    overflow: hidden;
+    position: relative;
   }
-  overflow: hidden;
+
+  /* eg. 21502435.jpg */
+  .nameLink {
+    margin-right: 1em;
+  }
+  /* eg. 41.02 KB, 395x526 */
+  .infoLabel {
+  }
+
+  // alias filename
+  .originalNameLink {
+    display: inline-block;
+    max-width: $thumbSize - (8 * $emMostCommonPxSize * $fileInfoEms); //Fallback
+    max-width: calc(#{$thumbSize} - 8em);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* requires all the above properties */
+
+    margin-right: 0.8em;
+
+  }
+
+  .fileInfoInner {
+    display: block;
+    width: 100%;
+
+    border-bottom: 1px solid transparent;
+    opacity: 0;
+    @if $animationSpeed {
+      transition: opacity ($animationSpeed * 0.5) ease-in-out;
+    }
+    overflow: hidden;
+  }
 }
+
 .opWrapper .uploadCell:hover .fileInfoInner {
   opacity: 1;
   border-bottom-color: $postOpInnerBorderColor;
@@ -149,6 +143,8 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7);
   opacity: 1;
   border-bottom-color: $postReplyInnerBorderColor;
 }
+
+$postHeaderMarginBottom: $postMessageVerticalPadding * 0.7;
 
 // Fill width when post has multiple files
 .multipleUploads .panelUploads {
@@ -163,9 +159,39 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7);
     display: inline-block;
   }
 
+
+  /* Makes the text go under the image if the space available next to it
+   *  becomes too narrow. */
+  .textBumper {
+    display: inline-block;
+    height: 0px;
+    width: 10em;
+  }
+  .textBumperReturn {
+    height: 0px;
+    line-height: 0px;
+  }
+
+
+  .postOp, .postReply {
+    // Only required by .divMessage { word-wrap }
+    max-width: 100%;
+  }
+
+  .messageWrap {
+    margin-top: -$postHeaderMarginBottom;
+    padding-bottom: $postHeaderMarginBottom;
+    padding-left: $defaultPadding * 1.8;
+  }
   .divMessage {
     display: inline;
-    margin: $defaultPadding 0;
+
+    // Requires  a {max-}width value on .divMessage and .post{Op|Reply}
+    word-wrap: break-word;
+    max-width: 100%;
+
+    text-align: top;
+    //margin: 0 0 $defaultPadding 0;
   }
 }
 
@@ -195,17 +221,12 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7);
 /* =Post Header
 ------------------------------------------------------------*/
 $postHeaderSmallFontSize: $smallFontSize;
-$opHeaderBackgroundColor: transparent!default;
-//$replyHeaderBackgroundColor: soften-lightness($postReplyBorderColor, palette('fgAlt'), 25);
-$replyHeaderBackgroundColor: transparent!default;
-$postOpHeaderColor: soften-lightness(palette('fgAlt'), palette('bgMain'), $fontColorContrast * 100)!default;
-$postReplyColor: soften-lightness(palette('fgAlt'), palette('bgAlt'), $fontColorContrast * 100)!default;
 
 .postOpHeader, .postOpHeader a, .fileInfo {
   color: $postOpHeaderColor;
 }
 .postReplyHeader, .postReplyHeader a, .fileInfo {
-  color: $postReplyColor;
+  color: $postReplyHeaderColor;
 }
 .postOpHeader a, .postReplyHeader a {
   &:hover {
@@ -216,7 +237,7 @@ $postReplyColor: soften-lightness(palette('fgAlt'), palette('bgAlt'), $fontColor
 $postModActionWidth: 1.5em; //deletion checkbox or dropdown menu arrow, MAGIC
 .postOpHeader, .postReplyHeader {
 
-  margin-bottom: $postMessageVerticalPadding;
+  margin-bottom: $postHeaderMarginBottom;
 
   // header items
   ul {
@@ -243,6 +264,10 @@ $postModActionWidth: 1.5em; //deletion checkbox or dropdown menu arrow, MAGIC
   }
   .spanId {
     margin-left: -0.1em; //Compensate for bigger name and role fonts
+  }
+
+  .linkPreviewWrap {
+    display: none; /* That link is pretty much useless for end-users */
   }
 
 }
@@ -275,20 +300,13 @@ input[type='checkbox'].deletionCheckBox {
   //margin-left: 0.07em;
 }
 
-.postOpHeader .linkPreviewWrap {
-  display: none; /* That link is pretty much useless for the end-users */
-}
-
-.postOpHeader, .postReplyHeader {
-  li:nth-child(2) {
-  }
-}
-
 /* =Post Content
 ------------------------------------------------------------*/
 .postContent {
   padding: 0 $postInternalPadding;
 }
+
+
 
 /* =Preview
 ------------------------------------------------------------*/

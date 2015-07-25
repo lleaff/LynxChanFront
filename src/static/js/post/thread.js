@@ -31,6 +31,8 @@ function saveThreadSettings() {
 }
 
 if (pageId === 'thread') {
+  changeRefresh();
+
   var replyCallback = function(status, data) {
 
     if (status === 'ok') {
@@ -416,20 +418,6 @@ if (pageId === 'thread') {
 
   for (var i = 0; i < postingQuotes.length; i++) {
     processPostingQuote(postingQuotes[i]);
-  }
-}
-
-function markPost(id) {
-  if (isNaN(id)) { return; }
-
-  if (markedPosting && markedPosting.className === 'markedPost') {
-    markedPosting.setAttribute('class', 'postCell');
-  }
-
-  markedPosting = document.getElementById(id);
-
-  if (markedPosting && markedPosting.className === 'postCell') {
-    markedPosting.className += ' markedPost';
   }
 }
 

@@ -1,4 +1,20 @@
 if (pageId === 'thread') {
+
+  var markPost = function(id) {
+    if (isNaN(id)) { return; }
+
+    if (markedPosting && markedPosting.className === 'markedPost') {
+      markedPosting.setAttribute('class', 'postCell');
+    }
+
+    markedPosting = document.getElementById(id);
+
+    if (markedPosting && markedPosting.className === 'postCell') {
+      markedPosting.className += ' markedPost';
+    }
+  };
+
+
   window.boardUri = undefined;
   window.threadId = undefined;
   window.board = false;
@@ -61,8 +77,6 @@ if (pageId === 'thread') {
   if (replies && replies.length) {
     lastReplyId = replies[replies.length - 1].id;
   }
-
-  changeRefresh();
 
   var hash = window.location.hash.substring(1);
 

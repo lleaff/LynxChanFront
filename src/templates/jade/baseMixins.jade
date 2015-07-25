@@ -55,7 +55,7 @@ mixin help(anchor, helpText)
   - var helpSectionUrl = anchor ? helpPage+'#'+formatAnchor(anchor) : '#';
   - var helpText = helpText || '';
   span.help
-    a(href=helpSectionUrl, alt=helpText) ?
+    a(target='_blank', href=helpSectionUrl, title=helpText) ?
 
 
 //-------------------------------

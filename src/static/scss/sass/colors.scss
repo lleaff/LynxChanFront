@@ -45,7 +45,7 @@ $linkHoverColor:      take-color($linkColor, palette('accentB'))!default;
 $minorHeaderBgColor:  if($vibrant,
   palette('accentA'),
   intensify(palette('bgAlt'), palette('fgMain'), 10))!default;
-$minorHeaderColor:    intense-lightness($minorHeaderBgColor, $weight: 60%)!default;  
+$minorHeaderColor:    intense-lightness($minorHeaderBgColor, $weight: 60)!default;  
 $minorHeaderBold:     550!default;
 
 // Shadows
@@ -82,10 +82,29 @@ $bodyBgColor:    palette('bgMain')!default;
 
 // Posts
 //============================================================
+$postInternalPadding: $defaultPadding * 0.9;
+
 $replyBgColor: palette('bgAlt')!default;
 $replyColor: palette('fgAlt')!default;
+$opHeaderBackgroundColor: transparent!default;
+$replyHeaderBackgroundColor: transparent!default;
+$postOpHeaderColor: soften-lightness(palette('fgAlt'), palette('bgMain'), $fontColorContrast * 100)!default;
+$postReplyHeaderColor: soften-lightness(palette('fgAlt'), palette('bgAlt'), $fontColorContrast * 100)!default;
 
-// Header
+// Op
+$opBackgroundColor: intensify-lightness(
+  palette('bgMain'), palette('fgMain'), 5);
+$opColor: palette('fgMain');
+
+$postOpInnerBorderColor: intensify($opBackgroundColor, palette('fgMain'), 4.5%);
+$opBorderTopColor: intensify($postOpInnerBorderColor,
+  palette('fgMain'), 7%);
+$postReplyInnerBorderColor: intensify($replyBgColor, palette('fgMain'), 5%);
+$postOpSpecialBorderColor: $minorHeaderBgColor;
+$opRegularBorder: 1px solid $postOpInnerBorderColor;
+
+
+// Post header
 $nameColor:           take($linkColor, palette('accentA'),
                     $saturation: 100, $hue: 100)!default;
 // false -> normal, true -> bold or a numerical value (400 = normal, 700 = bold)
@@ -97,6 +116,7 @@ $subjectColor:        take($linkColor, palette('accentB'),
 $subjectBold:         550!default;
 
 $linkReplyColor:      $linkColor!default;
+
 // Message
 //Can either be a color to take the hue from, or 'false' to disable markedPost styling
 $markedPost: palette('accentB')!default; 
@@ -110,7 +130,8 @@ $quoteLinkColor:      $linkColor!default;
 
 $spoilerColor: soften-lightness(
   change-color(#000, $lightness: lightness(palette('fgMain'))),
-  $replyBgColor)!default;
+  $replyBgColor,
+  $weight: 20)!default;
 $spoilerColorHover: intense-lightness($spoilerColor)!default;
 
 // =Buttons
@@ -143,8 +164,13 @@ $postFormColor:       palette('fgAlt')!default;
 
 // =Header
 //=============================================================
+$headerBgColor: palette('bgAlt')!default;
+$headerColor: palette('fgAlt')!default;
+$headerBorderColor: $borderColorAlt!default;
 @mixin headerColors {
-  background-color:   palette('bgAlt');
-  color:              palette('fgAlt');
-  border-color:       $borderColorAlt;
+  background-color:   $headerBgColor;
+  color:              $headerColor;
+  border-color:       $headerBorderColor;
 }
+$headerTitleColor: take-lightness(palette('accentA'), $headerColor)!default;
+$headerSubTitleColor: $headerTitleColor!default;

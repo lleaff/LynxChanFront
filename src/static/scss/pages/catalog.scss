@@ -1,11 +1,55 @@
+@import '../sass';
+
+$catalogThumbSize: max($thumbSize * 0.7, 128px);
+
+$catalogSecondaryColor: $postOpHeaderColor;
+$catalogBorderColor: $opBorderTopColor;
+
 .catalogCell {
   float: left;
-  min-width: 128px;
-  width: 22%;
-  //height: 512px;
+  min-width: $catalogThumbSize;
+  width: calc(#{$catalogThumbSize} + 1em);
+  //height: calc(#{$catalogThumbSize} +  );
+  
+  border: 1px solid $catalogBorderColor;
+  
+  .divMessage {
+    height: 10em;
+    font-size: 0.95em;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    overflow-y: scroll;//hidden;
+  }
+
 }
 
-.catalogHeader {
-  height: 128px + 16px; //Fallback
-  height: calc(128px + 1em);
+.catalogThreadDetails {
+  font-size: $smallFontSize;
+  color: $catalogSecondaryColor;
+
+  .labelPage {
+    float: right;
+  }
+}
+
+.catalogCellHeader {
+  height: $catalogThumbSize + $emMostCommonPxSize; //Fallback
+  height: calc(#{$catalogThumbSize} + 1.3em);
+
+  .linkThumb {
+    display: block;
+    width: 100%;
+
+    > img { // TEMP, TODO remove when hardcoded dimensions are removed
+      width: auto!important;
+      height: auto!important;
+      max-width: $catalogThumbSize;
+      max-height: $catalogThumbSize;
+     }
+  }
+  .labelSubject {
+    display: inline-block;
+    clear: left;
+  }
+
 }

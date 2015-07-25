@@ -231,7 +231,10 @@ var jsPaths = {
     paths.js+'pre/*I.js',
     paths.js+'pre/tail.js'
   ],
-  post: [ paths.js+'post/*.js' ],
+  post: [
+    paths.js+'post/api.js',
+    paths.js+'post/*.js'
+  ],
   ext: [ paths.js+'ext/*.js' ]
 };
 
