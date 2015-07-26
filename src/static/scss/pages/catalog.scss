@@ -1,50 +1,92 @@
 @import '../sass';
 
-$catalogThumbSize: max($thumbSize * 0.7, 128px);
+$catalogThumbSize: max($thumbSize * 0.7, 128px)!default;
 
-$catalogSecondaryColor: $postOpHeaderColor;
-$catalogBorderColor: $opBorderTopColor;
 
-.catalogCell {
-  float: left;
-  min-width: $catalogThumbSize;
-  width: calc(#{$catalogThumbSize} + 1em);
-  //height: calc(#{$catalogThumbSize} +  );
-  
-  border: 1px solid $catalogBorderColor;
-  
-  .divMessage {
-    height: 10em;
-    font-size: 0.95em;
-    text-overflow: ellipsis;
-    overflow-x: hidden;
-    overflow-y: scroll;//hidden;
-  }
-
+// Contain thread cells
+.catalog {
+  text-align: center;
 }
 
+.catalogCell {
+  box-sizing: content-box;
+  background-color: $catalogCellBgColor;
+  color: $catalogCellColor;
+
+  vertical-align: top;
+  display: inline-block;
+  min-width: $catalogThumbSize;
+  width: $catalogThumbSize + $emMostCommonPxSize; //Fallback
+  width: calc(#{$catalogThumbSize});
+  
+  border: $catalogCellBorderSize solid $catalogCellBorderColor;
+  margin: {
+    top: 0;
+    right: ($defaultPadding * 0.33);
+    bottom: ($defaultPadding * 0.66);
+    left: ($defaultPadding * 0.33);
+  }
+}
+
+$catalogCellPadding: $internalPadding * 0.8;
+
+// Everything except the footer
+.catalogCellContent {
+  height: $catalogThumbSize + 13 * $emMostCommonPxSize; //Fallback
+  height: calc(#{$catalogThumbSize} + 13em);
+  overflow: hidden;
+  margin-bottom: $catalogCellPadding;
+}
+
+.catalogMessageWrap {
+  margin: { left: $catalogCellPadding; right: $catalogCellPadding; }
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.catalogCell .divMessage {
+  font-size: 0.9em;
+}
+
+// Footer
 .catalogThreadDetails {
   font-size: $smallFontSize;
   color: $catalogSecondaryColor;
+  margin-bottom: $catalogCellPadding;
+
+  .labelReplies, .labelImages {
+    margin-left: $internalPadding * 2;
+    &:after {
+      margin-left: 0.3em;
+    }
+  }
 
   .labelPage {
-    float: right;
+    display: none; // Kind of useless
+    //float: right;
   }
 }
 
 .catalogCellHeader {
-  height: $catalogThumbSize + $emMostCommonPxSize; //Fallback
-  height: calc(#{$catalogThumbSize} + 1.3em);
+  //height: $catalogThumbSize + $emMostCommonPxSize; //Fallback
+  text-align: center;
 
   .linkThumb {
-    display: block;
+    min-height: $catalogThumbSize * 0.5;
+    max-height: $catalogThumbSize * 0.8;
+    vertical-align: center;
+    display: inline-block;
     width: 100%;
+
+    img {
+      display: block;
+      margin: 0 auto;
+    }
 
     > img { // TEMP, TODO remove when hardcoded dimensions are removed
       width: auto!important;
       height: auto!important;
       max-width: $catalogThumbSize;
-      max-height: $catalogThumbSize;
+      max-height: $catalogThumbSize * 0.8;
      }
   }
   .labelSubject {

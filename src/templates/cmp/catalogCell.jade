@@ -1,11 +1,13 @@
-section.catalogThread
-  header.catalogCellHeader
-    a.linkThumb
-    span.labelSubject
-  div.divMessage
+section.catalogThread(onclick='expandCatalogOp(event)')
+  .catalogCellContent
+    header.catalogCellHeader
+      a.linkThumb
+      span.labelSubject
+    .catalogMessageWrap
+      p.divMessage
   footer.catalogThreadDetails
-    span.labelReplies.fa.fa-comments
-    span.labelImages.fa.fa-picture-o
+    span.labelReplies.fa.fa-comment-o-after
+    span.labelImages.fa.fa-picture-o-after
     span.labelPage
 
     span.lockIndicator.fa.fa-lock(title=l.guiLockLabel)

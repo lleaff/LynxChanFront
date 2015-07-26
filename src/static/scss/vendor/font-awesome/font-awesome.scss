@@ -18,3 +18,5 @@
 @import "rotated-flipped";
 @import "stacked";
 @import "icons";
+// LynxChanFront modification: Uses :after instead of :before, append '-after' to class name to use.
+@import "icons-after";

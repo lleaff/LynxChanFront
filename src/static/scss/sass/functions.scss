@@ -99,7 +99,7 @@
 }
 
 @function intense($color, $threshold: 50%, $weight: 100%) {
-  @return $intense-lightness($color, $threshold, $weight);
+  @return intense-lightness($color, $threshold, $weight);
 }
 
 // Change $color to use the given value form $sourceColor

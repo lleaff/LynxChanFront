@@ -105,8 +105,13 @@ $fileInfoEms: 0.8; // inherited from <small>
   .nameLink {
     margin-right: 1em;
   }
-  /* eg. 41.02 KB, 395x526 */
-  .infoLabel {
+  /* eg. 41.02 KB */
+  .sizeLabel {
+    vertical-align: bottom;
+  }
+  /* eg. 395x526 */
+  .dimensionLabel {
+
   }
 
   // alias filename
@@ -117,6 +122,7 @@ $fileInfoEms: 0.8; // inherited from <small>
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis; /* requires all the above properties */
+    vertical-align: bottom;
 
     margin-right: 0.8em;
 

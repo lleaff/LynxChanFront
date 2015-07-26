@@ -174,3 +174,11 @@ $headerBorderColor: $borderColorAlt!default;
 }
 $headerTitleColor: take-lightness(palette('accentA'), $headerColor)!default;
 $headerSubTitleColor: $headerTitleColor!default;
+
+// =Catalog
+//=============================================================
+$catalogCellBgColor: palette('bgAlt')!default;
+$catalogCellColor: palette('fgAlt')!default;
+$catalogCellBorderSize: 2px!default;
+$catalogCellBorderColor: intense(palette('bgAlt'), 5)!default;
+$catalogSecondaryColor: $postOpHeaderColor!default;
