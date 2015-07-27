@@ -55,14 +55,17 @@ mixin help(anchor, helpText)
   - var helpSectionUrl = anchor ? helpPage+'#'+formatAnchor(anchor) : '#';
   - var helpText = helpText || '';
   span.help
-    a(target='_blank', href=helpSectionUrl, title=helpText) ?
+    // question-circle: 
+    a.fa-content(target='_blank', href=helpSectionUrl, title=helpText) 
 
+mixin info(infoText)
+  - var infoText = infoText || '';
+  //info-circle 
+  span.info.link.fa-content(title=helpText) 
 
 //-------------------------------
-//- Must be called in a script tag
-//- Id must be a camelCased string
-mixin pageId(pageString)
-  | window.pageId = '#{pageString}';
+mixin pageIdDeclaration(id)
+  != 'var pageId = "'+id+'";'
 
 //-------------------------------------------------------------
 //-=Helper functions

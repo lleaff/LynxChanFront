@@ -1,5 +1,8 @@
 extends ../jade/base
 
+block pageId
+  - var pageId = 'boardModeration';
+
 block headerTitle
   +title('#labelTitle', l.titBoardModeration)
 
@@ -40,6 +43,3 @@ block content
         input#deleteJsButton.button.submit.careful(type='button',
             value=l.guiDeleteBoard, onclick='deleteBoard()',
             style='display: none;')
-
-block pageId
-  +pageId('boardModeration')

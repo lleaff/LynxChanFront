@@ -1,5 +1,8 @@
 extends ../jade/base
 
+block pageId
+  - var pageId = 'account';
+
 block append styles
   +style('ext.css')
 
@@ -26,8 +29,8 @@ block content
           input#emailField(type='email', name='email')
         .field.alwaysSign
           label(for='checkboxAlwaysSign') #{l.guiAlwaysUseRoleSignature}
-          input#checkboxAlwaysSign(type='checkbox', name='alwaysSignRole')
           +help(l.help.roleSignatures, l.infoRoleSignature)
+          input#checkboxAlwaysSign(type='checkbox', name='alwaysSignRole')
         input.button.submit#saveFormButton(type='submit',
             value=l.guiSave)
         input.button.submit#saveJsButton(type='button',
@@ -83,6 +86,3 @@ block content
   section#ownedBoards
     h1 #{l.titOwnedBoards}
     #boardsDiv
-
-block pageId
-  +pageId('account')

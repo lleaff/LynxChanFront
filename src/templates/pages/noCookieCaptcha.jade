@@ -1,5 +1,8 @@
 extends ../jade/bare
 
+block pageId
+  - var pageId = 'noCookieCaptcha';
+
 block title
   | #{l.titNoCookieCaptcha}
 
@@ -21,6 +24,3 @@ block middle
       label(for='captchaAnswer') #{l.guiCaptchaAnswer}
       input(type='text', name='answer', required, autocomplete='off')
     input.button.submit(type='submit', value=l.guiSubmitCaptchaAnswer)
-
-block pageId
-  +pageId('noCookieCaptcha')

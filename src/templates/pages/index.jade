@@ -1,5 +1,8 @@
 extends ../jade/base
 
+block pageId
+  - var pageId = 'index';
+
 a(href='/account.js') #{l.titAccount}
 block headerTitle
   +title(siteTitle, '', '.')
@@ -14,6 +17,3 @@ block content
     h1 #{l.titTopBoards}
     nav#divBoards
     footer: a(href='/boards.js') #{l.titAllBoards}
-
-block pageId
-  +pageId('index')

@@ -1,6 +1,7 @@
 extends ../jade/base
 
-- var pageId = 'board';
+block pageId
+  - var pageId = 'board';
 
 block headerLogo
   img#bannerImage
@@ -45,6 +46,3 @@ block content
     name='action')
   input.button.submit#reportJsButton(type='button',
     onclick='reportPosts()', value=l.guiReport, style='display: none;')
-
-block pageId
-  +pageId('board')

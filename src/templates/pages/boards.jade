@@ -1,5 +1,8 @@
 extends ../jade/base
 
+block pageId
+  - var pageId = 'boards';
+
 block title
   | Boards
 
@@ -12,6 +15,3 @@ block content
   a#linkPrevious.fa.fa-chevron-left
   nav#divPages
   a#linkNext.fa.fa-chevron-right
-
-block pageId
-  +pageId('boards')

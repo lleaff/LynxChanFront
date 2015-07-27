@@ -1,5 +1,8 @@
 extends ../jade/base
 
+block pageId
+  - var pageId = 'error';
+
 block append styles
   +style('ext.css')
 
@@ -8,6 +11,3 @@ block append headerTitle
 
 block content 
   h4#errorLabel
-
-block pageId
-  +pageId('error')

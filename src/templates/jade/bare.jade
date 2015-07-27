@@ -2,6 +2,11 @@
 include variables
 include baseMixins
 
+//-=Settings
+block settings
+  block pageId
+    - var pageId = 'undefined';
+
 doctype html
 html
   block html
@@ -16,8 +21,10 @@ html
         +style('main.css')
       block topInlineScript
         script
-          block pageId
+          +pageIdDeclaration(pageId)
       block topScripts
+        block pageIdJs
+          | var pageId = '#{pageId}';
       block preloads
         +preloads()
     body

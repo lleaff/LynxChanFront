@@ -1,6 +1,9 @@
 include variables
 
 //-=Settings
+block settings
+block pageId
+  - var pageId = 'UNDEFINED'
 
 //- Mixins
 //------------------------------------------------------------
@@ -22,16 +25,16 @@ html
             link(rel='stylesheet', href=styleUrl)
         block favicon
           +favicon()
-        block topInlineScript
-          script
-            block pageId
+      block topInlineScript
+        script
+          +pageIdDeclaration(pageId)
         block topScripts
           for scriptUrl in baseTopScriptsUrls
             script(src=scriptUrl)
         block preloads
           +preloads()
     //-BODY============================================================
-    body
+    body(id=pageId)
       block body
         #notFooter
           //-Header______________________________

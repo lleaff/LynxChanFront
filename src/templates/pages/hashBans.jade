@@ -1,5 +1,8 @@
 extends ../jade/base
 
+block pageId
+  - var pageId = 'hashBans';
+
 block headerTitle
   +title(l.titFileBans)
 
@@ -23,6 +26,3 @@ block content
           style='display: none;')
 
   section#hashBansDiv
-
-block pageId
-  +pageId('hashBans')

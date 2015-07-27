@@ -1,5 +1,8 @@
 extends ../jade/base
 
+block pageId
+  - var pageId = 'bans';
+
 block append bottomScripts
   +script('ext.js')
 
@@ -11,6 +14,3 @@ block headerTitle
 
 block content
   main#bansDiv
-
-block pageId
-  +pageId('bans')

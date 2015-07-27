@@ -1,11 +1,11 @@
 extends ../jade/bare
 
+block pageId
+  - var pageId = 'message';
+
 block middle
   h4#labelMessage
     p.
       #{l.guiRedirectMessage.start}
        #[a#linkRedirect here]
        #{l.guiRedirectMessage.end}
-
-block pageId
-  +pageId('message')

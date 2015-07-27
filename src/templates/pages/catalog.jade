@@ -1,10 +1,10 @@
 extends ../jade/base
 
+block pageId
+  - var pageId = 'catalog';
+
 block headerTitle
   +title('#labelBoard', l.titCatalog, '.')
 
 block content
   section#divThreads.catalog
-
-block pageId
-  +pageId('catalog')

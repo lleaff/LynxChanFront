@@ -1,10 +1,10 @@
 extends ../jade/base
 
+block pageId
+  - var pageId = '404';
+
 block append bottomScripts
   +script('ext.js')
 
 block headerTitle
   +title('404', l.titNotFound)
-
-block pageId
-  +pageId('404')

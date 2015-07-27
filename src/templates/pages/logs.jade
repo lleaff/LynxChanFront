@@ -1,5 +1,8 @@
 extends ../jade/base
 
+block pageId
+  - var pageId = 'logs';
+
 block append bottomScripts
   +script('ext.js')
 
@@ -28,6 +31,3 @@ block content
 
   section#divLogs
   section#divPages
-
-block pageId
-  +pageId('logs')
