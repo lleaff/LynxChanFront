@@ -13,13 +13,15 @@ block append pageMenu
     a(href=baseStaticUrl+'/moderation.html') Moderation help
 
 block content
-  form#addStaffForm(method='post', enctype='multipart/form-data',
-    action='/setGlobalRole.js')
-    label(for='fieldLogin') #{l.guiUserLogin}: 
-    input#fieldLogin(type='text', name='login',
-        placeholder=l.phUserLogin, required)
-    label(for='newStaffCombo') #{l.guiRole}:
-    select#newStaffCombo(name='role', required)
+  form.form.addStaff#addStaffForm(action='/setGlobalRole.js',
+      enctype='multipart/form-data', method='post')
+    .field.userLogin
+      label(for='fieldLogin') #{l.guiUserLogin}: 
+      input#fieldLogin(type='text', name='login',
+          placeholder=l.phUserLogin, required)
+    .field.dropdown.newStaff
+      label(for='newStaffCombo') #{l.guiRole}:
+      select#newStaffCombo(name='role', required)
     input.button.submit#addJsButton(type='button', onclick='addUser()',
         value=l.guiAddUser, style='display: none;')
     input.button.submit#addFormButton(type='submit',

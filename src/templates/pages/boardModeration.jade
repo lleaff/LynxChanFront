@@ -16,11 +16,13 @@ block content
 
     section#transferForm
       h1 #{l.titOwnershipTransfer}
-      form(action='/transferBoardOwnerShip.js', method='post',
+      form.form.transferBoardOwnership(action='/transferBoardOwnership.js',
+          method='post',
           enctype='multipart/form-data')
         input#boardTransferIdentifier(type='hidden', name='boardUri')
-        label(for='fieldTransferLogin') #{l.guiUserLogin}
-        input#fieldTransferLogin(type='text', name='userLogin')
+        .field.userLogin
+          label(for='fieldTransferLogin') #{l.guiUserLogin}
+          input#fieldTransferLogin(type='text', name='userLogin')
         input.button.submit#transferFormButton.careful(type='submit',
             value=l.guiTransferBoardOwnership)
         input.button.submit#transferJsButton.careful(type='button',
@@ -30,7 +32,7 @@ block content
 
     section#deleteForm
       h1 #{l.titDeleteBoard}
-      form(action='/deleteBoard.js', method='post',
+      form.form.deleteBoard(action='/deleteBoard.js', method='post',
           enctype='multipart/form-data')
         input#boardDeletionIdentifier(type='hidden', name='boardUri')
         input#deleteFormButton.button.submit.careful(type='submit',

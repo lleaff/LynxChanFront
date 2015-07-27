@@ -8,15 +8,17 @@ block headerTitle
 
 block content
   section#placeRangeBans
-    form(action='/placeRangeBan.js', method='post',
+    form.form.rangeBans(action='/placeRangeBan.js', method='post',
         enctype='multipart/form-data')
-      label(for='rangeField') #{l.guiIPRangeBanLabel}
+      .field.range
+        label(for='rangeField') #{l.guiIPRangeBanLabel}
+        input#rangeField(type='text', name='range',
+            placeholder=l.phIPRangeBan)
         +help(l.helpIPRangeBan, l.infoIPRangeBan)
-      input#rangeField(type='text', name='range', placeholder=l.phIPRangeBan)
       input#boardIdentifier(type='hidden', name='boardUri')
-      input#createFormButton.button.submit(type='submit',
+      input.button.submit#createFormButton.button.submit(type='submit',
           value=l.guiPlaceIPRangeBan)
-      input#createJsButton.button.submit(type='button',
+      input.button.submit#createJsButton.button.submit(type='button',
           value=l.guiPlaceIPRangeBan, onclick='placeRangeBan()',
           style='display: none;')
 

@@ -10,14 +10,17 @@ block append bottomScripts
 
 block content
   section
-    form#placeHashBanForm(action='/placeHashBan.js', method='post',
-        enctype='multipart/form-data')
-      label(for='hashField') #{l.guiHashBanLabel}:
-      input#hashField(type='text', name='hash', placeholder=exampleHash)
+    form.form.hashBans#placeHashBanForm(action='/placeHashBan.js',
+        method='post', enctype='multipart/form-data')
+      .field.hash
+        label(for='hashField') #{l.guiHashBanLabel}:
+        input#hashField(type='text', name='hash', placeholder=exampleHash)
       input#boardIdentifier(type='hidden', name='boardUri')
-      input#createFormButton(type='submit', value=l.guiPlaceHashBan)
-      input#createJsButton(type='button', value=l.guiPlaceHashBan,
-          onclick='placeHashBan()', style='display: none;')
+      input.button.submit#createFormButton(type='submit',
+          value=l.guiPlaceHashBan)
+      input.button.submit#createJsButton(type='button',
+          value=l.guiPlaceHashBan, onclick='placeHashBan()',
+          style='display: none;')
 
   section#hashBansDiv
 

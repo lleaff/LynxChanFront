@@ -16,6 +16,7 @@
   },
   "infoRoleSignature":                "eg: Volunteer",
   "titPasswordChange":                "Password change",
+  "guiCurrentPassword":               "Current password",
   "guiNewPassword":                   "New password",
   "guiConfirmNewPassword":            "Confirm new password",
   "guiChangePassword":                "Change password",
@@ -114,7 +115,7 @@
   "guiDeleteRule":                    "Delete rule",
   "titNewRule":                       "New rule",
   "guiAddRule":                       "Add rule",
-  "titPageBoardRules":                    "Board rules",
+  "titPageBoardRules":                "Board rules",
   "guiBoardRulesLabel": {
     "start":                          "",
     "end":                            " rules:"
@@ -220,5 +221,4 @@
     "threadWiseIDPrefix":             "ID",
     "directLinkLabel":                "Singled-out post"
   }
-
 }

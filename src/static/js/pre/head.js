@@ -98,3 +98,27 @@ function clickAnim(element, options) {
     }, timeout);
   }
 }
+
+/* =User input
+============================================================*/
+/* Global onkeydown handler */
+window.onkeydown = function keydownHandler(e) {
+  var keyCode = e.keyCode;
+  var target = e.target;
+  var tagName = e.target.tagName;
+
+  switch(keyCode) {
+    case 13: /* Enter */
+    if (tagName === 'INPUT' || (tagName === 'TEXTAREA' && e.ctrlKey)) {
+      formEnterKeyHandler(target);
+    }
+    break;
+  }
+};
+
+/* Activate forms .submit buttons with Enter and Ctrl-Enter in textareas */
+function formEnterKeyHandler(focusedElem) {
+  if (focusedElem.form) {
+    focusedElem.form.getElementsByClassName('submit')[0].click();
+  }
+}

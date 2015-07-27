@@ -14,13 +14,13 @@ block middle
 
   p #{l.guiNoCookieCaptchaWelcomeMessage}
   img#imageCaptcha
-  form(action='/solveCaptcha.js', method='post',
-    enctype='multipart/form-data')
-    input#inputCaptchaId(type='hidden', name='captchaId',
-        autocomplete='off')
-    label(for='captchaAnswer') #{l.guiCaptchaAnswer}
-    input(type='text', name='answer', required)
-    input(type='submit', value=l.guiSubmitCaptchaAnswer)
+  form.form.noCookieCaptcha(action='/solveCaptcha.js', method='post',
+      enctype='multipart/form-data')
+    input#inputCaptchaId(type='hidden', name='captchaId')
+    .field.captchaAnswer
+      label(for='captchaAnswer') #{l.guiCaptchaAnswer}
+      input(type='text', name='answer', required, autocomplete='off')
+    input.button.submit(type='submit', value=l.guiSubmitCaptchaAnswer)
 
 block pageId
   +pageId('noCookieCaptcha')

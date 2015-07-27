@@ -9,16 +9,17 @@ block append bottomScripts
 block content
   section
     h3 #{l.titNewBanner}
-    form(action='/createBanner.js', method='post',
-      enctype='multipart/form-data')
+    form.form.createBanner(action='/createBanner.js', method='post',
+        enctype='multipart/form-data')
       fieldset
         input#boardIdentifier(type='hidden', name='boardUri')
-        input#files(type='file', name='files')
+        .files
+          input#files(type='file', name='files')
         input.button.submit#addFormButton(type='submit',
-          value=l.guiAddBanner)
+            value=l.guiAddBanner)
         input.button.submit#addJsButton(type='button',
-          value=l.guiAddBanner, onclick='addBanner()',
-          style='display: none')
+            value=l.guiAddBanner, onclick='addBanner()',
+            style='display: none')
 
   section
     h3 #{l.titExistingBanners}

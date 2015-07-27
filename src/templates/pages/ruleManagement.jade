@@ -10,14 +10,15 @@ block append bottomScripts
 
 block content
   h1 #{l.titNewRule}
-  form(action='/createRule.js', method='post',
+  form.form.createRule(action='/createRule.js', method='post',
       enctype='multipart/form-data')
     input#boardIdentifier(type='hidden', name='boardUri')
-    label.hidden(for='fieldRule') l.guiRule
-    input#fieldRule(type='text', name='rule')
-    input#addFormButton(type='submit',
+    .field.ruleText
+      label.hidden(for='fieldRule') l.guiRule
+      input#fieldRule(type='text', name='rule')
+    input.button.submit#addFormButton(type='submit',
         value=l.guiAddRule)
-    input#addJsButton(type='button', onclick='addRule()',
+    input.button.submit#addJsButton(type='button', onclick='addRule()',
         value=l.guiAddRule, style='display: none;')
 
   h1 #{l.titCurrentRules}

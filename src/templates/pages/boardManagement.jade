@@ -12,24 +12,27 @@ block headerTitle
 block content
   section#ownerControlDiv
     h2 #{l.titAddVolunteer}
-    form(action='/setVolunteer.js', method='post',
-        enctype='multipart/form-data')
+    form.form.addVolunteer(action='/setVolunteer.js',
+        method='post', enctype='multipart/form-data')
       fieldset
-        label(for='addVolunteerFieldLogin') #{l.guiUserLogin}:
+        .field.userLogin
+          label(for='addVolunteerFieldLogin') #{l.guiUserLogin}:
           input#addVolunteerFieldLogin(type='text', name='login', required)
         input(type='hidden', name='add', value='true')
         input#addVolunteerBoardIdentifier(type='hidden', name='boardUri')
-        input.button.submit#addVolunteerJsButton(type='button',
-          onclick='addVolunteer()', value=l.guiAddVolunteer,
-          style='display: none;')
-        input.button.submit#addVolunteerFormButton(type='submit',
-          value=l.guiAddVolunter)
+        .field.addVolunteer
+          input.button.submit#addVolunteerJsButton(type='button',
+              onclick='addVolunteer()', value=l.guiAddVolunteer,
+              style='display: none;')
+          input.button.submit#addVolunteerFormButton(type='submit',
+            value=l.guiAddVolunter)
 
     h2 #{l.titOwnershipTransfer}
-    form(action='/transferBoardOwnership.js', method='post',
-      enctype='multipart/form-data')
+    form.form.transferBoardOwnership(action='/transferBoardOwnership.js',
+        method='post', enctype='multipart/form-data')
       fieldset
-        label(for='transferBoardFieldLogin') #{l.guiUserLogin}:
+        .field.userLogin
+          label(for='transferBoardFieldLogin') #{l.guiUserLogin}:
           input#transferBoardFieldLogin(type='text', name='login', required)
         input#transferBoardIdentifier(type='hidden', name='boardUri')
         input.button.submit#transferBoardJsButton(type='button',
@@ -39,21 +42,22 @@ block content
           value=l.guiTransferBoardOwnership)
 
     h2 #{l.titDeleteBoard}
-    form(action='/deleteBoard.js', method='post',
+    form.form.deleteBoard(action='/deleteBoard.js', method='post',
         enctype='multipart/form-data')
       fieldset
         input#deletionIdentifier(name='boardUri', type='hidden')
-        input.button.submit#deleteBoardFormButton(type='submit',
-          value=l.guiDeleteBoard)
-        input.button.submit#deleteBoardJsButton(type='button',
-          onclick='deleteBoard()', value=l.guiDeleteBoard,
-          style='display: none;')
+        input.button.submit.careful#deleteBoardFormButton(type='submit',
+            value=l.guiDeleteBoard)
+        input.button.submit.careful#deleteBoardJsButton(type='button',
+            onclick='deleteBoard()', value=l.guiDeleteBoard,
+            style='display: none;')
 
     h2 #{l.titCustomCSS}
-    form(action='/setCustomCss.js', method='post',
+    form.form.setCustomCss(action='/setCustomCss.js', method='post',
         enctype='multipart/form-data')
       input#customCssIdentifier(type='hidden', name='boardUri')
-      input#files(type='files', name='files')
+      .files
+        input#files(type='files', name='files')
       input#cssFormButton(type='submit', value=l.guiUploadCustomCSS)
       input#cssJsButton(type='button', value=l.guiUploadCustomCSS,
           onclick='setCss()', style='display: none')
@@ -63,35 +67,35 @@ block content
     section#volunteersDiv
 
     h2 #{l.titBoardSettings}
-    form(action='/setBoardSettings.js', method='post',
-        enctype='multipart/form-data')
+    form.form.setBoardSettings(action='/setBoardSettings.js',
+        method='post', enctype='multipart/form-data')
       fieldset
         input#boardSettingsIdentifier(type='hidden', name='boardUri')
-
-        label(for='boardName') #{l.guiBoardName}
-        input#boardNameField(type='text', name='boardName')
-
-        label(for='boardDescription') #{l.guiBoardDescription}
-        input#boardDescriptionField(type='text', name='boardDescription')
-
-        label(for='anonymousNameField') #{l.guiDefaultName}
-        input#anonymousNameField(type='text', name='anonymousName',
-            placeholder=l.phDefaultName)
-
-        label(for='disableIds') #{l.guiDisableThreadWiseIDs}
-        input#disableIdsCheckbox(type='checkbox', name='disableIds')
-
-        label(for='allowCodeCheckbox') #{l.guiAllowCodeTags}
-        input#allowCodeCheckbox(type='checkbox', name='allowCode')
-
-        label(for='disableCaptcha') #{l.guiDisableCaptcha}
-        input#disableCaptchaCheckbox(type='checkbox',
-            name='disableCaptcha')
-
-        label(for='forceAnonymity') #{l.guiForceAnonymity}
+        .field.name
+          label(for='boardName') #{l.guiBoardName}
+          input#boardNameField(type='text', name='boardName')
+        .field.description
+          label(for='boardDescription') #{l.guiBoardDescription}
+          input#boardDescriptionField(type='text', name='boardDescription')
+        .field.AnonymousName
+          label(for='anonymousNameField') #{l.guiDefaultName}
+          input#anonymousNameField(type='text', name='anonymousName',
+              placeholder=l.phDefaultName)
+        .field.disableId
+          label(for='disableIds') #{l.guiDisableThreadWiseIDs}
+          input#disableIdsCheckbox(type='checkbox', name='disableIds')
+        .field.allowCode
+          label(for='allowCodeCheckbox') #{l.guiAllowCodeTags}
+          input#allowCodeCheckbox(type='checkbox', name='allowCode')
+        .field.disableCaptcha
+          label(for='disableCaptcha') #{l.guiDisableCaptcha}
+          input#disableCaptchaCheckbox(type='checkbox',
+              name='disableCaptcha')
+        .field.forceAnonymity
+          label(for='forceAnonymity') #{l.guiForceAnonymity}
+          input#forceAnonymityCheckbox(type='checkbox',
+              name='forceAnonymity')
           +help(l.helpForceAnonymity, l.infoForceAnonymity) 
-        input#forceAnonymityCheckbox(type='checkbox',
-            name='forceAnonymity')
 
         input.button.submit#saveSettingsJsButton(type='button',
             value=l.guiSave, onclick='saveSettings()',

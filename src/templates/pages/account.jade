@@ -18,31 +18,37 @@ block content
 
   section#accountSettings
     h1 #{l.guiSettings}
-    form(action='/changeAccountSettings.js', method='post',
-      enctype='multipart/form-data')
-        fieldset
+    form.form.accountSettings(action='/changeAccountSettings.js',
+        method='post', enctype='multipart/form-data')
+      fieldset
+        .field.email
           label(for='emailField') #{l.guiEmail}
           input#emailField(type='email', name='email')
+        .field.alwaysSign
           label(for='checkboxAlwaysSign') #{l.guiAlwaysUseRoleSignature}
           input#checkboxAlwaysSign(type='checkbox', name='alwaysSignRole')
           +help(l.help.roleSignatures, l.infoRoleSignature)
-          input.button.submit#saveFormButton(type='submit',
-              value=l.guiSave)
-          input.button.submit#saveJsButton(type='button',
-              value=l.guiSave, onclick='save()',
-              style='display: none;')
+        input.button.submit#saveFormButton(type='submit',
+            value=l.guiSave)
+        input.button.submit#saveJsButton(type='button',
+            value=l.guiSave, onclick='save()',
+            style='display: none;')
 
     h2 #{l.titPasswordChange} 
-    form(action='/changeAccountPassword.js', method='post',
-      enctype='multipart/form-data')
+    form.form.changePassword(action='/changeAccountPassword.js',
+        method='post', enctype='multipart/form-data')
       fieldset
-        input#fieldPassword(type='password', name='password', required)
-        label(for='fieldNewPassword') #{l.guiNewPassword}
-        input#fieldNewPassword(type='password', name='newPassword',
-            required)
-        label(for='fieldConfirmation') #{l.guiConfirmNewPassword}
-        input#fieldConfirmation(type='password', name='confirmation',
-            required)
+        .field.currentPassword
+          label(for='fieldPassword') #{l.guiCurrentPassword}
+          input#fieldPassword(type='password', name='password', required)
+        .field.newPassword
+          label(for='fieldNewPassword') #{l.guiNewPassword}
+          input#fieldNewPassword(type='password', name='newPassword',
+              required)
+        .field.newPasswordConfirm
+          label(for='fieldConfirmation') #{l.guiConfirmNewPassword}
+          input#fieldConfirmation(type='password', name='confirmation',
+              required)
         input.button.submit#passwordFormButton(type='submit',
             value=l.guiChangePassword)
         input.button.submit#passwordJsButton(type='button',
@@ -51,19 +57,23 @@ block content
 
   section#boardCreationDiv
     h1 #{l.titCreateBoard} 
-    form(action='/createBoard.js', enctype='multipart/form-data',
+    form.form.createBoard(action='/createBoard.js',
+        enctype='multipart/form-data',
       method='post')
       fieldset
-        label(for='newBoardFieldUri', title='[a-b]') #{l.guiBoardURI}
-        input#newBoardFieldUri(type='text', name='boardUri',
-            placeholder=l.phBoardUri, required)
-        label(for='newBoardFieldName') #{l.guiBoardName}
-        input#newBoardFieldName(type='text', name='boardName',
-            placeholder=l.phBoardName, required)
-        label(for='newBoardFieldDescription') #{l.guiBoardDescription}:
-        input#newBoardFieldDescription(type='text',
-            name='boardDescription', placeholder=l.phBoardDescription,
-            required)
+        .field.uri
+          label(for='newBoardFieldUri', title='[a-b]') #{l.guiBoardURI}
+          input#newBoardFieldUri(type='text', name='boardUri',
+              placeholder=l.phBoardUri, required)
+        .field.name
+          label(for='newBoardFieldName') #{l.guiBoardName}
+          input#newBoardFieldName(type='text', name='boardName',
+              placeholder=l.phBoardName, required)
+        .field.description
+          label(for='newBoardFieldDescription') #{l.guiBoardDescription}:
+          input#newBoardFieldDescription(type='text',
+              name='boardDescription', placeholder=l.phBoardDescription,
+              required)
         input.button.submit#newBoardJsButton(type='button',
             onclick='createBoard()', style='display: none',
             value=l.guiCreateBoard)
