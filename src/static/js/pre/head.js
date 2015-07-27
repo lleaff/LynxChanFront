@@ -45,6 +45,16 @@ function removeClass(domElement, className) {
     new RegExp('(?:^|\\s)'+className+'(?!\\S)'), '' );
 }
 
+function hasClass(domElement, className) {
+  return domElement.className.split(' ').indexOf(className) > -1;
+}
+
+function addClass(domElement, className) {
+  if (!hasClass(domElement, className)) {
+    domElement.className += ' '+className;
+  }
+}
+
 /* /!\ WARNING /!\
 * This will override some attributes set using JavaScript
  * like onclick, since they don't appear in .outerHTML. */

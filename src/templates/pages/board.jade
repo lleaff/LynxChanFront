@@ -22,7 +22,9 @@ block prepend middle
   include ../jade/createThread
 
 block content
+  a.anchor.postsTopAnchor(name='top')
   main#divThreads
+  a.anchor.postsBottomAnchor(name='bottom')
 
   a#linkPrevious.fa.fa-chevron-left
   nav#divPages

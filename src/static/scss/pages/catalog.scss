@@ -26,6 +26,10 @@ $catalogThumbSize: max($thumbSize * 0.7, 128px)!default;
     bottom: ($defaultPadding * 0.66);
     left: ($defaultPadding * 0.33);
   }
+
+  &.catalogCellLinkHover {
+    background-color: $catalogCellLinkHoverBgColor;
+  }
 }
 
 $catalogCellPadding: $internalPadding * 0.8;
@@ -44,6 +48,7 @@ $catalogCellPadding: $internalPadding * 0.8;
   overflow-y: auto;
 }
 .catalogCell .divMessage {
+  text-align: left;
   font-size: 0.9em;
 }
 
@@ -52,6 +57,7 @@ $catalogCellPadding: $internalPadding * 0.8;
   font-size: $smallFontSize;
   color: $catalogSecondaryColor;
   margin-bottom: $catalogCellPadding;
+  height: 1.1em;
 
   .labelReplies, .labelImages {
     margin-left: $internalPadding * 2;

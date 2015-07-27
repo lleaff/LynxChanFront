@@ -38,7 +38,9 @@ block content
 
   form(method='post', action='../../contentActions.js',
       enctype='multipart/form-data')
+    a.anchor.postsTopAnchor(name='top')
     main#divThreads
+    a.anchor.postsBottomAnchor(name='bottom')
 
     fieldset.divRefresh(style='diplay: none;')
       label(for='refreshCheckbox')

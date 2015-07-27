@@ -1,7 +1,9 @@
 section.catalogThread(onclick='expandCatalogOp(event)')
   .catalogCellContent
     header.catalogCellHeader
-      a.linkThumb
+      a.linkThumb(
+          onmouseenter='catalogCellLinkHover(event)',
+          onmouseleave='catalogCellLinkHover(event)')
       span.labelSubject
     .catalogMessageWrap
       p.divMessage

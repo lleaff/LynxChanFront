@@ -182,3 +182,4 @@ $catalogCellColor: palette('fgAlt')!default;
 $catalogCellBorderSize: 2px!default;
 $catalogCellBorderColor: intense(palette('bgAlt'), 5)!default;
 $catalogSecondaryColor: $postOpHeaderColor!default;
+$catalogCellLinkHoverBgColor: intensify($catalogCellBgColor, $catalogCellColor, $weight: 4)!default;
