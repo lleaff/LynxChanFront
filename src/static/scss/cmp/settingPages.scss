@@ -1,0 +1,24 @@
+@import '../sass';
+
+#contentWrapper {
+  text-align: center;
+  .content {
+    text-align: initial;
+  }
+}
+.accountContent, .boardManagementContent, .bannerManagementContent, .globalManagementContent {
+  display: inline-block;
+  margin: 0 auto;
+
+  .form {
+    padding: 0 $defaultPadding;
+    .field {
+      label {
+        text-align: right;
+      }
+    }
+    .submit {
+      margin: $defaultPadding auto 0 auto;
+    }
+  }
+}

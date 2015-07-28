@@ -1,0 +1,35 @@
+@import '../sass';
+
+#account {
+
+  .field {
+    label {
+      min-width: 15em;
+    }
+
+    input {
+      max-width: 20em;
+
+      &:not([type="checkbox"]) {
+        width: 20em;
+      }
+    }
+  }
+
+  .accountSettings .submit {
+    margin-top: $defaultPadding * 0.3;
+  }
+}
+
+.loginStatusBox {
+  float: right;
+
+  .loggedIn {
+    float: right;
+    margin: 0;
+  }
+  .logout {
+    float: right;
+    clear: right;
+  }
+}

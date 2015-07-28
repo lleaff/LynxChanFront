@@ -79,6 +79,7 @@
 // Return an automatically contrasted color
 //------------------------------------------------------------
 @function intense-lightness($color, $threshold: 50%, $weight: 100%) {
+  $scale: none!default;
   @if lightness($color) < $threshold {
     $scale: $mainContrast;
   } @else {
@@ -101,6 +102,32 @@
 @function intense($color, $threshold: 50%, $weight: 100%) {
   @return intense-lightness($color, $threshold, $weight);
 }
+
+@function soft-lightness($color, $threshold: 50%, $weight: 100%) {
+  $scale: none!default;
+  @if lightness($color) < $threshold {
+    $scale: -$mainContrast;
+  } @else {
+    $scale: $mainContrast;
+  }
+  $adjusted: adjust-color($color, $lightness: $scale * 100);
+  @return mix($adjusted, $color, $weight);
+}
+
+@function soft-saturation($color, $threshold: 50%, $weight: 100%) {
+  @if lightness($color) < $threshold {
+    $scale: -$mainSaturationContrast;
+  } @else {
+    $scale: $mainSaturationContrast;
+  }
+  $adjusted: adjust-color($color, $lightness: $scale * 100);
+  @return mix($adjusted, $color, $weight);
+}
+
+@function soft($color, $threshold: 50%, $weight: 100%) {
+  @return soft-lightness($color, $threshold, $weight);
+}
+
 
 // Change $color to use the given value form $sourceColor
 //------------------------------------------------------------

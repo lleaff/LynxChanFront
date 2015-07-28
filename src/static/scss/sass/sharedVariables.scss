@@ -9,8 +9,10 @@ $internalPadding: $defaultPadding / 2;
 
 // =Inputs
 //------------------------------------------------------------
-$buttonPadding: initial;
+$buttonPadding: ($defaultPadding * 0.3) ($defaultPadding * 0.6) ($defaultPadding * 0.3) ($defaultPadding * 0.6)!default;
 $buttonMargin: initial;
+$submitPadding: ($defaultPadding * 0.4) ($defaultPadding * 0.7) ($defaultPadding * 0.4) ($defaultPadding * 0.7)!default;
+$submitMargin: $buttonMargin;
 
 // =Header
 //------------------------------------------------------------

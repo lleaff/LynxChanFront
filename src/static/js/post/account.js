@@ -20,7 +20,7 @@ function changePassword() {
   if (!typedPassword.length) {
     alert('You must provide your current password.');
   } else if (typedConfirmation !== typedNewPassword) {
-    alert('Password confirmation does no match')
+    alert('Password confirmation does no match');
   } else if (!typedNewPassword.length) {
     alert('You cannot provide a blank password.');
   } else {
@@ -37,7 +37,7 @@ function changePassword() {
         location.reload(true);
 
       } else {
-        alert(status + ': ' + JSON.stringify(data));
+        alert(status+': '+JSON.stringify(data));
       }
     });
   }
@@ -45,34 +45,31 @@ function changePassword() {
 }
 
 function save() {
-
   var selectedSettings = [];
 
-  for ( var key in settingsRelation) {
-
+  for (var key in settingsRelation) {
     if (document.getElementById(key).checked) {
       selectedSettings.push(settingsRelation[key]);
     }
-
   }
 
-  var typedEmail = document.getElementById('emailField').value.trim();
+  var emailField = document.getElementById('emailField');
 
-  if (typedEmail.length > 64) {
+  var typedEmail = emailField.value.trim();
+
+  if (emailField.validity && emailField.validity.valid === false) {
+    alert('Please enter a valid email address');
+  } else if (typedEmail.length > 64) {
     alert('Email too long, keep it under 64 characters');
   } else {
-
     apiRequest('changeAccountSettings', {
       email : typedEmail,
       settings : selectedSettings
     }, function requestComplete(status, data) {
-
       if (status === 'ok') {
-
         alert('Settings changed.');
-
       } else {
-        alert(status + ': ' + JSON.stringify(data));
+        alert(status+': '+JSON.stringify(data));
       }
     });
 
@@ -103,10 +100,10 @@ function createBoard() {
 
         alert('Board created.');
 
-        window.location.pathname = '/' + typedUri + '/';
+        window.location.pathname = '/'+typedUri+'/';
 
       } else {
-        alert(status + ': ' + JSON.stringify(data));
+        alert(status+': '+JSON.stringify(data));
       }
     });
   }

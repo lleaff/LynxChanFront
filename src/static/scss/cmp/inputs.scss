@@ -1,0 +1,66 @@
+@import '../sass';
+
+/*------------------------------------------------------------*
+ * =Input
+ *------------------------------------------------------------*/
+// All text input fields including textarea
+@include text-inputs(true) {
+  padding: $defaultPadding * 0.3;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+input, button, textarea {
+  &:not([type="file"]) {
+    background-color: $inputBgColor;
+    border: solid 1px $inputBorderColor;
+    border-radius: 2px;
+    color: $inputColor;
+  }
+  box-shadow: none;
+}
+
+/* =Button
+ *------------------------------*/
+.button {
+  @if $animationSpeed {
+    transition: $animationSpeed * 1.1 ease-out;
+  }
+}
+
+.button:not(html) {
+  margin: $buttonMargin;
+  padding: $buttonPadding;
+
+  border: $buttonBorder;
+  border-radius: $buttonBorderRadius;
+  @include buttonColors;
+}
+
+// not() is just to increase specificity
+.submit:not(html) {
+  margin: $submitMargin;
+  padding: $submitPadding;
+  @include submitColors;
+}
+
+.button.careful:hover {
+  background-color: $buttonCarefulBgColor;
+  border-color: $buttonCarefulBgColor;
+  color: $buttonCarefulColor;
+}
+
+//.transparent {
+//  background: transparent;
+//  border: none!important;
+//  font-size: 0;
+//}
+
+/* =Checkbox
+ *------------------------------*/
+input[type="checkbox"] {
+}

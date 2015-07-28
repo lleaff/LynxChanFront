@@ -3,8 +3,9 @@
 $pageFooterPaddingHorizontal: 5em;
 
 #pageFooter {
-  @include altColors;
-  border-top: 1px solid $borderColorAlt;
+  background-color: $footerBgColor;
+  color: $footerColor;
+  border-top: 1px solid $footerBorderColor;
   border-bottom: none;
   margin: 0;
 }

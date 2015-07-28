@@ -65,10 +65,11 @@ html, body {
   float: right;
 }
 
-#threadContent, #boardContent {
-  margin-right: $postFormExternalWidth;
-  padding-right: $defaultPadding;
-}
+// TODO remove
+//#threadContent, #boardContent {
+//  margin-right: $postFormExternalWidth;
+//  padding-right: $defaultPadding;
+//}
 
 #divPages {
   position: absolute;
@@ -124,10 +125,32 @@ hr {
 }
 
 
+.help {
+  color: $helpIconColor;
+  a {
+    color: $helpIconColor;
+    &:hover {
+      color: $linkHoverColor;
+    }
+  }
+}
+
 .anchor {
   position: relative;
   display: block;
   height: 0;
+}
+
+.secondary {
+  border-color: take-lightness(palette('warning'), $borderColorAlt, 100%);
+  background-color: weighted('take-lightness', 10%,
+    palette('warning'), $borderColorAlt, 100%);
+}
+
+.careful {
+  border-color: take-lightness(palette('warning'), $borderColorAlt, 100%);
+  background-color: weighted('take-lightness', 10%,
+    palette('warning'), $borderColorAlt, 100%);
 }
 
 /*------------------------------------------------------------*
@@ -150,62 +173,77 @@ hr {
   padding: 1em;
 }
 
-/*------------------------------------------------------------*
- * =Input
+
+/* =Form layout
  *------------------------------------------------------------*/
-fieldset {
-  border: none;
-  padding: 0;
-  margin: 0;
+.form {
+  display: table;
+  border-collapse: collapse;
+
+  .field {
+    display: table-row;
+
+    label {
+      display: table-cell;
+      padding: { right: $defaultPadding * 0.9; }
+      vertical-align: middle;
+    }
+    input {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    label, input {
+      margin: { 
+        top: $defaultPadding * 0.33;
+        bottom: $defaultPadding * 0.33;
+      }
+    }
+    .help {
+      display: table-cell;
+      padding: { left: max($defaultPadding, 0.5em); }
+      vertical-align: middle;
+    }
+  }
+
+  .submit {
+    display: block;
+  }
 }
 
-input, button, textarea {
-  //background-color: palette('bgAlt');
-  //border: solid 1px $borderColorAlt;
-  //color: palette('fgAlt');
-  box-shadow: none;
+/*
+.form {
+  display: inline-block;
+  > fieldset {
+    display: inline-block;
+  }
+
+  .field {
+    float: left;
+    width: 100%;
+
+    &:after {
+      content: "";
+      display: block;
+      clear: left;
+    }
+
+    label {
+      float: left;
+    }
+    input {
+      float: right;
+    }
+
+    .help {
+      padding: {
+        left: max($defaultPadding * 0.5, 0.5em);
+        right: max($defaultPadding * 0.5, 0.5em);
+      }
+      float: right;
+    }
+  }
 }
-
-.secondary {
-  border-color: take-lightness(palette('warning'), $borderColorAlt, 100%);
-  background-color: weighted('take-lightness', 10%,
-    palette('warning'), $borderColorAlt, 100%);
-
-}
-
-.careful {
-  border-color: take-lightness(palette('warning'), $borderColorAlt, 100%);
-  background-color: weighted('take-lightness', 10%,
-    palette('warning'), $borderColorAlt, 100%);
-}
-
-/* =Button
- *------------------------------*/
-.button {
-  @include buttonColors;
-  margin: $buttonMargin;
-  padding: $buttonPadding;
-}
-
-.submit {
-  $submitMargin: $buttonMargin;
-  $submitPadding: $buttonPadding;
-
-  @include submitColors;
-  margin: $submitMargin;
-  padding: $submitPadding;
-}
-
-//.transparent {
-//  background: transparent;
-//  border: none!important;
-//  font-size: 0;
-//}
-
-/* =Checkbox
- *------------------------------*/
-input[type="checkbox"] {
-}
+*/
 
 /*------------------------------------------------------------*
  * =Page specific

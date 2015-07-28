@@ -14,7 +14,7 @@
   "help": {
     "roleSignatures":                 "Role signatures"
   },
-  "infoRoleSignature":                "eg: Volunteer",
+  "infoRoleSignature":                "eg: Volunteer, Board owner, ...",
   "titPasswordChange":                "Password change",
   "guiCurrentPassword":               "Current password",
   "guiNewPassword":                   "New password",
@@ -79,7 +79,7 @@
   "guiDisableCaptcha":                "Disable captcha",
   "guiForceAnonymity":                "Force anonymity",
   "helpForceAnonymity":               "",
-  "infoForceAnonymity":               "No name field when posting",
+  "infoForceAnonymity":               "No \"Name\" field when posting",
   "titBanners":                       "Banners",
   "titClosedReports":                 "Closed reports",
   "guiViewReportLink":                "View",

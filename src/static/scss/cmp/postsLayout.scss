@@ -64,15 +64,18 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7%);
 .uploadCell {
   display: inline-table;
   padding-right: $postInternalPadding;
-  margin: $postInternalPadding / 2 0 0 0;
+  margin: ($postInternalPadding / 2) 0 0 0;
   //max-width:  $thumbSize;
   //max-height: $thumbSize;
+  &:not(:first-child) {
+    margin-left: $postInternalPadding;
+  }
 }
 
 .panelUploads {
   float: left;
   border-collapse: collapse;
-  padding-right: $postInternalPadding * 2;
+  margin-right: $postInternalPadding * 2;
 
   .imgLink {
     display: table-cell;
@@ -107,7 +110,9 @@ $fileInfoEms: 0.8; // inherited from <small>
   }
   /* eg. 41.02 KB */
   .sizeLabel {
+    display: inline-block;
     vertical-align: bottom;
+    margin-right: 1em;
   }
   /* eg. 395x526 */
   .dimensionLabel {

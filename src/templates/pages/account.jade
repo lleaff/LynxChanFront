@@ -6,15 +6,18 @@ block pageId
 block append styles
   +style('ext.css')
 
+
+block prepend middle
+  .loginStatusBox
+    p.loggedIn #{l.guiLoggedInAs} #[span#labelLogin]
+    form.logout(action='/logout.js')
+      input.button.careful#logoutJsButton(type='button',
+        value=l.guiLogout, onclick='logout()', style='display: none')
+      input.button.careful#logoutFormButton(type='submit',
+        value=l.guiLogout)
+
 block content
   section#account
-    h4 #{l.guiLoggedInAs} #[span#labelLogin]
-
-    form(action='/logout.js')
-      input.button.submit.careful#logoutJsButton(type='button',
-        value=l.guiLogout, onclick='logout()', style='display: none')
-      input.button.submit.careful#logoutFormButton(type='submit',
-        value=l.guiLogout)
 
     a#globalManagementLink('/globalManagement.js')
       | #{l.guiGlobalManagement}
@@ -29,8 +32,8 @@ block content
           input#emailField(type='email', name='email')
         .field.alwaysSign
           label(for='checkboxAlwaysSign') #{l.guiAlwaysUseRoleSignature}
-          +help(l.help.roleSignatures, l.infoRoleSignature)
           input#checkboxAlwaysSign(type='checkbox', name='alwaysSignRole')
+          +help(l.help.roleSignatures, l.infoRoleSignature)
         input.button.submit#saveFormButton(type='submit',
             value=l.guiSave)
         input.button.submit#saveJsButton(type='button',
@@ -73,7 +76,7 @@ block content
           input#newBoardFieldName(type='text', name='boardName',
               placeholder=l.phBoardName, required)
         .field.description
-          label(for='newBoardFieldDescription') #{l.guiBoardDescription}:
+          label(for='newBoardFieldDescription') #{l.guiBoardDescription}
           input#newBoardFieldDescription(type='text',
               name='boardDescription', placeholder=l.phBoardDescription,
               required)

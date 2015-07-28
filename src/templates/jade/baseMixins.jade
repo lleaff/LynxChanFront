@@ -52,11 +52,12 @@ mixin pageMenuEntry()
 mixin help(anchor, helpText)
   - var helpPage = helpPageUrl;
   - function formatAnchor(orig) { return orig.toLowerCase().replace(/ /g, '-'); }
-  - var helpSectionUrl = anchor ? helpPage+'#'+formatAnchor(anchor) : '#';
+  - var helpSectionUrl = anchor ? helpPage+'#'+formatAnchor(anchor) : false;
   - var helpText = helpText || '';
   span.help
     // question-circle: 
-    a.fa-content(target='_blank', href=helpSectionUrl, title=helpText) 
+    // question: 
+    a.fa-content(target='_blank', href=helpSectionUrl, title=helpText) 
 
 mixin info(infoText)
   - var infoText = infoText || '';

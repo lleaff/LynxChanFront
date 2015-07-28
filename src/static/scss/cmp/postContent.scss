@@ -70,12 +70,14 @@ $postCodeBorderColor: intensify($postCodeBgColor, $postCodeColor, $weight: 10%)!
 
 .divMessage code {
   font-size: 0.9em;
-  white-space:  pre;
+  white-space: pre;
 
   background-color: $postCodeBgColor;
   color: $postCodeColor;
   border: 1px solid $postCodeBorderColor;
 
+  overflow: auto;
+  max-width: 100%;
   display: inline-block;
   padding: 0.5em;
   //padding-left: 0.1em;

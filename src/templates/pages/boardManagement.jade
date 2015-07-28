@@ -59,12 +59,13 @@ block content
     form.form.setCustomCss(action='/setCustomCss.js', method='post',
         enctype='multipart/form-data')
       input#customCssIdentifier(type='hidden', name='boardUri')
-      .files
-        input#files(type='files', name='files')
-      input#cssFormButton(type='submit', value=l.guiUploadCustomCSS)
-      input#cssJsButton(type='button', value=l.guiUploadCustomCSS,
-          onclick='setCss()', style='display: none')
-      +help('', l.infoCustomCSS)
+      .field
+        .files
+          input#files(type='file', name='files')
+        input.button.submit#cssFormButton(type='submit', value=l.guiUploadCustomCSS)
+        input.button.submit#cssJsButton(type='button', value=l.guiUploadCustomCSS,
+            onclick='setCss()', style='display: none')
+        +help('', l.infoCustomCSS)
 
     h2 #{l.titVolunteers}
     section#volunteersDiv

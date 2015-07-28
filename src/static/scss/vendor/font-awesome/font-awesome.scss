@@ -10,6 +10,8 @@
 @import "mixins";
 @import "path";
 @import "core";
+// LynxChanFront modification: Use '.fa-content' when using font characters directly in element content and not :before/:after
+@import "content";
 @import "larger";
 @import "fixed-width";
 @import "list";

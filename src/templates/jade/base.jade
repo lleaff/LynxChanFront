@@ -55,7 +55,8 @@ html
             block middle
               //-Content______________________________
               #contentWrapper
-                section(class=pageId ? pageId+'Content' : 'content')
+                //- eg.: pageId = 'board' -> section.content.boardContent
+                section(class='content'+(pageId ? ' '+pageId+'Content' : ''))
                   nav#pageMenu: ul
                     block pageMenu
                   block content
