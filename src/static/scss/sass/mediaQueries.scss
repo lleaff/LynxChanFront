@@ -1,0 +1,109 @@
+// Widths
+$veryNarrow: 22em;
+$narrow: 50em;
+$wide: 150em;
+
+$veryShort: 22em;
+$short: 30em;
+$tall: 400em;
+
+
+// =Direct
+//------------------------------------------------------------
+@mixin veryNarrow() {
+  @media screen and (max-width: $veryNarrow) {
+    @content;
+  }
+}
+@mixin narrow() {
+  @media screen and (min-width: $veryNarrow) and (max-width: $narrow) {
+    @content;
+  }
+}
+@mixin regular() {
+  @media screen and (min-width: $narrow) and (max-width: $wide) {
+    @content;
+  }
+}
+@mixin wide() {
+  @media screen and (min-width: $wide) {
+    @content;
+  }
+}
+
+// =Compare
+//------------------------------------------------------------
+@mixin narrower($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+@mixin wider($wdith) {
+  @media screen and (min-width: $width) {
+    @content;
+  }
+}
+@mixin widthBetween($widthLower, $widthHigher) {
+  @media screen and (min-width: $widthLower) and (max-width: $widthHigher) {
+    @content;
+  }
+}
+
+@mixin shorter($height) {
+  @media screen and (max-height: $height) {
+    @content;
+  }
+}
+@mixin taller($height) {
+  @media screen and (min-height: $height) {
+    @content;
+  }
+}
+@mixin heightBetween($heightLower, $heightHigher) {
+  @media screen and (min-height: $heightLower) and (max-height: $heightHigher) {
+    @content;
+  }
+}
+
+// =Debugging
+//------------------------------------------------------------
+@mixin bodyOverlay($background) {
+  body:after {
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    //z-index: 99999;
+
+    pointer-events: none;
+    opacity: 0.2;
+    background: $background;
+  }
+}
+
+@mixin debugMediaQueries(
+  $veryNarrowColor: #f55,
+  $narrowColor: #f99,
+  $regularColor: #af9,
+  $wideColor: #99f,
+  $shortColor: #aa5
+  ) {
+    @if $veryNarrowColor {
+      @include veryNarrow { @include bodyOverlay($veryNarrowColor); }
+    }
+    @if $narrowColor {
+      @include narrow { @include bodyOverlay($narrowColor); }
+    }
+    @if $regularColor {
+      @include regular { @include bodyOverlay($regularColor); }
+    }
+    @if $wideColor {
+      @include wide { @include bodyOverlay($wideColor); }
+    }
+
+    @if $shortColor {
+      @include shorter($short) { @include bodyOverlay($shortColor); }
+    }
+}
+
+@include debugMediaQueries;

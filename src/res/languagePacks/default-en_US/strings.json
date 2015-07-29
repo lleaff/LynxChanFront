@@ -131,7 +131,7 @@
   "phEmail":                          "user@example.com",
   "guiRegister":                      "Register",
   "titRecoverAccount":                "Recover account",
-  "guiRequestRecover":                "Request recovery",
+  "guiRequestRecovery":               "Request recovery",
   "guiSearchExcludeGlobalEntries":    "Exclude global entries",
   "guiSearchBoard":                   "Board",
   "guiSearchUser":                    "User",

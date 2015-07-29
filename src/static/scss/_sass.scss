@@ -2,8 +2,10 @@
 //- Anything that doesn't directly add rules when imported
 //-------------------------------------------------------------
 
+@import 'sass/libs/html5-text-inputs';
+
+@import 'sass/mediaQueries';
 @import 'sass/colors';
 @import 'sass/functions';
 @import 'sass/mixins';
 @import 'sass/sharedVariables';
-@import 'sass/html5-text-inputs';

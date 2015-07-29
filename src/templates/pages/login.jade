@@ -6,49 +6,57 @@ block pageId
 block content
   section
     h1 #{l.titLogin}
-    form(action='/login.js', enctype='multipart/form-data', method='post')
+    form.form.loginForm(
+        action='/login.js', enctype='multipart/form-data', method='post')
       fieldset
-        label(for='loginFieldLogin') #{l.guiUsername}
-        input#loginFieldLogin(type='text', name='login',
-            placeholder=l.phUsername, required)
-        label(for='loginFieldPassword') #{l.guiPassword}
-        input#loginFieldPassword(type='password', name='password',
-            required)
-      input.button.submit#loginFormButton(type='submit',
-          value=l.guiLogin)
-      input.button.submit#loginJsButton(type='button',
-        onclick='loginUser()', value=l.guiLogin, style='display: none;')
+        .field.loginUsername
+          label(for='loginFieldLogin') #{l.guiUsername}
+          input#loginFieldLogin(type='text', name='login',
+              placeholder=l.phUsername, required)
+        .field.loginPassword
+          label(for='loginFieldPassword') #{l.guiPassword}
+          input#loginFieldPassword(type='password', name='password',
+              required)
+        input.button.submit#loginFormButton(type='submit',
+            value=l.guiLogin)
+        input.button.submit#loginJsButton(type='button',
+          onclick='loginUser()', value=l.guiLogin, style='display: none;')
 
   section#divCreation
     h1 #{l.titRegister}
-    form(action='/registerAccount.js', enctype='multipart/form-data',
+    form.form.register(
+        action='/registerAccount.js', enctype='multipart/form-data',
         method='post')
       fieldset
-        label(for='registerFieldLogin')
-          span(title='Required') #{l.guiUsername}*
-        input#registerFieldLogin(type='text', name='login',
-            placeholder=l.phUsername, required)
-        label(for='registerFieldPassword')
-          span(title='Required') #{l.guiPassword}*
-        input#registerFieldPassword(type='password', name='password',
-            required)
-        label(for='registerFieldEmail') #{l.guiEmail}
-        input#registerFieldEmail(type='email', name='email',
-            placeholder=l.phEmail)
-      input.button.submit#registerFormButton(type='submit',
-          value=l.guiRegister)
-      input.button.submit#registerJsButton(type='button',
-          onclick='registerAccount()', value=l.guiRegister,
-          style='display: none;')
+        .field.registerLogin
+          label(for='registerFieldLogin')
+            span(title='Required') #{l.guiUsername}*
+          input#registerFieldLogin(type='text', name='login',
+              placeholder=l.phUsername, required)
+        .field.registerPassword
+          label(for='registerFieldPassword')
+            span(title='Required') #{l.guiPassword}*
+          input#registerFieldPassword(type='password', name='password',
+              required)
+        .field.registerEmail
+          label(for='registerFieldEmail') #{l.guiEmail}
+          input#registerFieldEmail(type='email', name='email',
+              placeholder=l.phEmail)
+        input.button.submit#registerFormButton(type='submit',
+            value=l.guiRegister)
+        input.button.submit#registerJsButton(type='button',
+            onclick='registerAccount()', value=l.guiRegister,
+            style='display: none;')
 
   section
     h1 #{l.titRecoverAccount}
-    form(action='/requestAccountRecovery.js',
+    form.form.recoverAccount(action='/requestAccountRecovery.js',
         enctype='multipart/form-data', method='post')
       fieldset
-        label(for='recoverFieldLogin') #{l.guiUsername}
-        input#recoverFieldLogin(type='text', name='login',
-            placeholder=l.phUsername, required)
+        .field.recoverField
+          label(for='recoverFieldLogin') #{l.guiUsername}
+          input#recoverFieldLogin(type='text', name='login',
+              placeholder=l.phUsername, required)
       input.button.submit#recoverFormButton(type='submit',
           value=l.guiRequestRecovery)
       input.button.submit#recoverJsButton(type='button',
