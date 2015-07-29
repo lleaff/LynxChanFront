@@ -66,7 +66,8 @@ mixin info(infoText)
 
 //-------------------------------
 mixin pageIdDeclaration(id)
-  != 'var pageId = "'+id+'";'
+  if pageId
+    != 'var pageId = "'+id+'";'
 
 //-------------------------------------------------------------
 //-=Helper functions
