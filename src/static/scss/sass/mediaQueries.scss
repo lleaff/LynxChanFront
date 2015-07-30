@@ -67,8 +67,12 @@ $tall: 400em;
 
 // =Debugging
 //------------------------------------------------------------
-@mixin bodyOverlay($background) {
-  body:after {
+@mixin bodyOverlay($color, $opacity: 0.18, $before: false, $discreete: true) {
+  $pseudoElement: if($before, before, after);
+  $blur: if($discreete, 13px, 15px);
+  $spread: if($discreete, 0px, 5px);
+
+  body:#{$pseudoElement} {
     content: "";
     display: block;
     position: fixed;
@@ -76,8 +80,9 @@ $tall: 400em;
     //z-index: 99999;
 
     pointer-events: none;
-    opacity: 0.2;
-    background: $background;
+    //border: 7px solid $color;
+    box-shadow: inset 0 0 $blur $spread $color;
+    //background: rgba($color, $opacity);
   }
 }
 
@@ -102,7 +107,7 @@ $tall: 400em;
     }
 
     @if $shortColor {
-      @include shorter($short) { @include bodyOverlay($shortColor); }
+      @include shorter($short) { @include bodyOverlay($shortColor, $before: true); }
     }
 }
 
