@@ -20,7 +20,8 @@ block pageMenu
     a#linkMod #{l.guiModerateThread}
 
 block prepend middle
-  include ../jade/replyThread
+  #secondaryHeader
+    include ../jade/replyThread
 
 block content
   #divControls
@@ -52,32 +53,33 @@ block content
           onchange='changeRefresh()')
       input#refreshButton(type='button', onclick='refreshPosts(true)',
           value=l.guiRefreshThread)
-    fieldset.contentAction
-      label(for='reportFieldReason') #{l.guiReportReason}
-      input#reportFieldReason(type='text', name='reason',
-          placeholder=l.phReportReason)
-      fieldset#divBanInput
-        label(for='fieldExpiration') #{l.guiExpiration}
-        input#fieldExpiration(type='date', name='expiration',
-            placeholder=l.phExpiration, required)
-        label(for='fieldBanMessage') #{l.guiBanMessage}
-        input#fieldBanMessage(type='text', name='banMessage')
-      label(for='deletionFieldPassword') #{l.guiPassword}
-      input#deletionFieldPassword(type='password', name='password')
-      label(for='checkboxGlobal') #{l.guiGlobalLabel}
-      input#checkboxGlobal(type='checkbox', name='global')
-      input.button.submit#deleteFormButton(type='submit',
-          value=l.guiDelete, name='action')
-      input.button.submit#deleteJsButton(type='button',
-          value=l.guiDelete, onclick='deletePosts()',
-          style='display: none;')
-      input#inputBan.button.submit.careful(type='submit',
-          value=l.guiBanAction, name='action')
-      input#banJsButton.button.submit.careful(type='button', 
-          value=l.guiBanAction, onclick='banPosts()',
-          style='display: none;')
-      input#reportFormButton.button.submit(type='submit',
-          value=l.guiReportAction, name='action')
-      input#reportJsButton.button.submit(type='button',
-          value=l.guiReportAction, onclick='reportPosts()',
-          style='display: none;')
+    .multiReport
+      fieldset.contentAction
+        label(for='reportFieldReason') #{l.guiReportReason}
+        input#reportFieldReason(type='text', name='reason',
+            placeholder=l.phReportReason)
+        fieldset#divBanInput
+          label(for='fieldExpiration') #{l.guiExpiration}
+          input#fieldExpiration(type='date', name='expiration',
+              placeholder=l.phExpiration, required)
+          label(for='fieldBanMessage') #{l.guiBanMessage}
+          input#fieldBanMessage(type='text', name='banMessage')
+        label(for='deletionFieldPassword') #{l.guiPassword}
+        input#deletionFieldPassword(type='password', name='password')
+        label(for='checkboxGlobal') #{l.guiGlobalLabel}
+        input#checkboxGlobal(type='checkbox', name='global')
+        input.button.submit#deleteFormButton(type='submit',
+            value=l.guiDelete, name='action')
+        input.button.submit#deleteJsButton(type='button',
+            value=l.guiDelete, onclick='deletePosts()',
+            style='display: none;')
+        input#inputBan.button.submit.careful(type='submit',
+            value=l.guiBanAction, name='action')
+        input#banJsButton.button.submit.careful(type='button', 
+            value=l.guiBanAction, onclick='banPosts()',
+            style='display: none;')
+        input#reportFormButton.button.submit(type='submit',
+            value=l.guiReportAction, name='action')
+        input#reportJsButton.button.submit(type='button',
+            value=l.guiReportAction, onclick='reportPosts()',
+            style='display: none;')

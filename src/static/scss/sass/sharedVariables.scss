@@ -1,4 +1,5 @@
 @import 'defaultTheme';
+@import 'colors';
 
 // =General
 //------------------------------------------------------------
@@ -13,6 +14,9 @@ $buttonPadding: ($defaultPadding * 0.3) ($defaultPadding * 0.6) ($defaultPadding
 $buttonMargin: initial;
 $submitPadding: ($defaultPadding * 0.4) ($defaultPadding * 0.7) ($defaultPadding * 0.4) ($defaultPadding * 0.7)!default;
 $submitMargin: $buttonMargin;
+$textInputsPadding: $defaultPadding * 0.3;
+$inputBorderWidth: 1px;
+$inputBorder: solid $inputBorderWidth $inputBorderColor;
 
 // =Header
 //------------------------------------------------------------
@@ -28,14 +32,16 @@ $pageHeaderHeight: calc(#{$logoHeight} + #{$pageHeaderBorderBottomSize});
 //------------------------------------------------------------
 // $captchaImageRealDimensions: 300*100px
 $captchaImageWidth: (300 / $emMostCommonPxSize) * 1em;
+$startingFieldMessageWidth: 25em;
 $postFormExternalPadding: $defaultPadding / 2;
 $postFormPadding: $internalPadding;
-$postFormInternalWidth: $captchaImageWidth + $postFormPadding * 2;
-$postFormExternalWidth: $postFormInternalWidth + $postFormPadding * 2;
+
+$postFormSideInternalWidth: $captchaImageWidth + $postFormPadding * 2;
+$postFormSideExternalWidth: $postFormSideInternalWidth + $postFormPadding * 2;
 
 // =Posts layout
 //------------------------------------------------------------
-$opPaddingRight: $postFormExternalWidth + ($defaultPadding * 2);
+//$opPaddingRight: $postFormSideExternalWidth + ($defaultPadding * 2);
 $opPaddingLeft: $defaultPadding * 2; 
 $postOpMarginLeft: -$defaultPadding;
 $replyMarginRight: $defaultPadding * 1.2;

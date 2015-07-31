@@ -3,9 +3,8 @@ include variables
 include baseMixins
 
 //-=Settings
-block settings
-  block pageId
-    - var pageId = 'undefined';
+block pageId
+  - var pageId = undefined;
 
 doctype html
 html
@@ -23,8 +22,6 @@ html
         script
           +pageIdDeclaration(pageId)
       block topScripts
-        block pageIdJs
-          | var pageId = '#{pageId}';
       block preloads
         +preloads()
     body

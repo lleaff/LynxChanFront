@@ -34,7 +34,7 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7%);
     border-color: soften-lightness($postReplyBorderColor, $bodyBgColor, (400 * $shadowsAlpha) );
   }
   margin-left: $replyMarginLeft;
-  margin-right: $replyMarginRight;
+  //margin-right: $replyMarginRight; //Deactivated, causes body overflow
 }
 
 @function chue($val) {
@@ -172,10 +172,11 @@ $postHeaderMarginBottom: $postMessageVerticalPadding * 0.7;
 
 
   /* Makes the text go under the image if the space available next to it
-   *  becomes narrower than $textBumberWidth */
+   *  becomes narrower than $textBumperWidth */
   $textBumperWidth: 10em;
   .textBumper {
-    display: inline-block;
+    //display: inline-block;
+    display: none; //TODO 
     height: 0px;
     width: $textBumperWidth;
   }

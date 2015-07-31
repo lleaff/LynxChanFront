@@ -148,7 +148,7 @@
   "guiInputThisIDMessage":            "Input this ID as the answer of the captcha when posting",
   "guiNoCookieCaptchaWelcomeMessage": "No problem! Solve this captcha here instead.",
   "guiCaptchaAnswer":                 "Answer",
-  "guiSubmitCaptchaAnswe":            "Solve captcha",
+  "guiSubmitCaptchaAnswer":           "Solve captcha",
   "titRangeBanned":                   "We are sorry",
   "guiRangeBannedMessage": {
     "startToRange":                   "Your IP range",

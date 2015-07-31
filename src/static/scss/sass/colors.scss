@@ -140,14 +140,16 @@ $quoteLinkColor:    $linkColor!default;
 $spoilerColor:      soften-lightness(
   change-color(#000, $lightness: lightness(palette('fgMain'))),
   $replyBgColor,
-  $weight:          20)!default;
+  $weight: 20)!default;
 $spoilerColorHover: intense-lightness($spoilerColor)!default;
 
 // =Inputs
 //=============================================================
-$inputBgColor:        soft-lightness(palette('bgMain'))!default;
-$inputColor:          soft-lightness(palette('fgMain'))!default;
-$inputBorderColor:    intensify($inputBgColor, $inputColor, 19)!default;
+$inputBgColor:          soft-lightness(palette('bgMain'))!default;
+$inputColor:            soft-lightness(palette('fgMain'))!default;
+$inputBorderColor:      intensify($inputBgColor, $inputColor, 19)!default;
+
+$discreeteInputBgColor: intensify-lightness($inputBgColor, $inputColor, 6)!default;
 
 // =Buttons
 //=============================================================
@@ -161,7 +163,7 @@ $buttonBorderRadius:     5px!default;
 
 $buttonHoverBorderColor: intensify($buttonBorderColor, $buttonColor, $weight: 30)!default;
 $buttonHoverColor:       intensify($buttonHoverBorderColor, $buttonColor, $weight: 20)!default;
-$buttonHoverBgColor:     $buttonBgColor!default; 
+$buttonHoverBgColor:     $buttonBgColor!default;
 
 $submitColor:            $buttonColor!default;
 $submitBgColor:          $buttonBgColor!default;
@@ -175,32 +177,35 @@ $buttonCarefulBgColor:   intense(take-lightness($carefulBgColor, $buttonBorderCo
 $buttonCarefulColor:     $carefulFgColor;
 
 @mixin buttonColors {
-  background-color:   $buttonBgColor;
-  color:              $buttonColor;
-  border-color:       $buttonBorderColor;
+  background-color:      $buttonBgColor;
+  color:                 $buttonColor;
+  border-color:          $buttonBorderColor;
   &:hover {
-    background-color:   $buttonHoverBgColor;
-    color:              $buttonHoverColor;
-    border-color:       $buttonHoverBorderColor;
+    background-color:    $buttonHoverBgColor;
+    color:               $buttonHoverColor;
+    border-color:        $buttonHoverBorderColor;
   }
 }
 
 @mixin submitColors {
-  background-color:   $submitBgColor;
-  color:              $submitColor;
-  border-color:       $submitBorderColor;
+  background-color:      $submitBgColor;
+  color:                 $submitColor;
+  border-color:          $submitBorderColor;
   &:hover {
-    background-color:   $submitHoverBgColor;
-    color:              $submitHoverColor;
-    border-color:       $submitHoverBorderColor;
+    background-color:    $submitHoverBgColor;
+    color:               $submitHoverColor;
+    border-color:        $submitHoverBorderColor;
   }
 }
 
 // =Post form
 //=============================================================
-$postFormBgColor:     palette('bgAlt')!default;
-$postFormBorderColor: $borderColorAlt!default;
-$postFormColor:       palette('fgAlt')!default;
+$postFormBgColor:       palette('bgAlt')!default;
+$postFormBorderColor:   $borderColorAlt!default;
+$postFormColor:         palette('fgAlt')!default;
+$postFormLabelColor:    soften-lightness($postFormColor, $postFormBgColor, 30)!default;
+$captchaFieldBgColor:   $discreeteInputBgColor!default;
+$postFormSubmitBgColor: $discreeteInputBgColor!default;
 
 // =Header
 //=============================================================
@@ -217,8 +222,8 @@ $headerSubTitleColor: $headerTitleColor!default;
 
 // =Footer
 //============================================================
-$footerBgColor: intense(palette('bgAlt'), $weight: 10)!default;
-$footerColor: intense(palette('fgAlt'), $weight: 10)!default;
+$footerBgColor:     intense(palette('bgAlt'), $weight: 10)!default;
+$footerColor:       intense(palette('fgAlt'), $weight: 10)!default;
 $footerBorderColor: soften-lightness($borderColorAlt, palette('fgAlt'), $weight: 50)!default;
 
 // =Catalog

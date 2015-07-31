@@ -1,67 +1,126 @@
 @import '../sass';
 //------------------------------
-$singleLineFieldRowHeight: 1.5em;
+$smallInnerMargin: 0.24em;
+
+$twoColumnPostFormMinWidth: $captchaImageWidth + 40em;
+
 //------------------------------
 
+
 #postFormWrapper {
+  display: inline-block;
   border: $borderStyle $borderWidth $postFormBorderColor;
   background: $postFormBgColor;
   color: $postFormColor;
+
   @if $shadows {
     box-shadow: 0 0 $shadowsRadius $shadowsColor;
     border-color: soften($postFormBorderColor, $bodyBgColor, (600 * $shadowsAlpha));
   }
 }
 #postFormWrapper h1 {
-  @include minorHeader($coverBorder: 1px);
+  @include narrower($wide) {
+    @include minorHeader($coverBorder: 1px);
+    text-align: left;
+  }
+
+  @include wider($wide) {
+    @include minorHeader($coverBorder: 1px);
+  }
 }
 
 
 .postForm {
   margin-top: $postFormExternalPadding;
-  box-sizing: content-box;
   position: relative;
-  width: $postFormInternalWidth + ($postFormExternalPadding * 2);
+  display: inline-block;
+  text-align: left;
+
+  @include wider($wide) {
+    width: $postFormSideInternalWidth + ($postFormExternalPadding * 2);
+  }
   @include marginHorizontal(auto);
+
   padding-bottom: $postFormExternalPadding;
+
+  .field {
+    width: 100%;
+    text-align: left;
+
+    label {
+      vertical-align: middle;
+    }
+    input {
+    }
+  }
+
+  label, #files, #filesInfo {
+    color: $postFormLabelColor;
+  }
 }
 
-#authorInfo, #messageArea, #captchaDiv, #sendPost {
+
+
+$postFormRightColdWidth: $captchaImageWidth;
+$leftColCompensateRightCol: $postFormRightColdWidth + $internalPadding;
+
+.postFormColLeft {
+  width: calc(100% - #{$leftColCompensateRightCol});
+  //width: 100%;
+  //margin-right: $leftColCompensateRightCol;
+}
+#metaFields {
+  display: table;
+  width: 100%;
+  .field {
+    display: table-row;
+    label {
+      display: table-cell;
+      padding-right: $internalPadding;
+    }
+    .inputWrap {
+      display: table-cell;
+      width: 100%;
+      padding-bottom: $smallInnerMargin;
+      input {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.postFormColRight {
+  width: $postFormRightColdWidth;
+  margin-right: $internalPadding;
+  float: right;
+}
+#messageArea {
+  width: calc(100% - #{$leftColCompensateRightCol});
+  //clear: left;
+  padding-top: $smallInnerMargin * 0.1;
+}
+
+
+#metaFields, #messageArea, #messageFiles #captchaDiv {
   @include paddingHorizontal($postFormExternalPadding);
 }
-#authorInfo {
-  padding-top: $postFormPadding;
+
+#metaFields, #messageArea {
+  float: left;
+}
+#messageFiles, #captchaDiv, #sendPost {
+  width: 100%;
+  display: inline-block;
+}
+#messageFiles, #captchaDiv {
+  margin-bottom: $internalPadding;
 }
 
-@mixin positionConsecutivePostFormRows($IDs, $height) {
-  $index: 0;
-  $offset: $postFormPadding;
-  @each $ID in $IDs {
-    $top: ($height * $index) + $offset;
-
-    #postFormWrapper label[for='#{$ID}'] {
-      position: absolute;
-      left: $postFormExternalPadding;
-      top: $top;
-    }
-    #postFormWrapper ##{$ID} {
-      position: absolute;
-      right: $postFormExternalPadding;
-      top: $top;
-    }
-
-    $index: $index + 1;
-  }
-
-  #authorInfo {
-    height: $height * $index;
-  }
+#sendPost {
+  text-align: left;
 }
-@include positionConsecutivePostFormRows(
-  'fieldName' 'fieldEmail' 'fieldPostingPassword' 'fieldSubject',
-  $singleLineFieldRowHeight);
 
-/* =User information
+/* =Fields
  *------------------------------*/
 #postFormWrapper label[for='fieldName'] {
 }
@@ -78,9 +137,6 @@ $singleLineFieldRowHeight: 1.5em;
 #postFormWrapper #fieldPostingPassword {
 }
 
-
-/* =Content
- *------------------------------*/
 label[for='fieldSubject'] {
 }
 #fieldSubject {
@@ -93,34 +149,50 @@ label[for='fieldMessage'] {
 $textAreaOversizeCompensation: 2px;
 
 #fieldMessage {
-  $widthFallback: 100%;
-  $width: calc(100% - #{$textAreaOversizeCompensation});
-  $height: (153 / $emMostCommonPxSize) * 1em;
-  width: $widthFallback;
+  //$widthFallback: 100%;
+  //$width: calc(100% - #{$postFormPadding} - #{$textAreaOversizeCompensation});
+  $width: 100%;
+
+  $regularHeight: 7.2em;
+  $tallHeight: (153 / $emMostCommonPxSize) * 1em;
+
+  //width: $widthFallback;
   width: $width;
-  min-width: $widthFallback;
-  min-width: $width;
-  height: $height;
-  min-height: $height / 2;
+  //min-width: $widthFallback;
+  min-width: $startingFieldMessageWidth;
+
+  height: $regularHeight;
+  min-height: $regularHeight;
+
+  @media (min-height: $short) and (min-width: $wide) {
+    height: $tallHeight;
+    min-height: $tallHeight / 2;
+  }
 }
 
 #messageFiles {
-  width: $postFormInternalWidth;
+  @include wider($wide) {
+    width: $postFormSideInternalWidth;
+  }
 }
 
 #filesWrapper {
-  width: $postFormInternalWidth;
+  @include wider($wide) {
+    width: $postFormSideInternalWidth;
+  }
   display: block;
 }
 #filesWrapper > label {
   display: none;
-  padding-top: 0.3em;     //Magic number, not good. TODO
+  //vertical-align: middle;
 }
 
 #files {
-  width: $postFormInternalWidth;
+  width: 100%;
+  @include wider($wide) {
+    width: $postFormSideInternalWidth;
+  }
   float: right;
-  color: soften-lightness($postFormColor, $postFormBgColor, 30);
 }
 #filesInfo {
   display: inline-block;
@@ -130,51 +202,63 @@ $textAreaOversizeCompensation: 2px;
 #filesSpoiler {
   display: inline-block;
   float: left;
-} // TODO: vertically center checkbox
+}
 
 /* =Captcha
  *------------------------------*/
 $captchaCharactersCount: 6;
 
 #captchaDiv {
-  //width: $captchaImageWidth;
+  width: $captchaImageWidth;
   @include marginHorizontal(auto);
-  //display: block;
+  box-sizing: content-box;
+
+  text-align: left;
 }
 
-@include hideLabel('captchaImage');
 $captchaImageRatio: 1 / 3;
-#captchaImage {
+#captchaImage, label[for="fieldCaptcha"] {
+  display: block;
   width: $captchaImageWidth;
   height: $captchaImageWidth * $captchaImageRatio;
 }
 
-
 $fieldCaptchaHeight: 1.5em;
 
-@include hideLabel('fieldCaptcha');
 label[for='fieldCaptcha'] {
+  border: $inputBorder;
 }
 #fieldCaptcha {
   height: $fieldCaptchaHeight;
   width: #{$captchaCharactersCount}em;
   font-family: $monospaceFont;
 }
-
 #reloadCaptchaButton {
   height: $fieldCaptchaHeight;
   margin: 0;
-  padding: 0;
+  padding: $textInputsPadding;
+}
+#fieldCaptcha, #reloadCaptchaButton {
+  margin-top: -($inputBorderWidth * 2);
+  border-top: none;
 }
 
+
 #noCookiesCaptchaLink {
-  float: left;
+  float: right;
 }
 
 .postSubmit {
-  max-width: $postFormInternalWidth;
-  display: block;
+  max-width: $postFormSideInternalWidth;
+  display: inline-block;
   @include marginHorizontal(auto);
   margin-top: $postFormExternalPadding * 0.6;
   padding: 0.3em 0.6em;
+}
+
+#fieldCaptcha, #reloadCaptchaButton {
+  background-color: $captchaFieldBgColor;
+}
+.postSubmit {
+  background-color: $postFormSubmitBgColor;
 }

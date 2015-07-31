@@ -5,7 +5,7 @@
  *------------------------------------------------------------*/
 // All text input fields including textarea
 @include text-inputs(true) {
-  padding: $defaultPadding * 0.3;
+  padding: $textInputsPadding;
 }
 
 fieldset {
@@ -17,7 +17,7 @@ fieldset {
 input, button, textarea {
   &:not([type="file"]) {
     background-color: $inputBgColor;
-    border: solid 1px $inputBorderColor;
+    border: $inputBorder;
     border-radius: 2px;
     color: $inputColor;
   }
@@ -63,4 +63,5 @@ input, button, textarea {
 /* =Checkbox
  *------------------------------*/
 input[type="checkbox"] {
+  vertical-align: middle;
 }

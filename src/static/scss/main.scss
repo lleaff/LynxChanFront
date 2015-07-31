@@ -46,7 +46,11 @@ html, body {
 
 .opWrapper {
   margin-right: -$defaultPadding;
-  padding-right: $postFormExternalWidth + $defaultPadding * 2;
+
+  padding-right: $defaultPadding;
+  @include wider($wide) {
+    padding-right: $postFormSideExternalWidth + $defaultPadding * 2;
+  }
   margin-left: -$defaultPadding;
   padding-left: $defaultPadding;
 }
@@ -54,23 +58,41 @@ html, body {
   margin-left: $postOpMarginLeft;
 }
 .divPosts {
-  margin-right: $postFormExternalWidth + $defaultPadding * 2;
+  margin-right: $defaultPadding;
+  @include wider($wide) {
+    margin-right: $postFormSideExternalWidth + $defaultPadding * 2;
+  }
   margin-left: -$defaultPadding;
 }
 
-#postFormWrapper {
-  width: $postFormExternalWidth;
-  display: block;
-  //top: $defaultPadding + $pageHeaderHeight;
-  //right: $defaultPadding;
-  float: right;
+#secondaryHeader {
+  text-align: center;
 }
 
-// TODO remove
-//#threadContent, #boardContent {
-//  margin-right: $postFormExternalWidth;
-//  padding-right: $defaultPadding;
-//}
+#postFormWrapper {
+  display: inline-block;
+
+  // Regular position: above posts
+
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  // Floating right of posts
+  @include wider($wide) {
+    width: $postFormSideExternalWidth;
+    position: fixed;
+    top: $defaultPadding + $pageHeaderHeight;
+    right: $defaultPadding;
+    float: right;
+
+    &:after {
+      content: none;
+    }
+  }
+}
 
 #divPages {
   position: absolute;

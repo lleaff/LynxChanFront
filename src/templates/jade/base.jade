@@ -1,7 +1,6 @@
 include variables
 
 //-=Settings
-block settings
 block pageId
   - var pageId = undefined
 
@@ -20,6 +19,7 @@ html
         meta(charset='utf-8')
         title 
           block title
+            +title('home')
         block styles
           for styleUrl in baseStylesUrls
             link(rel='stylesheet', href=styleUrl)

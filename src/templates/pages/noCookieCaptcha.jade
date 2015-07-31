@@ -21,6 +21,6 @@ block middle
       enctype='multipart/form-data')
     input#inputCaptchaId(type='hidden', name='captchaId')
     .field.captchaAnswer
-      label(for='captchaAnswer') #{l.guiCaptchaAnswer}
+      label(for='captchaAnswer') #{l.guiCaptchaAnswer}:
       input(type='text', name='answer', required, autocomplete='off')
     input.button.submit(type='submit', value=l.guiSubmitCaptchaAnswer)

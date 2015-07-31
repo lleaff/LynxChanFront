@@ -27,7 +27,11 @@ mixin title(mainTitle, subTitle, mainLink, subLink)
     if mainTitle.charAt(0) === '#'
       span.mainTitle(id=mainTitle.slice(1))
     else
-      span.mainTitle= mainTitle
+      if mainTitle === 'home'
+        a(href=baseUrl)
+        span.mainTitle= siteTitle
+      else
+        span.mainTitle= mainTitle
     if mainLink
       | </a>
   if subTitle

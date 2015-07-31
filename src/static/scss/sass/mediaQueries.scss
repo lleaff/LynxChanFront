@@ -38,7 +38,7 @@ $tall: 400em;
     @content;
   }
 }
-@mixin wider($wdith) {
+@mixin wider($width) {
   @media screen and (min-width: $width) {
     @content;
   }

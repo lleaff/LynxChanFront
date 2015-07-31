@@ -20,29 +20,32 @@ block pageMenu
     a#linkModeration #{l.titBoardActions}
 
 block prepend middle
-  include ../jade/createThread
+  #secondaryHeader
+    include ../jade/createThread
 
 block content
   a.anchor.postsTopAnchor(name='top')
   main#divThreads
   a.anchor.postsBottomAnchor(name='bottom')
 
-  a#linkPrevious.fa.fa-chevron-left
-  nav#divPages
-  a#linkNext.fa.fa-chevron-right
+  .boardNav
+    a#linkPrevious.fa.fa-chevron-left
+    nav#divPages
+    a#linkNext.fa.fa-chevron-right
 
-  label(for='reportFieldReason') #{l.guiReportReason}
+  .multiReport
+    label(for='reportFieldReason') #{l.guiReportReason}
     input#reportFieldReason(type='text', name='reason',
-      placeholder=l.phReportReason)
-  label(for='deletionFieldPasword') #{l.guiPassword}
+        placeholder=l.phReportReason)
+    label(for='deletionFieldPasword') #{l.guiPassword}
     input#deletionFieldPassword(type='password', name='password')
-  label(for='checkboxGlobal') #{l.guiGlobalLabel}
+    label(for='checkboxGlobal') #{l.guiGlobalLabel}
     input#checkboxGlobal(type='checkbox', name='global')
-  input.button.submit#deleteFormButton(type='submit', value=l.guiDelete,
-    name='action')
-  input.button.submit#deleteJsButton(type='button',
-    onclick='deletePosts()', value=l.guiDelete, style='display: none;')
-  input.button.submit#reportFormButton(type='submit', value=l.guiReport,
-    name='action')
-  input.button.submit#reportJsButton(type='button',
-    onclick='reportPosts()', value=l.guiReport, style='display: none;')
+    input.button.submit#deleteFormButton(type='submit', value=l.guiDelete,
+        name='action')
+    input.button.submit#deleteJsButton(type='button',
+        onclick='deletePosts()', value=l.guiDelete, style='display: none;')
+    input.button.submit#reportFormButton(type='submit', value=l.guiReport,
+        name='action')
+    input.button.submit#reportJsButton(type='button',
+        onclick='reportPosts()', value=l.guiReport, style='display: none;')
