@@ -65,6 +65,9 @@ $leftColCompensateRightCol: $postFormRightColdWidth + $internalPadding;
 
 .postFormColLeft {
   width: calc(100% - #{$leftColCompensateRightCol});
+  @include wider($wide) {
+    width: 100%;
+  }
   //width: 100%;
   //margin-right: $leftColCompensateRightCol;
 }
@@ -92,9 +95,16 @@ $leftColCompensateRightCol: $postFormRightColdWidth + $internalPadding;
   width: $postFormRightColdWidth;
   margin-right: $internalPadding;
   float: right;
+  @include wider($wide) {
+    margin-left: $internalPadding;
+    float: none;
+  }
 }
 #messageArea {
   width: calc(100% - #{$leftColCompensateRightCol});
+  @include wider($wide) {
+    width: 100%;
+  }
   //clear: left;
   padding-top: $smallInnerMargin * 0.1;
 }
@@ -159,6 +169,10 @@ $textAreaOversizeCompensation: 2px;
   width: $width;
   //min-width: $widthFallback;
   min-width: $startingFieldMessageWidth;
+  @include wider($wide) {
+    width: 100%;
+    min-width: 100%;
+  }
 
   height: $regularHeight;
   min-height: $regularHeight;

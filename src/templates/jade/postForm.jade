@@ -64,8 +64,8 @@ mixin postForm(options)
             value=actionName, tabindex='11')
     fieldset#messageArea
       label(for="fieldMessage") #{l.postForm.Message}
-      // title='' is to avoid the 'Please fill out this field' style tooltips
-      //  caused by 'required'.
+      //- title='' is to avoid the 'Please fill out this field' style
+      //-  tooltips caused by 'required'.
       textarea#fieldMessage(name='message',
           required, title='', tabindex='5')
     block
