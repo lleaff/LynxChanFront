@@ -1,5 +1,5 @@
 // Widths
-$veryNarrow: 22em;
+$veryNarrow: 25em;
 $narrow: 50em;
 $wide: 150em;
 
@@ -45,6 +45,11 @@ $tall: 400em;
 }
 @mixin widthBetween($widthLower, $widthHigher) {
   @media screen and (min-width: $widthLower) and (max-width: $widthHigher) {
+    @content;
+  }
+}
+@mixin between($widthLower, $widthHigher) { // alias
+  @include widthBetween($widthLower, $widthHigher) {
     @content;
   }
 }

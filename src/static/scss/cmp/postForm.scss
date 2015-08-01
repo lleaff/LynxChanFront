@@ -172,6 +172,8 @@ $textAreaOversizeCompensation: 2px;
   @include wider($wide) {
     width: 100%;
     min-width: 100%;
+
+    resize: vertical;
   }
 
   height: $regularHeight;

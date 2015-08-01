@@ -17,7 +17,7 @@ $catalogThumbSize: max($thumbSize * 0.7, 128px)!default;
   display: inline-block;
   min-width: $catalogThumbSize;
   width: $catalogThumbSize + $emMostCommonPxSize; //Fallback
-  width: calc(#{$catalogThumbSize});
+  width: $catalogThumbSize;
   
   border: $catalogCellBorderSize solid $catalogCellBorderColor;
   margin: {
@@ -25,6 +25,18 @@ $catalogThumbSize: max($thumbSize * 0.7, 128px)!default;
     right: ($defaultPadding * 0.33);
     bottom: ($defaultPadding * 0.66);
     left: ($defaultPadding * 0.33);
+  }
+
+  @include narrower($veryNarrow) {
+    width: 100%;
+    margin: {
+      right: 0;
+      left: 0;
+    }
+    border: {
+      left: none;
+      right: none;
+    }
   }
 
   &.catalogCellLinkHover {
@@ -93,7 +105,10 @@ $catalogCellPadding: $internalPadding * 0.8;
       height: auto!important;
       max-width: $catalogThumbSize;
       max-height: $catalogThumbSize * 0.8;
-     }
+      @include narrower($veryNarrow) {
+        max-width: 100%;
+      }
+    }
   }
   .labelSubject {
     display: inline-block;

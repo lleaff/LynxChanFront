@@ -192,6 +192,12 @@ h4, h5, h6 {
 #middle {
   position: relative;
   padding: $defaultPadding;
+  @include widthBetween($veryNarrow, $narrow) {
+    padding: $defaultPadding * 0.5;
+  }
+  @include narrower($veryNarrow) {
+    padding: 0;
+  }
   bottom: 0;
 }
 
