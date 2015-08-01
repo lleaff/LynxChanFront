@@ -193,8 +193,16 @@
 
 //
 //============================================================
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}
+
 @function percToNum($percentage) {
   @return ($percentage / 100%);
+}
+
+@function emToPx($ems) {
+  @return strip-units($ems) * $emMostCommonPxSize;
 }
 
 @function to-font-weight($weight) {
