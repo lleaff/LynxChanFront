@@ -1,4 +1,6 @@
-if (VERBOSE) { console.log('head.js - BEGIN PARSING'); }//DEBUG
+// @ifdef DEBUG
+console.log('head.js - BEGIN PARSING');//DEBUG
+// @endif
 
 /* Avoid 'pageId is undefined' */
 if (pageId === undefined) { var pageId = null; }
@@ -8,21 +10,29 @@ if (pageId === undefined) { var pageId = null; }
 /* Direct
 ------------------------------*/
 function removeElement(domElement) {
+  // @ifdef DEBUG
   try { //DEBUG
+  // @endif
     domElement.parentNode.removeChild(domElement);
+  // @ifdef DEBUG
   } catch(e) { //DEBUG
     console.log(e); //DEBUG
     throw(e); //DEBUG
   } //DEBUG
+  // @endif
 }
 
 function showElement(domElement) {
+  // @ifdef DEBUG
   try { //DEBUG
+  // @endif
     domElement.style.display = '';
+  // @ifdef DEBUG
   } catch(e) { //DEBUG
     console.log(e); //DEBUG
     throw(e); //DEBUG
   } //DEBUG
+  // @endif
 }
 
 /* Meta
@@ -58,15 +68,15 @@ function addClass(domElement, className) {
 /* /!\ WARNING /!\
 * This will override some attributes set using JavaScript
  * like onclick, since they don't appear in .outerHTML. */
-function replaceTag(domElement, newTag) {
-  var tag = domElement.tagName;
-  domElement.outerHTML = domElement.outerHTML.replace(
-    new RegExp('<'+tag, 'i'),
-    '<'+newTag);
-  domElement.outerHTML = domElement.outerHTML.replace(
-    new RegExp('</'+tag+'(?!.*'+tag+')', 'i'),
-    '</'+newTag);
-}
+//function replaceTag(domElement, newTag) {
+//  var tag = domElement.tagName;
+//  domElement.outerHTML = domElement.outerHTML.replace(
+//    new RegExp('<'+tag, 'i'),
+//    '<'+newTag);
+//  domElement.outerHTML = domElement.outerHTML.replace(
+//    new RegExp('</'+tag+'(?!.*'+tag+')', 'i'),
+//    '</'+newTag);
+//}
 
 /* =Feedback
 ============================================================*/

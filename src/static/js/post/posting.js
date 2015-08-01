@@ -1,4 +1,6 @@
+// @ifdef DEBUG
 console.log('posting.js - BEGIN PARSING');//DEBUG
+// @endif
 
 function iterateSelectedFiles(currentIndex, files, fileChooser, callback) {
   window.callback = callback;
@@ -383,12 +385,9 @@ function loadQuote(tooltip, quoteUrl) {
     if (error) {
       loadingPreviews.splice(loadingPreviews.indexOf(quoteUrl), 1);
     } else {
-
       var referenceList = quoteReference[quoteUrl];
-
       for (var i = 0; i < referenceList.length; i++) {
         referenceList[i].innerHTML = data;
-
       }
 
       loadedPreviews.push(quoteUrl);
@@ -445,7 +444,6 @@ function getSelectedContent() {
     var checkBox = checkBoxes[i];
 
     if (checkBox.checked) {
-
       var splitName = checkBox.name.split('-');
 
       var toAdd = {
@@ -458,7 +456,6 @@ function getSelectedContent() {
       }
 
       selectedContent.push(toAdd);
-
     }
   }
 
@@ -480,9 +477,7 @@ function reportPosts() {
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
-
       alert('Content reported');
-
     } else {
       alert(status+': '+JSON.stringify(data));
     }
@@ -500,13 +495,9 @@ function deletePosts() {
     password : typedPassword,
     postings : toDelete
   }, function requestComplete(status, data) {
-
     if (status === 'ok') {
-
       alert('Content deleted');
-
       window.location.pathname = '/';
-
     } else {
       alert(status+': '+JSON.stringify(data));
     }

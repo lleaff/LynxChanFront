@@ -10,11 +10,11 @@ function reloadCaptcha() {
 function saveThreadSettings() {
 
   apiRequest('changeThreadSettings', {
-    boardUri : boardUri,
-    threadId : threadId,
-    pin : document.getElementById('checkboxPin').checked,
-    lock : document.getElementById('checkboxLock').checked,
-    cyclic : document.getElementById('checkboxCyclic').checked
+    boardUri: boardUri,
+    threadId: threadId,
+    pin:      document.getElementById('checkboxPin').checked,
+    lock:     document.getElementById('checkboxLock').checked,
+    cyclic:   document.getElementById('checkboxCyclic').checked
   }, function setLock(status, data) {
 
     if (status === 'ok') {
@@ -97,7 +97,7 @@ function formatFileSize(size) {
 }
 
 function setLastEditedLabel(post, cell) {
-  var editedLabel = cell.getElementsByClassName('labelLaastEdit')[0];
+  var editedLabel = cell.getElementsByClassName('labelLastEdit')[0];
 
   if (post.lastEditTime) {
     var formatedDate = formatDateToDisplay(new Date(post.lastEditTime));
@@ -138,13 +138,16 @@ function setUploadCell(node, files) {
 
     setUploadLinks(cell, file);
 
-    var infoString = formatFileSize(file.size);
+    var sizeString = formatFileSize(file.size);
+    cell.getElementsByClassName('sizeLabel')[0].innerHTML = sizeString;
+
+    var dimensionLabel = cell.getElementsByClassName('dimensionLabel')[0];
 
     if (file.width) {
-      infoString += ', '+file.width+'x'+file.height;
+      dimensionLabel.innerHTML = file.width + 'x' + file.height;
+    } else {
+      removeElement(dimensionLabel);
     }
-
-    cell.getElementsByClassName('infoLabel')[0].innerHTML = infoString;
 
     node.appendChild(cell);
   }

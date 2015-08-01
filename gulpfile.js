@@ -92,6 +92,9 @@ var jadeLocals = JSON.parse(
   tryReadFileSync('./src/templates/jadeLocals.json', {log: true}) ||
     "{}");
 
+var templateSettings = JSON.parse(
+  tryReadFileSync('./templateSettings.json', {log: true}));
+
 var package = require('./package.json');
 //==========================
 var CWD = process.cwd(); /* Project's root (same place as gulpfile.js) */
@@ -238,13 +241,38 @@ var jsPaths = {
   ext: [ paths.js+'ext/*.js' ]
 };
 
-gulp.task('js', function() {
+function templateToEscapedString(template) {
+  var unescaped = tryReadFileSync(
+    basePaths.build+'templates/'+templateSettings[template], { log: true });
+  if(unescaped[0] === '\n') { /* Strip leading \n */
+    unescaped = unescaped.slice(1, unescaped.length);
+  }
+  /* Escape newlines for 'preprocess' */
+  return unescaped.replace(/\n/g, '\\n');
+}
+/* Remove moderation elements */
+var postCellTemplate = templateToEscapedString('postCell')
+  .replace(/<(\w+) class="panelRange"[\s\S]*?<\/span>.*<\/\1>/, '')
+  .replace(/<(\w+) class="linkEdit"[\s\S]*?<\/\1>/, '');
+var uploadCellTemplate = templateToEscapedString('uploadCell')
+  .replace(/<(\w+) class="divHash"[\s\S]*?<\/\1>/, '');
+
+var jsPreprocessContext = {
+  DEBUG:              !g.production,
+  postCellTemplate:   postCellTemplate,
+  uploadCellTemplate: uploadCellTemplate,
+  l:  lang
+};
+
+/* Requires 'jade' to be able to pass postCell/uploadCell html */
+gulp.task('js', ['jade'], function() {
 
   var combined = [];
 
   jsOutNames.forEach(function(name, i) {
     combined[i] =
       gulp.src(jsPaths[name])
+        .pipe(preprocess({context: jsPreprocessContext}))
         .pipe(gulpif(!g.production, sourcemaps.init()))
           .pipe(concat('../'+name+'.js'))
           .pipe(gulpif(g.ugly, uglify()))
@@ -473,6 +501,7 @@ function keepFirstWordFromCamelCase(camel) {
 }
 
 /*============= File operations ============= */
+/* options: log (false), encoding ('utf-8') */
 function tryReadFileSync(fileName, options) {
   options = options || {};
   if (options.encoding === undefined) { options.encoding = 'utf-8'; }

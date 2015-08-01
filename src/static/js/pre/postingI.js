@@ -1,13 +1,4 @@
 if (pageId === 'board' || pageId === 'thread') {
-  /* Objects containing information about post user images */
-
-  /* ---TEMPORARY begin---TODO*/
-  /* Replace .uploadCell <div>'s with <figure>'s */
-  //var uploadCells = document.body.getElementsByClassName('uploadCell');
-  //for (var i = 0; i < uploadCells.length; ++i) {
-  //  replaceTag(uploadCells[i], 'figure');
-  //}
-  /* ---TEMPORARY end---*/
 
   window.loadedPreviews = [];
   window.loadingPreviews = [];
@@ -25,4 +16,3 @@ if (pageId === 'board' || pageId === 'thread') {
   removeElement(document.getElementById('deleteFormButton'));
 
 }
-
