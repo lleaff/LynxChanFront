@@ -7,26 +7,34 @@ block append bottomScripts
   +script('ext.js')
 
 block append headerTitle
-  +title(l.titLogs)
+  +title('home', l.titLogs)
 
 block content
   section#logSearch
     form(action='logs.js', method='get')
       fieldset
-        label(for='checkboxExcludeGlobals')
-          | #{l.guiSearchExcludeGlobalEntries}
-        input#checkboxExcludeGlobals(type='checkbox',
-            name='excludeGlobals')
-        label(for='fieldBoard') #{l.guiSearchBoard}
-        input#fieldBoard(type='text', name='boardUri', placeholder='URI')
-        label(for='fieldUser') #{l.guiSearchUser}
-        input#fieldUser(type='text', name='user')
-        label(for='fieldAfter') #{l.guiSearchTypeOnlyBefore}
-        input#fieldAfter(type='text', name='after')
-        label(for='fieldBefore') #{l.guiSearchOnlyAfter}
-        input#fieldBefore(type='text', name='before')
-        label(for='comboboxType') #{l.guiSearchType}
-        select#comboboxType(name='type')
+        .field
+          label(for='checkboxExcludeGlobals')
+            | #{l.guiSearchExcludeGlobalEntries}:
+          input#checkboxExcludeGlobals(type='checkbox',
+              name='excludeGlobals')
+        .field
+          label(for='fieldBoard')= l.guiSearchBoard+': '
+          | /
+          input#fieldBoard(type='text', name='boardUri', placeholder='uri')
+          | /
+        .field
+          label(for='fieldUser') #{l.guiSearchUser}:
+          input#fieldUser(type='text', name='user')
+        .field
+          label(for='fieldAfter') #{l.guiSearchOnlyBefore}:
+          input#fieldAfter(type='text', name='after')
+        .field
+          label(for='fieldBefore') #{l.guiSearchOnlyAfter}:
+          input#fieldBefore(type='text', name='before')
+        .field
+          label(for='comboboxType') #{l.guiSearchType}:
+          select#comboboxType(name='type')
       input(type='submit', value=l.guiSearch)
 
   section#divLogs

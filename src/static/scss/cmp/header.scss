@@ -6,6 +6,7 @@
 #pageHeader {
   border-bottom: solid $pageHeaderBorderBottomSize;
   padding: $headerPadding;
+  text-align: center; // Center headerTitle
 
   height: $pageHeaderHeight;
 
@@ -14,19 +15,17 @@
 
 #headerTitle {
   font-size: 1em;
-  float: left;
   margin: 0;
-  display: block;
-  height: 3em;
+  display: inline-block;
 }
 #headerTitle .mainTitle {
+  display: block;
   color: $headerTitleColor;
   font-size: 2em;
-  display: block;
 }
 #headerTitle .subTitle {
-  color: $headerSubTitleColor;
   display: block;
+  color: $headerSubTitleColor;
   font-size: 1em;
 }
 

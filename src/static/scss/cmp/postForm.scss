@@ -54,11 +54,10 @@ $twoColumnPostFormMinWidth: $captchaImageWidth + 40em;
     }
   }
 
-  label, #files, #filesInfo {
+  label, #files, #filesInfo, #reloadCaptchaButton {
     color: $postFormLabelColor;
   }
 }
-
 
 
 $postFormRightColdWidth: $captchaImageWidth;
@@ -226,7 +225,7 @@ $captchaImageRatio: 1 / 3;
 $fieldCaptchaHeight: 1.5em;
 
 label[for='fieldCaptcha'] {
-  border: $inputBorder;
+  @include inputBorder;
 }
 #fieldCaptcha {
   height: $fieldCaptchaHeight;
@@ -259,6 +258,8 @@ label[for='fieldCaptcha'] {
 #fieldCaptcha, #reloadCaptchaButton {
   background-color: $captchaFieldBgColor;
 }
-.postSubmit {
+
+//+.submit to raise specificity
+.postSubmit.submit {
   background-color: $postFormSubmitBgColor;
 }

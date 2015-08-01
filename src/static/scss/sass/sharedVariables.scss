@@ -16,7 +16,9 @@ $submitPadding: ($defaultPadding * 0.4) ($defaultPadding * 0.7) ($defaultPadding
 $submitMargin: $buttonMargin;
 $textInputsPadding: $defaultPadding * 0.3;
 $inputBorderWidth: 1px;
-$inputBorder: solid $inputBorderWidth $inputBorderColor;
+@mixin inputBorder($color: $inputBorderColor, $borderWidth: $inputBorderWidth) {
+  border: solid $borderWidth $color;
+}
 
 // =Header
 //------------------------------------------------------------

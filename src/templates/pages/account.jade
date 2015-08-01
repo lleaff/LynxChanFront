@@ -3,9 +3,11 @@ extends ../jade/base
 block pageId
   - var pageId = 'account';
 
+block headerTitle
+  +title('home', l.titAccount)
+
 block append styles
   +style('ext.css')
-
 
 block prepend middle
   .loginStatusBox

@@ -149,6 +149,9 @@ $inputBgColor:          soft-lightness(palette('bgMain'))!default;
 $inputColor:            soft-lightness(palette('fgMain'))!default;
 $inputBorderColor:      intensify($inputBgColor, $inputColor, 19)!default;
 
+$inputHoverBorderColor: adjust-color(take-lightness(palette('accentA'), $inputBorderColor), $saturation: -1%)!default;
+$inputFocusBorderColor: adjust-color(take-lightness(palette('accentA'), $inputBorderColor), $saturation: -40%)!default;
+
 $discreeteInputBgColor: intensify-lightness($inputBgColor, $inputColor, 6)!default;
 
 // =Buttons
@@ -185,6 +188,11 @@ $buttonCarefulColor:     $carefulFgColor;
     color:               $buttonHoverColor;
     border-color:        $buttonHoverBorderColor;
   }
+  &:active {
+    background-color:    soft($buttonHoverBgColor, $weight: 3%);
+    color:               soft($buttonHoverColor, $weight: 3%);
+    border-color:        soft($buttonHoverBorderColor, $weight: 3%);
+  }
 }
 
 @mixin submitColors {
@@ -195,6 +203,11 @@ $buttonCarefulColor:     $carefulFgColor;
     background-color:    $submitHoverBgColor;
     color:               $submitHoverColor;
     border-color:        $submitHoverBorderColor;
+  }
+  &:active {
+    background-color:    soft($submitHoverBgColor, $weight: 3%);
+    color:               soft($submitHoverColor, $weight: 3%);
+    border-color:        soft($submitHoverBorderColor, $weight: 3%);
   }
 }
 

@@ -45,7 +45,7 @@ html
                   img#bannerImage(src=siteLogoUrl)
               h1#headerTitle
                 block headerTitle
-                  #{siteTitle}
+                  a(href=baseUrl): span.mainTitle #{siteTitle}
               //-Menu______________________________
               nav#userMenu: ul
                 +userMenuEntry

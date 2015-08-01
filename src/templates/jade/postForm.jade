@@ -14,51 +14,58 @@ mixin postForm(options)
           label(for="fieldName") #{l.postForm.Name}:
           .inputWrap
             input#fieldName(type='text', name='name',
-                placeholder=l.postForm.phName)
+                placeholder=l.postForm.phName, tabindex='1')
         .field
           label(for="fieldEmail") #{l.postForm.Email}:
           .inputWrap
             input#fieldEmail(name='email', type='text',
-                placeholder=l.postForm.phEmail)
+                placeholder=l.postForm.phEmail, tabindex='2')
         .field
           label(for="fieldPostingPassword") #{l.postForm.Password}:
           .inputWrap
             input#fieldPostingPassword(name='password', type='password',
-                placeholder=l.postForm.phPassword)
+                placeholder=l.postForm.phPassword tabindex='3')
         .field
           label(for="fieldSubject") #{l.postForm.Subject}:
           .inputWrap
             input#fieldSubject(type='text', name='subject',
-              placeholder=l.postForm.phSubject, autocomplete='off')
+              placeholder=l.postForm.phSubject, autocomplete='off',
+              tabindex='4')
     .postFormColRight
       fieldset#messageFiles
         #filesWrapper
           label(for="files") #{l.postForm.Files}:
           input#files(type='file', accept='image/*', multiple='',
-              name='files')
+              name='files', tabindex='6')
           small.info#filesInfo= l.postForm.MaxFileSizeLabel+': '
             | #[span#labelMaxFileSize] MB.
         #filesSpoiler
           label(for='checkboxSpoiler') #{l.postForm.Spoiler}
-          input#checkboxSpoiler(type='checkbox', name='spoiler')
+          input#checkboxSpoiler(type='checkbox', name='spoiler',
+              tabindex='7')
       fieldset#captchaDiv
           label(for='fieldCaptcha')
             img#captchaImage(src='/captcha.js')
           input#fieldCaptcha(type='text', name='captcha', required,
-              placeholder='......', autocomplete='off')
+              autocomplete='off', tabindex='8')
           button#reloadCaptchaButton(type='button',
               onclick='reloadCaptcha()', value=l.postForm.ReloadCaptcha,
-              alt=l.postForm.ReloadCaptcha, style='display: none;')
+              alt=l.postForm.ReloadCaptcha, style='display: none;',
+              tabindex='9')
             span.fa.fa-refresh
           small.info#noCookiesCaptchaLink
-            a(href='/noCookieCaptcha.js', target='_blank')
+            a(href='/noCookieCaptcha.js', target='_blank', tabindex='10')
               | #{l.postForm.NoCookiesCaptchaLink}
       fieldset#sendPost
         input.postSubmit.button.submit#jsButton(type='button',
-            onclick=actionFunction, value=actionName, style='display: none;')
+            onclick=actionFunction, value=actionName, style='display: none;',
+            tabindex='11')
         input.postSubmit.button.submit#formButton(type='submit',
-            value=actionName)
+            value=actionName, tabindex='11')
     fieldset#messageArea
       label(for="fieldMessage") #{l.postForm.Message}
-      textarea#fieldMessage(name='message', required, title='')
+      // title='' is to avoid the 'Please fill out this field' style tooltips
+      //  caused by 'required'.
+      textarea#fieldMessage(name='message',
+          required, title='', tabindex='5')
     block

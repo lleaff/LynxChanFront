@@ -14,14 +14,21 @@ fieldset {
   margin: 0;
 }
 
-input, button, textarea {
-  &:not([type="file"]) {
+input:not([type="file"]), button, textarea {
+  & {
     background-color: $inputBgColor;
-    border: $inputBorder;
+    @include inputBorder;
     border-radius: 2px;
     color: $inputColor;
   }
   box-shadow: none;
+
+  &:hover {
+    @include inputBorder($inputHoverBorderColor);
+  }
+  &:active, &:focus {
+    @include inputBorder($inputFocusBorderColor);
+  }
 }
 
 /* =Button

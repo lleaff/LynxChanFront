@@ -135,8 +135,8 @@
   "guiSearchExcludeGlobalEntries":    "Exclude global entries",
   "guiSearchBoard":                   "Board",
   "guiSearchUser":                    "User",
-  "guiSearchTypeOnlyBefore":          "Only before",
-  "guiSearchTypeOnlyAfter":           "Only after",
+  "guiSearchOnlyBefore":              "Only before",
+  "guiSearchOnlyAfter":               "Only after",
   "guiSearchType":                    "Type",
   "guiSearch":                        "Search",
   "guiRedirectMessage": {

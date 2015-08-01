@@ -193,8 +193,7 @@ $postHeaderMarginBottom: $postMessageVerticalPadding * 0.7;
 
   .messageWrap {
     margin-top: -$postHeaderMarginBottom;
-    padding-bottom: $postHeaderMarginBottom;
-    padding-left: $defaultPadding * 1.8;
+    padding: 0 $postInternalPadding $postHeaderMarginBottom ($defaultPadding * 1.8);
   }
   .divMessage {
     display: inline;
@@ -316,7 +315,7 @@ input[type='checkbox'].deletionCheckBox {
 /* =Post Content
 ------------------------------------------------------------*/
 .postContent {
-  padding: 0 $postInternalPadding;
+  padding: 0 0 0 $postInternalPadding;
 }
 
 
