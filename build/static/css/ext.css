@@ -1,0 +1,33 @@
+#labelCaptchaId {
+  background-color: #D6DAF0;
+  color: #000000;
+  border-color: #abaec0; }
+
+.usageExample {
+  margin: 1em;
+  padding-bottom: 0.5em;
+  max-width: 40em;
+  color: #000000;
+  background-color: #D6DAF0; }
+
+.usageExample pre, .usageExample p {
+  display: inline-block; }
+
+.usageExample:before {
+  font-size: 0.95em;
+  display: block;
+  background-color: #9988EE;
+  color: #3d365f;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  content: 'Example';
+  display: block;
+  font-size: 0.8em; }
+
+.usageExample .result:before {
+  content: 'Result';
+  display: block;
+  width: 100%;
+  font-size: 0.8em;
+  color: #565760;
+  border-bottom: solid 1px #c1c4d8; }

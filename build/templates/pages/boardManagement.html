@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> <a href="http://localhost:8080"><span class="mainTitle">LynxHub</span></a>
+    </title>
+    <link rel="stylesheet" href="http://static.localhost:8080/css/main.css">
+    <link rel="stylesheet" href="http://static.localhost:8080/css/ext.css"/>
+    <link rel="shortcut icon" href="http://static.localhost:8080/favicon.ico" type="image/x-icon"/>
+    <script>var pageId = "boardManagement";
+    </script>
+    <link href="http://static.localhost:8080/js/pre.js"/>
+    <link/>
+  </head>
+  <body id="boardManagement">
+    <div id="notFooter">
+      <header id="pageHeader">
+        <h1 id="headerTitle"><span id="boardLabel" class="mainTitle"></span>
+        </h1>
+        <nav id="userMenu">
+          <ul>
+            <li><a href="/account.js">Account</a>
+            </li>
+          </ul>
+        </nav>
+        <div id="headerLogo"><img id="headerLogoImage" src="http://static.localhost:8080/images/logo.png"></div>
+      </header>
+      <div id="middle">
+        <div id="contentWrapper">
+          <section class="content boardManagementContent">
+            <nav id="pageMenu">
+              <ul>
+              </ul>
+            </nav>
+            <section id="ownerControlDiv">
+              <h2>Add volunteer</h2>
+              <form action="/setVolunteer.js" method="post" enctype="multipart/form-data" class="form addVolunteer">
+                <fieldset>
+                  <div class="field userLogin">
+                    <label for="addVolunteerFieldLogin">User login:</label>
+                    <input id="addVolunteerFieldLogin" type="text" name="login" required>
+                  </div>
+                  <input type="hidden" name="add" value="true">
+                  <input id="addVolunteerBoardIdentifier" type="hidden" name="boardUri">
+                  <div class="field addVolunteer">
+                    <input id="addVolunteerJsButton" type="button" onclick="addVolunteer()" value="Add volunteer" style="display: none;" class="button submit">
+                    <input id="addVolunteerFormButton" type="submit" class="button submit">
+                  </div>
+                </fieldset>
+              </form>
+              <h2>Ownership transfer</h2>
+              <form action="/transferBoardOwnership.js" method="post" enctype="multipart/form-data" class="form transferBoardOwnership">
+                <fieldset>
+                  <div class="field userLogin">
+                    <label for="transferBoardFieldLogin">User login:</label>
+                    <input id="transferBoardFieldLogin" type="text" name="login" required>
+                  </div>
+                  <input id="transferBoardIdentifier" type="hidden" name="boardUri">
+                  <input id="transferBoardJsButton" type="button" onclick="transferBoard()" value="Transfer board ownership" style="display: none;" class="button submit">
+                  <input id="transferBoardFormButton" type="submit" value="Transfer board ownership" class="button submit">
+                </fieldset>
+              </form>
+              <h2>Delete board</h2>
+              <form action="/deleteBoard.js" method="post" enctype="multipart/form-data" class="form deleteBoard">
+                <fieldset>
+                  <input id="deletionIdentifier" name="boardUri" type="hidden">
+                  <input id="deleteBoardFormButton" type="submit" value="Delete board" class="button submit careful">
+                  <input id="deleteBoardJsButton" type="button" onclick="deleteBoard()" value="Delete board" style="display: none;" class="button submit careful">
+                </fieldset>
+              </form>
+              <h2>Custom CSS</h2>
+              <form action="/setCustomCss.js" method="post" enctype="multipart/form-data" class="form setCustomCss">
+                <input id="customCssIdentifier" type="hidden" name="boardUri">
+                <div class="field">
+                  <div class="files">
+                    <input id="files" type="file" name="files">
+                  </div>
+                  <input id="cssFormButton" type="submit" value="Upload CSS" class="button submit">
+                  <input id="cssJsButton" type="button" value="Upload CSS" onclick="setCss()" style="display: none" class="button submit"><span class="help">
+                    <!-- question-circle: -->
+                    <!-- question: --><a target="_blank" title="To delete the custom CSS, click on Upload CSS whithout selecting any file." class="fa-content"></a></span>
+                </div>
+              </form>
+              <h2>Volunteers</h2>
+              <section id="volunteersDiv"></section>
+              <h2>Board settings</h2>
+              <form action="/setBoardSettings.js" method="post" enctype="multipart/form-data" class="form setBoardSettings">
+                <fieldset>
+                  <input id="boardSettingsIdentifier" type="hidden" name="boardUri">
+                  <div class="field name">
+                    <label for="boardName">Board name</label>
+                    <input id="boardNameField" type="text" name="boardName">
+                  </div>
+                  <div class="field description">
+                    <label for="boardDescription">Board description</label>
+                    <input id="boardDescriptionField" type="text" name="boardDescription">
+                  </div>
+                  <div class="field AnonymousName">
+                    <label for="anonymousNameField">Default name</label>
+                    <input id="anonymousNameField" type="text" name="anonymousName" placeholder="Anonymous">
+                  </div>
+                  <div class="field disableId">
+                    <label for="disableIds">Disable thread-wise IDs</label>
+                    <input id="disableIdsCheckbox" type="checkbox" name="disableIds">
+                  </div>
+                  <div class="field allowCode">
+                    <label for="allowCodeCheckbox">Allow code tags</label>
+                    <input id="allowCodeCheckbox" type="checkbox" name="allowCode">
+                  </div>
+                  <div class="field disableCaptcha">
+                    <label for="disableCaptcha">Disable captcha</label>
+                    <input id="disableCaptchaCheckbox" type="checkbox" name="disableCaptcha">
+                  </div>
+                  <div class="field forceAnonymity">
+                    <label for="forceAnonymity">Force anonymity</label>
+                    <input id="forceAnonymityCheckbox" type="checkbox" name="forceAnonymity"><span class="help">
+                      <!-- question-circle: -->
+                      <!-- question: --><a target="_blank" title="No &quot;Name&quot; field when posting" class="fa-content"></a></span>
+                  </div>
+                  <input id="saveSettingsJsButton" type="button" value="Save" onclick="saveSettings()" style="display: none" class="button submit">
+                  <input id="saveSettingsFormButton" type="submit" value="Save" class="button submit">
+                </fieldset>
+              </form>
+              <nav>
+                <ul>
+                  <li><a id="bannerManagementLink">Banners</a></li>
+                  <li><a id="filterManagementLink">Filters</a></li>
+                  <li><a id="ruleManagementLink">Rules</a></li>
+                </ul>
+              </nav>
+            </section>
+            <section id="reportsAndBanslinks">
+              <nav>
+                <ul>
+                  <li><a id="closedReportsLink">Closed reports</a></li>
+                  <li><a id="bansLink">Bans</a></li>
+                  <li><a id="rangeBansLink">IP range bans</a></li>
+                  <li><a id="hashBansLink">File bans</a></li>
+                  <li>
+                    <h3>Open reports:
+                      <div id="reportDiv"></div>
+                    </h3>
+                  </li>
+                </ul>
+              </nav>
+            </section>
+          </section>
+        </div>
+      </div>
+    </div>
+    <footer id="pageFooter">
+      <nav>
+        <ul id="pageFooterItems">
+          <li><a href="http://localhost:8080">LynxHub</a></li>
+          <li><a href="http://static.localhost:8080/help.html">Help</a></li>
+          <li><a href="http://static.localhost:8080/about.html">About</a></li>
+        </ul>
+      </nav>
+    </footer>
+    <script src="http://static.localhost:8080/js/pre.js"></script>
+    <script src="http://static.localhost:8080/js/post.js"></script>
+    <script src="http://static.localhost:8080/js/ext.js"></script>
+  </body>
+</html>

@@ -1,7 +1,6 @@
 gulpsettings.json
 
 # Build files
-build/
 /templates
 /static
 sourcemaps/

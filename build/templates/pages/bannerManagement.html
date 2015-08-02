@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> <a href="http://localhost:8080"><span class="mainTitle">LynxHub</span></a>
+    </title>
+    <link rel="stylesheet" href="http://static.localhost:8080/css/main.css">
+    <link rel="shortcut icon" href="http://static.localhost:8080/favicon.ico" type="image/x-icon"/>
+    <script>var pageId = "bannerManagement";
+    </script>
+    <link href="http://static.localhost:8080/js/pre.js"/>
+    <link/>
+  </head>
+  <body id="bannerManagement">
+    <div id="notFooter">
+      <header id="pageHeader">
+        <h1 id="headerTitle"><span class="mainTitle">Banner management</span>
+        </h1>
+        <nav id="userMenu">
+          <ul>
+            <li><a href="/account.js">Account</a>
+            </li>
+          </ul>
+        </nav>
+        <div id="headerLogo"><img id="headerLogoImage" src="http://static.localhost:8080/images/logo.png"></div>
+      </header>
+      <div id="middle">
+        <div id="contentWrapper">
+          <section class="content bannerManagementContent">
+            <nav id="pageMenu">
+              <ul>
+              </ul>
+            </nav>
+            <section>
+              <h3>New banner</h3>
+              <form action="/createBanner.js" method="post" enctype="multipart/form-data" class="form createBanner">
+                <fieldset>
+                  <input id="boardIdentifier" type="hidden" name="boardUri">
+                  <div class="files">
+                    <input id="files" type="file" name="files">
+                  </div>
+                  <input id="addFormButton" type="submit" value="Add banner" class="button submit">
+                  <input id="addJsButton" type="button" value="Add banner" onclick="addBanner()" style="display: none" class="button submit">
+                </fieldset>
+              </form>
+            </section>
+            <section>
+              <h3>Existing banners</h3>
+              <div id="bannersDiv"></div>
+            </section>
+          </section>
+        </div>
+      </div>
+    </div>
+    <footer id="pageFooter">
+      <nav>
+        <ul id="pageFooterItems">
+          <li><a href="http://localhost:8080">LynxHub</a></li>
+          <li><a href="http://static.localhost:8080/help.html">Help</a></li>
+          <li><a href="http://static.localhost:8080/about.html">About</a></li>
+        </ul>
+      </nav>
+    </footer>
+    <script src="http://static.localhost:8080/js/pre.js"></script>
+    <script src="http://static.localhost:8080/js/post.js"></script>
+    <script src="http://static.localhost:8080/js/ext.js"></script>
+  </body>
+</html>

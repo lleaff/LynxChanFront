@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> <a href="http://localhost:8080"><span class="mainTitle">LynxHub</span></a>
+    </title>
+    <link rel="stylesheet" href="http://static.localhost:8080/css/main.css">
+    <link rel="shortcut icon" href="http://static.localhost:8080/favicon.ico" type="image/x-icon"/>
+    <script>var pageId = "boardModeration";
+    </script>
+    <link href="http://static.localhost:8080/js/pre.js"/>
+    <link/>
+  </head>
+  <body id="boardModeration">
+    <div id="notFooter">
+      <header id="pageHeader">
+        <h1 id="headerTitle"><span id="labelTitle" class="mainTitle"></span><span class="subTitle">Moderation</span>
+        </h1>
+        <nav id="userMenu">
+          <ul>
+            <li><a href="/account.js">Account</a>
+            </li>
+          </ul>
+        </nav>
+        <div id="headerLogo"><img id="headerLogoImage" src="http://static.localhost:8080/images/logo.png"></div>
+      </header>
+      <div id="middle">
+        <div id="contentWrapper">
+          <section class="content boardModerationContent">
+            <nav id="pageMenu">
+              <ul>
+                <li><a href="http://static.localhost:8080/moderation.html">Moderation help</a>
+                </li>
+              </ul>
+            </nav>
+            <section>Board owner: <span id="labelOwner"></span>
+              <section id="transferForm">
+                <h1>Ownership transfer</h1>
+                <form action="/transferBoardOwnership.js" method="post" enctype="multipart/form-data" class="form transferBoardOwnership">
+                  <input id="boardTransferIdentifier" type="hidden" name="boardUri">
+                  <div class="field userLogin">
+                    <label for="fieldTransferLogin">User login</label>
+                    <input id="fieldTransferLogin" type="text" name="userLogin">
+                  </div>
+                  <input id="transferFormButton" type="submit" value="Transfer board ownership" class="button submit careful">
+                  <input id="transferJsButton" type="button" onclick="transferboard()" value="Transfer board ownership" style="display: none;" class="button submit careful">
+                </form>
+              </section>
+              <section id="deleteForm">
+                <h1>Delete board</h1>
+                <form action="/deleteBoard.js" method="post" enctype="multipart/form-data" class="form deleteBoard">
+                  <input id="boardDeletionIdentifier" type="hidden" name="boardUri">
+                  <input id="deleteFormButton" type="submit" value="Delete board" class="button submit careful">
+                  <input id="deleteJsButton" type="button" value="Delete board" onclick="deleteBoard()" style="display: none;" class="button submit careful">
+                </form>
+              </section>
+            </section>
+          </section>
+        </div>
+      </div>
+    </div>
+    <footer id="pageFooter">
+      <nav>
+        <ul id="pageFooterItems">
+          <li><a href="http://localhost:8080">LynxHub</a></li>
+          <li><a href="http://static.localhost:8080/help.html">Help</a></li>
+          <li><a href="http://static.localhost:8080/about.html">About</a></li>
+        </ul>
+      </nav>
+    </footer>
+    <script src="http://static.localhost:8080/js/pre.js"></script>
+    <script src="http://static.localhost:8080/js/post.js"></script>
+    <script src="http://static.localhost:8080/js/ext.js"></script>
+  </body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> LynxHub - Help</title>
+    <link rel="stylesheet" href="http://static.localhost:8080/css/main.css">
+    <link rel="stylesheet" href="http://static.localhost:8080/css/ext.css"/>
+    <link rel="shortcut icon" href="http://static.localhost:8080/favicon.ico" type="image/x-icon"/>
+    <script>var pageId = "help";
+    </script>
+    <link href="http://static.localhost:8080/js/pre.js"/>
+    <link/>
+  </head>
+  <body id="help">
+    <div id="notFooter">
+      <header id="pageHeader">
+        <h1 id="headerTitle">
+        </h1>
+        <nav id="userMenu">
+          <ul>
+            <li><a href="/account.js">Account</a>
+            </li>
+          </ul>
+        </nav>
+        <div id="headerLogo"><img id="headerLogoImage" src="http://static.localhost:8080/images/logo.png"></div>
+      </header>
+      <div id="middle">
+        <div id="contentWrapper">
+          <section class="content helpContent">
+            <nav id="pageMenu">
+              <ul>
+              </ul>
+            </nav>
+            <section id="postingHelp"><a name="posting"></a>
+              <h1>Posting</h1>
+              <hr><a name="tripcodes"></a>
+              <h2>Tripcodes</h2>
+              <p>To use a tripcode, add a <code>#</code> in the name field followed by a
+                password for the tripcode. <br>
+                A hash will be applied to the password and the result will be displayed
+                instead.
+              </p>
+              <p>To use a secure tripcode, prepend two <code>#</code> instead of one. A secure
+                tripcode will generate a random text that will only be displayed if
+                your password matches.
+                
+              </p><a name="role-signatures"></a>
+              <h2>Role signatures</h2>
+              <p>
+                If you wish to display your global or board role when posting, put
+                <code><span title="case insensitive" class="detail">#rs</span></code> in the name field.
+                You can't use your role signature and a tripcode at the same time. <br>
+                There is a setting in <a href="http://localhost:8080/account.js">account settings</a>
+                to always display your role signature by default.
+                
+              </p><a name="formatting"></a>
+              <h2>Formatting</h2><a name="post-quote"></a>
+              <h3>Post quote</h3>
+              <p>If you write <code>&gt;&gt;</code> followed by the ID number of a post made in
+                the same board, a link to this post will be created.
+                
+              </p>
+              <div class="usageExample">
+                <p><a href="#" class="quoteLink">>>713705</a></p>
+              </div><a name="board-link"></a>
+              <h3>Board link</h3>
+              <p>If you write <code>&gt;&gt;&gt;</code> followed by a board's URI between slashes, a
+                link to that board will be created.
+                
+              </p>
+              <div class="usageExample">
+                <p><a href="#" class="quoteLink">>>>/furry/</a></p>
+              </div><a name="cross-board-quote"></a>
+              <h3>Cross-board quote</h3>
+              <p>
+                It's also possible to quote posts from other boards. Just append a post ID
+                number to a board link.
+                
+              </p>
+              <div class="usageExample">
+                <p><a href="#" class="quoteLink">>>>/cuteboys/15</a></p>
+              </div><a name="tags"></a>
+              <h3>Tags</h3><a name="greentext"></a>
+              <h4>Greentext</h4>
+              <p>If you add a <code>&gt;</code> at the start of a line, for some reason the text
+                following it will be green.
+                
+              </p>
+              <div id="greenTextExample" class="usageExample">
+                <p><span class="greenText">>mfw <br></span><span class="greenText">>kek <br></span><span class="greenText">>how does this work <br></span></p>
+              </div><a name="redtext"></a>
+              <h4>Redtext</h4>
+              <p>Surround your text with <code>==</code> to make it important.
+                
+              </p>
+              <div class="usageExample">
+                <pre>==I'm so small and insignificant why does no one notice me==</pre>
+                <p class="result"><span class="redText">Hi everyone how's it going? It's beautiful outside!</span></p>
+              </div><a name="italic"></a>
+              <h4>Italic</h4>
+              <div class="usageExample">
+                <pre>This place is giving me a feeling of ''deja vu''...</pre>
+                <p class="result">This place is giving me a feeling of <em>deja vu</em>...</p>
+              </div><a name="underline"></a>
+              <h4>Underline</h4>
+              <div class="usageExample">
+                <pre>Do __not__ abuse these features or bad things __will__ happen.</pre>
+                <p class="result">Do 
+                  <u>not</u> abuse these features or bad things 
+                  <u>will</u> happen.
+                </p>
+              </div><a name="bold"></a>
+              <h4>Bold</h4>
+              <div class="usageExample">
+                <pre>'''such wow much text formatting'''</pre>
+                <p class="result"><strong>such wow much text formatting</strong> <br>
+                  <span class="divBanMessage">(USER WAS BANNED FOR THIS POST)</span>
+                  
+                </p>
+              </div><a name="strikethrough"></a>
+              <h4>Strikethrough</h4>
+              <div class="usageExample">
+                <pre>~~linux~~ is the best operating system in the world</pre>
+                <p class="result">
+                  <s>linux</s> <em>GNU+Linux</em> is the best operating system in the world
+                  
+                  
+                </p>
+              </div><a name="spoiler"></a>
+              <h4>Spoiler</h4>
+              <p>Text surrounded by <code>[spoiler]</code> and <code>[/spoiler]</code>
+                 tags will be masked until it is hovered over.  <br>
+                You can't break lines between the two tags.
+                
+              </p>
+              <div class="usageExample">
+                <pre>My favorite pokemon is [spoiler]pikachu[/spoiler]</pre>
+                <p class="result">My favorite pokemon is <span class="spoiler">you____</span></p>
+              </div><a name="code"></a>
+              <h4>Code</h4>
+              <p>If enabled by the board owner, text surrounded with <code>[code]</code> and <code>[/code]</code> tags will use a monospace font and preserve white-space.
+                
+              </p>
+              <div class="usageExample">
+                <pre>if (Tweeter= LynxHub)
+  cout << "Block." << endl;
+else
+  if ( Tweet=Negative)
+    cout << "Block" << endl;
+</pre>
+              </div><a name="urls"></a>
+              <h3>Urls</h3>
+              <p>Urls beginning with <code>http</code> or <code>https</code> will automatically be
+                converted to hyperlinks.
+                
+              </p>
+              <div class="usageExample">
+                <p><a href="https://instagram.com/taylorswift/">https://instagram.com/taylorswift/</a></p>
+              </div>
+            </section>
+            <section id="helpAdditionalLinks">
+              <nav>
+                <ul>
+                  <li><a href="http://static.localhost:8080/moderation.html">Moderation help</a></li>
+                </ul>
+              </nav>
+            </section>
+          </section>
+        </div>
+      </div>
+    </div>
+    <footer id="pageFooter">
+      <nav>
+        <ul id="pageFooterItems">
+          <li><a href="http://localhost:8080">LynxHub</a></li>
+          <li><a href="http://static.localhost:8080/help.html">Help</a></li>
+          <li><a href="http://static.localhost:8080/about.html">About</a></li>
+        </ul>
+      </nav>
+    </footer>
+    <script src="http://static.localhost:8080/js/pre.js"></script>
+    <script src="http://static.localhost:8080/js/post.js"></script>
+    <script src="http://static.localhost:8080/js/ext.js"></script>
+  </body>
+</html>

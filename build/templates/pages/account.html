@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> <a href="http://localhost:8080"><span class="mainTitle">LynxHub</span></a>
+    </title>
+    <link rel="stylesheet" href="http://static.localhost:8080/css/main.css">
+    <link rel="stylesheet" href="http://static.localhost:8080/css/ext.css"/>
+    <link rel="shortcut icon" href="http://static.localhost:8080/favicon.ico" type="image/x-icon"/>
+    <script>var pageId = "account";
+    </script>
+    <link href="http://static.localhost:8080/js/pre.js"/>
+    <link/>
+  </head>
+  <body id="account">
+    <div id="notFooter">
+      <header id="pageHeader">
+        <h1 id="headerTitle"><a href="http://localhost:8080"><span class="mainTitle">LynxHub</span></a><span class="subTitle">Account</span>
+        </h1>
+        <nav id="userMenu">
+          <ul>
+            <li><a href="/account.js">Account</a>
+            </li>
+          </ul>
+        </nav>
+        <div id="headerLogo"><img id="headerLogoImage" src="http://static.localhost:8080/images/logo.png"></div>
+      </header>
+      <div id="middle">
+        <div class="loginStatusBox">
+          <p class="loggedIn">Logged in as <span id="labelLogin"></span></p>
+          <form action="/logout.js" class="logout">
+            <input id="logoutJsButton" type="button" value="Logout" onclick="logout()" style="display: none" class="button careful">
+            <input id="logoutFormButton" type="submit" value="Logout" class="button careful">
+          </form>
+        </div>
+        <div id="contentWrapper">
+          <section class="content accountContent">
+            <nav id="pageMenu">
+              <ul>
+              </ul>
+            </nav>
+            <section id="account"><a id="globalManagementLink" /globalManagement.js>Global management</a></section>
+            <section id="accountSettings">
+              <h1>Settings</h1>
+              <form action="/changeAccountSettings.js" method="post" enctype="multipart/form-data" class="form accountSettings">
+                <fieldset>
+                  <div class="field email">
+                    <label for="emailField">E-mail</label>
+                    <input id="emailField" type="email" name="email">
+                  </div>
+                  <div class="field alwaysSign">
+                    <label for="checkboxAlwaysSign">Always use role signature</label>
+                    <input id="checkboxAlwaysSign" type="checkbox" name="alwaysSignRole"><span class="help">
+                      <!-- question-circle: -->
+                      <!-- question: --><a target="_blank" href="http://static.localhost:8080/help.html#role-signatures" title="eg: Volunteer, Board owner, ..." class="fa-content"></a></span>
+                  </div>
+                  <input id="saveFormButton" type="submit" value="Save" class="button submit">
+                  <input id="saveJsButton" type="button" value="Save" onclick="save()" style="display: none;" class="button submit">
+                </fieldset>
+              </form>
+              <h2>Password change </h2>
+              <form action="/changeAccountPassword.js" method="post" enctype="multipart/form-data" class="form changePassword">
+                <fieldset>
+                  <div class="field currentPassword">
+                    <label for="fieldPassword">Current password</label>
+                    <input id="fieldPassword" type="password" name="password" required>
+                  </div>
+                  <div class="field newPassword">
+                    <label for="fieldNewPassword">New password</label>
+                    <input id="fieldNewPassword" type="password" name="newPassword" required>
+                  </div>
+                  <div class="field newPasswordConfirm">
+                    <label for="fieldConfirmation">Confirm new password</label>
+                    <input id="fieldConfirmation" type="password" name="confirmation" required>
+                  </div>
+                  <input id="passwordFormButton" type="submit" value="Change password" class="button submit">
+                  <input id="passwordJsButton" type="button" value="Change password" style="display: none;" onclick="changePassword()" class="button submit">
+                </fieldset>
+              </form>
+            </section>
+            <section id="boardCreationDiv">
+              <h1>Create board </h1>
+              <form action="/createBoard.js" enctype="multipart/form-data" method="post" class="form createBoard">
+                <fieldset>
+                  <div class="field uri">
+                    <label for="newBoardFieldUri" title="[a-b]">Board URI</label>
+                    <input id="newBoardFieldUri" type="text" name="boardUri" placeholder="" required>
+                  </div>
+                  <div class="field name">
+                    <label for="newBoardFieldName">Board name</label>
+                    <input id="newBoardFieldName" type="text" name="boardName" placeholder="" required>
+                  </div>
+                  <div class="field description">
+                    <label for="newBoardFieldDescription">Board description</label>
+                    <input id="newBoardFieldDescription" type="text" name="boardDescription" placeholder="" required>
+                  </div>
+                  <input id="newBoardJsButton" type="button" onclick="createBoard()" style="display: none" value="Create board" class="button submit">
+                  <input id="newBoardFormButton" type="submit" value="Create board" class="button submit">
+                </fieldset>
+              </form>
+            </section>
+            <section id="ownedBoards">
+              <h1>Owned boards</h1>
+              <div id="boardsDiv"></div>
+            </section>
+          </section>
+        </div>
+      </div>
+    </div>
+    <footer id="pageFooter">
+      <nav>
+        <ul id="pageFooterItems">
+          <li><a href="http://localhost:8080">LynxHub</a></li>
+          <li><a href="http://static.localhost:8080/help.html">Help</a></li>
+          <li><a href="http://static.localhost:8080/about.html">About</a></li>
+        </ul>
+      </nav>
+    </footer>
+    <script src="http://static.localhost:8080/js/pre.js"></script>
+    <script src="http://static.localhost:8080/js/post.js"></script>
+  </body>
+</html>
