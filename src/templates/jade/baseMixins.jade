@@ -65,7 +65,7 @@ mixin help(anchor, helpText)
 
 mixin info(infoText)
   - var infoText = infoText || '';
-  //info-circle 
+  // info-circle 
   span.info.link.fa-content(title=helpText) 
 
 //-------------------------------
@@ -73,7 +73,15 @@ mixin pageIdDeclaration(id)
   if pageId
     != 'var pageId = "'+id+'";'
 
+//- Components
 //-------------------------------
+mixin banner
+  //- <br> Needed if display: inline-block
+  br
+  #headerBanner&attributes(attributes)
+    img#bannerImage
+    block
+
 mixin linkPrevious
     a#linkPrevious.fa.fa-angle-left(title='Previous')&attributes(attributes)
       block

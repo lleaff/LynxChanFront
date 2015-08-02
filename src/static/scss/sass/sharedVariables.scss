@@ -3,51 +3,53 @@
 
 // =General
 //------------------------------------------------------------
-$emMostCommonPxSize: 14;
-$smallFontSize: 0.8em;
-$animationSpeed: 0.2s!default;
-$internalPadding: $defaultPadding / 2;
+$emMostCommonPxSize: 14!default;
+$smallFontSize:      0.8em!default;
+$animationSpeed:     0.2s!default;
+$internalPadding:    $defaultPadding / 2!default;
 
 // =Inputs
 //------------------------------------------------------------
-$buttonPadding: ($defaultPadding * 0.3) ($defaultPadding * 0.6) ($defaultPadding * 0.3) ($defaultPadding * 0.6)!default;
-$buttonMargin: initial;
-$submitPadding: ($defaultPadding * 0.4) ($defaultPadding * 0.7) ($defaultPadding * 0.4) ($defaultPadding * 0.7)!default;
-$submitMargin: $buttonMargin;
-$textInputsPadding: $defaultPadding * 0.3;
-$inputBorderWidth: 1px;
+$buttonPadding:     ($defaultPadding * 0.3) ($defaultPadding * 0.6) ($defaultPadding * 0.3) ($defaultPadding * 0.6)!default!default;
+$buttonMargin:      initial!default;
+$submitPadding:     ($defaultPadding * 0.4) ($defaultPadding * 0.7) ($defaultPadding * 0.4) ($defaultPadding * 0.7)!default!default;
+$submitMargin:      $buttonMargin!default;
+$textInputsPadding: $defaultPadding * 0.3!default;
+$inputBorderWidth:  1px!default;
 @mixin inputBorder($color: $inputBorderColor, $borderWidth: $inputBorderWidth) {
   border: solid $borderWidth $color;
 }
 
 // =Header
 //------------------------------------------------------------
-$headerPadding: 0.3em;
-$logoWidth: 21em;
-$logoHeight: $logoWidth / 3;
-$pageHeaderBorderBottomSize: 1px;
+$headerPadding: 0.3em!default;
+$bannerWidth: 21em!default;
+$bannerHeight: $bannerWidth / 3!default;
+$logoWidth: false!default;
+$logoHeight: false!default;
+$pageHeaderBorderBottomSize: 1px!default;
 $pageHeaderHeight: $logoHeight; //Fallback
-$pageHeaderHeight: calc(#{$logoHeight} + #{$pageHeaderBorderBottomSize});
+$pageHeaderHeight: calc(#{$logoHeight} + #{$pageHeaderBorderBottomSize})!default;
 
 
 // =Post form
 //------------------------------------------------------------
 // $captchaImageRealDimensions: 300*100px
-$captchaImageWidth: (300 / $emMostCommonPxSize) * 1em;
-$startingFieldMessageWidth: 25em;
-$postFormExternalPadding: $defaultPadding / 2;
-$postFormPadding: $internalPadding;
+$captchaImageWidth: (300 / $emMostCommonPxSize) * 1em!default;
+$startingFieldMessageWidth: 25em!default;
+$postFormExternalPadding: $defaultPadding / 2!default;
+$postFormPadding: $internalPadding!default;
 
-$postFormSideInternalWidth: $captchaImageWidth + $postFormPadding * 2;
-$postFormSideExternalWidth: $postFormSideInternalWidth + $postFormPadding * 2;
+$postFormSideInternalWidth: $captchaImageWidth + $postFormPadding * 2!default;
+$postFormSideExternalWidth: $postFormSideInternalWidth + $postFormPadding * 2!default;
 
 // =Posts layout
 //------------------------------------------------------------
-//$opPaddingRight: $postFormSideExternalWidth + ($defaultPadding * 2);
-$opPaddingLeft: $defaultPadding * 2; 
-$postOpMarginLeft: -$defaultPadding;
-$replyMarginRight: $defaultPadding * 1.2;
-$replyMarginLeft: $opPaddingLeft + ($replyMarginRight - $opPaddingLeft); 
+//$opPaddingRight: $postFormSideExternalWidth + ($defaultPadding * 2)!default;
+$opPaddingLeft: $defaultPadding * 2!default; 
+$postOpMarginLeft: -$defaultPadding!default;
+$replyMarginRight: $defaultPadding * 1.2!default;
+$replyMarginLeft: $opPaddingLeft + ($replyMarginRight - $opPaddingLeft)!default; 
 
 // =Posts
 //------------------------------------------------------------
@@ -55,8 +57,8 @@ $underlineQuotes: true!default;
 
 // =Footer
 //------------------------------------------------------------
-$pageFooterRowCount: 3;
-$pageFooterItemsSize: 0.7em;
-$pageFooterPaddingTop: 1em;
+$pageFooterRowCount: 3!default;
+$pageFooterItemsSize: 0.7em!default;
+$pageFooterPaddingTop: 1em!default;
 $pageFooterHeight: ($pageFooterItemsSize + 0.2) * $pageFooterRowCount +
-  $pageFooterPaddingTop;
+  $pageFooterPaddingTop!default;

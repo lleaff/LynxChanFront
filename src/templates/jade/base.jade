@@ -40,9 +40,6 @@ html
           //-Header______________________________
           header#pageHeader
             block header
-              #headerLogo
-                block headerLogo
-                  img#bannerImage(src=siteLogoUrl)
               h1#headerTitle
                 block headerTitle
                   a(href=baseUrl): span.mainTitle #{siteTitle}
@@ -51,6 +48,9 @@ html
                 +userMenuEntry
                   a(href='/account.js') #{l.guiAccount}
                 block userMenu
+              block headerLogo
+                #headerLogo
+                  img#headerLogoImage(src=siteLogoUrl)
           #middle
             block middle
               //-Content______________________________

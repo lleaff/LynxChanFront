@@ -8,6 +8,8 @@ $twoColumnPostFormMinWidth: $captchaImageWidth + 40em;
 
 
 #postFormWrapper {
+  min-width: 49em; //temporary, TODO: scale down with media query
+
   display: inline-block;
   border: $borderStyle $borderWidth $postFormBorderColor;
   background: $postFormBgColor;

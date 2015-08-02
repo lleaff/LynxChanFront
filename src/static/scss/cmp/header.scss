@@ -4,6 +4,7 @@
  * =Header
  *------------------------------------------------------------*/
 #pageHeader {
+  float: left; // For logo floating context
   border-bottom: solid $pageHeaderBorderBottomSize;
   padding: $headerPadding;
   text-align: center; // Center headerTitle
@@ -29,20 +30,27 @@
   font-size: 1em;
 }
 
+
 #headerLogo {
   float: left;
   @include negatePadding($top: $headerPadding, $left: $headerPadding);
   margin-right: $headerPadding;
+  @if $logoWidth  { width:  $logoWidth; }
+  @if $logoHeight { height: $logoHeight; }
+}
 
-  width: $logoWidth;
-  height: $logoHeight;
+#headerBanner {
+  margin-top: $defaultPadding;
+  display: inline-block;
   overflow: hidden;
 }
 
 #bannerImage {
-  width: inherit;
-  height: inherit;
-  object-fit: cover;
+  @if $bannerWidth  { width:  $bannerWidth; }
+  @if $bannerHeight { height: $bannerHeight; }
+  @if $bannerWidth or $bannerHeight {
+    object-fit: cover;
+  }
 }
 
 #userMenu {
