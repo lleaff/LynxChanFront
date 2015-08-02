@@ -73,6 +73,15 @@ mixin pageIdDeclaration(id)
   if pageId
     != 'var pageId = "'+id+'";'
 
+//-------------------------------
+mixin linkPrevious
+    a#linkPrevious.fa.fa-angle-left(title='Previous')&attributes(attributes)
+      block
+mixin linkNext
+    a#linkNext.fa.fa-angle-right(title='Next')&attributes(attributes)
+      block
+
+
 //-------------------------------------------------------------
 //-=Helper functions
 //-------------------------------------------------------------

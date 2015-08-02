@@ -94,11 +94,13 @@ html, body {
   }
 }
 
-#divPages {
-  position: absolute;
-  bottom: 0;
-  width: 90%;
-  width: calc(100% - #{$defaultPadding});
+.pagesNav {
+  float: left;
+  margin-right: $defaultPadding;
+}
+
+.multiReport {
+  float: right;
 }
 
 

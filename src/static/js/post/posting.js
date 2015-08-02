@@ -331,6 +331,7 @@ function processQuote(quote) {
 
   var tooltip = document.createElement('div');
   tooltip.style.display = 'none';
+  tooltip.setAttribute('class', 'postPreviewTooltip');
   quote.parentNode.appendChild(tooltip);
   tooltip.appendChild(document.createTextNode('Loading'));
 
@@ -347,10 +348,7 @@ function processQuote(quote) {
   quoteReference[quoteUrl] = referenceList;
 
   quote.onmouseenter = function() {
-    tooltip.setAttribute('class', 'postPreviewTooltip');
-    tooltip.style.display = 'block';
-    tooltip.style.backgroundColor = '#ccc';
-
+    showElement(tooltip);
     if (loadedPreviews.indexOf(quoteUrl) < 0 &&
         loadingPreviews.indexOf(quoteUrl) < 0) {
       loadQuote(tooltip, quoteUrl);

@@ -1,0 +1,40 @@
+@import '../sass';
+
+.pagesNav {
+  padding: ($defaultPadding * 0.6) $defaultPadding;
+  text-align: center;
+
+  @include altColors;
+}
+
+#linkPrevious, #linkNext {
+}
+#linkPrevious {
+}
+#linkNext {
+}
+
+//- On board page
+.boardNav {
+  .pagesLinks {
+    display: inline;
+
+    padding-right: $internalPadding * 1;
+    border-right: $borderWidth solid $borderColorAlt;
+  }
+  .linkCatalog {
+    padding-left: $internalPadding * 1.15;
+  }
+}
+
+#linkPrevious, #linkNext, #divPages a {
+    margin: 0 0.3em;
+}
+
+#divPages {
+  display: inline;
+  @include paddingHorizontal($internalPadding);
+
+  //a:before { content: "["; }
+  //a:after  { content: "]"; }
+}

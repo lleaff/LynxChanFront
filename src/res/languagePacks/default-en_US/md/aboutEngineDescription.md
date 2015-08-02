@@ -1,6 +1,6 @@
-## LynxChan
-[https://gitlab.com/mrseth/LynxChan](Source code repository)
+### LynxChan
+[Source code repository](https://gitlab.com/mrseth/LynxChan)
 
 
-## LynxChanFront
-[https://github.com/lleaff/LynxChanFront](Source code repository)
+### LynxChanFront
+[Source code repository](https://github.com/lleaff/LynxChanFront)

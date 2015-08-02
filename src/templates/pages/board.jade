@@ -13,9 +13,13 @@ block append userMenu
   +userMenuEntry
     a#linkManagement Manage Board
 
+mixin catalogLink
+ a.linkCatalog(href='catalog.html') #{l.titCatalog}
+
 block pageMenu
   +pageMenuEntry
-    a(href='catalog.html') #{l.titCatalog}
+    +catalogLink
+   
   +pageMenuEntry
     a#linkModeration #{l.titBoardActions}
 
@@ -28,10 +32,12 @@ block content
   main#divThreads
   a.anchor.postsBottomAnchor(name='bottom')
 
-  .boardNav
-    a#linkPrevious.fa.fa-chevron-left
-    nav#divPages
-    a#linkNext.fa.fa-chevron-right
+  nav.pagesNav.boardNav
+    .pagesLinks
+      +linkPrevious
+      #divPages
+      +linkNext
+    +catalogLink
 
   .multiReport
     label(for='reportFieldReason') #{l.guiReportReason}

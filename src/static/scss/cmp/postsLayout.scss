@@ -22,13 +22,16 @@
 $postMessageVerticalPadding: $defaultPadding * 1.2;
 
 $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7%);
+@mixin postReplyBorder() {
+  border-width: 1px;
+  border-color: $postReplyBorderColor;
+  border-style: none solid solid none;
+}
 .postReply {
   border: solid 1px;
   color: $replyColor;
   background-color: $replyBgColor;
-  border-size: 1px;
-  border-color: $postReplyBorderColor;
-  border-style: none solid solid none;
+  @include postReplyBorder;
   @if $shadows >= 2 {
     box-shadow: ($shadowsRadius / 2) ($shadowsRadius / 3) $shadowsRadius -($shadowsRadius / 3) $shadowsColor;
     border-color: soften-lightness($postReplyBorderColor, $bodyBgColor, (400 * $shadowsAlpha) );
@@ -325,10 +328,27 @@ input[type='checkbox'].deletionCheckBox {
 .postPreviewTooltip {
   display: inline-block;
   z-index: 10;
+  //@include postReplyBorder;
+
+  max-width: 100%;
+
+  background: $replyBgColor;
 
   @if $shadows {
     @include tooltipShadows();
   }
+
+  .postReply {
+    margin-left: 0;
+    //padding-bottom: $postInternalPadding;
+  }
+  .deletionCheckBoxWrap {
+    display: none;
+  }
+  .postContent {
+    padding: 0;
+  }
+
 }
 
 /* =Misc
