@@ -250,22 +250,22 @@ function templateToEscapedString(template) {
   /* Escape newlines for 'preprocess' */
   return unescaped.replace(/\n/g, '\\n');
 }
-/* Remove moderation elements */
-var postCellTemplate = templateToEscapedString('postCell')
-  .replace(/<(\w+) class="panelRange"[\s\S]*?<\/span>.*<\/\1>/, '')
-  .replace(/<(\w+) class="linkEdit"[\s\S]*?<\/\1>/, '');
-var uploadCellTemplate = templateToEscapedString('uploadCell')
-  .replace(/<(\w+) class="divHash"[\s\S]*?<\/\1>/, '');
-
-var jsPreprocessContext = {
-  DEBUG:              !g.production,
-  postCellTemplate:   postCellTemplate,
-  uploadCellTemplate: uploadCellTemplate,
-  l:  lang
-};
-
 /* Requires 'jade' to be able to pass postCell/uploadCell html */
 gulp.task('js', ['jade'], function() {
+
+  /* Remove moderation elements */
+  var postCellTemplate = templateToEscapedString('postCell')
+    .replace(/<(\w+) class="panelRange"[\s\S]*?<\/span>.*<\/\1>/, '')
+    .replace(/<(\w+) class="linkEdit"[\s\S]*?<\/\1>/, '');
+  var uploadCellTemplate = templateToEscapedString('uploadCell')
+    .replace(/<(\w+) class="divHash"[\s\S]*?<\/\1>/, '');
+
+  var jsPreprocessContext = {
+    DEBUG:              !g.production,
+    postCellTemplate:   postCellTemplate,
+    uploadCellTemplate: uploadCellTemplate,
+    l:  lang
+  };
 
   var combined = [];
 
