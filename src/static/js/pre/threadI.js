@@ -32,8 +32,9 @@ if (pageId === 'thread') {
   window.hiddenCaptcha      = !document.getElementById('captchaDiv');
   window.markedPosting      = undefined;
 
-  /* @excude */ /* Replaced with actual .html file content
-                   using gulp-preprocess */ /* @endexclude */
+  /* @excude */
+  /* Replaced with actual .html file content using gulp-preprocess */
+  /* @endexclude */
   window.postCellTemplate = '/* @echo postCellTemplate */';
   window.uploadCellTemplate = '/* @echo uploadCellTemplate */';
 

@@ -49,6 +49,10 @@ $postOpMarginLeft: -$defaultPadding;
 $replyMarginRight: $defaultPadding * 1.2;
 $replyMarginLeft: $opPaddingLeft + ($replyMarginRight - $opPaddingLeft); 
 
+// =Posts
+//------------------------------------------------------------
+$underlineQuotes: true!default;
+
 // =Footer
 //------------------------------------------------------------
 $pageFooterRowCount: 3;

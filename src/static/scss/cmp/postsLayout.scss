@@ -237,7 +237,7 @@ $postHeaderMarginBottom: $postMessageVerticalPadding * 0.7;
   }
 }
 
-/* =Post Header
+/* =Header (post)
 ------------------------------------------------------------*/
 $postHeaderSmallFontSize: $smallFontSize;
 
@@ -261,7 +261,7 @@ $postModActionWidth: 1.5em; //deletion checkbox or dropdown menu arrow, MAGIC
   // header items
   ul {
     display: inline-block;
-    float: left;
+    //float: left;
     position: relative;
     list-style: none;
     padding: 0 0 0 0;//0.15em 0 0 0;
@@ -315,8 +315,16 @@ li.deletionCheckBoxWrap {
 input[type='checkbox'].deletionCheckBox {
   display: inline;
   //float: left;
-  //margin-top: 0.07em; //MAGIC
-  //margin-left: 0.07em;
+}
+
+.postHeaderInnerAfter {
+  display: inline-block;
+}
+
+.postHeader .mention {
+  color: $mentionColor;
+  font-size: $smallFontSize;
+  margin: 0 ($internalPadding / 2) 0 ($internalPadding / 2);
 }
 
 /* =Post Content
@@ -325,6 +333,14 @@ input[type='checkbox'].deletionCheckBox {
   padding: 0 0 0 $postInternalPadding;
 }
 
+@if $underlineQuotes {
+  .quoteLink, .postHeader .mention {
+    text-decoration: underline;
+  }
+  .quoteLink {
+    margin-right: 0.15em; // To show demarcation between links, >>84>>59
+  }
+}
 
 
 /* =Preview

@@ -28,9 +28,15 @@ function iterateSelectedFiles(currentIndex, files, fileChooser, callback) {
 if (pageId === 'board' || pageId === 'thread') {
 
   var quotes = document.getElementsByClassName('quoteLink');
+  var mentions = setMentions(quotes);
+  
   for (var i = 0; i < quotes.length; ++i) {
     processQuote(quotes[i]);
   }
+  for (var i = 0; i < mentions.length; ++i) {
+    processQuote(mentions[i]);
+  }
+
 
   var MIMETYPES = {
     //a:       'application/octet-stream',
@@ -181,6 +187,8 @@ if (pageId === 'board' || pageId === 'thread') {
     +document.getElementById('labelMaxFileSize').innerHTML;
 }
 
+/* =Uploads, =Images, =Videos
+------------------------------------------------------------*/
 function processImageLink(link, i) {
   var mime = getMime(link.href);
 
@@ -320,6 +328,8 @@ function setPlayer(link, mime, uploadCell, maxWidth, maxHeight) {
   parent.replaceChild(videoContainer, link);
 }
 
+/* =Quotes, =Mentions, =Previews
+------------------------------------------------------------*/
 function processQuote(quote) {
   var tooltip = document.createElement('div');
   tooltip.style.display = 'none';
@@ -352,13 +362,13 @@ function processQuote(quote) {
     tooltip.style.display = 'none';
   };
 
- if (!board) {
-     var matches = quote.href.match(/\#(\d+)/);
- 
-     quote.onclick = function() {
-       markPost(matches[1]);
-     };
-   }
+  if (!board) {
+    var matches = quote.href.match(/\#(\d+)/);
+
+    quote.onclick = function() {
+      markPost(matches[1]);
+    };
+  }
 
 }
 
@@ -404,6 +414,40 @@ function loadQuote(tooltip, quoteUrl) {
 
 }
 
+function setMentions(quotes) {
+  var mentions = [];
+
+  var quote, href, quotingHref, quotingId, mentionedId, mention, mentioned;
+  for (var i = 0; i < quotes.length; ++i) {
+    quote = quotes[i];
+
+    href = quote.getAttribute('href');
+    mentionedId = href.slice(href.lastIndexOf('#') + 1);
+
+    /* If mentioned post is hidden, stop here */
+    if (!(mentioned = document.getElementById(mentionedId))) {
+      continue;
+    }
+    
+    quotingHref = getParentByClassName(quote, 'post')
+      .getElementsByClassName('linkSelf')[0].getAttribute('href');
+    quotingId = quotingHref.slice(quotingHref.lastIndexOf('#') + 1);
+
+    mention = document.createElement('a');
+    mention.setAttribute('class', 'mention');
+    mention.setAttribute('href', quotingHref);
+    mention.innerHTML = '&gt;&gt;'+quotingId; /* eg.: >>123 */
+
+    mentions.push(mention);
+    mentioned.getElementsByClassName('postHeaderInnerAfter')[0]
+      .appendChild(mention);
+  }
+
+  return mentions;
+}
+
+/* =Moderation
+------------------------------------------------------------*/
 function banPosts() {
   var typedReason =
     document.getElementById('reportFieldReason').value.trim();
@@ -465,7 +509,6 @@ function getSelectedContent() {
   }
 
   return selectedContent;
-
 }
 
 function reportPosts() {

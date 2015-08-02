@@ -36,14 +36,7 @@ if (pageId === 'thread') {
   var replyCallback = function(status, data) {
 
     if (status === 'ok') {
-      document.getElementById('fieldMessage').value = '';
-      document.getElementById('fieldSubject').value = '';
-      //document.getElementById('files').type = 'text';
-      document.getElementById('files').type = 'file';
-
-      setTimeout(function() {
-        refreshPosts();
-      }, 2000);
+      replySuccessful();
     } else {
       alert(status + ': ' + JSON.stringify(data));
     }
@@ -59,6 +52,19 @@ if (pageId === 'thread') {
   };
 }
 
+function replySuccessful() {
+  /* Reset fields */
+  document.getElementById('fieldMessage').value = '';
+  document.getElementById('fieldSubject').value = '';
+  document.getElementById('files').value = '';
+
+  setTimeout(function() {
+    refreshPosts();
+  }, 2000);
+}
+
+/* =Reply DOM building
+------------------------------------------------------------*/
 function padDateField(value) {
   if (value < 10) {
     value = '0' + value;
@@ -82,18 +88,14 @@ function formatDateToDisplay(d) {
 }
 
 function formatFileSize(size) {
-
   var orderIndex = 0;
 
   while (orderIndex < sizeOrders.length - 1 && size > 1024) {
-
     orderIndex++;
     size /= 1024;
-
   }
 
   return size.toFixed(2)+' '+sizeOrders[orderIndex];
-
 }
 
 function setLastEditedLabel(post, cell) {
@@ -125,7 +127,6 @@ function setUploadLinks(cell, file) {
 }
 
 function setUploadCell(node, files) {
-
   if (!files) {
     return;
   }
@@ -182,7 +183,6 @@ function setPostHideableElements(postCell, post) {
 }
 
 function setPostComplexElements(postCell, post, boardUri, threadId) {
-
   var labelRole = postCell.getElementsByClassName('labelRole')[0];
 
   if (post.signedRole) {
@@ -209,7 +209,6 @@ function setPostComplexElements(postCell, post, boardUri, threadId) {
 }
 
 function setPostInnerElements(boardUri, threadId, post, postCell) {
-
   var linkName = postCell.getElementsByClassName('linkName')[0];
 
   linkName.innerHTML = post.name;
@@ -232,7 +231,6 @@ function setPostInnerElements(boardUri, threadId, post, postCell) {
 }
 
 function addPost(post) {
-
   var postCell = document.createElement('div');
   postCell.innerHTML = postCellTemplate;
 
@@ -264,7 +262,6 @@ function addPost(post) {
 }
 
 var refreshCallback = function(error, data) {
-
   if (error) {
     return;
   }
@@ -320,7 +317,6 @@ function refreshPosts(manual) {
 }
 
 function sendReplyData(files) {
-
   var forcedAnon = !document.getElementById('fieldName');
 
   var typedName = !forcedAnon &&

@@ -4,8 +4,8 @@ block variables
 block outer
   if postType == 'Op'
     | <div class="opWrapper">
-  article(class='post'+postType)
-    header(class='post'+postType+'Header')
+  article(class='post'+(' post'+postType))
+    header(class='postHeader'+(' post'+postType+'Header'))
       .postHeaderInner
         ul
           li.deletionCheckBoxWrap: input.deletionCheckBox(type='checkbox')
@@ -22,6 +22,7 @@ block outer
           li.panelRange #{l.guiIPRangeLabel}: #[span.labelRange]
           block linkReply
           a.linkEdit #{l.guiPostEdit}
+      .postHeaderInnerAfter
     section.postContent
       .panelUploads
       //- Presentational element that prevents the text from being too narrow

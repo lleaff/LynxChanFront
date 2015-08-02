@@ -125,6 +125,8 @@ $subjectBold:    550!default;
 
 $linkReplyColor: $linkColor!default;
 
+$mentionColor:   $linkColor!default;
+
 // Message
 //Can either be a color to take the hue from, or 'false' to disable markedPost styling
 $markedPost:        palette('accentB')!default;

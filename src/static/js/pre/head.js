@@ -78,6 +78,28 @@ function addClass(domElement, className) {
 //    '</'+newTag);
 //}
 
+/* =Get
+------------------------------*/
+function getParentByClassName(domElement, className) {
+  while ((domElement = domElement.parentNode) &&
+         !hasClass(domElement, className)) {}
+  return domElement;
+}
+
+/* @exclude */
+/* Supports multiple classNames */
+//function getParentByClassNames(domElement, classNames) {
+//  if (typeof(classNames) === 'string') { classNames = [classNames]; }
+//  for (var i; (domElement = domElement.parentNode); ) {
+//    for (i = 0; i < classNames.length; ++i) {
+//      if (hasClass(domElement, classNames[i])) {
+//        break;
+//      }
+//    }
+//  }
+//  return domElement;
+//}
+/* @endexclude */
 
 /* =Elements
 ------------------------------*/
