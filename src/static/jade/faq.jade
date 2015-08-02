@@ -1,13 +1,13 @@
 extends ../../templates/jade/base
 
 block pageId
-  - var pageId = 'help';
+  - var pageId = 'faq';
 
 block title
-  | #{siteTitle} - #{l.titHelp}
+  | #{siteTitle} - #{l.titFAQ}
 
 block headerTitle
-  +title(titHelpPage)
+  +title(titFAQPage)
 
 block append bottomScripts
   +script('ext.js')
@@ -16,7 +16,7 @@ block append styles
   +style('ext.css')
 
 block content
-  section#postingHelp
-    include $LANGUAGE_PACK/jade/helpPosting.jade
+  section#globalRules
+    include $LANGUAGE_PACK/jade/faq.jade
 
   +helpAdditionalLinks

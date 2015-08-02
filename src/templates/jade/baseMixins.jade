@@ -89,6 +89,14 @@ mixin linkNext
     a#linkNext.fa.fa-angle-right(title='Next')&attributes(attributes)
       block
 
+mixin helpAdditionalLinks
+  section#helpAdditionalLinks
+    nav
+      ul
+        li: a(href=baseStaticUrl+'/faq.html') FAQ
+        li: a(href=baseStaticUrl+'/globalrules.html') Global rules
+        li: a(href=baseStaticUrl+'/help.html') General help
+        li: a(href=baseStaticUrl+'/moderation.html') Moderation help
 
 //-------------------------------------------------------------
 //-=Helper functions
