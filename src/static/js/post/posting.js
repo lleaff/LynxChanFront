@@ -359,10 +359,14 @@ function processQuote(quote) {
 }
 
 function positionQuotePreview(quote, tooltip) {
-  //var rect = quote.getBoundingClientRect();
+  //TODO Position tooltip differently depending on available space
   tooltip.style.position = 'absolute';
   tooltip.style.left = quote.offsetLeft+quote.offsetWidth+'px';
   tooltip.style.top = quote.offsetTop+'px';
+
+  var rightAvailableSpace = (document.documentElement.clientWidth -
+                             quote.getBoundingClientRect().right);
+  tooltip.style.maxWidth = rightAvailableSpace+'px';
 }
 
 function loadQuote(tooltip, quoteUrl) {
