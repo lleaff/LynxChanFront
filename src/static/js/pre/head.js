@@ -84,7 +84,7 @@ function addClass(domElement, className) {
 /* Cute spinning loading icon */
 function createSpinner() {
   var spinner = document.createElement('span');
-  spinner.setAttribute('class', 'fa fa-spinner fa-pulse');
+  spinner.setAttribute('class', 'fa fa-spinner fa-pulse loadingPreview');
   return spinner;
 }
 

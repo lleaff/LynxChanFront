@@ -325,7 +325,6 @@ function processQuote(quote) {
   tooltip.style.display = 'none';
   tooltip.setAttribute('class', 'postPreviewTooltip');
   quote.parentNode.appendChild(tooltip);
-  tooltip.appendChild(createSpinner());
 
   var quoteUrl = quote.href;
 
@@ -335,12 +334,17 @@ function processQuote(quote) {
 
   quote.onmouseenter = function() {
     positionQuotePreview(quote, tooltip);
-    showElement(tooltip);
 
     if (loadedPreviews.indexOf(quoteUrl) < 0 &&
         loadingPreviews.indexOf(quoteUrl) < 0) {
+      setTimeout(function() {
+        if (tooltip.innerHTML === "") {
+          tooltip.appendChild(createSpinner());
+        }
+      }, 500); /* Delay before showing spinner (ms) */
       loadQuote(tooltip, quoteUrl);
     }
+    showElement(tooltip);
 
   };
 
@@ -360,12 +364,16 @@ function processQuote(quote) {
 
 function positionQuotePreview(quote, tooltip) {
   //TODO Position tooltip differently depending on available space
+
+  var rightMargin = 6; /* (px) */
+
   tooltip.style.position = 'absolute';
-  tooltip.style.left = quote.offsetLeft+quote.offsetWidth+'px';
+  tooltip.style.left =
+    (quote.offsetLeft + quote.offsetWidth + rightMargin)+'px';
   tooltip.style.top = quote.offsetTop+'px';
 
-  var rightAvailableSpace = (document.documentElement.clientWidth -
-                             quote.getBoundingClientRect().right);
+  var rightAvailableSpace = document.documentElement.clientWidth -
+                         quote.getBoundingClientRect().right - rightMargin;
   tooltip.style.maxWidth = rightAvailableSpace+'px';
 }
 
