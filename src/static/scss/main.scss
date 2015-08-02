@@ -21,6 +21,12 @@ html, body {
   width: 100%;
 }
 
+#pageMenu {
+  ul {
+    padding: 0;
+  }
+}
+
 #notFooter {
   min-height: 100%;
   padding-bottom: $defaultPadding;

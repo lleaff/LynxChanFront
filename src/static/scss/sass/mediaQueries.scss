@@ -115,5 +115,3 @@ $tall: 400em;
       @include shorter($short) { @include bodyOverlay($shortColor, $before: true); }
     }
 }
-
-@include debugMediaQueries;

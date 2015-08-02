@@ -59,6 +59,11 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7%);
 /* opCell contains the whole thread, not just the Op */
 .opCell {
   padding-bottom: $defaultPadding * 2.5;
+  @if $shadows >= 2 {
+    &:not(:last-of-type) {
+      background: transparent linear-gradient(to top, rgba($shadowsBaseColor, $shadowsAlpha * 0.6), $bodyBgColor 0.8em) no-repeat;
+    }
+  }
 }
 .postCell {
   margin-top: $defaultPadding / 2.3;
