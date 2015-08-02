@@ -7,7 +7,7 @@ if (pageId === undefined) { var pageId = null; }
 
 /* =DOM Manipulation
 ============================================================*/
-/* Direct
+/* =Direct
 ------------------------------*/
 function removeElement(domElement) {
   // @ifdef DEBUG
@@ -35,7 +35,7 @@ function showElement(domElement) {
   // @endif
 }
 
-/* Meta
+/* =Meta
 ------------------------------*/
 /* Remove 'value' from 'domElement''s 'attribute' */
 function removeCompoundAttribute(domElement, attribute, value) {
@@ -77,6 +77,16 @@ function addClass(domElement, className) {
 //    new RegExp('</'+tag+'(?!.*'+tag+')', 'i'),
 //    '</'+newTag);
 //}
+
+
+/* =Elements
+------------------------------*/
+/* Cute spinning loading icon */
+function createSpinner() {
+  var spinner = document.createElement('span');
+  spinner.setAttribute('class', 'fa fa-spinner fa-pulse');
+  return spinner;
+}
 
 /* =Feedback
 ============================================================*/

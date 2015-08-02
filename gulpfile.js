@@ -408,8 +408,7 @@ gulp.task('browser-sync', ['build'], function() {
     .on('change', serverRefresh);
   gulp.watch(
     [filesRecur.js],
-    ['js'])
-    .on('change', serverRefresh);
+    ['js', 'browserReloadJs']);
   gulp.watch(
     [filesRecur.jade, filesRecur.jadeExtras, filesRecur.jadeStatic],
     ['html', 'jade', 'jadeStatic', 'browserReload']);
@@ -428,6 +427,9 @@ function serverRefresh() {
 }
 
 gulp.task('browserReload', ['html'], function() {
+  serverRefresh();
+});
+gulp.task('browserReloadJs', ['js'], function() {
   serverRefresh();
 });
 

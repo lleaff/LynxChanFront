@@ -321,34 +321,22 @@ function setPlayer(link, mime, uploadCell, maxWidth, maxHeight) {
 }
 
 function processQuote(quote) {
-
-  var rect = quote.getBoundingClientRect();
-
-  var previewOrigin = {
-    x : rect.right + 10 + window.scrollX,
-    y : rect.top + window.scrollY
-  };
-
   var tooltip = document.createElement('div');
   tooltip.style.display = 'none';
   tooltip.setAttribute('class', 'postPreviewTooltip');
   quote.parentNode.appendChild(tooltip);
-  tooltip.appendChild(document.createTextNode('Loading'));
-
-  tooltip.style.position = 'absolute';
-  tooltip.style.left = previewOrigin.x + 'px';
-  tooltip.style.top = previewOrigin.y + 'px';
+  tooltip.appendChild(createSpinner());
 
   var quoteUrl = quote.href;
 
   var referenceList = quoteReference[quoteUrl] || [];
-
   referenceList.push(tooltip);
-
   quoteReference[quoteUrl] = referenceList;
 
   quote.onmouseenter = function() {
+    positionQuotePreview(quote, tooltip);
     showElement(tooltip);
+
     if (loadedPreviews.indexOf(quoteUrl) < 0 &&
         loadingPreviews.indexOf(quoteUrl) < 0) {
       loadQuote(tooltip, quoteUrl);
@@ -368,6 +356,13 @@ function processQuote(quote) {
      };
    }
 
+}
+
+function positionQuotePreview(quote, tooltip) {
+  //var rect = quote.getBoundingClientRect();
+  tooltip.style.position = 'absolute';
+  tooltip.style.left = quote.offsetLeft+quote.offsetWidth+'px';
+  tooltip.style.top = quote.offsetTop+'px';
 }
 
 function loadQuote(tooltip, quoteUrl) {

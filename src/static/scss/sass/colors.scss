@@ -152,7 +152,8 @@ $inputBorderColor:      intensify($inputBgColor, $inputColor, 19)!default;
 $inputHoverBorderColor: adjust-color(take-lightness(palette('accentA'), $inputBorderColor), $saturation: -1%)!default;
 $inputFocusBorderColor: adjust-color(take-lightness(palette('accentA'), $inputBorderColor), $saturation: -40%)!default;
 
-$discreeteInputBgColor: intensify-lightness($inputBgColor, $inputColor, 6)!default;
+$discreeteInputColor:   $inputColor!default;
+$discreeteInputBgColor: intensify-lightness($inputBgColor, $inputColor, 2)!default;
 
 // =Buttons
 //=============================================================

@@ -99,8 +99,22 @@ html, body {
   margin-right: $defaultPadding;
 }
 
+// Board and Thread pages
 .multiReport {
   float: right;
+}
+// Thread page
+// eg.: Auto 97 [x] [Refresh]
+.divRefresh {
+  text-align: right;
+  min-height: 1.3em;
+  float: left;
+
+  // eg.: Auto 15
+  label {
+    display: inline-block;
+    min-width: 6em;
+  }
 }
 
 
@@ -194,10 +208,9 @@ h4, h5, h6 {
 #middle {
   position: relative;
   padding: $defaultPadding;
-  @include widthBetween($veryNarrow, $narrow) {
-    padding: $defaultPadding * 0.5;
-  }
   @include narrower($veryNarrow) {
+    // TODO Always keep padding at 0, set margin on child elements instead
+    // to avoid negative margins overflowing body.
     padding: 0;
   }
   bottom: 0;
@@ -244,44 +257,18 @@ h4, h5, h6 {
   }
 }
 
-/*
-.form {
-  display: inline-block;
-  > fieldset {
-    display: inline-block;
-  }
-
-  .field {
-    float: left;
-    width: 100%;
-
-    &:after {
-      content: "";
-      display: block;
-      clear: left;
-    }
-
-    label {
-      float: left;
-    }
-    input {
-      float: right;
-    }
-
-    .help {
-      padding: {
-        left: max($defaultPadding * 0.5, 0.5em);
-        right: max($defaultPadding * 0.5, 0.5em);
-      }
-      float: right;
-    }
-  }
-}
-*/
-
 /*------------------------------------------------------------*
  * =Page specific
  *------------------------------------------------------------*/
+
+// Board, Thread
+//------------------------------
+.multiReport, .divRefresh {
+  input:not([type="file"]) {
+    color: $discreeteInputColor;
+    background-color: $discreeteInputBgColor;
+  }
+}
 
 /* =Post content
 /* =Catalog

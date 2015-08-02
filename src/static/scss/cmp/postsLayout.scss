@@ -84,6 +84,10 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7%);
     display: table-cell;
     min-width: 1em;
     min-height: 1em;
+
+    // Disables outline when unzooming image,
+    //  but possible accessibility issue.
+    outline: none; 
   }
 
   .imgExpanded {
@@ -305,7 +309,7 @@ li.deletionCheckBoxWrap {
   display: inline-block;
   position: relative;
   margin-top: 0.2em;
-  height: 1em;
+  //height: 1em;
   width: 1em;
 }
 input[type='checkbox'].deletionCheckBox {

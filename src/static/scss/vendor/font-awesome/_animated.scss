@@ -2,11 +2,15 @@
 // --------------------------
 
 .#{$fa-css-prefix}-spin {
+  // inline elements have animations disabled in some browsers
+  display: inline-block;
   -webkit-animation: fa-spin 2s infinite linear;
           animation: fa-spin 2s infinite linear;
 }
 
 .#{$fa-css-prefix}-pulse {
+  // inline elements have animations disabled in some browsers
+  display: inline-block;
   -webkit-animation: fa-spin 1s infinite steps(8);
           animation: fa-spin 1s infinite steps(8);
 }
