@@ -256,7 +256,8 @@ $catalogCellLinkHoverBgColor: intensify($catalogCellBgColor, $catalogCellColor, 
 $notificationBgColor:     intense(palette('bgAlt'), $weight: 60)!default;
 $notificationColor:       soften(
   palette('bgAlt'), $notificationBgColor, $weight: 100)!default;
-$notificationBorderColor: soft($borderColorAlt,  $weight: 20)!default;
+$notificationBorderColor: intensify-lightness(
+  $notificationColor, $notificationBgColor, $weight: 30)!default;
 $notificationPadding:     $defaultPadding!default;
 $notificationButtonColor: intensify-lightness(
   $notificationColor, $notificationBgColor, $weight: 30)!default;

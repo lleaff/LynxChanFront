@@ -8,7 +8,7 @@ function handleConnectionResponse(xhr, delegate) {
       console.log(xhr.responseText);
     }
   } catch (error) {
-    notification('Error in parsing response.');
+    warning('Error in parsing response.');
     return;
   }
 
@@ -18,26 +18,26 @@ function handleConnectionResponse(xhr, delegate) {
   }
 
   if (response.status === 'error') {
-    notification('Internal server error. '+response.data);
+    warning('Internal server error. '+response.data);
   } else if (response.status === 'fileTooLarge') {
-    notification('File size exceeded maximum allowed'+
+    warning('File size exceeded maximum allowed'+
           maxFileSize ? ' ('+maxFileSize+' MB).' : '.');
   } else if (response.status === 'blank') {
-    notification('Parameter '+response.data+' was sent in blank.');
+    warning('Parameter '+response.data+' was sent in blank.');
   } else if (response.status === 'tooLarge') {
-    notification('Request refused because it was too large');
+    warning('Request refused because it was too large');
   } else if (response.status === 'construction') {
     notification('This page is under construction.');
   } else if (response.status === 'denied') {
-    notification('You are not allowed to perform this operation.');
+    warning('You are not allowed to perform this operation.');
   } else if (response.status === 'maintenance') {
     notification('This site is undergoing maintenance, all of its functionality has been temporarily disabled.');
   } else if (response.status === 'banned') {
     if (response.data.range) {
-      notification('Your ip range '+response.data.range+' has been banned from '+
+      warning('Your ip range '+response.data.range+' has been banned from '+
             response.data.board + '.');
     } else {
-      notification('You are banned from '+response.data.board+' until '+
+      warning('You are banned from '+response.data.board+' until '+
             new Date(response.data.expiration).toString()+'.\nReason: '+
             response.data.reason+'.\nYour ban id: '+response.data.banId);
     }

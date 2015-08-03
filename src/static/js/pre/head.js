@@ -181,7 +181,17 @@ function notification(message, options) {
   return el;
 }
 
-
+/* Wrappers over notification() */
+function warning(message, options) {
+  if (options === undefined) { options = {}; }
+  options.tone = 'negative';
+  notification(message, options);
+}
+function success(message, options) {
+  if (options === undefined) { options = {}; }
+  options.tone = 'positive';
+  notification(message, options);
+}
 
 /* =Feedback
 ============================================================*/

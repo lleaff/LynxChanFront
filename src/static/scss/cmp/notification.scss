@@ -18,11 +18,24 @@
     max-width: 100%;
   }
 
-  .neutral {
+  &.neutral {
   }
-  .positive {
+  &.positive {
+    background-color: take-lightness(palette('good'), $notificationBgColor, $weight: 65%);
+    border-color: take-lightness(palette('good'), $notificationButtonColor, $weight: 65%);
+
+    .closeButton {
+      color: take-lightness(palette('good'), $notificationButtonColor, $weight: 65%);
+    }
   }
-  .negative {
+  &.negative {
+    background-color: take-lightness(palette('bad'), $notificationBgColor, $weight: 65%);
+    border-color: take-lightness(palette('bad'), $notificationButtonColor, $weight: 65%);
+
+    .closeButton {
+      color: take-lightness(palette('bad'), $notificationButtonColor, $weight: 65%);
+    }
+
   }
 
   .closeButton {
