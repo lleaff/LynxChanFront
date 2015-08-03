@@ -3,7 +3,6 @@ console.log('posting.js - BEGIN PARSING');//DEBUG
 // @endif
 
 function iterateSelectedFiles(currentIndex, files, fileChooser, callback) {
-  window.callback = callback;
   if (currentIndex < fileChooser.files.length) {
     var reader = new FileReader();
 
@@ -20,7 +19,7 @@ function iterateSelectedFiles(currentIndex, files, fileChooser, callback) {
 
     reader.readAsDataURL(fileChooser.files[currentIndex]);
   } else {
-    window.callback(files);
+    callback(files);
   }
 
 }

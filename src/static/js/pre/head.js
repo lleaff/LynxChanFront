@@ -151,8 +151,8 @@ function notification(message, options) {
   }
 
   el.setAttribute('class', 'notification '+(options.tone || 'neutral'));
-  el.setAttribute('style',
-                  'position:fixed;top:0;left:0;right:0;margin:0 auto;');
+  /* Override pointer-events:none; on container. */
+  el.setAttribute('style', 'pointer-events:auto;');
 
   var timeoutId;
   if (options.timeout !== false) {
@@ -168,7 +168,16 @@ function notification(message, options) {
       inner);
   }
 
-  document.body.appendChild(el);
+  /* Center 'display: inline-block' */
+  var container = document.getElementById('notificationsContainer');
+  if (!container) {
+    container = document.createElement('div');
+    container.setAttribute('id', 'notificationsContainer');
+    container.setAttribute('style',
+      'position:fixed;top:0;width:100%;text-align:center;pointer-events:none;');
+    document.body.appendChild(container);
+  }
+  container.appendChild(el);
   return el;
 }
 

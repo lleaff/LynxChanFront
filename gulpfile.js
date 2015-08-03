@@ -261,7 +261,7 @@ gulp.task('js', ['jade'], function() {
     .replace(/<(\w+) class="divHash"[\s\S]*?<\/\1>/, '');
 
   var jsPreprocessContext = {
-    DEBUG:              !g.production,
+    DEBUG:              !!g.production || undefined,
     postCellTemplate:   postCellTemplate,
     uploadCellTemplate: uploadCellTemplate,
     l:  lang

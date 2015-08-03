@@ -258,5 +258,5 @@ $notificationColor:       soften(
   palette('bgAlt'), $notificationBgColor, $weight: 100)!default;
 $notificationBorderColor: soft($borderColorAlt,  $weight: 20)!default;
 $notificationPadding:     $defaultPadding!default;
-$notificationButtonColor: soften(
-  $notificationColor, $notificationBgColor, $weight: 20)!default;
+$notificationButtonColor: intensify-lightness(
+  $notificationColor, $notificationBgColor, $weight: 30)!default;

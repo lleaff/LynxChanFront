@@ -1,6 +1,8 @@
 @import '../sass';
 
 .notification {
+  $notificationTopPadding: ($notificationPadding * 0.7);
+
   display: inline-block;
 
   background-color: $notificationBgColor;
@@ -9,7 +11,7 @@
   border-style: none solid solid solid;
 
   .notificationInner {
-    padding: ($notificationPadding * 0.7) $notificationPadding
+    padding: $notificationTopPadding $notificationPadding
       $notificationPadding $notificationPadding;
     display: inline-block;
     word-wrap: break-word;
@@ -26,9 +28,10 @@
   .closeButton {
     display: inline-block;
     float: right;
+    vertical-align: middle;
     background-color: transparent;
     border: none;
     color: $notificationButtonColor;
-    margin: $internalPadding $internalPadding $internalPadding 0;
+    margin: $notificationTopPadding ($internalPadding / 2) $internalPadding 0;
   }
 }
