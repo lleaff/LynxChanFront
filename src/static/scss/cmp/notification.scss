@@ -1,0 +1,34 @@
+@import '../sass';
+
+.notification {
+  display: inline-block;
+
+  background-color: $notificationBgColor;
+  color: $notificationColor;
+  border: $borderWidth $notificationBorderColor;
+  border-style: none solid solid solid;
+
+  .notificationInner {
+    padding: ($notificationPadding * 0.7) $notificationPadding
+      $notificationPadding $notificationPadding;
+    display: inline-block;
+    word-wrap: break-word;
+    max-width: 100%;
+  }
+
+  .neutral {
+  }
+  .positive {
+  }
+  .negative {
+  }
+
+  .closeButton {
+    display: inline-block;
+    float: right;
+    background-color: transparent;
+    border: none;
+    color: $notificationButtonColor;
+    margin: $internalPadding $internalPadding $internalPadding 0;
+  }
+}

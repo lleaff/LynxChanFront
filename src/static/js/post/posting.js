@@ -460,7 +460,7 @@ function banPosts() {
   var expiration = Date.parse(typedExpiration || '');
 
   if (isNaN(expiration)) {
-    alert('Invalid expiration');
+    notification('Invalid expiration');
 
     return;
   }
@@ -477,10 +477,10 @@ function banPosts() {
 
     if (status === 'ok') {
 
-      alert('Bans applied');
+      notification('Bans applied');
 
     } else {
-      alert(status + ': ' + JSON.stringify(data));
+      notification(status + ': ' + JSON.stringify(data));
     }
   });
 }
@@ -526,9 +526,9 @@ function reportPosts() {
   }, function requestComplete(status, data) {
 
     if (status === 'ok') {
-      alert('Content reported');
+      notification('Content reported');
     } else {
-      alert(status+': '+JSON.stringify(data));
+      notification(status+': '+JSON.stringify(data));
     }
   });
 }
@@ -545,10 +545,10 @@ function deletePosts() {
     postings : toDelete
   }, function requestComplete(status, data) {
     if (status === 'ok') {
-      alert('Content deleted');
+      notification('Content deleted');
       window.location.pathname = '/';
     } else {
-      alert(status+': '+JSON.stringify(data));
+      notification(status+': '+JSON.stringify(data));
     }
   });
 

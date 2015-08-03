@@ -59,7 +59,7 @@ function setUser(login, role) {
       location.reload(true);
 
     } else {
-      alert(status + ': ' + JSON.stringify(data));
+      notification(status + ': ' + JSON.stringify(data));
     }
   });
 

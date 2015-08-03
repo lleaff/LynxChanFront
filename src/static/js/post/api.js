@@ -8,7 +8,7 @@ function handleConnectionResponse(xhr, delegate) {
       console.log(xhr.responseText);
     }
   } catch (error) {
-    alert('Error in parsing response.');
+    notification('Error in parsing response.');
     return;
   }
 
@@ -18,26 +18,26 @@ function handleConnectionResponse(xhr, delegate) {
   }
 
   if (response.status === 'error') {
-    alert('Internal server error. '+response.data);
+    notification('Internal server error. '+response.data);
   } else if (response.status === 'fileTooLarge') {
-    alert('File size exceeded maximum allowed'+
+    notification('File size exceeded maximum allowed'+
           maxFileSize ? ' ('+maxFileSize+' MB).' : '.');
   } else if (response.status === 'blank') {
-    alert('Parameter '+response.data+' was sent in blank.');
+    notification('Parameter '+response.data+' was sent in blank.');
   } else if (response.status === 'tooLarge') {
-    alert('Request refused because it was too large');
+    notification('Request refused because it was too large');
   } else if (response.status === 'construction') {
-    alert('This page is under construction.');
+    notification('This page is under construction.');
   } else if (response.status === 'denied') {
-    alert('You are not allowed to perform this operation.');
+    notification('You are not allowed to perform this operation.');
   } else if (response.status === 'maintenance') {
-    alert('This site is undergoing maintenance, all of its functionality has been temporarily disabled.');
+    notification('This site is undergoing maintenance, all of its functionality has been temporarily disabled.');
   } else if (response.status === 'banned') {
     if (response.data.range) {
-      alert('Your ip range '+response.data.range+' has been banned from '+
+      notification('Your ip range '+response.data.range+' has been banned from '+
             response.data.board + '.');
     } else {
-      alert('You are banned from '+response.data.board+' until '+
+      notification('You are banned from '+response.data.board+' until '+
             new Date(response.data.expiration).toString()+'.\nReason: '+
             response.data.reason+'.\nYour ban id: '+response.data.banId);
     }
@@ -64,7 +64,7 @@ function apiRequest(page, parameters, delegate) {
     xhr = new XDomainRequest();
     xhr.open('POST', API_DOMAIN + page);
   } else {
-    alert('This site can\'t run JS on your browser because it does not support CORS requests. Disable JavaScript and try again.');
+    notification('This site can\'t run JS on your browser because it does not support CORS requests. Disable JavaScript and try again.');
 
     return;
   }
@@ -80,7 +80,7 @@ function apiRequest(page, parameters, delegate) {
       }
 
       if (xhr.status != 200) {
-        alert('Connection failed.');
+        notification('Connection failed.');
         return;
       }
 
@@ -129,7 +129,7 @@ function localRequest(address, callback) {
     xhr = new XDomainRequest();
     xhr.open('GET', address);
   } else {
-    alert('This site can\'t run js on your shitty browser because it does not support CORS requests. Disable js and try again.');
+    notification('This site can\'t run js on your shitty browser because it does not support CORS requests. Disable js and try again.');
     return;
   }
 

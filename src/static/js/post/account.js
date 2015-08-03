@@ -18,11 +18,11 @@ function changePassword() {
   var typedConfirmation = document.getElementById('fieldConfirmation').value;
 
   if (!typedPassword.length) {
-    alert('You must provide your current password.');
+    notification('You must provide your current password.');
   } else if (typedConfirmation !== typedNewPassword) {
-    alert('Password confirmation does no match');
+    notification('Password confirmation does no match');
   } else if (!typedNewPassword.length) {
-    alert('You cannot provide a blank password.');
+    notification('You cannot provide a blank password.');
   } else {
     apiRequest('changeAccountPassword', {
       password : typedPassword,
@@ -32,12 +32,12 @@ function changePassword() {
 
       if (status === 'ok') {
 
-        alert('Password changed.');
+        notification('Password changed.');
 
         location.reload(true);
 
       } else {
-        alert(status+': '+JSON.stringify(data));
+        notification(status+': '+JSON.stringify(data));
       }
     });
   }
@@ -58,18 +58,18 @@ function save() {
   var typedEmail = emailField.value.trim();
 
   if (emailField.validity && emailField.validity.valid === false) {
-    alert('Please enter a valid email address');
+    notification('Please enter a valid email address');
   } else if (typedEmail.length > 64) {
-    alert('Email too long, keep it under 64 characters');
+    notification('Email too long, keep it under 64 characters');
   } else {
     apiRequest('changeAccountSettings', {
       email : typedEmail,
       settings : selectedSettings
     }, function requestComplete(status, data) {
       if (status === 'ok') {
-        alert('Settings changed.');
+        notification('Settings changed.');
       } else {
-        alert(status+': '+JSON.stringify(data));
+        notification(status+': '+JSON.stringify(data));
       }
     });
 
@@ -85,9 +85,9 @@ function createBoard() {
       .trim();
 
   if (!typedUri.length || !typedName.length || !typedDescription.length) {
-    alert('All fields are mandatory.');
+    notification('All fields are mandatory.');
   } else if (/\W/.test(typedUri)) {
-    alert('Invalid uri.');
+    notification('Invalid uri.');
     return;
   } else {
     apiRequest('createBoard', {
@@ -98,12 +98,12 @@ function createBoard() {
 
       if (status === 'ok') {
 
-        alert('Board created.');
+        notification('Board created.');
 
         window.location.pathname = '/'+typedUri+'/';
 
       } else {
-        alert(status+': '+JSON.stringify(data));
+        notification(status+': '+JSON.stringify(data));
       }
     });
   }

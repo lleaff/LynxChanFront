@@ -20,9 +20,9 @@ if (pageId === 'edit') {
     var typedMessage = document.getElementById('fieldMessage').value.trim();
 
     if (!typedMessage.length) {
-      alert('A message is mandatory.');
+      notification('A message is mandatory.');
     } else if (typedMessage.length > 2048) {
-      alert('Message too long, keep it under 2048 characters.');
+      notification('Message too long, keep it under 2048 characters.');
     } else {
 
       var parameters = {
@@ -40,9 +40,9 @@ if (pageId === 'edit') {
                  parameters,
                  function requestComplete(status, data) {
         if (status === 'ok') {
-          alert('Posting edited.');
+          notification('Posting edited.');
         } else {
-          alert(status + ': ' + JSON.stringify(data));
+          notification(status + ': ' + JSON.stringify(data));
         }
       });
 

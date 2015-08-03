@@ -10,10 +10,10 @@ function recoverAccount() {
 
       if (status === 'ok') {
 
-        alert('Password request created. Check your e-mail.');
+        notification('Password request created. Check your e-mail.');
 
       } else {
-        alert(status + ': ' + JSON.stringify(data));
+        notification(status + ': ' + JSON.stringify(data));
       }
     });
 
@@ -27,7 +27,7 @@ function loginUser() {
   var typedPassword = document.getElementById('loginFieldPassword').value;
 
   if (!typedLogin.length || !typedPassword.length) {
-    alert('Both login and password are mandatory.');
+    notification('Both login and password are mandatory.');
   } else {
     apiRequest('login', {
       login : typedLogin,
@@ -42,7 +42,7 @@ function loginUser() {
         window.location.pathname = '/account.js';
 
       } else {
-        alert(status + ': ' + JSON.stringify(data));
+        notification(status + ': ' + JSON.stringify(data));
       }
     });
   }
@@ -55,13 +55,13 @@ function registerAccount() {
   var typedPassword = document.getElementById('registerFieldPassword').value;
 
   if (!typedLogin.length || !typedPassword.length) {
-    alert('Both login and password are mandatory.');
+    notification('Both login and password are mandatory.');
   } else if (typedLogin.length > 16) {
-    alert('Login too long, keep it under 16 characters');
+    notification('Login too long, keep it under 16 characters');
   } else if (typedEmail.length > 64) {
-    alert('Email too long, keep it under 64 characters');
+    notification('Email too long, keep it under 64 characters');
   } else if (/\W/.test(typedLogin)) {
-    alert('Invalid login.');
+    notification('Invalid login.');
   } else {
 
     apiRequest('registerAccount', {
@@ -78,7 +78,7 @@ function registerAccount() {
         window.location.pathname = '/account.js';
 
       } else {
-        alert(status + ': ' + JSON.stringify(data));
+        notification(status + ': ' + JSON.stringify(data));
       }
     });
 

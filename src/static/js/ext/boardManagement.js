@@ -10,7 +10,7 @@ if (pageId === 'boardManagement') {
     .trim();
 
     if (!typedName.length || !typedName.length) {
-      alert('Both name and description are mandatory.');
+      notification('Both name and description are mandatory.');
       return;
     }
 
@@ -42,7 +42,7 @@ if (pageId === 'boardManagement') {
         location.reload(true);
 
       } else {
-        alert(status + ': ' + JSON.stringify(data));
+        notification(status + ': ' + JSON.stringify(data));
       }
     });
 
@@ -77,7 +77,7 @@ if (pageId === 'boardManagement') {
         location.reload(true);
 
       } else {
-        alert(status + ': ' + JSON.stringify(data));
+        notification(status + ': ' + JSON.stringify(data));
       }
     });
 
@@ -95,7 +95,7 @@ if (pageId === 'boardManagement') {
         window.location.pathname = '/' + boardIdentifier + '/';
 
       } else {
-        alert(status + ': ' + JSON.stringify(data));
+        notification(status + ': ' + JSON.stringify(data));
       }
     });
 
@@ -111,7 +111,7 @@ if (pageId === 'boardManagement') {
         window.location.pathname = '/';
 
       } else {
-        alert(status + ': ' + JSON.stringify(data));
+        notification(status + ': ' + JSON.stringify(data));
       }
     });
 
@@ -129,13 +129,13 @@ if (pageId === 'boardManagement') {
       if (status === 'ok') {
 
         if (files) {
-          alert('New CSS set.');
+          notification('New CSS set.');
         } else {
-          alert('CSS deleted.');
+          notification('CSS deleted.');
         }
 
       } else {
-        alert(status + ': ' + JSON.stringify(data));
+        notification(status + ': ' + JSON.stringify(data));
       }
     });
   };

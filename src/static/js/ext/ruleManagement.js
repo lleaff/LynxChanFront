@@ -21,7 +21,7 @@ if (pageId === 'ruleManagement') {
           location.reload(true);
 
         } else {
-          alert(status+': '+JSON.stringify(data));
+          notification(status+': '+JSON.stringify(data));
         }
       });
     };
@@ -36,10 +36,10 @@ if (pageId === 'ruleManagement') {
     var typedRule = document.getElementById('fieldRule').value.trim();
 
     if (!typedRule.length) {
-      alert('You can\'t inform a blank rule.');
+      notification('You can\'t inform a blank rule.');
 
     } else if (typedRule.length > 512) {
-      alert('Rule too long, keep in under 512 characters.');
+      notification('Rule too long, keep in under 512 characters.');
     } else {
 
       apiRequest('createRule', {
@@ -49,7 +49,7 @@ if (pageId === 'ruleManagement') {
         if (status === 'ok') {
           location.reload(true);
         } else {
-          alert(status+': '+JSON.stringify(data));
+          notification(status+': '+JSON.stringify(data));
         }
       });
     }

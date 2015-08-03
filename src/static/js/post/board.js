@@ -11,12 +11,12 @@ var postCallback = function requestComplete(status, data) {
 
   if (status === 'ok') {
 
-    alert('Thread created.');
+    notification('Thread created.');
 
     window.location.pathname = '/' + boardUri + '/res/' + data + '.html';
 
   } else {
-    alert(status + ': ' + JSON.stringify(data));
+    notification(status + ': ' + JSON.stringify(data));
   }
 };
 
@@ -42,29 +42,29 @@ function sendThreadData(files) {
     document.getElementById('fieldCaptcha').value.trim() : undefined;
 
   if (!typedMessage.length) {
-    alert('A message is mandatory.');
+    notification('A message is mandatory.');
     return;
   } else if (!forcedAnon && typedName.length > 32) {
-    alert('Name is too long, keep it under 32 characters.');
+    notification('Name is too long, keep it under 32 characters.');
     return;
   } else if (typedMessage.length > 2048) {
-    alert('Message is too long, keep it under 2048 characters.');
+    notification('Message is too long, keep it under 2048 characters.');
     return;
   } else if (typedEmail.length > 64) {
-    alert('Email is too long, keep it under 64 characters.');
+    notification('Email is too long, keep it under 64 characters.');
     return;
   } else if (typedSubject.length > 128) {
-    alert('Subject is too long, keep it under 128 characters.');
+    notification('Subject is too long, keep it under 128 characters.');
     return;
   } else if (typedPassword.length > 8) {
-    alert('Password is too long, keep it under 8 characters.');
+    notification('Password is too long, keep it under 8 characters.');
     return;
   } else if (!hiddenCaptcha && typedCaptcha.length !== 6 &&
              typedCaptcha.length !== 24) {
-    alert('Captchas are exactly 6 characters long.\n(or 24 in the case of a no-cookie ID)');
+    notification('Captchas are exactly 6 characters long.\n(or 24 in the case of a no-cookie ID)');
     return;
   } else if (/\W/.test(typedCaptcha)) {
-    alert('Invalid captcha.');
+    notification('Invalid captcha.');
     return;
   }
 

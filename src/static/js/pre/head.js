@@ -10,16 +10,22 @@ if (pageId === undefined) { var pageId = null; }
 /* =Direct
 ------------------------------*/
 function removeElement(domElement) {
-  // @ifdef DEBUG
-  try { //DEBUG
-  // @endif
-    domElement.parentNode.removeChild(domElement);
-  // @ifdef DEBUG
-  } catch(e) { //DEBUG
-    console.log(e); //DEBUG
-    throw(e); //DEBUG
-  } //DEBUG
-  // @endif
+  try {
+    if (domElement.parentNode) {
+      domElement.parentNode.removeChild(domElement);
+      return true;
+    }
+  } catch(e) {
+    if (e.code === 8) { /* NotFoundError */
+      // @ifdef DEBUG
+      console.log('removeElement(): Node not found: ', domElement,
+                  '(caller: ', removeElement.caller, ')');
+      // @endif
+    } else {
+      throw(e);
+    }
+  }
+  return false;
 }
 
 function showElement(domElement) {
@@ -103,12 +109,70 @@ function getParentByClassName(domElement, className) {
 
 /* =Elements
 ------------------------------*/
-/* Cute spinning loading icon */
+/* Cute spinning icon to indicate loading */
 function createSpinner() {
   var spinner = document.createElement('span');
   spinner.setAttribute('class', 'fa fa-spinner fa-pulse loadingPreview');
   return spinner;
 }
+
+/* FontAwesome dependency */
+function createCloseButton(targetElement, callback) {
+  var button = document.createElement('button');
+  button.setAttribute('class', 'closeButton fa fa-close');
+  button.onclick = function() {
+    if (targetElement) { removeElement(targetElement); }
+    if (callback) { callback(); }
+  };
+  return button;
+}
+
+/* options: 
+ *  - escape (true): Escape characters in message for display as text, set
+ *      to false to inject raw html instead.
+ *  - timeout (2300): Time in milliseconds to show the notification, set to
+ *      false to let the user close it xemselves.
+ *  - tone (neutral, positive, negative): Add class to the element to
+ *      visually communicate the tone of the message (success/error).
+ *  - closeButton (true): Allow the user to close the notification with
+ *      a cross button. */
+function notification(message, options) {
+  if (options === undefined) { options = {}; }
+
+  var el = document.createElement('div');
+  var inner = document.createElement('div');
+  inner.setAttribute('class', 'notificationInner');
+  el.appendChild(inner);
+
+  if (options.escape === undefined || options.escape === true) {
+    inner.appendChild(document.createTextNode(message));
+  } else {
+    inner.innerHTML = message;
+  }
+
+  el.setAttribute('class', 'notification '+(options.tone || 'neutral'));
+  el.setAttribute('style',
+                  'position:fixed;top:0;left:0;right:0;margin:0 auto;');
+
+  var timeoutId;
+  if (options.timeout !== false) {
+    timeoutId = setTimeout(
+      function() { removeElement(el); },
+      options.timeout === undefined ? 2300 : options.timeout);
+  }
+  if (options.closeButton === undefined || options.closeButton === true) {
+    el.insertBefore(
+      createCloseButton(
+        el,
+        timeoutId ?  function() { clearTimeout(timeoutId); } : undefined),
+      inner);
+  }
+
+  document.body.appendChild(el);
+  return el;
+}
+
+
 
 /* =Feedback
 ============================================================*/

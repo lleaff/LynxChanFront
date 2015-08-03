@@ -250,3 +250,13 @@ $catalogCellBorderSize:       2px!default;
 $catalogCellBorderColor:      intense(palette('bgAlt'), $weight: 9)!default;
 $catalogSecondaryColor:       $postOpHeaderColor!default;
 $catalogCellLinkHoverBgColor: intensify($catalogCellBgColor, $catalogCellColor, $weight: 4)!default;
+
+// =Notification
+//============================================================
+$notificationBgColor:     intense(palette('bgAlt'), $weight: 60)!default;
+$notificationColor:       soften(
+  palette('bgAlt'), $notificationBgColor, $weight: 100)!default;
+$notificationBorderColor: soft($borderColorAlt,  $weight: 20)!default;
+$notificationPadding:     $defaultPadding!default;
+$notificationButtonColor: soften(
+  $notificationColor, $notificationBgColor, $weight: 20)!default;

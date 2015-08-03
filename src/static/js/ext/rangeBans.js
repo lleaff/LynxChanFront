@@ -41,7 +41,7 @@ function liftBan(ban) {
       location.reload(true);
 
     } else {
-      alert(status + ': ' + JSON.stringify(data));
+      notification(status + ': ' + JSON.stringify(data));
     }
   });
 }
@@ -66,7 +66,7 @@ function placeRangeBan() {
           location.reload(true);
 
         } else {
-          alert(status + ': ' + JSON.stringify(data));
+          notification(status + ': ' + JSON.stringify(data));
         }
       });
 

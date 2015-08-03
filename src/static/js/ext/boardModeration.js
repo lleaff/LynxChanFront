@@ -24,7 +24,7 @@ function transferBoard() {
       window.location.pathname = '/' + boardIdentifier + '/';
 
     } else {
-      alert(status + ': ' + JSON.stringify(data));
+      notification(status + ': ' + JSON.stringify(data));
     }
   });
 
@@ -40,7 +40,7 @@ function deleteBoard() {
       window.location.pathname = '/';
 
     } else {
-      alert(status + ': ' + JSON.stringify(data));
+      notification(status + ': ' + JSON.stringify(data));
     }
   });
 

@@ -41,7 +41,7 @@ function liftHashBan(hashBan) {
       location.reload(true);
 
     } else {
-      alert(status + ': ' + JSON.stringify(data));
+      notification(status + ': ' + JSON.stringify(data));
     }
   });
 }
@@ -66,7 +66,7 @@ function placeHashBan() {
           location.reload(true);
 
         } else {
-          alert(status + ': ' + JSON.stringify(data));
+          notification(status + ': ' + JSON.stringify(data));
         }
       });
 

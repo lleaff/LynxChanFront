@@ -20,7 +20,7 @@ if (pageId === 'bannerManagement') {
     var file = document.getElementById('files').files[0];
 
     if (!file) {
-      alert('You must select a file');
+      notification('You must select a file');
       return;
     }
 
@@ -45,7 +45,7 @@ if (pageId === 'bannerManagement') {
           location.reload(true);
 
         } else {
-          alert(status + ': ' + JSON.stringify(data));
+          notification(status + ': ' + JSON.stringify(data));
         }
       });
 
@@ -67,7 +67,7 @@ if (pageId === 'bannerManagement') {
         location.reload(true);
 
       } else {
-        alert(status + ': ' + JSON.stringify(data));
+        notification(status + ': ' + JSON.stringify(data));
       }
     });
   };

@@ -38,7 +38,7 @@ function removeFilter(filter) {
       location.reload(true);
 
     } else {
-      alert(status + ': ' + JSON.stringify(data));
+      notification(status + ': ' + JSON.stringify(data));
     }
   });
 
@@ -50,10 +50,10 @@ function addFilter() {
       .trim();
 
   if (!typedOriginal.length || !typedReplacement.length) {
-    alert('Both fields are mandatory.');
+    notification('Both fields are mandatory.');
     return;
   } else if (typedOriginal.length > 32 || typedReplacement.length > 32) {
-    alert('Both fields cannot exceed 32 characters.');
+    notification('Both fields cannot exceed 32 characters.');
     return;
   }
 
@@ -68,7 +68,7 @@ function addFilter() {
       location.reload(true);
 
     } else {
-      alert(status + ': ' + JSON.stringify(data));
+      notification(status + ': ' + JSON.stringify(data));
     }
   });
 
