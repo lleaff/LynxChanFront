@@ -8,37 +8,35 @@ function reloadCaptcha() {
 }
 
 function saveThreadSettings() {
-
   apiRequest('changeThreadSettings', {
     boardUri: boardUri,
     threadId: threadId,
     pin:      document.getElementById('checkboxPin').checked,
     lock:     document.getElementById('checkboxLock').checked,
     cyclic:   document.getElementById('checkboxCyclic').checked
+
   }, function setLock(status, data) {
-
     if (status === 'ok') {
-
       alert('Settings saved.');
-
       location.reload(true);
 
     } else {
       alert(status+': '+JSON.stringify(data));
+
     }
   });
-
 }
 
 if (pageId === 'thread') {
   changeRefresh();
 
   var replyCallback = function(status, data) {
-
     if (status === 'ok') {
       replySuccessful();
+
     } else {
       alert(status + ': ' + JSON.stringify(data));
+
     }
   };
 
@@ -58,9 +56,7 @@ function replySuccessful() {
   document.getElementById('fieldSubject').value = '';
   document.getElementById('files').value = '';
 
-  setTimeout(function() {
-    refreshPosts();
-  }, 2000);
+  setTimeout(refreshPosts, 2000);
 }
 
 /* =Reply DOM building
@@ -256,22 +252,19 @@ function addPost(post) {
   for (i = 0; i < quotes.length; ++i) {
     var quote = quotes[i];
     processQuote(quote);
+    setMention(quote);
   }
 
   processPostingQuote(postCell.getElementsByClassName('linkQuote')[0]);
 }
 
 var refreshCallback = function(error, data) {
-  if (error) {
-    return;
-  }
+  if (error) { return; }
 
   var receivedData = JSON.parse(data);
-
   var posts = receivedData.posts;
 
   foundPosts = false;
-
   if (posts && posts.length) {
     var lastPost = posts[posts.length - 1];
 
@@ -279,9 +272,7 @@ var refreshCallback = function(error, data) {
       foundPosts = true;
 
       for (var i = 0; i < posts.length; i++) {
-
         var post = posts[i];
-
         if (post.postId > lastReplyId) {
           addPost(post);
           lastReplyId = post.postId;
@@ -317,6 +308,7 @@ function refreshPosts(manual) {
 }
 
 function sendReplyData(files) {
+
   var forcedAnon = !document.getElementById('fieldName');
 
   var typedName = !forcedAnon &&
@@ -377,6 +369,7 @@ function sendReplyData(files) {
 }
 
 function postReply() {
+
   iterateSelectedFiles(0, [], document.getElementById('files'), sendReplyData);
 }
 
@@ -400,7 +393,6 @@ function startTimer(time) {
 }
 
 function changeRefresh() {
-
   if (autoRefresh) {
     labelRefresh.innerHTML = '';
     clearInterval(refreshTimer);

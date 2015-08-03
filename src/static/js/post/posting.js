@@ -417,33 +417,34 @@ function loadQuote(tooltip, quoteUrl) {
 function setMentions(quotes) {
   var mentions = [];
 
-  var quote, href, quotingHref, quotingId, mentionedId, mention, mentioned;
   for (var i = 0; i < quotes.length; ++i) {
-    quote = quotes[i];
-
-    href = quote.getAttribute('href');
-    mentionedId = href.slice(href.lastIndexOf('#') + 1);
-
-    /* If mentioned post is hidden, stop here */
-    if (!(mentioned = document.getElementById(mentionedId))) {
-      continue;
-    }
-    
-    quotingHref = getParentByClassName(quote, 'post')
-      .getElementsByClassName('linkSelf')[0].getAttribute('href');
-    quotingId = quotingHref.slice(quotingHref.lastIndexOf('#') + 1);
-
-    mention = document.createElement('a');
-    mention.setAttribute('class', 'mention');
-    mention.setAttribute('href', quotingHref);
-    mention.innerHTML = '&gt;&gt;'+quotingId; /* eg.: >>123 */
-
-    mentions.push(mention);
-    mentioned.getElementsByClassName('postHeaderInnerAfter')[0]
-      .appendChild(mention);
+    var mention = setMention(quotes[i]);
+    if (mention) { mentions.push(mention); }
   }
 
   return mentions;
+}
+
+function setMention(quote) {
+  var href = quote.getAttribute('href');
+  var mentionedId = href.slice(href.lastIndexOf('#') + 1);
+
+  var mentioned = document.getElementById(mentionedId);
+  /* If mentioned post is hidden, stop here */
+  if (!mentioned) { return; }
+
+  var quotingHref = getParentByClassName(quote, 'post')
+    .getElementsByClassName('linkSelf')[0].getAttribute('href');
+  var quotingId = quotingHref.slice(quotingHref.lastIndexOf('#') + 1);
+
+  var mention = document.createElement('a');
+  mention.setAttribute('class', 'mention');
+  mention.setAttribute('href', quotingHref);
+  mention.innerHTML = '&gt;&gt;'+quotingId; /* eg.: >>123 */
+
+  mentioned.getElementsByClassName('postHeaderInnerAfter')[0]
+    .appendChild(mention);
+  return mention;
 }
 
 /* =Moderation
