@@ -17,11 +17,11 @@ function saveThreadSettings() {
 
   }, function setLock(status, data) {
     if (status === 'ok') {
-      notification('Settings saved.');
+      success('Settings saved.');
       location.reload(true);
 
     } else {
-      notification(status+': '+JSON.stringify(data));
+      warning(status+': '+JSON.stringify(data));
 
     }
   });
@@ -35,7 +35,7 @@ if (pageId === 'thread') {
       replySuccessful();
 
     } else {
-      notification(status + ': ' + JSON.stringify(data));
+      warning(status + ': ' + JSON.stringify(data));
 
     }
   };
@@ -190,7 +190,7 @@ function setPostComplexElements(postCell, post, boardUri, threadId) {
   var link = postCell.getElementsByClassName('linkSelf')[0];
   var linkQuote = postCell.getElementsByClassName('linkQuote')[0];
   linkQuote.innerHTML = post.postId;
-  linkQuote.href = '/'+boardUri+'res'+threadId+'.html#q'+post.postId;
+  linkQuote.href = '/'+boardUri+'/res/'+threadId+'.html#q'+post.postId;
 
   var deletionCheckbox =
     postCell.getElementsByClassName('deletionCheckBox')[0];
@@ -324,29 +324,29 @@ function sendReplyData(files) {
     document.getElementById('fieldCaptcha').value.trim();
 
   if (!typedMessage.length) {
-    notification('A message is mandatory.');
+    warning('A message is mandatory.');
     return;
   } else if (!forcedAnon && typedName.length > 32) {
-    notification('Name is too long, keep it under 32 characters.');
+    warning('Name is too long, keep it under 32 characters.');
     return;
   } else if (typedMessage.length > 2048) {
-    notification('Message is too long, keep it under 2048 characters.');
+    warning('Message is too long, keep it under 2048 characters.');
     return;
   } else if (typedEmail.length > 64) {
-    notification('Email is too long, keep it under 64 characters.');
+    warning('Email is too long, keep it under 64 characters.');
     return;
   } else if (typedSubject.length > 128) {
-    notification('Subject is too long, keep it under 128 characters.');
+    warning('Subject is too long, keep it under 128 characters.');
     return;
   } else if (typedPassword.length > 8) {
-    notification('Password is too long, keep it under 8 characters.');
+    warning('Password is too long, keep it under 8 characters.');
     return;
   } else if (!hiddenCaptcha && typedCaptcha.length !== 6 &&
              typedCaptcha.length !== 24) {
-    notification('Captchas are exactly 6 characters long.\n(or 24 in the case of a no-cookie ID)');
+    warning('Captchas are exactly 6 characters long.\n(or 24 in the case of a no-cookie ID)');
     return;
   } else if (/\W/.test(typedCaptcha)) {
-    notification('Invalid captcha.');
+    warning('Invalid captcha.');
     return;
   }
 
