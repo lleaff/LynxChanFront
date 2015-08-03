@@ -89,14 +89,21 @@ mixin linkNext
     a#linkNext.fa.fa-angle-right(title='Next')&attributes(attributes)
       block
 
+mixin linkPage(page)
+  - title = l[tit+page]
+  a(href=baseStaticUrl+'/'+page.toLowerCase()+'.html', title=title
+    )&attributes(attributes)= title
+
+
+
 mixin helpAdditionalLinks
   section#helpAdditionalLinks
     nav
       ul
-        li: a(href=baseStaticUrl+'/faq.html') FAQ
-        li: a(href=baseStaticUrl+'/globalrules.html') Global rules
-        li: a(href=baseStaticUrl+'/help.html') General help
-        li: a(href=baseStaticUrl+'/moderation.html') Moderation help
+        li: a(href=baseStaticUrl+'/faq.html') #{l.titFAQ}
+        li: a(href=baseStaticUrl+'/globalrules.html') #{l.titGlobalRules}
+        li: a(href=baseStaticUrl+'/help.html') #{l.titGeneralHelp}
+        li: a(href=baseStaticUrl+'/moderation.html') #{l.titModerationHelp}
 
 //-------------------------------------------------------------
 //-=Helper functions

@@ -17,7 +17,7 @@ block content
       enctype='multipart/form-data')
     input#boardIdentifier(type='hidden', name='boardUri')
     .field.ruleText
-      label.hidden(for='fieldRule') l.guiRule
+      label.hidden(for='fieldRule') #{l.guiRule}
       input#fieldRule(type='text', name='rule')
     input.button.submit#addFormButton(type='submit',
         value=l.guiAddRule)

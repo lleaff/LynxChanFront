@@ -36,8 +36,8 @@
 // Message body
 //------------------------------------------------------------
 // '>>12401'
-.quoteLink {
-  @if $quoteLinkColor != $linkColor {
+@if $quoteLinkColor != $linkColor {
+  .quoteLink, .postPreviewTooltip .quoteLink {
     color: $quoteLinkColor;
   }
 }

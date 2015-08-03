@@ -94,7 +94,10 @@ $catalogCellPadding: $internalPadding * 0.8;
   height: 1.1em;
 
   .labelReplies, .labelImages {
-    margin-left: $internalPadding * 2;
+    margin: {
+      left: $internalPadding;
+      right: $internalPadding;
+    }
     &:after {
       margin-left: 0.3em;
     }
@@ -104,6 +107,12 @@ $catalogCellPadding: $internalPadding * 0.8;
     display: none; // Kind of useless
     //float: right;
   }
+
+  .threadStatus {
+    float: right;
+    margin: 0 0.3em;
+  }
+
 }
 
 .catalogCellHeader {
