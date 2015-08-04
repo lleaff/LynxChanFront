@@ -35,7 +35,7 @@ mixin postForm(options)
       fieldset#messageFiles
         #filesWrapper
           label(for="files") #{l.postForm.Files}:
-          input#files(type='file', accept='image/*,video/*,audo/*',
+          input#files(type='file', accept='image/*,video/*,audio/*',
               multiple='', name='files', tabindex='6')
           small.info#filesInfo= l.postForm.MaxFileSizeLabel+': '
             | #[span#labelMaxFileSize] MB.

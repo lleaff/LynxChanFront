@@ -1,7 +1,7 @@
 @import '../sass';
 
 $catalogThumbSize: max($thumbSize * 0.7, 128px)!default;
-$catalogCellWidth: $catalogThumbSize;
+$catalogCellWidth: max($catalogThumbSize, 140px)!default; //140px: 8chan default
 $catalogCellPaddingHorizontal: $defaultPadding * 0.66;
 
 // Breakpoints
