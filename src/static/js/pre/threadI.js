@@ -18,7 +18,6 @@ if (pageId === 'thread') {
   window.boardUri           = undefined;
   window.threadId           = undefined;
   window.board              = false;
-  window.replyButton        = undefined;
   window.refreshButton      = undefined;
   window.lastReplyId        = 0;
   window.lastRefreshWaiting = 0;
@@ -58,8 +57,8 @@ if (pageId === 'thread') {
     removeElement(document.getElementById('settingsFormButton'));
   }
 
-  replyButton = document.getElementById('jsButton');
-  showElement(replyButton);
+  window.postButton = document.getElementById('jsButton');
+  showElement(postButton);
 
   if (document.getElementById('captchaDiv')) {
     showElement(document.getElementById('reloadCaptchaButton'));

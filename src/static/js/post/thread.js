@@ -1,12 +1,3 @@
-function reloadCaptcha() {
-  document.cookie = 'captchaid=; path=/;';
-
-  document.getElementById('captchaImage').src = '/captcha.js#'+
-    new Date().toString();
-  /* Clear the text field */
-  document.getElementById('fieldCaptcha').value = "";
-}
-
 function saveThreadSettings() {
   apiRequest('changeThreadSettings', {
     boardUri: boardUri,
@@ -41,7 +32,7 @@ if (pageId === 'thread') {
   };
 
   replyCallback.stop = function() {
-    replyButton.removeAttribute('disabled');
+    postButton.removeAttribute('disabled');
 
     if (!hiddenCaptcha) {
       reloadCaptcha();
@@ -55,6 +46,8 @@ function replySuccessful() {
   document.getElementById('fieldMessage').value = '';
   document.getElementById('fieldSubject').value = '';
   document.getElementById('files').value = '';
+
+  notification('Post created.');
 
   setTimeout(refreshPosts, 2000);
 }
@@ -307,69 +300,14 @@ function refreshPosts(manual) {
 
 }
 
+
 function sendReplyData(files) {
-  var forcedAnon = !document.getElementById('fieldName');
-
-  var typedName = !forcedAnon &&
-    document.getElementById('fieldName').value.trim();
-
-  var typedEmail = document.getElementById('fieldEmail').value.trim();
-  var typedMessage = document.getElementById('fieldMessage').value.trim();
-  var typedSubject = document.getElementById('fieldSubject').value.trim();
-  var typedPassword = document.getElementById('fieldPostingPassword').value.trim();
-
-  var threadId = document.getElementById('threadIdentifier').value;
-
-  var typedCaptcha = !hiddenCaptcha && 
-    document.getElementById('fieldCaptcha').value.trim();
-
-  if (!typedMessage.length) {
-    warning('A message is mandatory.');
-    return;
-  } else if (!forcedAnon && typedName.length > 32) {
-    warning('Name is too long, keep it under 32 characters.');
-    return;
-  } else if (typedMessage.length > 2048) {
-    warning('Message is too long, keep it under 2048 characters.');
-    return;
-  } else if (typedEmail.length > 64) {
-    warning('Email is too long, keep it under 64 characters.');
-    return;
-  } else if (typedSubject.length > 128) {
-    warning('Subject is too long, keep it under 128 characters.');
-    return;
-  } else if (typedPassword.length > 8) {
-    warning('Password is too long, keep it under 8 characters.');
-    return;
-  } else if (!hiddenCaptcha && typedCaptcha.length !== 6 &&
-             typedCaptcha.length !== 24) {
-    warning('Captchas are exactly 6 characters long.\n(or 24 in the case of a no-cookie ID)');
-    return;
-  } else if (/\W/.test(typedCaptcha)) {
-    warning('Invalid captcha.');
-    return;
-  }
-
-  replyButton.setAttribute('disabled', '');
-
-  apiRequest('replyThread', {
-    name : forcedAnon ? null : typedName,
-    captcha : hiddenCaptcha ? null : typedCaptcha,
-    subject : typedSubject,
-    spoiler : document.getElementById('checkboxSpoiler').checked,
-    password : typedPassword,
-    message : typedMessage,
-    email : typedEmail,
-    files : files,
-    boardUri : boardUri,
-    threadId : threadId
-  }, replyCallback);
-
+  sendPostData(files, true);
 }
 
 function postReply() {
-
-  iterateSelectedFiles(0, [], document.getElementById('files'), sendReplyData);
+  iterateSelectedFiles(0, [],
+                       document.getElementById('files'), sendReplyData);
 }
 
 function startTimer(time) {
