@@ -159,9 +159,7 @@ if (pageId === 'board' || pageId === 'thread') {
   var videoTypes = [ 'video/webm', 'video/mp4' ];
 
   var getMime = function getMime(pathName) {
-
     var pathParts = pathName.split('.');
-
     var mime;
 
     if (pathParts.length) {
@@ -176,10 +174,10 @@ if (pageId === 'board' || pageId === 'thread') {
   };
 
   var imageLinkElements = document.getElementsByClassName('imgLink');
-  var imageLinks = [];
+  window.attachments = [];
   for (var i = 0; i < imageLinkElements.length; ++i) {
-    imageLinks[i] = imageLinkElements[i];
-    processImageLink(imageLinks[i], i);
+    /* Set image/video inlining */
+    attachments[i] = new Attachment(imageLinkElements[i]);
   }
 
   window.maxFileSize =
@@ -188,95 +186,184 @@ if (pageId === 'board' || pageId === 'thread') {
 
 /* =Uploads, =Images, =Videos
 ------------------------------------------------------------*/
-function processImageLink(link, i) {
+
+function Attachment(link) {
+  /* 'image'|'video'|'audio' */
+  this.thumb          = link.getElementsByTagName('img')[0];
+  this.thumbSrc       = this.thumb.getAttribute('src');
+  this.link           = link;
+  /* .uploadCell */
+  this.container      = link.parentNode; 
+  this.maxThumbWidth  = this.container.style.maxWidth;
+  this.maxThumbHeight = this.container.style.maxHeight;
+  /* status, minimized or expanded */
+  this.minimized      = true;
+
   var mime = getMime(link.href);
+  this.mime = mime;
 
   if (mime.indexOf('image/') > -1) {
-    var obj = {};
-    obj.thumb          = link.getElementsByTagName('img')[0];
-    obj.thumbSrc       = obj.thumb.getAttribute('src');
-    obj.link           = link;
-    obj.container      = link.parentNode; /* .uploadCell */
-    obj.maxThumbWidth  = obj.container.style.maxWidth;
-    obj.maxThumbHeight = obj.container.style.maxHeight;
-    setClickableImage(obj);
-
-  } else if (playableTypes.indexOf(mime) > -1) {
-    setPlayer(link, mime);
-  }
-}
-function setClickableImage(obj) {
-  obj.link.onclick = function(event) {
-    return initialImageExpand(event, obj);
-  };
-}
-
-/* mouseEvent.target -> link */
-function initialImageExpand(event, obj) {
-  /* return: false -> Don't follow link, true -> Follow link */
-
-  /* If event was fired by middle mouse button or combined with
-   * the ctrl key, act as a normal link */
-  if (event.which === 2 || event.ctrlKey) {
-    return true;
-  }
-
-  obj.thumb.style.opacity = 0.9; /* Immediate feedback, then transition */
-  clickAnim(obj.thumb, {
-            manualUnset: true,
-            duration: 400,
-            opacity: 0.5
-  });
-
-  obj.expandedSrc = obj.link.href;
-
-  if (obj.expandedSrc === obj.thumbSrc) {
-    obj.thumb.className += ' imgExpanded';
+    this.type = 'image';
+    setClickableAttachment(this);
   } else {
-    obj.expanded = document.createElement('img');
-    obj.expanded.setAttribute('src', obj.expandedSrc);
-    obj.expanded.setAttribute('style', 'display: none;');
-    obj.expanded.setAttribute('class', 'imgExpanded');
-    obj.link.appendChild(obj.expanded);
-
-    obj.expanded.onload = function(e) {
-      obj.thumb.style.display = 'none';
-      obj.expanded.style.display = '';
-      obj.container.style.maxWidth  = '';
-      obj.container.style.maxHeight = '';
-      clickAnim(obj.thumb, { unset: true });
-    };
+    /* Correct some filetypes misreporting as video */
+    this.type = videoTypes.indexOf(mime) > -1 ? 'video' : 'audio';
+    //setPlayer(this);
   }
-  obj.link.onclick = function(event) {
-    return toggleImage(event, obj);
-  };
+
+  return this;
+}
+
+
+function toggleImage(event, up) {
+  if (up.expandedSrc === up.thumbSrc) {
+    if (up.thumb.className.indexOf('imgExpanded') != -1) {
+      removeClass(up.thumb, 'imgExpanded');
+    } else {
+      up.thumb.className += 'imgExpanded';
+    }
+  } else if (up.minimized) {
+    up.expand();
+  } else {
+    up.minimize();
+  }
   return false;
 }
 
-function toggleImage(event, obj) {
-  /* If event was fired by middle mouse button or combined with
-   * the ctrl key, act as a normal link */
-  if (event.which === 2 || event.ctrlKey) {
-    return true;
-  }
-  var el = obj.thumb;
-  if (obj.expandedSrc === obj.thumbSrc) {
-    if (obj.thumb.className.indexOf('imgExpanded') != -1) {
-      removeClass(obj.thumb, 'imgExpanded');
+Attachment.prototype.toggleExpand = function() {
+  if (this.minimized) { this.expand(); } else { this.minimize(); }
+};
+
+Attachment.prototype.minimize = function() {
+  if (this.type === 'image') { /* image */
+    if (this.expandedSrc === this.thumbSrc) {
+      removeClass(this.thumb, 'imgExpanded');
     } else {
-      obj.thumb.className += 'imgExpanded';
     }
-  } else if (obj.expanded.style.display === 'none') {
-    obj.thumb.style.display = 'none';
-    obj.container.style.maxHeight = '';
-    obj.container.style.maxWidth  = '';
-    obj.expanded.style.display = '';
-  } else {
-    obj.expanded.style.display = 'none';
-    obj.container.style.maxHeight = el.maxThumbHeight;
-    obj.container.style.maxWidth = el.maxThumbWidth;
-    obj.thumb.style.display = '';
+  } else { /* video or audio */
+
   }
+  this.expanded.style.display = 'none';
+  this.container.style.maxHeight = this.maxThumbHeight;
+  this.container.style.maxWidth = this.maxThumbWidth;
+  this.thumb.style.display = '';
+
+  this.minimized = true;
+};
+
+Attachment.prototype.expand = function() {
+  if (this.type === 'image') { /* image */
+    if (this.expandedSrc === this.thumbSrc) {
+      this.thumb.className += 'imgExpanded';
+    } else {
+    }
+  } else { /* video or audio */
+
+  }
+  this.thumb.style.display = 'none';
+  this.container.style.maxHeight = '';
+  this.container.style.maxWidth  = '';
+  this.expanded.style.display = '';
+
+  this.minimized = false;
+};
+
+
+Attachment.prototype.toggleHide = function() {
+  if (this.hidden) { this.show(); } else { this.hide(); }
+};
+
+Attachment.prototype.hide = function() {
+  this.placeholder.style.display = '';
+  this.thumb.style.display = 'none';
+  if (this.expanded) { this.expanded.style.display = 'none'; }
+
+  if (this.type === 'image') { /* image */
+
+  } else { /* video or audio */
+
+  }
+  this.hidden = true;
+};
+
+Attachment.prototype.show = function() {
+  this.placeholder.style.display = 'none';
+
+  if (this.minimized) {
+    this.thumb.style.display = '';
+  } else {
+    this.expanded.style.display = '';
+    //if (this.type === 'image') { /* image */
+    //} else { /* video or audio */
+    //}
+    this.hidden = false;
+  }
+};
+
+function setClickableAttachment(up) {
+  up.link.onclick = function(event) {
+    /* If event was fired by middle mouse button or combined with
+     * the ctrl key, act as a normal link */
+    if (event.which === 2 || event.ctrlKey) { return true; }
+
+    if (up.type === 'image') { /* image */
+      initialImageExpand(event, up);
+    } else { /* video or audio */
+      initialVideo
+    }
+    return false;
+  };
+
+  /* Low priority so doesn't need to be blocking */
+  setTimeout(function() {
+    var hideButton = createUploadHideButton();
+    //TODO append hideButton
+  }, 0);
+}
+
+/* mouseEvent.target -> link */
+function initialImageExpand(event, up) {
+  /* return: false -> Don't follow link, true -> Follow link */
+
+  /*------ Animation */
+  up.thumb.style.opacity = 0.9; /* Immediate feedback, then transition */
+  clickAnim(up.thumb, {
+    manualUnset: true,
+    duration: 400,
+    opacity: 0.5
+  });
+
+  up.expandedSrc = up.link.href;
+
+  if (up.expandedSrc === up.thumbSrc) {
+    up.thumb.className += ' imgExpanded';
+  } else {
+    up.expanded = document.createElement('img');
+    up.expanded.setAttribute('src', up.expandedSrc);
+    up.expanded.setAttribute('style', 'display: none;');
+    up.expanded.setAttribute('class', 'imgExpanded');
+    up.link.appendChild(up.expanded);
+
+    up.expanded.onload = function(e) {
+      up.thumb.style.display = 'none';
+      up.expanded.style.display = '';
+      up.container.style.maxWidth  = '';
+      up.container.style.maxHeight = '';
+      clickAnim(up.thumb, { unset: true });
+    };
+  }
+  up.minimized = false;
+
+  up.link.onclick = function(event) {
+    /* If event was fired by middle mouse button or combined with
+     * the ctrl key, act as a normal link */
+    if (event.which === 2 || event.ctrlKey) {
+      return true;
+    } else {
+      return toggleImage(event, up);
+    }
+
+  };
   return false;
 }
 
