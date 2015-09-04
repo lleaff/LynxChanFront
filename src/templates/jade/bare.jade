@@ -12,6 +12,8 @@ html
     head
       block head
         meta(charset='UTF-8')
+        //- Prevents mobile browsers from rendering the page "zoomed-out"
+        meta(name=viewport content='width=device-width, initial-scale=1')
       block favicon
         +favicon()
       title

@@ -17,6 +17,8 @@ html
     head
       block head
         meta(charset='utf-8')
+        //- Prevents mobile browsers from rendering the page "zoomed-out"
+        meta(name=viewport content='width=device-width, initial-scale=1')
         title 
           block title
             +title('home')
