@@ -10,6 +10,10 @@
   border: $borderWidth $notificationBorderColor;
   border-style: none solid solid solid;
 
+  @if $shadows {
+    @include tooltipShadows;
+  }
+
   .notificationInner {
     padding: $notificationTopPadding $notificationPadding
       $notificationPadding $notificationPadding;

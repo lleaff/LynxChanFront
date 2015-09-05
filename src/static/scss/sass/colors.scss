@@ -3,7 +3,11 @@
 @import 'defaultTheme';
 
 @function palette($key) {
+  @if not map-has-key($palette-colors, $key) {
+    @warn 'Palette key "#{$key}" not found.';
+  }
   @return map-get($palette-colors, $key);
+
 }
 
 //============================================================
@@ -144,6 +148,11 @@ $spoilerColor:      soften-lightness(
   $replyBgColor,
   $weight: 20)!default;
 $spoilerColorHover: intense-lightness($spoilerColor)!default;
+
+// Uploads
+$uploadPlaceholderBgColor: mix(palette('bgMain'), palette('bgAlt'), $weight: 30%);
+$uploadPlaceholderBorderColor: intense(intensify(
+  $uploadPlaceholderBgColor, $replyColor, $weight: 30))!default;;
 
 // =Inputs
 //=============================================================

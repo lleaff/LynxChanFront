@@ -72,7 +72,7 @@
 //.#{$fa-css-prefix}-map-marker:before { content: $fa-var-map-marker; }
 //.#{$fa-css-prefix}-adjust:before { content: $fa-var-adjust; }
 //.#{$fa-css-prefix}-tint:before { content: $fa-var-tint; }
-//.#{$fa-css-prefix}-edit:before,
+.#{$fa-css-prefix}-edit:before,
 .#{$fa-css-prefix}-pencil-square-o:before { content: $fa-var-pencil-square-o; }
 //.#{$fa-css-prefix}-share-square-o:before { content: $fa-var-share-square-o; }
 //.#{$fa-css-prefix}-check-square-o:before { content: $fa-var-check-square-o; }
@@ -256,7 +256,7 @@
 //.#{$fa-css-prefix}-fighter-jet:before { content: $fa-var-fighter-jet; }
 //.#{$fa-css-prefix}-beer:before { content: $fa-var-beer; }
 //.#{$fa-css-prefix}-h-square:before { content: $fa-var-h-square; }
-//.#{$fa-css-prefix}-plus-square:before { content: $fa-var-plus-square; }
+.#{$fa-css-prefix}-plus-square:before { content: $fa-var-plus-square; }
 //.#{$fa-css-prefix}-angle-double-left:before { content: $fa-var-angle-double-left; }
 //.#{$fa-css-prefix}-angle-double-right:before { content: $fa-var-angle-double-right; }
 //.#{$fa-css-prefix}-angle-double-up:before { content: $fa-var-angle-double-up; }
@@ -327,8 +327,8 @@
 //.#{$fa-css-prefix}-rss-square:before { content: $fa-var-rss-square; }
 //.#{$fa-css-prefix}-play-circle:before { content: $fa-var-play-circle; }
 //.#{$fa-css-prefix}-ticket:before { content: $fa-var-ticket; }
-//.#{$fa-css-prefix}-minus-square:before { content: $fa-var-minus-square; }
-//.#{$fa-css-prefix}-minus-square-o:before { content: $fa-var-minus-square-o; }
+.#{$fa-css-prefix}-minus-square:before { content: $fa-var-minus-square; }
+.#{$fa-css-prefix}-minus-square-o:before { content: $fa-var-minus-square-o; }
 //.#{$fa-css-prefix}-level-up:before { content: $fa-var-level-up; }
 //.#{$fa-css-prefix}-level-down:before { content: $fa-var-level-down; }
 //.#{$fa-css-prefix}-check-square:before { content: $fa-var-check-square; }
@@ -469,13 +469,13 @@
 //.#{$fa-css-prefix}-file-powerpoint-o:before { content: $fa-var-file-powerpoint-o; }
 //.#{$fa-css-prefix}-file-photo-o:before,
 //.#{$fa-css-prefix}-file-picture-o:before,
-//.#{$fa-css-prefix}-file-image-o:before { content: $fa-var-file-image-o; }
+.#{$fa-css-prefix}-file-image-o:before { content: $fa-var-file-image-o; }
 //.#{$fa-css-prefix}-file-zip-o:before,
 //.#{$fa-css-prefix}-file-archive-o:before { content: $fa-var-file-archive-o; }
 //.#{$fa-css-prefix}-file-sound-o:before,
-//.#{$fa-css-prefix}-file-audio-o:before { content: $fa-var-file-audio-o; }
+.#{$fa-css-prefix}-file-audio-o:before { content: $fa-var-file-audio-o; }
 //.#{$fa-css-prefix}-file-movie-o:before,
-//.#{$fa-css-prefix}-file-video-o:before { content: $fa-var-file-video-o; }
+.#{$fa-css-prefix}-file-video-o:before { content: $fa-var-file-video-o; }
 //.#{$fa-css-prefix}-file-code-o:before { content: $fa-var-file-code-o; }
 //.#{$fa-css-prefix}-vine:before { content: $fa-var-vine; }
 //.#{$fa-css-prefix}-codepen:before { content: $fa-var-codepen; }

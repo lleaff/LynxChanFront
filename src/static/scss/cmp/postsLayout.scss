@@ -80,6 +80,8 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7%);
   }
 }
 
+/* =Uploads
+------------------------------*/
 .panelUploads {
   float: left;
   border-collapse: collapse;
@@ -95,11 +97,59 @@ $postReplyBorderColor: intensify($replyBgColor, palette('fgMain'), 7%);
     outline: none; 
   }
 
-  .imgExpanded {
-    max-width: 100%;
-    width: 100%;
+}
+
+.imgExpanded, .inlineVideo {
+  max-width: 100%;
+  width: 100%;
+}
+
+.uploadPlaceholder {
+  background-color: $uploadPlaceholderBgColor;
+  border: 2px dashed $uploadPlaceholderBorderColor;
+  border-radius: 2px;
+  padding: $defaultPadding;
+
+  text-align: center;
+  .uploadPlaceholderInner {
+    display: inline-block;
+    vertical-align: middle;
   }
 
+  .uploadPlaceholderInner:before {
+    @include fa-icon;
+    font-size: 2em;
+  }
+  &.image {
+    @include font-awesome-icon($fa-var-file-image-o);
+  } 
+  &.video  {
+    @include font-awesome-icon($fa-var-file-video-o);
+  }
+  &.audio  {
+    @include font-awesome-icon($fa-var-file-audio-o);
+  } 
+
+}
+
+$minimizeButtonWidth: 1em;
+.videoContainer {
+  margin-left: $minimizeButtonWidth / 2;
+  display: block;
+  position: relative; // To capture absolutely positioned .minimizeButton
+}
+
+.minimizeButton {
+  width: $minimizeButtonWidth;
+  height: $minimizeButtonWidth;
+  display: block;
+  position: absolute;
+  top: 0;// $internalPadding;
+  left: -$minimizeButtonWidth;// $internalPadding;
+
+  cursor: pointer;
+  @include fa-icon;
+  color: $softerColor;
 }
 
 /* File info

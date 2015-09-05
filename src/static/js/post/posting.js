@@ -2,6 +2,344 @@
 console.log('posting.js - BEGIN PARSING');//DEBUG
 // @endif
 
+
+/* =Uploads, =Images, =Videos
+------------------------------------------------------------*/
+function createUploadHideButton(target) {
+  var el = document.createElement('button');
+  el.setAttribute('class', 'hideButton fa fa-minus-square-o');
+
+  el.hide = function(target) {
+    var placeholder = target.placeholder;
+    if (placeholder === undefined) {
+      placeholder = appendUploadPlaceholder(target);
+    }
+
+    target.hide();
+    target.thumb.style.display = 'none';
+
+    el.setAttribute('class', 'hideButton fa fa-plus-square');
+    target.hidden = true;
+  };
+
+  el.show = function(target) {
+    el.setAttribute('class', 'hideButton fa fa-minus-square-o');
+    target.placeholder.style.display = 'none';
+    target.show();
+  };
+
+  el.onclick = function() {
+    if (target.hidden) { this.hide(); } else { this.show(); }
+  };
+
+  return el;
+}
+
+function appendUploadPlaceholder(upload) {
+  var placeholder = upload.placeholder = document.createElement('div');
+
+  /* eg.: .uploadPlaceholder.video */
+  placeholder.setAttribute('class', 'uploadPlaceholder '+upload.type);
+
+  var width = (upload.thumbWidth = upload.thumb.naturalWidth);
+  var height = (upload.thumbWidth = upload.thumb.naturalWidth);
+  placeholder.setAttribute(
+    'style', 'width:'+width+'; height:'+height+'; display: none;');
+    var inner = document.createElement('div');
+    inner.setAttribute('class', 'uploadPlaceholderInner');
+    placeholder.appendChild(inner);
+
+  upload.thumb.appendChild(placeholder);
+
+  upload.placeholder = placeholder;
+  return placeholder;
+}
+
+/* Call without 'new' */
+function newAttachment(link) {
+  var mime = getMime(link.href);
+
+  if (mime.indexOf('image/') > -1) {
+    return new ImageAttachment(link, mime);
+  } else {
+    return new VideoAttachment(link, mime);
+  }
+}
+
+function Attachment(link) {
+  /* 'image'|'video'|'audio' */
+  this.thumb          = link.getElementsByTagName('img')[0];
+  this.thumbSrc       = this.thumb.getAttribute('src');
+  this.link           = link;
+  /* .uploadCell */
+  this.container      = link.parentNode;
+  this.maxThumbWidth  = this.container.style.maxWidth;
+  this.maxThumbHeight = this.container.style.maxHeight;
+  /* status, minimized or expanded */
+  this.minimized      = true;
+
+  var mime = getMime(link.href);
+  this.mime = mime;
+
+  return this;
+}
+
+var ImageAttachment = extend(Attachment, function(link, mime) {
+  this.mime = mime;
+  this.type = 'image';
+
+  setInteractiveImage(this);
+  return this;
+});
+
+var VideoAttachment = extend(Attachment, function(link, mime) {
+  this.mime = mime;
+  /* Correct some filetypes misreporting as video */
+  this.type = videoTypes.indexOf(mime) > -1 ? 'video' : 'audio';
+
+  setPlayer(this);
+  return this;
+});
+
+function toggleImage(event, up) {
+  if (up.expandedSrc === up.thumbSrc) {
+    if (up.thumb.className.indexOf('imgExpanded') != -1) {
+      removeClass(up.thumb, 'imgExpanded');
+    } else {
+      up.thumb.className += 'imgExpanded';
+    }
+  } else if (up.minimized) {
+    up.expand();
+  } else {
+    up.minimize();
+  }
+  return false;
+}
+
+Attachment.prototype.toggleExpand = function() {
+  if (this.minimized) { this.expand(); } else { this.minimize(); }
+};
+
+Attachment.prototype.minimize = function() {
+  if (this.expandedSrc === this.thumbSrc) {
+    removeClass(this.thumb, 'imgExpanded');
+  } else {
+  }
+
+  this.expanded.style.display    = 'none';
+  this.container.style.maxHeight = this.maxThumbHeight;
+  this.container.style.maxWidth  = this.maxThumbWidth;
+  this.thumb.style.display       = '';
+
+  this.minimized = true;
+};
+
+VideoAttachment.prototype.minimize = function() {
+  if (this.expanded.pause) { this.expanded.pause(); }
+
+  this.expanded.style.display    = 'none';
+  this.container.style.maxHeight = this.maxThumbHeight;
+  this.container.style.maxWidth  = this.maxThumbWidth;
+  this.link.style.display        = '';
+
+  this.source.removeAttribute('src'); /* Stop downloading video */
+
+  if (this.minimizeButton) { this.minimizeButton.style.display = 'none'; }
+
+  this.minimized = true;
+};
+
+Attachment.prototype.expand = function() {
+  if (this.expandedSrc === this.thumbSrc) {
+    this.thumb.className += 'imgExpanded';
+  } else {
+    this.thumb.style.display       = 'none';
+    this.container.style.maxHeight = '';
+    this.container.style.maxWidth  = '';
+    this.expanded.style.display    = '';
+  }
+
+  this.minimized = false;
+};
+
+VideoAttachment.prototype.expand = function() {
+  this.source.setAttribute('src', this.expandedSrc);
+
+  this.link.style.display           = 'none';
+  this.container.style.maxHeight    = '';
+  this.container.style.maxWidth     = '';
+  if (this.minimizeButton) { this.minimizeButton.style.display = ''; }
+  this.expanded.style.display       = '';
+
+  this.minimized = false;
+};
+
+
+Attachment.prototype.toggleHide = function() {
+  if (this.hidden) { this.show(); } else { this.hide(); }
+};
+
+Attachment.prototype.hide = function() {
+  if (!this.placeholder) {
+    this.placeholder.style.display = '';
+  } else {
+    appendUploadPlaceholder(this).style.display('');
+  }
+  this.thumb.style.display = 'none';
+  if (this.expanded) { this.expanded.style.display = 'none'; }
+
+  this.hidden = true;
+};
+
+Attachment.prototype.show = function() {
+  this.placeholder.style.display = 'none';
+
+  if (this.minimized) {
+    this.thumb.style.display = '';
+  } else {
+    this.expanded.style.display = '';
+
+
+    this.hidden = false;
+  }
+};
+
+function setInteractiveImage(up) {
+
+  up.link.onclick = function(event) {
+    /* If event was fired by middle mouse button or combined with
+     * the ctrl key, act as a normal link */
+    if (event.which === 2 || event.ctrlKey) { return true; }
+
+    initialImageExpand(event, up);
+    return false;
+  };
+
+  /* Low priority so doesn't need to be blocking */
+  setTimeout(function() {
+    var hideButton = createUploadHideButton();
+    //TODO actually append hideButton
+  }, 0);
+}
+
+/* mouseEvent.target -> link */
+function initialImageExpand(event, up) {
+  /* return: false -> Don't follow link, true -> Follow link */
+
+  /*------ Animation */
+  up.thumb.style.opacity = 0.9; /* Immediate feedback, then transition */
+  clickAnim(up.thumb, {
+    manualUnset: true,
+    duration: 400,
+    opacity: 0.5
+  });
+
+  up.expandedSrc = up.link.href;
+
+  if (up.expandedSrc === up.thumbSrc) {
+    up.thumb.className += ' imgExpanded';
+  } else {
+    up.expanded = document.createElement('img');
+    up.expanded.setAttribute('src', up.expandedSrc);
+    up.expanded.setAttribute('style', 'display: none;');
+    up.expanded.setAttribute('class', 'imgExpanded');
+    up.link.appendChild(up.expanded);
+
+    up.expanded.onload = function(e) {
+      up.thumb.style.display = 'none';
+      up.expanded.style.display = '';
+      up.container.style.maxWidth  = '';
+      up.container.style.maxHeight = '';
+      clickAnim(up.thumb, { unset: true });
+    };
+  }
+  up.minimized = false;
+
+  /* New onclick
+  ---------------*/
+  up.link.onclick = function(event) {
+    /* If event was fired by middle mouse button or combined with
+     * the ctrl key, act as a normal link */
+    if (event.which === 2 || event.ctrlKey) {
+      return true;
+    } else {
+      up.toggleExpand();
+    }
+    return false;
+  };
+
+  return false;
+}
+
+function setPlayer(up) {
+  var source = document.createElement('source');
+  source.setAttribute('src', up.link.href);
+  source.setAttribute('type', up.mime);
+  up.expandedSrc = up.link.href;
+  up.source = source;
+
+  var video = document.createElement(up.type); /* 'audio'|'video' */
+  video.setAttribute('controls', true);
+  video.setAttribute('class', 'inlineVideo');
+  video.style.display = 'none';
+  video.appendChild(source);
+  up.expanded = video;
+
+  var videoContainer = document.createElement('span');
+  videoContainer.setAttribute('class', 'videoContainer');
+  up.videoContainer = videoContainer;
+
+  up.link.onclick = function(event) {
+    /* If event was fired by middle mouse button or combined with
+     * the ctrl key, act as a normal link */
+    if (event.which === 2 || event.ctrlKey) { return true; }
+
+    initialVideoExpand(event, up);
+
+    return false;
+};
+
+  videoContainer.appendChild(video);
+  up.container.style.maxWidth  = '';
+  up.container.style.maxHeight = '';
+}
+
+
+function initialVideoExpand(event, up) {
+
+  /* Minimize button */
+  var minimizeButton = document.createElement('div');
+  minimizeButton.innerHTML = '';
+  minimizeButton.setAttribute('class', 'minimizeButton');
+  minimizeButton.onclick = function() {
+    up.minimize();
+  };
+  up.videoContainer.insertBefore(minimizeButton,
+                                 up.videoContainer.childNodes[0]);
+  up.minimizeButton = minimizeButton;
+
+  up.container.replaceChild(up.videoContainer, up.link);
+  up.expanded.style.display = '';
+  up.container.style.maxWidth  = up.maxThumbWidth;
+  up.container.style.maxHeight = up.maxThumbHeight;
+  up.link.style.display = 'none';
+  up.container.appendChild(up.link);
+
+  up.link.onclick = function(event) {
+    /* If event was fired by middle mouse button or combined with
+     * the ctrl key, act as a normal link */
+    if (event.which === 2 || event.ctrlKey) { return true; }
+    up.expand();
+    return false;
+  };
+
+  return false;
+}
+
+
+
+
+
 function iterateSelectedFiles(currentIndex, files, fileChooser, callback) {
   if (currentIndex < fileChooser.files.length) {
     var reader = new FileReader();
@@ -28,7 +366,7 @@ if (pageId === 'board' || pageId === 'thread') {
 
   var quotes = document.getElementsByClassName('quoteLink');
   var mentions = setMentions(quotes);
-  
+
   for (var i = 0; i < quotes.length; ++i) {
     processQuote(quotes[i]);
   }
@@ -177,243 +515,12 @@ if (pageId === 'board' || pageId === 'thread') {
   window.attachments = [];
   for (var i = 0; i < imageLinkElements.length; ++i) {
     /* Set image/video inlining */
-    attachments[i] = new Attachment(imageLinkElements[i]);
+    attachments[i] = newAttachment(imageLinkElements[i]);
   }
 
   window.maxFileSize =
     +document.getElementById('labelMaxFileSize').innerHTML;
 }
-
-/* =Uploads, =Images, =Videos
-------------------------------------------------------------*/
-
-function Attachment(link) {
-  /* 'image'|'video'|'audio' */
-  this.thumb          = link.getElementsByTagName('img')[0];
-  this.thumbSrc       = this.thumb.getAttribute('src');
-  this.link           = link;
-  /* .uploadCell */
-  this.container      = link.parentNode; 
-  this.maxThumbWidth  = this.container.style.maxWidth;
-  this.maxThumbHeight = this.container.style.maxHeight;
-  /* status, minimized or expanded */
-  this.minimized      = true;
-
-  var mime = getMime(link.href);
-  this.mime = mime;
-
-  if (mime.indexOf('image/') > -1) {
-    this.type = 'image';
-    setClickableAttachment(this);
-  } else {
-    /* Correct some filetypes misreporting as video */
-    this.type = videoTypes.indexOf(mime) > -1 ? 'video' : 'audio';
-    //setPlayer(this);
-  }
-
-  return this;
-}
-
-
-function toggleImage(event, up) {
-  if (up.expandedSrc === up.thumbSrc) {
-    if (up.thumb.className.indexOf('imgExpanded') != -1) {
-      removeClass(up.thumb, 'imgExpanded');
-    } else {
-      up.thumb.className += 'imgExpanded';
-    }
-  } else if (up.minimized) {
-    up.expand();
-  } else {
-    up.minimize();
-  }
-  return false;
-}
-
-Attachment.prototype.toggleExpand = function() {
-  if (this.minimized) { this.expand(); } else { this.minimize(); }
-};
-
-Attachment.prototype.minimize = function() {
-  if (this.type === 'image') { /* image */
-    if (this.expandedSrc === this.thumbSrc) {
-      removeClass(this.thumb, 'imgExpanded');
-    } else {
-    }
-  } else { /* video or audio */
-
-  }
-  this.expanded.style.display = 'none';
-  this.container.style.maxHeight = this.maxThumbHeight;
-  this.container.style.maxWidth = this.maxThumbWidth;
-  this.thumb.style.display = '';
-
-  this.minimized = true;
-};
-
-Attachment.prototype.expand = function() {
-  if (this.type === 'image') { /* image */
-    if (this.expandedSrc === this.thumbSrc) {
-      this.thumb.className += 'imgExpanded';
-    } else {
-    }
-  } else { /* video or audio */
-
-  }
-  this.thumb.style.display = 'none';
-  this.container.style.maxHeight = '';
-  this.container.style.maxWidth  = '';
-  this.expanded.style.display = '';
-
-  this.minimized = false;
-};
-
-
-Attachment.prototype.toggleHide = function() {
-  if (this.hidden) { this.show(); } else { this.hide(); }
-};
-
-Attachment.prototype.hide = function() {
-  this.placeholder.style.display = '';
-  this.thumb.style.display = 'none';
-  if (this.expanded) { this.expanded.style.display = 'none'; }
-
-  if (this.type === 'image') { /* image */
-
-  } else { /* video or audio */
-
-  }
-  this.hidden = true;
-};
-
-Attachment.prototype.show = function() {
-  this.placeholder.style.display = 'none';
-
-  if (this.minimized) {
-    this.thumb.style.display = '';
-  } else {
-    this.expanded.style.display = '';
-    //if (this.type === 'image') { /* image */
-    //} else { /* video or audio */
-    //}
-    this.hidden = false;
-  }
-};
-
-function setClickableAttachment(up) {
-  up.link.onclick = function(event) {
-    /* If event was fired by middle mouse button or combined with
-     * the ctrl key, act as a normal link */
-    if (event.which === 2 || event.ctrlKey) { return true; }
-
-    if (up.type === 'image') { /* image */
-      initialImageExpand(event, up);
-    } else { /* video or audio */
-      initialVideo
-    }
-    return false;
-  };
-
-  /* Low priority so doesn't need to be blocking */
-  setTimeout(function() {
-    var hideButton = createUploadHideButton();
-    //TODO append hideButton
-  }, 0);
-}
-
-/* mouseEvent.target -> link */
-function initialImageExpand(event, up) {
-  /* return: false -> Don't follow link, true -> Follow link */
-
-  /*------ Animation */
-  up.thumb.style.opacity = 0.9; /* Immediate feedback, then transition */
-  clickAnim(up.thumb, {
-    manualUnset: true,
-    duration: 400,
-    opacity: 0.5
-  });
-
-  up.expandedSrc = up.link.href;
-
-  if (up.expandedSrc === up.thumbSrc) {
-    up.thumb.className += ' imgExpanded';
-  } else {
-    up.expanded = document.createElement('img');
-    up.expanded.setAttribute('src', up.expandedSrc);
-    up.expanded.setAttribute('style', 'display: none;');
-    up.expanded.setAttribute('class', 'imgExpanded');
-    up.link.appendChild(up.expanded);
-
-    up.expanded.onload = function(e) {
-      up.thumb.style.display = 'none';
-      up.expanded.style.display = '';
-      up.container.style.maxWidth  = '';
-      up.container.style.maxHeight = '';
-      clickAnim(up.thumb, { unset: true });
-    };
-  }
-  up.minimized = false;
-
-  up.link.onclick = function(event) {
-    /* If event was fired by middle mouse button or combined with
-     * the ctrl key, act as a normal link */
-    if (event.which === 2 || event.ctrlKey) {
-      return true;
-    } else {
-      return toggleImage(event, up);
-    }
-
-  };
-  return false;
-}
-
-function setPlayer(link, mime, uploadCell, maxWidth, maxHeight) {
-  var path = link.href;
-  var parent = link.parentNode;
-
-  var src = document.createElement('source');
-  src.setAttribute('src', link.href);
-  src.setAttribute('type', mime);
-
-  var video = document.createElement(videoTypes.indexOf(mime) > -1 ? 'video' : 'audio');
-  video.setAttribute('controls', true);
-  video.style.display = 'none';
-  video.appendChild(src);
-
-  var videoContainer = document.createElement('span');
-  videoContainer.setAttribute('class', 'videoContainer');
-
-  var hideLink = document.createElement('a');
-  hideLink.innerHTML = '[ - ]';
-  hideLink.style.display = 'none';
-  hideLink.setAttribute('class', 'hideLink');
-  hideLink.onclick = function() {
-    newThumb.style.display = '';
-    video.style.display = 'none';
-    hideLink.style.display = 'none';
-    video.pause();
-  };
-
-  var newThumb = document.createElement('img');
-  newThumb.setAttribute('src', link.childNodes[0].src);
-  newThumb.onclick = function() {
-    newThumb.style.display = 'none';
-    video.style.display = '';
-    uploadCell.style.maxWidth  = maxWidth;
-    uploadCell.style.maxHeight = maxHeight;
-    hideLink.style.display = '';
-    video.play();
-  };
-
-  videoContainer.appendChild(hideLink);
-  videoContainer.appendChild(video);
-  uploadCell.style.maxWidth  = '';
-  uploadCell.style.maxHeight = '';
-  videoContainer.appendChild(newThumb);
-
-  parent.replaceChild(videoContainer, link);
-}
-
 /* =Quotes, =Mentions, =Previews
 ------------------------------------------------------------*/
 function processQuote(quote) {

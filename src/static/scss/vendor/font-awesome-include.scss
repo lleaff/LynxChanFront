@@ -1,0 +1,7 @@
+/* $iconName is the icon name prefixed with 'fa-var-' */
+@mixin font-awesome-icon($iconName, $element: ':before') {
+  &#{$element} {
+    @include fa-icon;
+    content: $iconName;
+  }
+}

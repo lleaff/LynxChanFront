@@ -5,6 +5,27 @@ console.log('head.js - BEGIN PARSING');//DEBUG
 /* Avoid 'pageId is undefined' */
 if (pageId === undefined) { var pageId = null; }
 
+
+
+/* =Objects
+============================================================*/
+/* Returns a new class that extends another class, 'newConstructor' will be
+ *  called after the extended class constructor's on each new object. New
+ *  arguments to the constructor must be appended to the original
+ *  constructor's arguments, ie. 'newConstructor' must take the same
+ *  arguments as extended. . */
+function extend(extended, newConstructor) {
+  var newClass = function() {
+    extended.apply(this, arguments);
+
+    newConstructor.apply(this, arguments);
+  };
+  newClass.prototype = Object.create(extended.prototype);
+  newClass.prototype.constructor = newClass;
+  return newClass;
+}
+
+
 /* =DOM Manipulation
 ============================================================*/
 /* =Direct
