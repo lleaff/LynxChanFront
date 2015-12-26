@@ -1,3 +1,5 @@
+**This project isn't maintained anymore and is several versions behind LynxChan's current release.**
+
 # LynxChanFront
 A front-end for [Lynx Chan](https://gitlab.com/mrseth/LynxChan)
 
